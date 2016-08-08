@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+
+{% block wrapper %}
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-4 col-md-offset-2">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        {% block paneltitle %}
+                            <h3 class="panel-title">SIA</h3>
+                        {% endblock %}
+                    </div>
+                    <div class="panel-body">
+                        {% block content %}
+
+                            {#
+                                                    <div>
+                                                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                                            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+                                                            <a href="{{ path('fos_user_security_logout') }}">
+                                                                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                                            </a>
+                                                        {% else %}
+                                                            <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                                                        {% endif %}
+                                                    </div>
+                            #}
+
+                            {% for type, messages in app.session.flashBag.all %}
+                                {% for message in messages %}
+                                    <div class="{{ type }}">
+                                        {{ message|trans({}, 'FOSUserBundle') }}
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+
+                            <div>
+                                {% block fos_user_content %}
+                                {% endblock fos_user_content %}
+                            </div>
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+            {% block sidebar %}
+
+            {% endblock %}

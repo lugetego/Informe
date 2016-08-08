@@ -24,6 +24,27 @@ class User extends BaseUser
      */
     private $academico;
 
+    /**
+     * @return mixed
+     */
+    public function getAcademico()
+    {
+        return $this->academico;
+    }
+
+    /**
+     * Set academico
+     *
+     * @param \InformeBundle\Entity\Academico $academico
+     * @return User
+     */
+    public function setAcademico(\InformeBundle\Entity\Academico $academico = null)
+    {
+        $this->academico = $academico;
+
+        return $this;
+    }
+
     public function __construct()
     {
         parent::__construct();
@@ -40,27 +61,6 @@ class User extends BaseUser
         return $this->id;
     }
 
-    /**
-     * Set academico
-     *
-     * @param InformeBundle\Entity\Academico $academico
-     * @return User
-     */
-    public function setAcademico(InformeBundle\Entity\Academico $academico = null)
-    {
-        $this->academico = $academico;
 
-        return $this;
-    }
-
-    /**
-     * Get academico
-     *
-     * @return InformeBundle\Entity\Academico
-     */
-    public function getAcademico()
-    {
-        return $this->academico;
-    }
 
 }

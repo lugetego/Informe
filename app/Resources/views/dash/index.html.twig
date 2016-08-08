@@ -1,0 +1,185 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CCM - Dashboard{% endblock %}
+
+{% block css %}
+
+    {{ parent() }}
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="{{ asset('bundles/ccmsia/css/responsive-calendar.css') }}" type="text/css"/>
+
+{% endblock %}
+
+{% block wrapper %}
+
+    <div class="row">
+
+        <div class="col-lg-12">
+            <p></p>
+            {#                <h1 class="page-header">Solicitudes </h1>#}
+        </div>
+    </div>
+
+
+    <div class="page-header">
+        <h1><i class="fa fa-book" aria-hidden="true"></i> Informe anual</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-bar-chart" aria-hidden="true"></i> Investigación</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Titulo</th>
+                                <th>Acciones</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for investigacion in investigaciones %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ path('investigacion_show', { 'id': investigacion.id }) }}"> {{ investigacion.tipo }}</a>
+                                    </td>
+                                    <td>
+                                        {{ investigacion.titulo }}
+                                    </td>
+
+                                    <td>
+                                        <a href="{{ path('investigacion_show', { 'id': investigacion.id }) }}"> <i class="fa fa-search-plus" aria-hidden="true"></i></a>
+                                        <a href="{{ path('investigacion_edit', { 'id': investigacion.id }) }}"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <!-- /.table -->
+                    </div>
+                </div>
+                <div class="panel-footer"> <a href="{{ path('investigacion_new') }}"><button type="button" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Nuevo registro</button></a></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-6">
+
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Estudiantes</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Alumno</th>
+                                <th>Programa</th>
+
+                                <th>Acciones</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for estudiante in estudiantes %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ path('estudiantes_show', { 'id': estudiante.id }) }}"> {{ estudiante.alumno }}</a>
+                                    </td>
+                                    <td>
+                                        {{ estudiante.programa }}
+                                    </td>
+
+                                    <td>
+                                        <a href="{{ path('estudiantes_show', { 'id': estudiante.id }) }}"> <i class="fa fa-search-plus" aria-hidden="true"></i></a>
+                                        <a href="{{ path('estudiantes_edit', { 'id': estudiante.id }) }}"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+
+                                    </td>
+                                    <td>
+
+                                    </td>
+
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <!-- /.table -->
+                    </div>
+                </div>
+                <div class="panel-footer"> <a href="{{ path('estudiantes_new') }}"><button type="button" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Nuevo registro</button></a></div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-6">
+
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Cursos y seminarios</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Alumno</th>
+                                <th>Programa</th>
+
+                                <th>Acciones</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for curso in cursos %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ path('cursos_show', { 'id': curso.id }) }}"> {{ curso.informacion }}</a>
+                                    </td>
+                                    <td>
+                                        {{ curso.tipo }}
+                                    </td>
+
+                                    <td>
+                                        <a href="{{ path('cursos_show', { 'id': curso.id }) }}"> <i class="fa fa-search-plus" aria-hidden="true"></i></a>
+                                        <a href="{{ path('cursos_edit', { 'id': curso.id }) }}"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+
+                                    </td>
+                                    <td>
+
+                                    </td>
+
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <!-- /.table -->
+                    </div>
+                </div>
+                <div class="panel-footer"> <a href="{{ path('cursos_new') }}"><button type="button" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Nuevo registro</button></a></div>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+    <!-- /.row -->
+
+
+
+{% endblock %}
+
+

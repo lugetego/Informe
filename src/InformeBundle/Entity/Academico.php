@@ -56,6 +56,33 @@ class Academico
     private $user;
 
     /**
+     * @var array $investigaciones
+     *
+     * @ORM\OneToMany(targetEntity="InformeBundle\Entity\Investigacion", mappedBy="academico")
+     *
+     * The mappedBy attribute designates the field in the entity that is the owner of the relationship.
+     */
+    private $investigaciones;
+
+    /**
+     * @var array $estudiantes
+     *
+     * @ORM\OneToMany(targetEntity="InformeBundle\Entity\Estudiantes", mappedBy="academico")
+     *
+     * The mappedBy attribute designates the field in the entity that is the owner of the relationship.
+     */
+    private $estudiantes;
+
+    /**
+     * @var array $cursos
+     *
+     * @ORM\OneToMany(targetEntity="InformeBundle\Entity\Cursos", mappedBy="academico")
+     *
+     * The mappedBy attribute designates the field in the entity that is the owner of the relationship.
+     */
+    private $cursos;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -172,5 +199,114 @@ class Academico
 
     }
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->investigaciones = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+
+
+    /**
+     * Get investigaciones
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getInvestigaciones()
+    {
+        return $this->investigaciones;
+    }
+
+
+
+    /**
+     * Add investigaciones
+     *
+     * @param \InformeBundle\Entity\Investigacion $investigaciones
+     * @return Academico
+     */
+    public function addInvestigacione(\InformeBundle\Entity\Investigacion $investigaciones)
+    {
+        $this->investigaciones[] = $investigaciones;
+
+        return $this;
+    }
+
+    /**
+     * Remove investigaciones
+     *
+     * @param \InformeBundle\Entity\Investigacion $investigaciones
+     */
+    public function removeInvestigacione(\InformeBundle\Entity\Investigacion $investigaciones)
+    {
+        $this->investigaciones->removeElement($investigaciones);
+    }
+
+    /**
+     * Add estudiantes
+     *
+     * @param \InformeBundle\Entity\Estudiantes $estudiantes
+     * @return Academico
+     */
+    public function addEstudiante(\InformeBundle\Entity\Estudiantes $estudiantes)
+    {
+        $this->estudiantes[] = $estudiantes;
+
+        return $this;
+    }
+
+    /**
+     * Remove estudiantes
+     *
+     * @param \InformeBundle\Entity\Estudiantes $estudiantes
+     */
+    public function removeEstudiante(\InformeBundle\Entity\Estudiantes $estudiantes)
+    {
+        $this->estudiantes->removeElement($estudiantes);
+    }
+
+    /**
+     * Get estudiantes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEstudiantes()
+    {
+        return $this->estudiantes;
+    }
+
+    /**
+     * Add cursos
+     *
+     * @param \InformeBundle\Entity\Cursos $cursos
+     * @return Academico
+     */
+    public function addCurso(\InformeBundle\Entity\Cursos $cursos)
+    {
+        $this->cursos[] = $cursos;
+
+        return $this;
+    }
+
+    /**
+     * Remove cursos
+     *
+     * @param \InformeBundle\Entity\Cursos $cursos
+     */
+    public function removeCurso(\InformeBundle\Entity\Cursos $cursos)
+    {
+        $this->cursos->removeElement($cursos);
+    }
+
+    /**
+     * Get cursos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCursos()
+    {
+        return $this->cursos;
+    }
 }
