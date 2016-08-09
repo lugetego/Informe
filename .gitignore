@@ -18,9 +18,6 @@
 # Parameters
 app/config/parameters.yml
 app/config/parameters.ini
-app/config/parameters.yml.dist
-app/config/security.yml
-app/config/config.yml
 
 # Managed by Composer
 /app/bootstrap.php.cache
