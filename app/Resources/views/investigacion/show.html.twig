@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+
+{% block wrapper %}
+
+    <div class="row">
+
+        <div class="col-lg-12">
+            <p></p>
+            {#                <h1 class="page-header">Solicitudes </h1>#}
+        </div>
+    </div>
+
+    <div class="page-header">
+        <h1>Investigación</h1>
+    </div>
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ investigacion.titulo |title}}</h3>
+        </div>
+        <div class="panel-body">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <dl>
+                        <dt>Autores</dt>
+                        <dd>{{ investigacion.autores }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-1">
+                    <dl>
+                        <dt>Tipo</dt>
+                        <dd>{{ investigacion.tipo }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-1">
+                       <dl>
+                            <dt>Año</dt>
+                            <dd>{{ investigacion.year }}</dd>
+                        </dl>
+                </div>
+                <div class="col-md-1">
+                    <dl>
+                        <dt>Páginas</dt>
+                        <dd>{{ investigacion.pags }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-1">
+                    <dl>
+                        <dt>Volúmen</dt>
+                        <dd>{{ investigacion.volumen }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-1">
+                    <dl>
+                        <dt>Número</dt>
+                        <dd>{{ investigacion.numero }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-7">
+                    <dl>
+                        <dt>Status</dt>
+                        <dd>{{ investigacion.status }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Revista</dt>
+                        <dd>{{ investigacion.revista }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-2">
+                    <dl>
+                        <dt>ISSN</dt>
+                        <dd>{{ investigacion.issn }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-6">
+                    <dl>
+                        <dt>Indizado</dt>
+                        <dd>{% if investigacion.indizado %}Si{% else %}No{% endif %}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-1">
+                    <dl>
+                        <dt>Proyectos</dt>
+                        <dd>{{ investigacion.proyectos }}</dd>
+                    </dl>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-7 col-lg-offset-5">
+
+            {{ form_start(delete_form) }}
+            <a class="btn btn-primary" href="{{ path('investigacion_edit', { 'id': investigacion.id }) }}">Modificar</a>
+            <a class="btn btn-warning" href="{{ path('dashboard') }}">Cancelar</a>
+            <input class="btn btn-danger" type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+
+        </div>
+    </div>
+
+
+{% endblock %}
