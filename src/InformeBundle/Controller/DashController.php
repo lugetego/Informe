@@ -45,6 +45,7 @@ class DashController extends Controller
             $investigaciones = $user->getAcademico()->getInvestigaciones();
             $estudiantes = $user->getAcademico()->getEstudiantes();
             $cursos = $user->getAcademico()->getCursos();
+            $proyectos = $user->getAcademico()->getProyectos();
             $academico = $user->getAcademico()->getId();
 
 
@@ -58,6 +59,7 @@ class DashController extends Controller
                 'investigaciones'=> $investigaciones,
                 'estudiantes'=>$estudiantes,
                 'cursos'=>$cursos,
+                'proyectos'=>$proyectos,
 
             ));
 
