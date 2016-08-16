@@ -92,6 +92,15 @@ class Academico
     private $proyectos;
 
     /**
+     * @var array $eventos
+     *
+     * @ORM\OneToMany(targetEntity="InformeBundle\Entity\Eventos", mappedBy="academico")
+     *
+     * The mappedBy attribute designates the field in the entity that is the owner of the relationship.
+     */
+    private $eventos;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -350,5 +359,38 @@ class Academico
     public function getProyectos()
     {
         return $this->proyectos;
+    }
+
+    /**
+     * Add eventos
+     *
+     * @param \InformeBundle\Entity\Eventos $eventos
+     * @return Academico
+     */
+    public function addEvento(\InformeBundle\Entity\Eventos $eventos)
+    {
+        $this->eventos[] = $eventos;
+
+        return $this;
+    }
+
+    /**
+     * Remove eventos
+     *
+     * @param \InformeBundle\Entity\Eventos $eventos
+     */
+    public function removeEvento(\InformeBundle\Entity\Eventos $eventos)
+    {
+        $this->eventos->removeElement($eventos);
+    }
+
+    /**
+     * Get eventos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEventos()
+    {
+        return $this->eventos;
     }
 }

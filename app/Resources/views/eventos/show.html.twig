@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block wrapper %}
+    <div class="row">
+
+        <div class="col-lg-12">
+            <p></p>
+            {#                <h1 class="page-header">Solicitudes </h1>#}
+        </div>
+    </div>
+
+    <div class="page-header">
+        <h1>Eventos</h1>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ evento.nombre |title}}</h3>
+        </div>
+        <div class="panel-body">
+
+            <div class="row">
+                <div class="col-md-2">
+                    <dl>
+                        <dt>Tipo</dt>
+                        <dd>{{ evento.tipo }}</dd>
+                    </dl>
+                </div>
+                <div class="col-lg-2">
+                    <dl>
+                        <dt>Organizador</dt>
+                        {% if evento.organizador == true %}
+                            <dd><span class="label label-success">Si</span></dd>
+                        {% else %}
+                            <dd><span class="label label-danger">No</span></dd>
+                        {% endif %}
+                    </dl>
+                </div>
+                <div class="col-lg-2">
+                    <dl>
+                        <dt>Nacional</dt>
+                        {% if evento.nacional == true %}
+                            <dd><span class="label label-success">Si</span></dd>
+                        {% else %}
+                            <dd><span class="label label-danger">No</span></dd>
+                        {% endif %}
+                    </dl>
+                </div>
+                <div class="col-md-2">
+                    <dl>
+                        <dt>País</dt>
+                        <dd>{{ evento.pais }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-2">
+                    <dl>
+                        <dt>Institución</dt>
+                        <dd>{{ evento.institucion }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-2">
+                    <dl>
+                        <dt>Plática</dt>
+                        <dd>{{ evento.platica }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-2">
+                    <dl>
+                        <dt>Actividad</dt>
+                        <dd>{{ evento.actividad }}</dd>
+                    </dl>
+                </div>
+                <div class="col-lg-2">
+                    <dl>
+                        <dt>Fecha</dt>
+                        <dd>{{ evento.fecha|date('d-m-Y') }}</dd>
+                    </dl>
+
+                </div>
+                <div class="col-md-12">
+                    <dl>
+                        <dt>Información</dt>
+                        <dd>{{ evento.informacion }}</dd>
+                    </dl>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-7 col-lg-offset-5">
+
+            {{ form_start(delete_form) }}
+            <a class="btn btn-primary" href="{{ path('eventos_edit', { 'id': evento.id }) }}">Modificar</a>
+            <a class="btn btn-warning" href="{{ path('dashboard') }}">Cancelar</a>
+            <input class="btn btn-danger" type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+
+        </div>
+    </div>
+
+
+{% endblock %}

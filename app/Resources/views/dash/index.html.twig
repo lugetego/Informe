@@ -127,7 +127,7 @@
 
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Cursos y seminarios</h3>
+                    <h3 class="panel-title"><i class="fa fa-tasks" aria-hidden="true"></i> Cursos y seminarios</h3>
                 </div>
                 <div class="panel-body">
                     <div class="panel-body">
@@ -178,7 +178,7 @@
 
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Proyectos</h3>
+                    <h3 class="panel-title"><i class="fa fa-folder-o" aria-hidden="true"></i> Proyectos</h3>
                 </div>
                 <div class="panel-body">
                     <div class="panel-body">
@@ -219,6 +219,57 @@
                     </div>
                 </div>
                 <div class="panel-footer"> <a href="{{ path('proyectos_new') }}"><button type="button" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Nuevo registro</button></a></div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-6">
+
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-folder-o" aria-hidden="true"></i> Eventos</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Evento</th>
+                                <th>Tipo</th>
+
+                                <th>Nombre</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for evento in eventos %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ path('eventos_show', { 'id': evento.id }) }}"> {{ evento.nombre }}</a>
+                                    </td>
+                                    <td>
+                                        {{ evento.tipo }}
+                                    </td>
+
+                                    <td>
+                                        <a href="{{ path('eventos_show', { 'id': evento.id }) }}"> <i class="fa fa-search-plus" aria-hidden="true"></i></a>
+                                        <a href="{{ path('eventos_edit', { 'id': evento.id }) }}"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+
+                                    </td>
+                                    <td>
+
+                                    </td>
+
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <!-- /.table -->
+                    </div>
+                </div>
+                <div class="panel-footer"> <a href="{{ path('eventos_new') }}"><button type="button" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Nuevo registro</button></a></div>
 
             </div>
 

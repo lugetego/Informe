@@ -1,0 +1,157 @@
+{% extends 'base.html.twig' %}
+
+{% block wrapper %}
+    <div class="row">
+
+        <div class="col-lg-12">
+            <p></p>
+            {#                <h1 class="page-header">Solicitudes </h1>#}
+        </div>
+    </div>
+    <div class="page-header">
+        <h1>Eventos</h1>
+    </div>
+    {{ form_start(form) }}
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(form.tipo) }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.tipo,{'attr': {'class': 'form-control input-sm', 'placeholder':'tipo'} } ) }}
+                        </div>
+                        <div>{{ form_errors(form.tipo) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(form.nombre) }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.nombre,{'attr': {'class': 'form-control input-sm', 'placeholder':'Nombre del evento'} } ) }}
+                        </div>
+                        <div>{{ form_errors(form.nombre) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <div>{{ form_label(form.organizador) }}</div>
+                        <div>
+                            {% spaceless %}
+                                {% for child in form.organizador %}
+                                    <div class="radio-inline">
+                                        {{ form_widget(child) }}  {{ form_label(child, null, {'label_attr': {'class': 'btn btn-default btn-xs'}}) }}
+                                    </div>
+                                {% endfor %}
+                            {% endspaceless %}
+                        </div>
+                        <div>{{ form_errors(form.organizador) }}</div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <div>{{ form_label(form.nacional) }}</div>
+                        <div>
+                            {% spaceless %}
+                                {% for child in form.nacional %}
+                                    <div class="radio-inline">
+                                        {{ form_widget(child) }}  {{ form_label(child, null, {'label_attr': {'class': 'btn btn-default btn-xs'}}) }}
+                                    </div>
+                                {% endfor %}
+                            {% endspaceless %}
+                        </div>
+                        <div>{{ form_errors(form.nacional) }}</div>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(form.pais) }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.pais,{'attr': {'class': 'form-control input-sm', 'placeholder':'Número de proyecto'} } ) }}
+                        </div>
+                        <div>{{ form_errors(form.pais) }}</div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(form.institucion) }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.institucion,{'attr': {'class': 'form-control input-sm', 'placeholder':'Institución'} } ) }}
+                        </div>
+                        <div>{{ form_errors(form.institucion) }}</div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(form.platica) }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.platica,{'attr': {'class': 'form-control input-sm', 'placeholder':'Número de proyecto'} } ) }}
+                        </div>
+                        <div>{{ form_errors(form.platica) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(form.actividad) }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.actividad,{'attr': {'class': 'form-control input-sm', 'placeholder':'Número de proyecto'} } ) }}
+                        </div>
+                        <div>{{ form_errors(form.actividad) }}</div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div>{{ form_label(form.fecha) }}</div>
+                        <div class="col-lg-4" >{{ form_widget(form.fecha.day, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                        <div class="col-lg-4" >{{ form_widget(form.fecha.month, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                        <div class="col-lg-4" >{{ form_widget(form.fecha.year, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                        <div>{{ form_errors(form.fecha) }}</div>
+                    </div>
+                </div>
+                <div class="col-md-12" >
+                    <div>{{ form_label(form.informacion) }}</div>
+                    <div>{{ form_widget(form.informacion, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                    <div>{{ form_errors(form.informacion) }}</div><br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-lg-7 col-lg-offset-5">
+            <input type="submit" value="Guardar"  class="btn btn-primary"/>
+            <a class="btn btn-warning" href="{{ path('dashboard') }}">Cancelar</a>
+
+            {{ form_end(form) }}
+
+
+        </div>
+    </div>
+
+
+{% endblock %}
