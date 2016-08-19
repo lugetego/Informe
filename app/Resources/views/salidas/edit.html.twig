@@ -1,0 +1,177 @@
+{% extends 'base.html.twig' %}
+
+{% block wrapper %}
+    <div class="row">
+
+        <div class="col-lg-12">
+            <p></p>
+            {#                <h1 class="page-header">Solicitudes </h1>#}
+        </div>
+    </div>
+
+    <div class="page-header">
+        <h1>Licencia y comisión</h1>
+    </div>
+
+    {{ form_start(edit_form) }}
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(edit_form.tipo) }}
+                        </div>
+                        <div>
+                            {{ form_widget(edit_form.tipo,{'attr': {'class': 'form-control input-sm', 'placeholder':'Tipo'} } ) }}
+                        </div>
+                        <div>{{ form_errors(edit_form.tipo) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(edit_form.pais) }}
+                        </div>
+                        <div>
+                            {{ form_widget(edit_form.pais,{'attr': {'class': 'form-control input-sm', 'placeholder':'País'} } ) }}
+                        </div>
+                        <div>{{ form_errors(edit_form.pais) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(edit_form.ciudad) }}
+                        </div>
+                        <div>
+                            {{ form_widget(edit_form.ciudad,{'attr': {'class': 'form-control input-sm', 'placeholder':'Ciudad'} } ) }}
+                        </div>
+                        <div>{{ form_errors(edit_form.ciudad) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(edit_form.estado) }}
+                        </div>
+                        <div>
+                            {{ form_widget(edit_form.estado,{'attr': {'class': 'form-control input-sm', 'placeholder':'Estado'} } ) }}
+                        </div>
+                        <div>{{ form_errors(edit_form.estado) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(edit_form.universidad) }}
+                        </div>
+                        <div>
+                            {{ form_widget(edit_form.universidad,{'attr': {'class': 'form-control input-sm', 'placeholder':'Universidad'} } ) }}
+                        </div>
+                        <div>{{ form_errors(edit_form.universidad) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(edit_form.profesor) }}
+                        </div>
+                        <div>
+                            {{ form_widget(edit_form.profesor,{'attr': {'class': 'form-control input-sm', 'placeholder':'Profesor'} } ) }}
+                        </div>
+                        <div>{{ form_errors(edit_form.profesor) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(edit_form.actividad) }}
+                        </div>
+                        <div>
+                            {{ form_widget(edit_form.actividad,{'attr': {'class': 'form-control input-sm', 'placeholder':'Actividad'} } ) }}
+                        </div>
+                        <div>{{ form_errors(edit_form.actividad) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(edit_form.proposito) }}
+                        </div>
+                        <div>
+                            {{ form_widget(edit_form.proposito,{'attr': {'class': 'form-control input-sm', 'placeholder':'Propósito'} } ) }}
+                        </div>
+                        <div>{{ form_errors(edit_form.proposito) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(edit_form.proyecto) }}
+                        </div>
+                        <div>
+                            {{ form_widget(edit_form.proyecto,{'attr': {'class': 'form-control input-sm', 'placeholder':'Proyecto'} } ) }}
+                        </div>
+                        <div>{{ form_errors(edit_form.proyecto) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div>{{ form_label(edit_form.inicio) }}</div>
+                        <div class="col-lg-4" >{{ form_widget(edit_form.inicio.day, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                        <div class="col-lg-4" >{{ form_widget(edit_form.inicio.month, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                        <div class="col-lg-4" >{{ form_widget(edit_form.inicio.year, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                        <div>{{ form_errors(edit_form.inicio) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div>{{ form_label(edit_form.fin) }}</div>
+                        <div class="col-lg-4" >{{ form_widget(edit_form.fin.day, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                        <div class="col-lg-4" >{{ form_widget(edit_form.fin.month, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                        <div class="col-lg-4" >{{ form_widget(edit_form.fin.year, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                        <div>{{ form_errors(edit_form.fin) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(edit_form.trabajo) }}
+                        </div>
+                        <div>
+                            {{ form_widget(edit_form.trabajo,{'attr': {'class': 'form-control input-sm', 'placeholder':'Trabajo'} } ) }}
+                        </div>
+                        <div>{{ form_errors(edit_form.trabajo) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(edit_form.observaciones) }}
+                        </div>
+                        <div>
+                            {{ form_widget(edit_form.observaciones,{'attr': {'class': 'form-control input-sm', 'placeholder':'Observaciones'} } ) }}
+                        </div>
+                        <div>{{ form_errors(edit_form.observaciones) }}</div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-7 col-lg-offset-5">
+            <input type="submit" value="Guardar"  class="btn btn-primary"/>
+            <a class="btn btn-warning" href="{{ path('dashboard') }}">Cancelar</a>
+
+            {{ form_end(edit_form) }}
+
+
+        </div>
+    </div>
+{% endblock %}

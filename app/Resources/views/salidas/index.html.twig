@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Salidas list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Tipo</th>
+                <th>Pais</th>
+                <th>Ciudad</th>
+                <th>Estado</th>
+                <th>Universidad</th>
+                <th>Profesor</th>
+                <th>Actividad</th>
+                <th>Proposito</th>
+                <th>Proyecto</th>
+                <th>Inicio</th>
+                <th>Fin</th>
+                <th>Trabajo</th>
+                <th>Observaciones</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for salida in salidas %}
+            <tr>
+                <td><a href="{{ path('salidas_show', { 'id': salida.id }) }}">{{ salida.id }}</a></td>
+                <td>{{ salida.tipo }}</td>
+                <td>{{ salida.pais }}</td>
+                <td>{{ salida.ciudad }}</td>
+                <td>{{ salida.estado }}</td>
+                <td>{{ salida.universidad }}</td>
+                <td>{{ salida.profesor }}</td>
+                <td>{{ salida.actividad }}</td>
+                <td>{{ salida.proposito }}</td>
+                <td>{{ salida.proyecto }}</td>
+                <td>{% if salida.inicio %}{{ salida.inicio|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if salida.fin %}{{ salida.fin|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ salida.trabajo }}</td>
+                <td>{{ salida.observaciones }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('salidas_show', { 'id': salida.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('salidas_edit', { 'id': salida.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('salidas_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

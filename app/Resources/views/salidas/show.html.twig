@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block wrapper %}
+    <div class="row">
+
+        <div class="col-lg-12">
+            <p></p>
+            {#                <h1 class="page-header">Solicitudes </h1>#}
+        </div>
+    </div>
+    <div class="page-header">
+        <h1>Salidas</h1>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ salida.tipo}}</h3>
+        </div>
+        <div class="panel-body">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <dl>
+                        <dt>País</dt>
+                        <dd>{{ salida.pais }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Ciudad</dt>
+                        <dd>{{ salida.ciudad }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Estado</dt>
+                        <dd>{{ salida.estado }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Universidad</dt>
+                        <dd>{{ salida.universidad }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Profesor</dt>
+                        <dd>{{ salida.profesor }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Actividad</dt>
+                        <dd>{{ salida.actividad }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Propósito</dt>
+                        <dd>{{ salida.proposito }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Proyecto</dt>
+                        <dd>{{ salida.proyecto }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Inicio</dt>
+                        <dd>{% if salida.inicio %}{{ salida.inicio|date('Y-m-d') }}{% endif %}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Fin</dt>
+                        <dd>{% if salida.fin %}{{ salida.fin|date('Y-m-d') }}{% endif %}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Trabajo</dt>
+                        <dd>{{ salida.trabajo }}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl>
+                        <dt>Observaciones</dt>
+                        <dd>{{ salida.observaciones }}</dd>
+                    </dl>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-7 col-lg-offset-5">
+
+            {{ form_start(delete_form) }}
+            <a class="btn btn-primary" href="{{ path('salidas_edit', { 'id': salida.id }) }}">Modificar</a>
+            <a class="btn btn-warning" href="{{ path('dashboard') }}">Cancelar</a>
+            <input class="btn btn-danger" type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+
+        </div>
+    </div>
+{% endblock %}

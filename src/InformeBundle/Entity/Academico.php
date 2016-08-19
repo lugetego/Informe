@@ -101,6 +101,15 @@ class Academico
     private $eventos;
 
     /**
+     * @var array $salidas
+     *
+     * @ORM\OneToMany(targetEntity="InformeBundle\Entity\Salidas", mappedBy="academico")
+     *
+     * The mappedBy attribute designates the field in the entity that is the owner of the relationship.
+     */
+    private $salidas;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -392,5 +401,38 @@ class Academico
     public function getEventos()
     {
         return $this->eventos;
+    }
+
+    /**
+     * Add salidas
+     *
+     * @param \InformeBundle\Entity\Salidas $salidas
+     * @return Academico
+     */
+    public function addSalida(\InformeBundle\Entity\Salidas $salidas)
+    {
+        $this->salidas[] = $salidas;
+
+        return $this;
+    }
+
+    /**
+     * Remove salidas
+     *
+     * @param \InformeBundle\Entity\Salidas $salidas
+     */
+    public function removeSalida(\InformeBundle\Entity\Salidas $salidas)
+    {
+        $this->salidas->removeElement($salidas);
+    }
+
+    /**
+     * Get salidas
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSalidas()
+    {
+        return $this->salidas;
     }
 }

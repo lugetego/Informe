@@ -273,6 +273,57 @@
 
             </div>
 
+
+
+        </div>
+
+        <div class="col-lg-6">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-folder-o" aria-hidden="true"></i> Salidas</h3>
+            </div>
+            <div class="panel-body">
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>País</th>
+                            <th>Universidad</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for salida in salidas %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('salidas_show', { 'id': salida.id }) }}"> {{ salida.tipo }}</a>
+                                </td>
+                                <td>
+                                    {{ salida.pais }}
+                                </td>
+
+                                <td>
+                                    <a href="{{ path('salidas_show', { 'id': salida.id }) }}"> <i class="fa fa-search-plus" aria-hidden="true"></i></a>
+                                    <a href="{{ path('salidas_edit', { 'id': salida.id }) }}"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+
+                                </td>
+                                <td>
+
+                                </td>
+
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <!-- /.table -->
+                </div>
+            </div>
+            <div class="panel-footer"> <a href="{{ path('salidas_new') }}"><button type="button" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Nuevo registro</button></a></div>
+
+        </div>
+
         </div>
 
 

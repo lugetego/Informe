@@ -1,0 +1,176 @@
+{% extends 'base.html.twig' %}
+
+{% block wrapper %}
+    <div class="row">
+
+        <div class="col-lg-12">
+            <p></p>
+            {#                <h1 class="page-header">Solicitudes </h1>#}
+        </div>
+    </div>
+    <div class="page-header">
+        <h1>Licencia o comisión</h1>
+    </div>
+
+
+    {{ form_start(form) }}
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(form.tipo) }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.tipo,{'attr': {'class': 'form-control input-sm', 'placeholder':'Tipo'} } ) }}
+                        </div>
+                        <div>{{ form_errors(form.tipo) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(form.pais) }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.pais,{'attr': {'class': 'form-control input-sm', 'placeholder':'País'} } ) }}
+                        </div>
+                        <div>{{ form_errors(form.pais) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(form.ciudad) }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.ciudad,{'attr': {'class': 'form-control input-sm', 'placeholder':'Ciudad'} } ) }}
+                        </div>
+                        <div>{{ form_errors(form.ciudad) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(form.estado) }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.estado,{'attr': {'class': 'form-control input-sm', 'placeholder':'Estado'} } ) }}
+                        </div>
+                        <div>{{ form_errors(form.estado) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(form.universidad) }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.universidad,{'attr': {'class': 'form-control input-sm', 'placeholder':'Universidad'} } ) }}
+                        </div>
+                        <div>{{ form_errors(form.universidad) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(form.profesor) }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.profesor,{'attr': {'class': 'form-control input-sm', 'placeholder':'Profesor'} } ) }}
+                        </div>
+                        <div>{{ form_errors(form.profesor) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(form.actividad) }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.actividad,{'attr': {'class': 'form-control input-sm', 'placeholder':'Actividad'} } ) }}
+                        </div>
+                        <div>{{ form_errors(form.actividad) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(form.proposito) }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.proposito,{'attr': {'class': 'form-control input-sm', 'placeholder':'Propósito'} } ) }}
+                        </div>
+                        <div>{{ form_errors(form.proposito) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(form.proyecto) }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.proyecto,{'attr': {'class': 'form-control input-sm', 'placeholder':'Proyecto'} } ) }}
+                        </div>
+                        <div>{{ form_errors(form.proyecto) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div>{{ form_label(form.inicio) }}</div>
+                        <div class="col-lg-4" >{{ form_widget(form.inicio.day, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                        <div class="col-lg-4" >{{ form_widget(form.inicio.month, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                        <div class="col-lg-4" >{{ form_widget(form.inicio.year, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                        <div>{{ form_errors(form.inicio) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div>{{ form_label(form.fin) }}</div>
+                        <div class="col-lg-4" >{{ form_widget(form.fin.day, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                        <div class="col-lg-4" >{{ form_widget(form.fin.month, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                        <div class="col-lg-4" >{{ form_widget(form.fin.year, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                        <div>{{ form_errors(form.fin) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(form.trabajo) }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.trabajo,{'attr': {'class': 'form-control input-sm', 'placeholder':'Trabajo'} } ) }}
+                        </div>
+                        <div>{{ form_errors(form.trabajo) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(form.observaciones) }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.observaciones,{'attr': {'class': 'form-control input-sm', 'placeholder':'Observaciones'} } ) }}
+                        </div>
+                        <div>{{ form_errors(form.observaciones) }}</div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-7 col-lg-offset-5">
+            <input type="submit" value="Guardar"  class="btn btn-primary"/>
+            <a class="btn btn-warning" href="{{ path('dashboard') }}">Cancelar</a>
+
+            {{ form_end(form) }}
+
+
+        </div>
+    </div>
+{% endblock %}
