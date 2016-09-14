@@ -7,6 +7,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use InformeBundle\Entity\Academico;
+use InformeBundle\Entity\Investigacion;
+
 
 class InvestigacionType extends AbstractType
 {
@@ -62,9 +64,8 @@ class InvestigacionType extends AbstractType
                 'placeholder'=>'Seleccionar',
                 'required'=>true,
                 'choices_as_values' => true,
-
-
             ))
+
             ->add('pags', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
                 'label'=>'*Páginas',
                 'required'=>false,
@@ -112,9 +113,9 @@ class InvestigacionType extends AbstractType
                 'label'=>'Revista',
                 'required'=>false,
             ))
-           /* ->add('academico',null, array(
+           /* ->add('autor',null, array(
                 'class' => 'InformeBundle\Entity\Academico',
-                'label' => 'Académico',
+                'label' => 'Autor',
                 'read_only'=>'true',
                 'required'=>true,
                 'disabled'  => false,
@@ -125,10 +126,10 @@ class InvestigacionType extends AbstractType
                         ->leftjoin('r.user','a')
                         ->where('a.id = :id')
                         ->setParameter('id', $user->getId())
-                        ;}, 'data' => ($user->getAcademico())))*/
-
-
+                        ;}, 'data' => ($user->getAcademico()->getAutor())))
+*/
         ;
+
     }
     
     /**

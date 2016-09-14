@@ -3,6 +3,8 @@
 namespace InformeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Index;
+
 
 /**
  * Investigacion
@@ -27,6 +29,14 @@ class Investigacion
      * @ORM\JoinColumn(name="academico_id", referencedColumnName="id")
      */
     private $academico;
+
+    /**
+     * @var autor
+     * @ORM\Column(name="autor", type="integer")
+     * @ORM\ManyToOne(targetEntity="Academico", inversedBy="investigacionesautor")
+     * @ORM\JoinColumn(name="autor_id", referencedColumnName="id")
+     */
+    private $autor;
 
     /**
      * @var string
@@ -420,4 +430,29 @@ class Investigacion
     }
 
 
+
+
+
+    /**
+     * Set autor
+     *
+     * @param integer $autor
+     * @return Investigacion
+     */
+    public function setAutor($autor)
+    {
+        $this->autor = $autor;
+
+        return $this;
+    }
+
+    /**
+     * Get autor
+     *
+     * @return integer 
+     */
+    public function getAutor()
+    {
+        return $this->autor;
+    }
 }

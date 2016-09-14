@@ -50,6 +50,13 @@ class InvestigacionController extends Controller
         $securityContext = $this->container->get('security.token_storage');
 
         $user = $securityContext->getToken()->getUser();
+        $academico = $user->getAcademico();
+
+        $em = $this->getDoctrine()->getManager();
+
+
+
+
 
         $investigacion = new Investigacion();
         $form = $this->createForm('InformeBundle\Form\InvestigacionType', $investigacion, array('user'=>$user));
@@ -57,7 +64,8 @@ class InvestigacionController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $investigacion->setAcademico($user->getAcademico());
+            $investigacion->setAcademico($academico);
+            $investigacion->setAutor($academico);
             $em->persist($investigacion);
             $em->flush();
 
