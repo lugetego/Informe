@@ -31,9 +31,9 @@ class Cursos
     /**
      * @var string
      *
-     * @ORM\Column(name="informacion", type="string", length=255)
+     * @ORM\Column(name="nombre", type="string", length=255)
      */
-    private $informacion;
+    private $nombre;
 
     /**
      * @var string
@@ -42,6 +42,26 @@ class Cursos
      */
     private $tipo;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nivel", type="string", length=255)
+     */
+    private $nivel;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="horas", type="string", length=255)
+     */
+    private $horas;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lugar", type="string", length=255)
+     */
+    private $lugar;
 
     /**
      * Get id
@@ -54,26 +74,26 @@ class Cursos
     }
 
     /**
-     * Set informacion
+     * Set nombre
      *
-     * @param string $informacion
+     * @param string $nombre
      * @return Cursos
      */
-    public function setInformacion($informacion)
+    public function setNombre($nombre)
     {
-        $this->informacion = $informacion;
+        $this->nombre = $nombre;
 
         return $this;
     }
 
     /**
-     * Get informacion
+     * Get nombre
      *
      * @return string 
      */
-    public function getInformacion()
+    public function getNombre()
     {
-        return $this->informacion;
+        return $this->nombre;
     }
 
     /**
@@ -121,4 +141,53 @@ class Cursos
     {
         return $this->tipo;
     }
+
+    /**
+     * @return string
+     */
+    public function getNivel()
+    {
+        return $this->nivel;
+    }
+
+    /**
+     * @param string $nivel
+     */
+    public function setNivel($nivel)
+    {
+        $this->nivel = $nivel;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHoras()
+    {
+        return $this->horas;
+    }
+
+    /**
+     * @param string $horas
+     */
+    public function setHoras($horas)
+    {
+        $this->horas = $horas;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLugar()
+    {
+        return $this->lugar;
+    }
+
+    /**
+     * @param string $lugar
+     */
+    public function setLugar($lugar)
+    {
+        $this->lugar = $lugar;
+    }
+
 }

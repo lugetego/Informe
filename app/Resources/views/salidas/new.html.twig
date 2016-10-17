@@ -1,21 +1,8 @@
-{% extends 'base.html.twig' %}
+{% form_theme form 'form_errors.html.twig' %}
 
-{% block wrapper %}
-    <div class="row">
+{{ form_start(form, {'action': path('salidas_new')}) }}
 
-        <div class="col-lg-12">
-            <p></p>
-            {#                <h1 class="page-header">Solicitudes </h1>#}
-        </div>
-    </div>
-    <div class="page-header">
-        <h1>Licencia o comisión</h1>
-    </div>
-
-
-    {{ form_start(form) }}
-
-    <div class="panel panel-default">
+<div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
 
@@ -25,12 +12,12 @@
                             {{ form_label(form.tipo) }}
                         </div>
                         <div>
-                            {{ form_widget(form.tipo,{'attr': {'class': 'form-control input-sm', 'placeholder':'Tipo'} } ) }}
+                            {{ form_widget(form.tipo,{'attr': {'class': 'form-control input-sm', 'placeholder':'Licencia o comisión'} } ) }}
                         </div>
                         <div>{{ form_errors(form.tipo) }}</div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-5">
                     <div class="form-group">
                         <div>
                             {{ form_label(form.pais) }}
@@ -41,7 +28,7 @@
                         <div>{{ form_errors(form.pais) }}</div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-5">
                     <div class="form-group">
                         <div>
                             {{ form_label(form.ciudad) }}
@@ -52,7 +39,7 @@
                         <div>{{ form_errors(form.ciudad) }}</div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="form-group">
                         <div>
                             {{ form_label(form.estado) }}
@@ -63,7 +50,7 @@
                         <div>{{ form_errors(form.estado) }}</div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="form-group">
                         <div>
                             {{ form_label(form.universidad) }}
@@ -74,7 +61,7 @@
                         <div>{{ form_errors(form.universidad) }}</div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="form-group">
                         <div>
                             {{ form_label(form.profesor) }}
@@ -85,7 +72,7 @@
                         <div>{{ form_errors(form.profesor) }}</div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="form-group">
                         <div>
                             {{ form_label(form.actividad) }}
@@ -96,7 +83,7 @@
                         <div>{{ form_errors(form.actividad) }}</div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="form-group">
                         <div>
                             {{ form_label(form.proposito) }}
@@ -107,7 +94,7 @@
                         <div>{{ form_errors(form.proposito) }}</div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="form-group">
                         <div>
                             {{ form_label(form.proyecto) }}
@@ -118,7 +105,7 @@
                         <div>{{ form_errors(form.proyecto) }}</div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="form-group">
                         <div>{{ form_label(form.inicio) }}</div>
                         <div class="col-lg-4" >{{ form_widget(form.inicio.day, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
@@ -127,7 +114,7 @@
                         <div>{{ form_errors(form.inicio) }}</div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="form-group">
                         <div>{{ form_label(form.fin) }}</div>
                         <div class="col-lg-4" >{{ form_widget(form.fin.day, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
@@ -136,9 +123,10 @@
                         <div>{{ form_errors(form.fin) }}</div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+
+                <div class="col-lg-12">
                     <div class="form-group">
-                        <div>
+                        <div><br>
                             {{ form_label(form.trabajo) }}
                         </div>
                         <div>
@@ -147,7 +135,7 @@
                         <div>{{ form_errors(form.trabajo) }}</div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-12">
                     <div class="form-group">
                         <div>
                             {{ form_label(form.observaciones) }}
@@ -163,14 +151,11 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-7 col-lg-offset-5">
-            <input type="submit" value="Guardar"  class="btn btn-primary"/>
-            <a class="btn btn-warning" href="{{ path('dashboard') }}">Cancelar</a>
 
-            {{ form_end(form) }}
-
-
-        </div>
+<div class="row">
+    <div class="col-lg-7 col-lg-offset-5">
+        <input type="submit" value="Guardar"  class="btn btn-primary"/>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+        {{ form_end(form) }}
     </div>
-{% endblock %}
+</div>

@@ -1,27 +1,12 @@
-{% extends 'base.html.twig' %}
+{% form_theme edit_form 'form_errors.html.twig' %}
 
-{% block wrapper %}
-
-    <div class="row">
-
-        <div class="col-lg-12">
-            <p></p>
-            {#                <h1 class="page-header">Solicitudes </h1>#}
-        </div>
-    </div>
-    <div class="page-header">
-        <h1>Investigación</h1>
-    </div>
-
-
-
-    {{ form_start(edit_form) }}
+{{ form_start(edit_form, {'action': path('investigacion_edit', { 'id': id})}) }}
 
 <div class="panel panel-default">
     <div class="panel-body">
         <div class="row">
             <div class="col-lg-12">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <div class="form-group">
                         <div>
                             {{ form_label(edit_form.titulo) }}
@@ -32,7 +17,7 @@
                         <div>{{ form_errors(edit_form.titulo) }}</div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <div class="form-group">
                         <div>
                             {{ form_label(edit_form.autores) }}
@@ -43,7 +28,7 @@
                         <div>{{ form_errors(edit_form.autores) }}</div>
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-3">
                     <div class="form-group">
                         <div>
                             {{ form_label(edit_form.tipo) }}
@@ -54,7 +39,7 @@
                         <div>{{ form_errors(edit_form.tipo) }}</div>
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-3">
                     <div class="form-group">
                         <div>
                             {{ form_label(edit_form.year) }}
@@ -65,7 +50,7 @@
                         <div>{{ form_errors(edit_form.year) }}</div>
                     </div>
                 </div>
-                <div class="col-lg-1">
+                <div class="col-lg-3">
                     <div class="form-group">
                         <div>
                             {{ form_label(edit_form.pags) }}
@@ -76,7 +61,7 @@
                         <div>{{ form_errors(edit_form.pags) }}</div>
                     </div>
                 </div>
-                <div class="col-lg-1">
+                <div class="col-lg-3">
                     <div class="form-group">
                         <div>
                             {{ form_label(edit_form.volumen) }}
@@ -87,7 +72,7 @@
                         <div>{{ form_errors(edit_form.volumen) }}</div>
                     </div>
                 </div>
-                <div class="col-lg-1">
+                <div class="col-lg-3">
                     <div class="form-group">
                         <div>
                             {{ form_label(edit_form.numero) }}
@@ -98,7 +83,7 @@
                         <div>{{ form_errors(edit_form.numero) }}</div>
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-3">
                     <div class="form-group">
                         <div>
                             {{ form_label(edit_form.status) }}
@@ -109,7 +94,7 @@
                         <div>{{ form_errors(edit_form.status) }}</div>
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-3">
                     <div class="form-group">
                         <div>{{ form_label(edit_form.indizado) }}</div>
                         <div>
@@ -124,7 +109,7 @@
                         <div>{{ form_errors(edit_form.indizado) }}</div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-12">
                     <div class="form-group">
                         <div>
                             {{ form_label(edit_form.revista) }}
@@ -135,7 +120,7 @@
                         <div>{{ form_errors(edit_form.revista) }}</div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="form-group">
                         <div>
                             {{ form_label(edit_form.issn) }}
@@ -146,7 +131,7 @@
                         <div>{{ form_errors(edit_form.issn) }}</div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-12">
                     <div class="form-group">
                         <div>
                             {{ form_label(edit_form.proyectos) }}
@@ -163,13 +148,12 @@
     </div>
 </div>
 
-    <div class="row">
-        <div class="col-lg-7 col-lg-offset-5">
-            <input type="submit" value="Guardar"  class="btn btn-primary"/>
-            <a class="btn btn-warning" href="{{ path('dashboard') }}">Cancelar</a>
-            {{ form_end(edit_form) }}
-        </div>
+<div class="row">
+    <div class="col-lg-7 col-lg-offset-5">
+        <input type="submit" value="Guardar"  class="btn btn-primary"/>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+        {{ form_end(edit_form) }}
     </div>
+</div>
 
 
-{% endblock %}

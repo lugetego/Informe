@@ -54,7 +54,9 @@ class EventosController extends Controller
             $em->persist($evento);
             $em->flush();
 
-            return $this->redirectToRoute('eventos_show', array('id' => $evento->getId()));
+            //return $this->redirectToRoute('eventos_show', array('id' => $evento->getId()));
+            return $this->redirectToRoute('dashboard');
+
         }
 
         return $this->render('eventos/new.html.twig', array(
@@ -96,10 +98,13 @@ class EventosController extends Controller
             $em->persist($evento);
             $em->flush();
 
-            return $this->redirectToRoute('eventos_show', array('id' => $evento->getId()));
+            //return $this->redirectToRoute('eventos_show', array('id' => $evento->getId()));
+            return $this->redirectToRoute('dashboard');
+
         }
 
         return $this->render('eventos/edit.html.twig', array(
+            'id'=>$evento->getId(),
             'evento' => $evento,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

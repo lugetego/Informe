@@ -1,21 +1,6 @@
-{% extends 'base.html.twig' %}
 
-{% block wrapper %}
-    <div class="row">
-
-        <div class="col-lg-12">
-            <p></p>
-            {#                <h1 class="page-header">Solicitudes </h1>#}
-        </div>
-    </div>
-
-    <div class="page-header">
-        <h1>Eventos</h1>
-    </div>
     <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">{{ evento.nombre |title}}</h3>
-        </div>
+
         <div class="panel-body">
 
             <div class="row">
@@ -71,8 +56,15 @@
                 </div>
                 <div class="col-lg-2">
                     <dl>
-                        <dt>Fecha</dt>
-                        <dd>{{ evento.fecha|date('d-m-Y') }}</dd>
+                        <dt>Inicio</dt>
+                        <dd>{{ evento.inicio|date('d-m-Y') }}</dd>
+                    </dl>
+
+                </div>
+                <div class="col-lg-2">
+                    <dl>
+                        <dt>Fin</dt>
+                        <dd>{{ evento.fin|date('d-m-Y') }}</dd>
                     </dl>
 
                 </div>
@@ -89,17 +81,13 @@
     </div>
 
 
-    <div class="row">
-        <div class="col-lg-7 col-lg-offset-5">
+<div class="row">
+    <div class="col-lg-7 col-lg-offset-5">
 
-            {{ form_start(delete_form) }}
-            <a class="btn btn-primary" href="{{ path('eventos_edit', { 'id': evento.id }) }}">Modificar</a>
-            <a class="btn btn-warning" href="{{ path('dashboard') }}">Cancelar</a>
-            <input class="btn btn-danger" type="submit" value="Delete">
-            {{ form_end(delete_form) }}
+        {{ form_start(delete_form) }}
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+        <input class="btn btn-danger" type="submit" value="Eliminar" onclick="return confirm('¿Estás seguro de eliminar este registro?')">
+        {{ form_end(delete_form) }}
 
-        </div>
     </div>
-
-
-{% endblock %}
+</div>

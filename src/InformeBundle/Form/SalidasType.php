@@ -15,19 +15,72 @@ class SalidasType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('tipo')
-            ->add('pais')
-            ->add('ciudad')
-            ->add('estado')
-            ->add('universidad')
-            ->add('profesor')
-            ->add('actividad')
-            ->add('proposito')
-            ->add('proyecto')
-            ->add('inicio', 'date')
-            ->add('fin', 'date')
-            ->add('trabajo')
-            ->add('observaciones')
+            ->add('tipo', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',array(
+                'label'=>'*Tipo',
+                'choices'=>array(
+                    'licencia'=>'Licencia',
+                    'comision'=>'Comisión',
+            )))
+            ->add('pais', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
+                'label'=>'*País',
+                'required'=>true,
+            ))
+            ->add('ciudad', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
+                'label'=>'*Ciudad',
+                'required'=>true,
+            ))
+            ->add('estado', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
+                'label'=>'*Estado',
+                'required'=>true,
+            ))
+            ->add('universidad', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
+                'label'=>'*Universidad',
+                'required'=>true,
+            ))
+            ->add('profesor', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
+                'label'=>'Profesor',
+                'required'=>false,
+            ))
+            ->add('actividad', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
+                'label'=>'Actividad',
+                'required'=>false,
+            ))
+            ->add('proposito', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
+                'label'=>'Propósito',
+                'required'=>false,
+            ))
+            ->add('proyecto', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
+                'label'=>'Proyecto',
+                'required'=>false,
+            ))
+            ->add('inicio','Symfony\Component\Form\Extension\Core\Type\DateType',array(
+                'placeholder' => array(
+                    'year' => 'Año',
+                    'month' => 'Mes',
+                    'day' => 'Día'),
+                'years'=> range(2015,2015),
+                'label'=>'*Inicio',
+                'required'=>true,
+
+            ))
+            ->add('fin','Symfony\Component\Form\Extension\Core\Type\DateType',array(
+                'placeholder' => array(
+                    'year' => 'Año',
+                    'month' => 'Mes',
+                    'day' => 'Día'),
+                'years'=> range(2015,2015),
+                'label'=>'*Fin',
+                'required'=>true,
+            ))
+            ->add('trabajo', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
+                'label'=>'Trabajo',
+                'required'=>false,
+            ))
+            ->add('observaciones', 'Symfony\Component\Form\Extension\Core\Type\TextareaType',array(
+                'label'=>'Observaciones',
+                'required'=>false,
+
+            ))
         ;
     }
     

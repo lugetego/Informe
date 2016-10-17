@@ -54,7 +54,9 @@ class ProyectosController extends Controller
             $em->persist($proyecto);
             $em->flush();
 
-            return $this->redirectToRoute('proyectos_show', array('id' => $proyecto->getId()));
+            //return $this->redirectToRoute('proyectos_show', array('id' => $proyecto->getId()));
+            return $this->redirectToRoute('dashboard');
+
         }
 
         return $this->render('proyectos/new.html.twig', array(
@@ -89,6 +91,13 @@ class ProyectosController extends Controller
     {
         $deleteForm = $this->createDeleteForm($proyecto);
         $editForm = $this->createForm('InformeBundle\Form\ProyectosType', $proyecto);
+
+        $editForm->remove('tipos');
+        $editForm->remove('tipo');
+
+
+        $editForm->add('tipo','Symfony\Component\Form\Extension\Core\Type\TextType', array('label' => 'Tipo de programa'));
+
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -96,10 +105,13 @@ class ProyectosController extends Controller
             $em->persist($proyecto);
             $em->flush();
 
-            return $this->redirectToRoute('proyectos_show', array('id' => $proyecto->getId()));
+            //return $this->redirectToRoute('proyectos_show', array('id' => $proyecto->getId()));
+            return $this->redirectToRoute('dashboard');
+
         }
 
         return $this->render('proyectos/edit.html.twig', array(
+            'id'=>$proyecto->getId(),
             'proyecto' => $proyecto,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

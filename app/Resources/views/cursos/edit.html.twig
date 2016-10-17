@@ -1,65 +1,87 @@
-{% extends 'base.html.twig' %}
+{% form_theme edit_form 'form_errors.html.twig' %}
 
-{% block wrapper %}
-    <div class="row">
+{{ form_start(edit_form, {'action': path('cursos_edit', { 'id': id})}) }}
 
-        <div class="col-lg-12">
-            <p></p>
-            {#                <h1 class="page-header">Solicitudes </h1>#}
-        </div>
-    </div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
 
-    <div class="page-header">
-        <h1>Cursos y seminarios</h1>
-    </div>
-
-
-    {{ form_start(edit_form) }}
-
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <div class="row">
-
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <div>
-                            {{ form_label(edit_form.tipo) }}
-                        </div>
-                        <div>
-                            {{ form_widget(edit_form.tipo,{'attr': {'class': 'form-control input-sm', 'placeholder':'Nombre del alumno'} } ) }}
-                        </div>
-                        <div>{{ form_errors(edit_form.tipo) }}</div>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <div>
+                        {{ form_label(edit_form.nombre) }}
                     </div>
-                </div>
-                <div class="col-lg-10">
-                    <div class="form-group">
-                        <div>
-                            {{ form_label(edit_form.informacion) }}
-                        </div>
-                        <div>
-                            {{ form_widget(edit_form.informacion,{'attr': {'class': 'form-control input-sm', 'placeholder':'Información del curso o seminario'} } ) }}
-                        </div>
-                        <div>{{ form_errors(edit_form.informacion) }}</div>
+                    <div>
+                        {{ form_widget(edit_form.nombre,{'attr': {'class': 'form-control input-sm', 'placeholder':'Nombre del curso o seminario'} } ) }}
                     </div>
+                    <div>{{ form_errors(edit_form.nombre) }}</div>
                 </div>
-
             </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <div>
+                        {{ form_label(edit_form.tipo) }}
+                    </div>
+                    <div>
+                        {{ form_widget(edit_form.tipo,{'attr': {'class': 'form-control input-sm', 'placeholder':'Curso o seminario'} } ) }}
+                    </div>
+                    <div>{{ form_errors(edit_form.tipo) }}</div>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <div>
+                        {{ form_label(edit_form.nivel) }}
+                    </div>
+                    <div>
+                        {{ form_widget(edit_form.nivel,{'attr': {'class': 'form-control input-sm', 'placeholder':'Nivel del curso o seminario'} } ) }}
+                    </div>
+                    <div>{{ form_errors(edit_form.nivel) }}</div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <div>
+                        {{ form_label(edit_form.horas) }}
+                    </div>
+                    <div>
+                        {{ form_widget(edit_form.horas,{'attr': {'class': 'form-control input-sm', 'placeholder':'Número de horas'} } ) }}
+                    </div>
+                    <div>{{ form_errors(edit_form.horas) }}</div>
+                </div>
+            </div>
+
+
+            {%  if edit_form.lugares is defined %}
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <div>{{ form_label(edit_form.lugares) }}</div>
+                        <div>{{ form_widget(edit_form.lugares, {'attr': {'class': 'form-control input-sm', 'placeholder':'Otro lugar'} } ) }}</div>
+                        <div>{{ form_errors(edit_form.lugares) }}</div><br>
+                    </div>
+                </div>
+
+
+            {% endif %}
+
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div>{{ form_label(edit_form.lugar) }}</div>
+                    <div>{{ form_widget(edit_form.lugar, {'attr': {'class': 'form-control input-sm', 'placeholder':'Otro lugar'} } ) }}</div>
+                    <div>{{ form_errors(edit_form.lugar) }}</div><br>
+                </div>
+            </div>
+
         </div>
     </div>
+</div>
 
-
-
-    <div class="row">
-        <div class="col-lg-7 col-lg-offset-5">
-            <input type="submit" value="Guardar"  class="btn btn-primary"/>
-            <a class="btn btn-warning" href="{{ path('dashboard') }}">Cancelar</a>
-
-            {{ form_end(edit_form) }}
-
-
-        </div>
+<div class="row">
+    <div class="col-lg-7 col-lg-offset-5">
+        <input type="submit" value="Guardar"  class="btn btn-primary"/>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+        {{ form_end(edit_form) }}
     </div>
-
-    
-
-{% endblock %}
+</div>

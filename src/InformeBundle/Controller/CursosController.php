@@ -55,7 +55,9 @@ class CursosController extends Controller
             $em->persist($curso);
             $em->flush();
 
-            return $this->redirectToRoute('cursos_show', array('id' => $curso->getId()));
+            //return $this->redirectToRoute('cursos_show', array('id' => $curso->getId()));
+            return $this->redirectToRoute('dashboard');
+
         }
 
         return $this->render('cursos/new.html.twig', array(
@@ -90,6 +92,14 @@ class CursosController extends Controller
     {
         $deleteForm = $this->createDeleteForm($curso);
         $editForm = $this->createForm('InformeBundle\Form\CursosType', $curso);
+
+        $editForm->remove('lugares');
+        $editForm->remove('lugar');
+
+
+        $editForm->add('lugar','Symfony\Component\Form\Extension\Core\Type\TextType', array('label' => 'Lugar donde se impartió'));
+
+
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -97,10 +107,13 @@ class CursosController extends Controller
             $em->persist($curso);
             $em->flush();
 
-            return $this->redirectToRoute('cursos_edit', array('id' => $curso->getId()));
+            //return $this->redirectToRoute('cursos_edit', array('id' => $curso->getId()));
+            return $this->redirectToRoute('dashboard');
+
         }
 
         return $this->render('cursos/edit.html.twig', array(
+            'id'=>$curso->getId(),
             'curso' => $curso,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

@@ -1,47 +1,50 @@
-{% extends 'base.html.twig' %}
+<div class="panel panel-default">
 
-{% block wrapper %}
-    <div class="row">
+    <div class="panel-body">
 
-        <div class="col-lg-12">
-            <p></p>
-            {#                <h1 class="page-header">Solicitudes </h1>#}
-        </div>
-    </div>
+        <div class="row">
 
-    <div class="page-header">
-        <h1>Cursos y seminarios</h1>
-    </div>
+            <div class="col-md-8">
+                <dl>
+                    <dt>Lugar donde se impartió</dt>
+                    <dd>{{ curso.lugar }}</dd>
+                </dl>
+            </div>
+            <div class="col-md-4">
+                <dl>
+                    <dt>Tipo</dt>
+                    <dd>{{ curso.tipo }}</dd>
+                </dl>
+            </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">{{ curso.tipo}}</h3>
-        </div>
-        <div class="panel-body">
+            <div class="col-md-4">
+                <dl>
+                    <dt>Nivel</dt>
+                    <dd>{{ curso.nivel }}</dd>
+                </dl>
+            </div>
+            <div class="col-md-4">
+                <dl>
+                    <dt>Número de horas</dt>
+                    <dd>{{ curso.horas }}</dd>
+                </dl>
+            </div>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <dl>
-                        <dt>Información</dt>
-                        <dd>{{ curso.informacion }}</dd>
-                    </dl>
-                </div>
+
 
             </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-7 col-lg-offset-5">
-
-            {{ form_start(delete_form) }}
-            <a class="btn btn-primary" href="{{ path('cursos_edit', { 'id': curso.id }) }}">Modificar</a>
-            <a class="btn btn-warning" href="{{ path('dashboard') }}">Cancelar</a>
-            <input class="btn btn-danger" type="submit" value="Delete">
-            {{ form_end(delete_form) }}
 
         </div>
     </div>
 
 
-{% endblock %}
+<div class="row">
+    <div class="col-lg-7 col-lg-offset-5">
+
+        {{ form_start(delete_form) }}
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+        <input class="btn btn-danger" type="submit" value="Eliminar" onclick="return confirm('¿Estás seguro de eliminar este registro?')">
+        {{ form_end(delete_form) }}
+
+    </div>
+</div>

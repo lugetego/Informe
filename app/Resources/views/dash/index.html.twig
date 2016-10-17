@@ -10,10 +10,15 @@
 
 {% endblock %}
 
+{% block sidebar %}
+    <li>
+        <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i>  Informe </a>
+    </li>
+{% endblock %}
+
 {% block wrapper %}
 
     <div class="row">
-
         <div class="col-lg-12">
             <p></p>
             {#                <h1 class="page-header">Solicitudes </h1>#}
@@ -22,317 +27,530 @@
 
 
     <div class="page-header">
-        <h1><i class="fa fa-book" aria-hidden="true"></i> Informe anual</h1>
+        <h1><i class="fa fa-pencil" aria-hidden="true"></i> Informe anual</h1>
     </div>
 
     <div class="row">
-        <div class="col-lg-6">
-            <div class="panel panel-primary">
+
+        <!-- Investigación -->
+        <div class="col-lg-8">
+            <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-bar-chart" aria-hidden="true"></i> Investigación</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="panel-body">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>Tipo</th>
-                                <th>Titulo</th>
-                                <th>Acciones</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            {% for investigacion in investigaciones %}
-                                <tr>
-                                    <td>
-                                        <a href="{{ path('investigacion_show', { 'id': investigacion.id }) }}"> {{ investigacion.tipo }}</a>
-                                    </td>
-                                    <td>
-                                        {{ investigacion.titulo }}
-                                    </td>
-
-                                    <td>
-                                        <a href="{{ path('investigacion_show', { 'id': investigacion.id }) }}"> <i class="fa fa-search-plus" aria-hidden="true"></i></a>
-                                        <a href="{{ path('investigacion_edit', { 'id': investigacion.id }) }}"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                        <!-- /.table -->
+                    <div class="row">
+                    <div class="col-md-11"><h3 class="panel-title"><i class="fa fa-bar-chart" aria-hidden="true"></i> <strong>Investigación</strong></h3></div>
+                    <div class="col-md-1"><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#invesnewModal">
+                            <i class="fa fa-plus"></i> Nuevo </button> </div>
+                        <!-- Button trigger modal -->
+                    </div>
+                        <!-- Modal -->
+                    <div class="modal fade" id="invesnewModal" tabindex="-1" role="dialog" aria-labelledby="invesnewModalLabel">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="invesnewModalLabel">Investigación</h4>
+                                </div>
+                                <div class="modal-body">
+                                    {% render(controller('InformeBundle:Investigacion:new')) %}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="panel-footer"> <a href="{{ path('investigacion_new') }}"><button type="button" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Nuevo registro</button></a></div>
 
-            </div>
-
-        </div>
-
-
-        <div class="col-lg-6">
-
-
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Estudiantes</h3>
-                </div>
                 <div class="panel-body">
-                    <div class="panel-body">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>Alumno</th>
-                                <th>Programa</th>
+                    <div class="row">
 
-                                <th>Acciones</th>
-                            </tr>
-                            </thead>
-                            <tbody>
+                        {% for investigacion in investigaciones %}
+                            <div class="col-md-11">
+                                <p><i class="fa fa-file-o" aria-hidden="true"></i>
+                                        <strong>{{ investigacion.titulo|title }}</strong>,
+                                    <em>{{ investigacion.autores }}</em>
+                                    {{ investigacion.pags }} págs.,
+                                    {{ investigacion.year }},
+                                    <small>{{ investigacion.tipo  }}</small>
+                                </p></div>
+                            {% set modalshow = 'invesshowModal'~ investigacion.id  %}
+                            {% set modaledit = 'inveseditModal'~ investigacion.id  %}
 
-                            {% for estudiante in estudiantes %}
-                                <tr>
-                                    <td>
-                                        <a href="{{ path('estudiantes_show', { 'id': estudiante.id }) }}"> {{ estudiante.alumno }}</a>
-                                    </td>
-                                    <td>
-                                        {{ estudiante.programa }}
-                                    </td>
+                            <div class="col-md-1">
+                                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ modalshow }}">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ modaledit }}">
+                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                </button>
+                            </div>
 
-                                    <td>
-                                        <a href="{{ path('estudiantes_show', { 'id': estudiante.id }) }}"> <i class="fa fa-search-plus" aria-hidden="true"></i></a>
-                                        <a href="{{ path('estudiantes_edit', { 'id': estudiante.id }) }}"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                            <!-- Modal -->
+                            <div class="modal fade" id="{{ modalshow }}" tabindex="-1" role="dialog" aria-labelledby="{{ modalshow }}Label">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="{{ modalshow }}Label">{{ investigacion.titulo |title}}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% render controller("InformeBundle:Investigacion:show", {'id': investigacion.id}) %}
+                                        </div>
 
-                                    </td>
-                                    <td>
+                                    </div>
+                                </div>
+                            </div>
 
-                                    </td>
+                            <!-- Modal -->
+                            <div class="modal fade" id="{{ modaledit }}" tabindex="-1" role="dialog" aria-labelledby="{{ modaledit }}Label">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="{{ modaledit }}Label">Investigación</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% render controller("InformeBundle:Investigacion:edit", {'id': investigacion.id}) %}
+                                        </div>
 
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                        <!-- /.table -->
-                    </div>
-                </div>
-                <div class="panel-footer"> <a href="{{ path('estudiantes_new') }}"><button type="button" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Nuevo registro</button></a></div>
-
-            </div>
-
-        </div>
-
-        <div class="col-lg-6">
-
-
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-tasks" aria-hidden="true"></i> Cursos y seminarios</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="panel-body">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>Alumno</th>
-                                <th>Programa</th>
-
-                                <th>Acciones</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            {% for curso in cursos %}
-                                <tr>
-                                    <td>
-                                        <a href="{{ path('cursos_show', { 'id': curso.id }) }}"> {{ curso.informacion }}</a>
-                                    </td>
-                                    <td>
-                                        {{ curso.tipo }}
-                                    </td>
-
-                                    <td>
-                                        <a href="{{ path('cursos_show', { 'id': curso.id }) }}"> <i class="fa fa-search-plus" aria-hidden="true"></i></a>
-                                        <a href="{{ path('cursos_edit', { 'id': curso.id }) }}"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                        <!-- /.table -->
-                    </div>
-                </div>
-                <div class="panel-footer"> <a href="{{ path('cursos_new') }}"><button type="button" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Nuevo registro</button></a></div>
-
-            </div>
-
-        </div>
-
-        <div class="col-lg-6">
-
-
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-folder-o" aria-hidden="true"></i> Proyectos</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="panel-body">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>Proyecto</th>
-                                <th>Tipo</th>
-
-                                <th>Número</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            {% for proyecto in proyectos %}
-                                <tr>
-                                    <td>
-                                        <a href="{{ path('proyectos_show', { 'id': proyecto.id }) }}"> {{ proyecto.nombre }}</a>
-                                    </td>
-                                    <td>
-                                        {{ proyecto.tipo }}
-                                    </td>
-
-                                    <td>
-                                        <a href="{{ path('proyectos_show', { 'id': proyecto.id }) }}"> <i class="fa fa-search-plus" aria-hidden="true"></i></a>
-                                        <a href="{{ path('proyectos_edit', { 'id': proyecto.id }) }}"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                        <!-- /.table -->
-                    </div>
-                </div>
-                <div class="panel-footer"> <a href="{{ path('proyectos_new') }}"><button type="button" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Nuevo registro</button></a></div>
-
-            </div>
-
-        </div>
-
-        <div class="col-lg-6">
-
-
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-folder-o" aria-hidden="true"></i> Eventos</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="panel-body">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>Evento</th>
-                                <th>Tipo</th>
-
-                                <th>Nombre</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            {% for evento in eventos %}
-                                <tr>
-                                    <td>
-                                        <a href="{{ path('eventos_show', { 'id': evento.id }) }}"> {{ evento.nombre }}</a>
-                                    </td>
-                                    <td>
-                                        {{ evento.tipo }}
-                                    </td>
-
-                                    <td>
-                                        <a href="{{ path('eventos_show', { 'id': evento.id }) }}"> <i class="fa fa-search-plus" aria-hidden="true"></i></a>
-                                        <a href="{{ path('eventos_edit', { 'id': evento.id }) }}"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                        <!-- /.table -->
-                    </div>
-                </div>
-                <div class="panel-footer"> <a href="{{ path('eventos_new') }}"><button type="button" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Nuevo registro</button></a></div>
-
-            </div>
-
-
-
-        </div>
-
-        <div class="col-lg-6">
-
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-folder-o" aria-hidden="true"></i> Salidas</h3>
-            </div>
-            <div class="panel-body">
-                <div class="panel-body">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>Tipo</th>
-                            <th>País</th>
-                            <th>Universidad</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        {% for salida in salidas %}
-                            <tr>
-                                <td>
-                                    <a href="{{ path('salidas_show', { 'id': salida.id }) }}"> {{ salida.tipo }}</a>
-                                </td>
-                                <td>
-                                    {{ salida.pais }}
-                                </td>
-
-                                <td>
-                                    <a href="{{ path('salidas_show', { 'id': salida.id }) }}"> <i class="fa fa-search-plus" aria-hidden="true"></i></a>
-                                    <a href="{{ path('salidas_edit', { 'id': salida.id }) }}"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-
-                                </td>
-                                <td>
-
-                                </td>
-
-                            </tr>
+                                    </div>
+                                </div>
+                            </div>
                         {% endfor %}
-                        </tbody>
-                    </table>
-                    <!-- /.table -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        <!-- Fin Investigación -->
+
+
+        <!-- Estudiantes -->
+        <div class="col-lg-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                    <div class="col-md-11"><h3 class="panel-title"><i class="fa fa-graduation-cap" aria-hidden="true"></i> <strong>Estudiantes</strong></h3></div>
+                    <div class="col-md-1"><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#estudiantesnewModal">
+                            <i class="fa fa-plus"></i> Nuevo </button> </div>
+                        <!-- Button trigger modal -->
+                    </div>
+                        <!-- Modal -->
+                    <div class="modal fade" id="estudiantesnewModal" tabindex="-1" role="dialog" aria-labelledby="estudiantesnewModalLabel">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="estudiantesnewModalLabel">Estudiantes</h4>
+                                </div>
+                                <div class="modal-body">
+                                    {% render(controller('InformeBundle:Estudiantes:new')) %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <div class="row">
+
+                        {% for estudiante in estudiantes %}
+                        <div class="col-md-11">
+                            <p><i class="fa fa-user" aria-hidden="true"></i>
+                                <strong>{{ estudiante.alumno|title }}</strong>,
+                                <strong>Tesis:</strong> {{ estudiante.tesis|title }},
+                                <em>{{ estudiante.programa|title }}</em>
+                            </p></div>
+                        {% set estmodalshow = 'estshowModal'~ estudiante.id  %}
+                        {% set estmodaledit = 'esteditModal'~ estudiante.id  %}
+
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ estmodalshow }}">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ estmodaledit }}">
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                            </button>
+                        </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="{{ estmodalshow }}" tabindex="-1" role="dialog" aria-labelledby="{{ estmodalshow }}Label">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="{{ estmodalshow }}Label">{{ estudiante.alumno |title}}</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        {% render controller("InformeBundle:Estudiantes:show", {'id': estudiante.id}) %}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="{{ estmodaledit }}" tabindex="-1" role="dialog" aria-labelledby="{{ estmodaledit }}Label">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="{{ estmodaledit }}Label">Estudiantes</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        {% render controller("InformeBundle:Estudiantes:edit", {'id': estudiante.id}) %}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="panel-footer"> <a href="{{ path('salidas_new') }}"><button type="button" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Nuevo registro</button></a></div>
+        <!-- Fin Estudiantes -->
 
+
+        <!-- Cursos y seminarios -->
+        <div class="col-lg-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-11"><h3 class="panel-title"><i class="fa fa-university" aria-hidden="true"></i> <strong>Cursos y seminarios</strong></h3></div>
+                        <div class="col-md-1"><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#cursosnewModal">
+                                <i class="fa fa-plus"></i> Nuevo </button> </div>
+                        <!-- Button trigger modal -->
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="cursosnewModal" tabindex="-1" role="dialog" aria-labelledby="cursosnewModalLabel">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="cursosnewModalLabel">Cursos y seminarios</h4>
+                                </div>
+                                <div class="modal-body">
+                                     {% render(controller('InformeBundle:Cursos:new')) %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <div class="row">
+
+                        {% for curso in cursos %}
+                            <div class="col-md-11">
+                                <p><i class="fa fa-book" aria-hidden="true"></i>
+                                        <strong>{{ curso.nombre|title }}</strong>,
+                                    <strong></strong> {{ curso.tipo|title }},
+
+                                </p></div>
+                            {% set cursomodalshow = 'cursoshowModal'~ curso.id  %}
+                            {% set cursomodaledit = 'cursoeditModal'~ curso.id  %}
+
+                            <div class="col-md-1">
+                                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ cursomodalshow }}">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ cursomodaledit }}">
+                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                </button>
+                            </div>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="{{ cursomodalshow }}" tabindex="-1" role="dialog" aria-labelledby="{{ cursomodalshow }}Label">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="{{ cursomodalshow }}Label">{{ curso.nombre |title}}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% render controller("InformeBundle:Cursos:show", {'id': curso.id}) %}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="{{ cursomodaledit }}" tabindex="-1" role="dialog" aria-labelledby="{{ cursomodaledit }}Label">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="{{ cursomodaledit }}Label">Cursos y seminarios</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% render controller("InformeBundle:Cursos:edit", {'id': curso.id}) %}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
         </div>
+        <!-- Fin Cursos y seminarios -->
 
+
+        <!-- Proyectos -->
+        <div class="col-lg-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-11"><h3 class="panel-title"><i class="fa fa-tasks" aria-hidden="true"></i> <strong>Proyectos</strong></h3></div>
+                        <div class="col-md-1"><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#proyectosnewModal">
+                                <i class="fa fa-plus"></i> Nuevo </button> </div>
+                        <!-- Button trigger modal -->
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="proyectosnewModal" tabindex="-1" role="dialog" aria-labelledby="proyectosnewModalLabel">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="proyectosnewModalLabel">Proyectos</h4>
+                                </div>
+                                <div class="modal-body">
+                                    {% render(controller('InformeBundle:Proyectos:new')) %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <div class="row">
+
+                        {% for proyecto in proyectos %}
+                            <div class="col-md-11">
+                                <p><i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                    <strong>{{ proyecto.nombre|title }}</strong>,
+                                    {{ proyecto.tipo |upper}},
+                                    {{ proyecto.numero }},
+
+                                </p></div>
+                            {% set proyectomodalshow = 'proyectoshowModal'~ proyecto.id  %}
+                            {% set proyectomodaledit = 'proyectoeditModal'~ proyecto.id  %}
+
+                            <div class="col-md-1">
+                                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ proyectomodalshow }}">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ proyectomodaledit }}">
+                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                </button>
+                            </div>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="{{ proyectomodalshow }}" tabindex="-1" role="dialog" aria-labelledby="{{ proyectomodalshow }}Label">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="{{ proyectomodalshow }}Label">{{ proyecto.nombre |title}}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% render controller("InformeBundle:Proyectos:show", {'id': proyecto.id}) %}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="{{ proyectomodaledit }}" tabindex="-1" role="dialog" aria-labelledby="{{ proyectomodaledit }}Label">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="{{ proyectomodaledit }}Label">Proyectos</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% render controller("InformeBundle:Proyectos:edit", {'id': proyecto.id}) %}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
         </div>
+        <!-- Fin Proyectos -->
 
 
+        <!-- Eventos -->
+        <div class="col-lg-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-11"><h3 class="panel-title"><i class="fa fa-calendar-o" aria-hidden="true"></i> <strong>Eventos</strong></h3></div>
+                        <div class="col-md-1"><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#eventosnewModal">
+                                <i class="fa fa-plus"></i> Nuevo </button> </div>
+                        <!-- Button trigger modal -->
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="eventosnewModal" tabindex="-1" role="dialog" aria-labelledby="eventosnewModalLabel">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="eventosnewModalLabel">Eventos</h4>
+                                </div>
+                                <div class="modal-body">
+                                    {% render(controller('InformeBundle:Eventos:new')) %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    </div>
-    <!-- /.row -->
+                <div class="panel-body">
+                    <div class="row">
+
+                        {% for evento in eventos %}
+                            <div class="col-md-11">
+                                <p><i class="fa fa-table" aria-hidden="true"></i>
+                                    <strong>{{ evento.nombre|title }}</strong>,
+                                    {{ evento.tipo |title}},
+                                    {{ evento.institucion|title }},
+
+                                </p></div>
+                            {% set eventomodalshow = 'eventoshowModal'~ evento.id  %}
+                            {% set eventomodaledit = 'eventoeditModal'~ evento.id  %}
+
+                            <div class="col-md-1">
+                                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ eventomodalshow }}">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ eventomodaledit }}">
+                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                </button>
+                            </div>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="{{ eventomodalshow }}" tabindex="-1" role="dialog" aria-labelledby="{{ eventomodalshow }}Label">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="{{ eventomodalshow }}Label">{{ evento.nombre |title}}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% render controller("InformeBundle:Eventos:show", {'id': evento.id}) %}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="{{ eventomodaledit }}" tabindex="-1" role="dialog" aria-labelledby="{{ eventomodaledit }}Label">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="{{ eventomodaledit }}Label">Eventos</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% render controller("InformeBundle:Eventos:edit", {'id': evento.id}) %}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fin Eventos -->
 
 
+        <!-- Salidas -->
+        <div class="col-lg-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-11"><h3 class="panel-title"><i class="fa fa-globe" aria-hidden="true"></i> <strong>Licencias y comisiones</strong></h3></div>
+                        <div class="col-md-1"><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#salidasnewModal">
+                                <i class="fa fa-plus"></i> Nuevo </button> </div>
+                        <!-- Button trigger modal -->
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="salidasnewModal" tabindex="-1" role="dialog" aria-labelledby="salidasnewModalLabel">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="salidasnewModalLabel">Licencias y comisiones</h4>
+                                </div>
+                                <div class="modal-body">
+                                    {% render(controller('InformeBundle:Salidas:new')) %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <div class="row">
+                        {% for salida in salidas %}
+                            <div class="col-md-11">
+                                <p><i class="fa fa-car" aria-hidden="true"></i>
+                                    <strong>{{ salida.pais|title }}</strong>,
+                                    {{ salida.tipo |title}},
+                                    {{ salida.universidad|title }},
+
+                                </p></div>
+                            {% set salidamodalshow = 'salidashowModal'~ salida.id  %}
+                            {% set salidamodaledit = 'salidaeditModal'~ salida.id  %}
+
+                            <div class="col-md-1">
+                                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ salidamodalshow }}">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ salidamodaledit }}">
+                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                </button>
+                            </div>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="{{ salidamodalshow }}" tabindex="-1" role="dialog" aria-labelledby="{{ salidamodalshow }}Label">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="{{ salidamodalshow }}Label">{{ salida.tipo |title}}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% render controller("InformeBundle:Salidas:show", {'id': salida.id}) %}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="{{ salidamodaledit }}" tabindex="-1" role="dialog" aria-labelledby="{{ salidamodaledit }}Label">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="{{ salidamodaledit }}Label">Licencias y comisiones</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% render controller("InformeBundle:Salidas:edit", {'id': salida.id}) %}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fin Salidas -->
 
 {% endblock %}
-
-

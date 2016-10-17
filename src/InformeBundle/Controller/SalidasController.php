@@ -54,7 +54,9 @@ class SalidasController extends Controller
             $em->persist($salida);
             $em->flush();
 
-            return $this->redirectToRoute('salidas_show', array('id' => $salida->getId()));
+            //return $this->redirectToRoute('salidas_show', array('id' => $salida->getId()));
+            return $this->redirectToRoute('dashboard');
+
         }
 
         return $this->render('salidas/new.html.twig', array(
@@ -96,10 +98,13 @@ class SalidasController extends Controller
             $em->persist($salida);
             $em->flush();
 
-            return $this->redirectToRoute('salidas_show', array('id' => $salida->getId()));
+            //return $this->redirectToRoute('salidas_show', array('id' => $salida->getId()));
+            return $this->redirectToRoute('dashboard');
+
         }
 
         return $this->render('salidas/edit.html.twig', array(
+            'id'=>$salida->getId(),
             'salida' => $salida,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

@@ -15,19 +15,23 @@ class ProyectosType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('tipo', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',array(
+            ->add('tipos', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',array(
                 'label'=>'*Programa',
                 'choices'=>array(
-                    'CONACYT'=>'conacyt',
-                    'PAEP'=>'paep',
-                    'PAPIME'=>'papime',
-                    'PAPIIT'=>'papiit',
-                    'Otro'=>'otro'
+                    'CONACYT'=>'CONACYT',
+                    'PAEP'=>'PAEP',
+                    'PAPIME'=>'PAPIME',
+                    'PAPIIT'=>'PAPIIT',
+                    'Otro'=>'Otro'
                 ),
-                'placeholder'=>'Seleccionar',
-                'required'=>true,
+                // *this line is important*
                 'choices_as_values' => true,
+                'placeholder' => 'Seleccionar',
+                'label'=>'Tipo de programa',
+                'mapped'=> false,
 
+            ))
+            ->add('tipo','Symfony\Component\Form\Extension\Core\Type\TextType', array('label' => 'Otro tipo de programa', 'read_only'=> true
 
             ))
             ->add('nombre', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(

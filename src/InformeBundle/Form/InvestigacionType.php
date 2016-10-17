@@ -31,6 +31,7 @@ class InvestigacionType extends AbstractType
         }
 
         $builder
+
             ->add('tipo', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',array(
                 'label'=>'*Tipo de publicación',
                 'choices'=>array(

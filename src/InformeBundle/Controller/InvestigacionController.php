@@ -69,7 +69,7 @@ class InvestigacionController extends Controller
             $em->persist($investigacion);
             $em->flush();
 
-            //return $this->redirectToRoute('investigacion_show', array('id' => $investigacion->getId()));
+           // return $this->redirectToRoute('investigacion_show', array('id' => $investigacion->getId()));
             return $this->redirectToRoute('dashboard');
         }
 
@@ -121,13 +121,14 @@ class InvestigacionController extends Controller
             $em->persist($investigacion);
             $em->flush();
 
-            return $this->redirectToRoute('investigacion_show', array('id' => $investigacion->getId()));
+            //return $this->redirectToRoute('investigacion_show', array('id' => $investigacion->getId()));
 
-            //return $this->redirectToRoute('dashboard');
+            return $this->redirectToRoute('dashboard');
 
         }
 
         return $this->render('investigacion/edit.html.twig', array(
+            'id'=>$investigacion->getId(),
             'investigacion' => $investigacion,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

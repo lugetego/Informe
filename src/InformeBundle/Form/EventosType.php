@@ -24,7 +24,7 @@ class EventosType extends AbstractType
                 'choices'=>array(
                     'Conferencia'=>'conferencia',
                     'Curso'=>'curso',
-                    'Encuentro'=>'encuentro,',
+                    'Encuentro'=>'encuentro',
                     'Escuela'=>'escuela',
                     'Plática'=>'platica',
                     'Seminario'=>'seminario',
@@ -56,17 +56,39 @@ class EventosType extends AbstractType
                 'choices_as_values' => false,
 
             ))
-            ->add('pais')
-            ->add('institucion')
-            ->add('platica')
-            ->add('actividad')
-            ->add('fecha','Symfony\Component\Form\Extension\Core\Type\DateType',array(
+            ->add('pais', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
+                'label'=>'*País',
+                'required'=>true,
+            ))
+            ->add('institucion', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
+                'label'=>'*Institución',
+                'required'=>true,
+            ))
+            ->add('platica', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
+                'label'=>'*Plática',
+                'required'=>true,
+            ))
+            ->add('actividad', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
+                'label'=>'*Actividad',
+                'required'=>true,
+            ))
+            ->add('inicio','Symfony\Component\Form\Extension\Core\Type\DateType',array(
                 'placeholder' => array(
                     'year' => 'Año',
                     'month' => 'Mes',
                     'day' => 'Día'),
                 'years'=> range(2015,2015),
-                'label'=>'*Fecha',
+                'label'=>'*Inicio',
+                'required'=>true,
+
+            ))
+            ->add('fin','Symfony\Component\Form\Extension\Core\Type\DateType',array(
+                'placeholder' => array(
+                    'year' => 'Año',
+                    'month' => 'Mes',
+                    'day' => 'Día'),
+                'years'=> range(2015,2015),
+                'label'=>'*Fin',
                 'required'=>true,
 
             ))

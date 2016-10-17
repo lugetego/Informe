@@ -24,12 +24,17 @@ class DashController extends Controller
      * Lists all actions on Informe .
      *
      * @Route("/", name="dashboard")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      * @Template()
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+
 
         if ($this->get('security.context')->isGranted('ROLE_ADMIN'))
         {

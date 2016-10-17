@@ -54,7 +54,9 @@ class EstudiantesController extends Controller
             $em->persist($estudiante);
             $em->flush();
 
-            return $this->redirectToRoute('estudiantes_show', array('id' => $estudiante->getId()));
+            // return $this->redirectToRoute('estudiantes_show', array('id' => $estudiante->getId()));
+            return $this->redirectToRoute('dashboard');
+
         }
 
         return $this->render('estudiantes/new.html.twig', array(
@@ -100,10 +102,13 @@ class EstudiantesController extends Controller
             $em->persist($estudiante);
             $em->flush();
 
-            return $this->redirectToRoute('estudiantes_show', array('id' => $estudiante->getId()));
+            //return $this->redirectToRoute('estudiantes_show', array('id' => $estudiante->getId()));
+            return $this->redirectToRoute('dashboard');
+
         }
 
         return $this->render('estudiantes/edit.html.twig', array(
+            'id'=>$estudiante->getId(),
             'estudiante' => $estudiante,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

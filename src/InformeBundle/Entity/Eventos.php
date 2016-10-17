@@ -88,10 +88,16 @@ class Eventos
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha", type="datetime")
+     * @ORM\Column(name="inicio", type="date")
      */
-    private $fecha;
+    private $inicio;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fin", type="date")
+     */
+    private $fin;
     /**
      * @var string
      *
@@ -295,27 +301,51 @@ class Eventos
     }
 
     /**
-     * Set fecha
+     * Set inicio
      *
-     * @param \DateTime $fecha
-     * @return Eventos
+     * @param \DateTime $inicio
+     * @return Salidas
      */
-    public function setFecha($fecha)
+    public function setInicio($inicio)
     {
-        $this->fecha = $fecha;
+        $this->inicio = $inicio;
 
         return $this;
     }
 
     /**
-     * Get fecha
+     * Get inicio
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
-    public function getFecha()
+    public function getInicio()
     {
-        return $this->fecha;
+        return $this->inicio;
     }
+
+    /**
+     * Set fin
+     *
+     * @param \DateTime $fin
+     * @return Salidas
+     */
+    public function setFin($fin)
+    {
+        $this->fin = $fin;
+
+        return $this;
+    }
+
+    /**
+     * Get fin
+     *
+     * @return \DateTime
+     */
+    public function getFin()
+    {
+        return $this->fin;
+    }
+
 
     /**
      * Set informacion
