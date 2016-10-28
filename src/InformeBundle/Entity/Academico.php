@@ -24,7 +24,6 @@ class Academico
      */
     private $id;
 
-
     /**
      * @var int
      *
@@ -126,6 +125,16 @@ class Academico
      * The mappedBy attribute designates the field in the entity that is the owner of the relationship.
      */
     private $salidas;
+
+    /**
+     * @var array $planes
+     *
+     * @ORM\OneToMany(targetEntity="InformeBundle\Entity\Plan", mappedBy="academico")
+     *
+     * The mappedBy attribute designates the field in the entity that is the owner of the relationship.
+     */
+    private $planes;
+
 
     /**
      * Get id
@@ -524,5 +533,38 @@ class Academico
     public function getAutor()
     {
         return $this->autor;
+    }
+
+    /**
+     * Add planes
+     *
+     * @param \InformeBundle\Entity\Plan $planes
+     * @return Academico
+     */
+    public function addPlane(\InformeBundle\Entity\Plan $planes)
+    {
+        $this->planes[] = $planes;
+
+        return $this;
+    }
+
+    /**
+     * Remove planes
+     *
+     * @param \InformeBundle\Entity\Plan $planes
+     */
+    public function removePlane(\InformeBundle\Entity\Plan $planes)
+    {
+        $this->planes->removeElement($planes);
+    }
+
+    /**
+     * Get planes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPlanes()
+    {
+        return $this->planes;
     }
 }

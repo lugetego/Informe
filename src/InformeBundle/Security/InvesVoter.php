@@ -6,6 +6,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 use InformeBundle\Entity\Investigacion;
 use InformeBundle\Entity\Estudiantes;
+use InformeBundle\Entity\Plan;
 use InformeBundle\Entity\User;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 
@@ -31,7 +32,7 @@ class InvesVoter extends  Voter
         }
 
         // only vote on Post objects inside this voter
-        if (!$subject instanceof Investigacion && !$subject instanceof Estudiantes) {
+        if (!$subject instanceof Investigacion && !$subject instanceof Estudiantes && !$subject instanceof Plan) {
             return false;
         }
 

@@ -58,10 +58,6 @@ class InvestigacionController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-
-
-
-
         $investigacion = new Investigacion();
         $form = $this->createForm('InformeBundle\Form\InvestigacionType', $investigacion, array('user'=>$user));
         $form->handleRequest($request);

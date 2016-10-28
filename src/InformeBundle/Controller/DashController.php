@@ -35,15 +35,9 @@ class DashController extends Controller
             throw $this->createAccessDeniedException();
         }
 
-
         if ($this->get('security.context')->isGranted('ROLE_ADMIN'))
         {
-
             $academicos = $em->getRepository('InformeBundle:Academico')->findAll();
-
-
-
-
         }
         else {
             $user = $this->get('security.context')->getToken()->getUser();
@@ -53,16 +47,7 @@ class DashController extends Controller
             $proyectos = $user->getAcademico()->getProyectos();
             $eventos = $user->getAcademico()->getEventos();
             $salidas = $user->getAcademico()->getSalidas();
-
-
-            $academico = $user->getAcademico()->getId();
-
-
-            //$solicitudes = $em->getRepository('CcmSiaBundle:Solicitud')->findSolicitudesByAcademico($academico->getId());
-            //$academico = $user->getId();
-            //$academicos = $em->getRepository('CcmSiaBundle:Academico')->findByUser($academico);
-            // $proyectos = $em->getRepository('CcmSiaBundle:Proyecto')->findByAcademico($academico);
-
+            $planes = $user->getAcademico()->getPlanes();
 
             return $this->render('dash/index.html.twig', array(
                 'investigaciones'=> $investigaciones,
@@ -71,22 +56,15 @@ class DashController extends Controller
                 'proyectos'=>$proyectos,
                 'eventos'=>$eventos,
                 'salidas'=>$salidas,
+                'planes'=>$planes,
 
             ));
 
-
-            /* return $this->redirect(
-                $this->generateUrl('academico_show',array('id' => $academico)
-                )); */
-
         }
-
 
         return array(
             'academicos' => $academicos,
         );
 
-
     }
-
 }

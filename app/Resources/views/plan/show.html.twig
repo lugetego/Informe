@@ -1,0 +1,52 @@
+{% extends 'dash/index.html.twig' %}
+
+{% block wrapper %}
+    <h1>Plan</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ plan.id }}</td>
+            </tr>
+            <tr>
+                <th>Investigacion</th>
+                <td>{{ plan.investigacion }}</td>
+            </tr>
+            <tr>
+                <th>Estudiantes</th>
+                <td>{{ plan.estudiantes }}</td>
+            </tr>
+            <tr>
+                <th>Cursos</th>
+                <td>{{ plan.cursos }}</td>
+            </tr>
+            <tr>
+                <th>Proyectos</th>
+                <td>{{ plan.proyectos }}</td>
+            </tr>
+            <tr>
+                <th>Eventos</th>
+                <td>{{ plan.eventos }}</td>
+            </tr>
+            <tr>
+                <th>Salidas</th>
+                <td>{{ plan.salidas }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('plan_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('plan_edit', { 'id': plan.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
