@@ -24,6 +24,10 @@ class AcademicoController extends Controller
      */
     public function indexAction()
     {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+
         $em = $this->getDoctrine()->getManager();
 
         $academicos = $em->getRepository('InformeBundle:Academico')->findAll();

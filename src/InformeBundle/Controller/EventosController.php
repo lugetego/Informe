@@ -24,9 +24,13 @@ class EventosController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
 
-        $eventos = $em->getRepository('InformeBundle:Eventos')->findAll();
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $user = $this->get('security.context')->getToken()->getUser();
+        $eventos = $user->getAcademico()->getEventos();
 
         return $this->render('eventos/index.html.twig', array(
             'eventos' => $eventos,
@@ -55,7 +59,7 @@ class EventosController extends Controller
             $em->flush();
 
             //return $this->redirectToRoute('eventos_show', array('id' => $evento->getId()));
-            return $this->redirectToRoute('dashboard');
+            return $this->redirectToRoute('eventos_index');
 
         }
 
@@ -99,7 +103,7 @@ class EventosController extends Controller
             $em->flush();
 
             //return $this->redirectToRoute('eventos_show', array('id' => $evento->getId()));
-            return $this->redirectToRoute('dashboard');
+            return $this->redirectToRoute('eventos_index');
 
         }
 

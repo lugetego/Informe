@@ -24,9 +24,13 @@ class ProyectosController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
 
-        $proyectos = $em->getRepository('InformeBundle:Proyectos')->findAll();
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $user = $this->get('security.context')->getToken()->getUser();
+        $proyectos = $user->getAcademico()->getProyectos();
 
         return $this->render('proyectos/index.html.twig', array(
             'proyectos' => $proyectos,
@@ -55,7 +59,7 @@ class ProyectosController extends Controller
             $em->flush();
 
             //return $this->redirectToRoute('proyectos_show', array('id' => $proyecto->getId()));
-            return $this->redirectToRoute('dashboard');
+            return $this->redirectToRoute('proyectos_index');
 
         }
 
@@ -106,7 +110,7 @@ class ProyectosController extends Controller
             $em->flush();
 
             //return $this->redirectToRoute('proyectos_show', array('id' => $proyecto->getId()));
-            return $this->redirectToRoute('dashboard');
+            return $this->redirectToRoute('proyectos_index');
 
         }
 

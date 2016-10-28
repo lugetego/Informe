@@ -24,13 +24,14 @@ class EstudiantesController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
 
-        $estudiantes = $em->getRepository('InformeBundle:Estudiantes')->findAll();
+        $user = $this->get('security.context')->getToken()->getUser();
+        $estudiantes = $user->getAcademico()->getEstudiantes();
 
         return $this->render('estudiantes/index.html.twig', array(
             'estudiantes' => $estudiantes,
         ));
+
     }
 
     /**
@@ -54,8 +55,8 @@ class EstudiantesController extends Controller
             $em->persist($estudiante);
             $em->flush();
 
-            // return $this->redirectToRoute('estudiantes_show', array('id' => $estudiante->getId()));
-            return $this->redirectToRoute('dashboard');
+            return $this->redirectToRoute('estudiantes_index');
+            //return $this->redirectToRoute('dashboard');
 
         }
 
@@ -103,7 +104,7 @@ class EstudiantesController extends Controller
             $em->flush();
 
             //return $this->redirectToRoute('estudiantes_show', array('id' => $estudiante->getId()));
-            return $this->redirectToRoute('dashboard');
+            return $this->redirectToRoute('estudiantes_index');
 
         }
 

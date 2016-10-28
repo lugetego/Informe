@@ -1,57 +1,119 @@
-{% extends 'base.html.twig' %}
+{% extends 'dash/index.html.twig' %}
 
-{% block body %}
-    <h1>Eventos list</h1>
+{% block wrapper %}
+    <div class="row">
+        <div class="col-lg-12">
+            <p></p>
+            <br>
+            {#                <h1 class="page-header">Solicitudes </h1>#}
+        </div>
+    </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Tipo</th>
-                <th>Organizador</th>
-                <th>Nacional</th>
-                <th>Pais</th>
-                <th>Institucion</th>
-                <th>Platica</th>
-                <th>Actividad</th>
-                <th>Fecha</th>
-                <th>Informacion</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for evento in eventos %}
-            <tr>
-                <td><a href="{{ path('eventos_show', { 'id': evento.id }) }}">{{ evento.id }}</a></td>
-                <td>{{ evento.nombre }}</td>
-                <td>{{ evento.tipo }}</td>
-                <td>{% if evento.organizador %}Yes{% else %}No{% endif %}</td>
-                <td>{% if evento.nacional %}Yes{% else %}No{% endif %}</td>
-                <td>{{ evento.pais }}</td>
-                <td>{{ evento.institucion }}</td>
-                <td>{{ evento.platica }}</td>
-                <td>{{ evento.actividad }}</td>
-                <td>{% if evento.fecha %}{{ evento.fecha|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ evento.informacion }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('eventos_show', { 'id': evento.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('eventos_edit', { 'id': evento.id }) }}">edit</a>
-                        </li>
+    <div class="row">
+
+        <!-- Eventos -->
+        <div class="col-lg-6">
+
+            <ol class="breadcrumb">
+                <li><a href="{{ path('dashboard') }}">Inicio</a></li>
+                <li class="active">Informe</li>
+                <li class="active">Eventos</li>
+            </ol>
+
+
+            <div class="panel panel-default">
+
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <i class="fa fa-calendar-o fa-1x" aria-hidden="true"></i> <strong>Eventos</strong>
+                        </a>
+                        <button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#invesnewModal">
+                            <i class="fa fa-plus"></i> Nuevo </button>
+                        <!-- Button trigger modal -->
+                    </h4>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="eventosnewModal" tabindex="-1" role="dialog" aria-labelledby="eventosnewModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="eventosnewModalLabel">Eventos</h4>
+                            </div>
+                            <div class="modal-body">
+                                {% render(controller('InformeBundle:Eventos:new')) %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+
+                    <ul class="list-group">
+
+                        {% for evento in eventos %}
+                            {% set eventomodalshow = 'eventoshowModal'~ evento.id  %}
+                            {% set eventomodaledit = 'eventoeditModal'~ evento.id  %}
+
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <i class="fa fa-table fa-2x" aria-hidden="true"></i>
+                                                    <span class="user-info">
+                                                    <strong>{{ evento.nombre|title }}</strong>
+
+                                                        <em>{{ evento.institucion|title }}</em>,
+                                                        <span class="label label-default"><small>{{ evento.tipo |title}}</small></span></span>
+                                        <p class="pull-right">
+                                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ eventomodalshow }}">
+                                                <i class="fa fa-search" aria-hidden="true"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ eventomodaledit }}">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                            </button>
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="{{ eventomodalshow }}" tabindex="-1" role="dialog" aria-labelledby="{{ eventomodalshow }}Label">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="{{ eventomodalshow }}Label">{{ evento.nombre |title}}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% render controller("InformeBundle:Eventos:show", {'id': evento.id}) %}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="{{ eventomodaledit }}" tabindex="-1" role="dialog" aria-labelledby="{{ eventomodaledit }}Label">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="{{ eventomodaledit }}Label">Eventos</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% render controller("InformeBundle:Eventos:edit", {'id': evento.id}) %}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
                     </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin Eventos -->
 
-    <ul>
-        <li>
-            <a href="{{ path('eventos_new') }}">Create a new entry</a>
-        </li>
-    </ul>
 {% endblock %}

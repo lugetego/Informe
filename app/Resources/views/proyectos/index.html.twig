@@ -1,51 +1,118 @@
-{% extends 'base.html.twig' %}
+{% extends 'dash/index.html.twig' %}
 
 {% block wrapper %}
+
+    <div class="row">
+        <div class="col-lg-12">
+            <p></p>
+            <br>
+            {#                <h1 class="page-header">Solicitudes </h1>#}
+        </div>
+    </div>
+
     <div class="row">
 
-        <div class="col-lg-12">
-            <h3 class="page-header">Proyectos</h3>
-        </div>
-        <!-- /.col-lg-12 -->
-    </div>
-    <!-- /.row -->
 
+        <!-- Proyectos -->
+        <div class="col-lg-6">
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Tipo</th>
-                <th>Nombre</th>
-                <th>Numero</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for proyecto in proyectos %}
-            <tr>
-                <td><a href="{{ path('proyectos_show', { 'id': proyecto.id }) }}">{{ proyecto.id }}</a></td>
-                <td>{{ proyecto.tipo }}</td>
-                <td>{{ proyecto.nombre }}</td>
-                <td>{{ proyecto.numero }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('proyectos_show', { 'id': proyecto.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('proyectos_edit', { 'id': proyecto.id }) }}">edit</a>
-                        </li>
+            <ol class="breadcrumb">
+                <li><a href="{{ path('dashboard') }}">Inicio</a></li>
+                <li class="active">Informe</li>
+                <li class="active">Proyectos</li>
+            </ol>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <i class="fa fa-tasks fa-1x" aria-hidden="true"></i> <strong>Proyectos</strong>
+                        </a>
+                        <button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#proyectosnewModal">
+                            <i class="fa fa-plus"></i> Nuevo </button>
+                        <!-- Button trigger modal -->
+                    </h4>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="proyectosnewModal" tabindex="-1" role="dialog" aria-labelledby="proyectosnewModalLabel">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="proyectosnewModalLabel">Proyectos</h4>
+                                </div>
+                                <div class="modal-body">
+                                    {% render(controller('InformeBundle:Proyectos:new')) %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                    <ul class="list-group">
+                        {% for proyecto in proyectos %}
+                            {% set proyectomodalshow = 'proyectoshowModal'~ proyecto.id  %}
+                            {% set proyectomodaledit = 'proyectoeditModal'~ proyecto.id  %}
+
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i>
+                                                    <span class="user-info">
+                                                    <strong>{{ proyecto.nombre|title }}</strong>
+                                                        <em>{{ proyecto.numero }}</em>,
+                                                        <span class="label label-default"><small>{{ proyecto.tipo|upper }}</small></span></span>
+                                        <p class="pull-right">
+                                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ proyectomodalshow }}">
+                                                <i class="fa fa-search" aria-hidden="true"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ proyectomodaledit }}">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                            </button>
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="{{ proyectomodalshow }}" tabindex="-1" role="dialog" aria-labelledby="{{ proyectomodalshow }}Label">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="{{ proyectomodalshow }}Label">{{ proyecto.nombre |title}}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% render controller("InformeBundle:Proyectos:show", {'id': proyecto.id}) %}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="{{ proyectomodaledit }}" tabindex="-1" role="dialog" aria-labelledby="{{ proyectomodaledit }}Label">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="{{ proyectomodaledit }}Label">Proyectos</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% render controller("InformeBundle:Proyectos:edit", {'id': proyecto.id}) %}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
                     </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('proyectos_new') }}">Create a new entry</a>
-        </li>
-    </ul>
+    <!-- Fin Proyectos -->
+
 {% endblock %}

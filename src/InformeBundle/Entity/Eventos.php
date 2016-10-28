@@ -101,7 +101,7 @@ class Eventos
     /**
      * @var string
      *
-     * @ORM\Column(name="informacion", type="string", length=255)
+     * @ORM\Column(name="informacion", type="string", length=255, nullable=true)
      */
     private $informacion;
 

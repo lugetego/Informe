@@ -24,13 +24,19 @@ class SalidasController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
 
-        $salidas = $em->getRepository('InformeBundle:Salidas')->findAll();
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $user = $this->get('security.context')->getToken()->getUser();
+        $salidas = $user->getAcademico()->getSalidas();
 
         return $this->render('salidas/index.html.twig', array(
             'salidas' => $salidas,
         ));
+
+
     }
 
     /**
@@ -55,7 +61,7 @@ class SalidasController extends Controller
             $em->flush();
 
             //return $this->redirectToRoute('salidas_show', array('id' => $salida->getId()));
-            return $this->redirectToRoute('dashboard');
+            return $this->redirectToRoute('salidas_index');
 
         }
 
@@ -99,7 +105,7 @@ class SalidasController extends Controller
             $em->flush();
 
             //return $this->redirectToRoute('salidas_show', array('id' => $salida->getId()));
-            return $this->redirectToRoute('dashboard');
+            return $this->redirectToRoute('salidas_index');
 
         }
 

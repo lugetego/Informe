@@ -24,9 +24,13 @@ class CursosController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
 
-        $cursos = $em->getRepository('InformeBundle:Cursos')->findAll();
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $user = $this->get('security.context')->getToken()->getUser();
+        $cursos = $user->getAcademico()->getCursos();
 
         return $this->render('cursos/index.html.twig', array(
             'cursos' => $cursos,
@@ -56,7 +60,7 @@ class CursosController extends Controller
             $em->flush();
 
             //return $this->redirectToRoute('cursos_show', array('id' => $curso->getId()));
-            return $this->redirectToRoute('dashboard');
+            return $this->redirectToRoute('cursos_index');
 
         }
 
@@ -108,7 +112,7 @@ class CursosController extends Controller
             $em->flush();
 
             //return $this->redirectToRoute('cursos_edit', array('id' => $curso->getId()));
-            return $this->redirectToRoute('dashboard');
+            return $this->redirectToRoute('cursos_index');
 
         }
 

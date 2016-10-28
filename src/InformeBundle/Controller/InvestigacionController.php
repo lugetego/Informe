@@ -30,12 +30,16 @@ class InvestigacionController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
 
-        $investigacions = $em->getRepository('InformeBundle:Investigacion')->findAll();
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $user = $this->get('security.context')->getToken()->getUser();
+        $investigaciones = $user->getAcademico()->getInvestigaciones();
 
         return $this->render('investigacion/index.html.twig', array(
-            'investigacions' => $investigacions,
+            'investigaciones' => $investigaciones,
         ));
     }
 
@@ -69,8 +73,8 @@ class InvestigacionController extends Controller
             $em->persist($investigacion);
             $em->flush();
 
-           // return $this->redirectToRoute('investigacion_show', array('id' => $investigacion->getId()));
-            return $this->redirectToRoute('dashboard');
+            return $this->redirectToRoute('investigacion_index');
+           // return $this->redirectToRoute('dashboard');
         }
 
         return $this->render('investigacion/new.html.twig', array(
@@ -123,7 +127,7 @@ class InvestigacionController extends Controller
 
             //return $this->redirectToRoute('investigacion_show', array('id' => $investigacion->getId()));
 
-            return $this->redirectToRoute('dashboard');
+            return $this->redirectToRoute('investigacion_index');
 
         }
 
