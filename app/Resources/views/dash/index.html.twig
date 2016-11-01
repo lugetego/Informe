@@ -124,7 +124,18 @@
                             </dl>
 
                         </div>
+
+                        <div class="col-lg-2 col-md-2 text-center">
+                            <dl>
+                                <dt><i class="fa fa-file-pdf-o fa-3x" aria-hidden="true"></i></dt>
+                                <dd><a href="{{ path('informe_pdf') }} "> <h5>Descargar</h5></a></dd>
+                            </dl>
+
+                        </div>
                     </div>
+
+
+
                 </div>
             </div>
         </div>
@@ -230,35 +241,66 @@
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active"><a href="#investigacion" aria-controls="investigacion" role="tab" data-toggle="tab"> <i class="fa fa-bar-chart" aria-hidden="true"></i> Investigación</a></li>
                             <li role="presentation"><a href="#estudiantes" aria-controls="estudiantes" role="tab" data-toggle="tab"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Estudiantes</a></li>
-                            <li role="presentation"><a href="#cursos" aria-controls="messages" role="tab" data-toggle="tab"><i class="fa fa-university" aria-hidden="true"></i> Cursos</a></li>
-                            <li role="presentation"><a href="#proyectos" aria-controls="settings" role="tab" data-toggle="tab"><i class="fa fa-tasks" aria-hidden="true"></i> Proyectos</a></li>
-                            <li role="presentation"><a href="#eventos" aria-controls="settings" role="tab" data-toggle="tab"><i class="fa fa-calendar" aria-hidden="true"></i> Eventos</a></li>
-                            <li role="presentation"><a href="#salidas" aria-controls="settings" role="tab" data-toggle="tab"><i class="fa fa-globe" aria-hidden="true"></i> Salidas</a></li>
+                            <li role="presentation"><a href="#cursos" aria-controls="cursos" role="tab" data-toggle="tab"><i class="fa fa-university" aria-hidden="true"></i> Cursos</a></li>
+                            <li role="presentation"><a href="#proyectos" aria-controls="proyectos" role="tab" data-toggle="tab"><i class="fa fa-tasks" aria-hidden="true"></i> Proyectos</a></li>
+                            <li role="presentation"><a href="#eventos" aria-controls="eventos" role="tab" data-toggle="tab"><i class="fa fa-calendar" aria-hidden="true"></i> Eventos</a></li>
+                            <li role="presentation"><a href="#salidas" aria-controls="salidas" role="tab" data-toggle="tab"><i class="fa fa-globe" aria-hidden="true"></i> Salidas</a></li>
                         </ul>
 
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane active" id="investigacion">
+                                <br>
                                 {% for investigacion in investigaciones %}
 
-                                    <p>{{ investigacion.titulo|title }}<br>
+                                    <p><strong>{{ investigacion.titulo|title }}</strong>, {{ investigacion.autores }}, {{ investigacion.tipo }}
+                                        {{ investigacion.year }}, {{ investigacion.pags }} págs., Vol. {{ investigacion.volumen }},  {{ investigacion.numero }},
+                                        {{ investigacion.status }}, {{ investigacion.indizado }}, {{ investigacion.revista }}, {{ investigacion.issn }}
+                                        {{ investigacion.proyectos }}
                                     </p>
-
                                 {% endfor %}
-
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="profile">
-
+                            <div role="tabpanel" class="tab-pane" id="estudiantes">
+                                <br>
+                                {% for estudiante in estudiantes %}
+                                    <p><strong>{{ estudiante.alumno|title }}</strong>, {{ estudiante.programa }}, {{ estudiante.tesis }}</p>
+                                {% endfor %}
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="messages">...</div>
-                            <div role="tabpanel" class="tab-pane" id="settings">...</div>
+                            <div role="tabpanel" class="tab-pane" id="cursos">
+                                <br>
+                                {% for curso in cursos %}
+                                    <p><strong>{{ curso.nombre|title }}</strong>, {{ curso.tipo }}, {{ curso.nivel }}, {{ curso.horas }}, {{ curso.lugar }}</p>
+                                {% endfor %}
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="proyectos">
+                                <br>
+                                {% for proyecto in proyectos %}
+                                    <p><strong>{{ proyecto.nombre|title }}</strong>, {{ proyecto.numero }}, {{ proyecto.tipo }}</p>
+                                {% endfor %}
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="eventos">
+                                <br>
+                                {% for evento in eventos %}
+                                    <p><strong>{{ evento.tipo|title }}</strong>, {{ evento.nombre }}, Organizador: {{ evento.organizador }}, Nacional: {{ evento.nacional }}
+                                    {{ evento.pais }}, {{ evento.institucion }}, {{ evento.platica }}, {{ evento.actividad }}, {{ evento.inicio|date() }}, {{ evento.fin|date() }},
+                                        {{ evento.informacion }}</p>
+                                {% endfor %}
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="salidas">
+                                <br>
+                                {% for salida in salidas %}
+                                    <p><strong>{{ salida.tipo|title }}</strong>, {{ salida.pais }}, {{ salida.ciudad }}, Nacional: {{ salida.estado }}
+                                        {{ salida.profesor }}, {{ salida.actividad }}, {{ salida.proposito }}, {{ salida.proyecto }}, {{ salida.inicio|date() }}, {{ salida.fin|date() }},
+                                        {{ salida.trabajo }}, {{ salida.observaciones }}</p>
+                                {% endfor %}
+                            </div>
                         </div>
 
                     </div>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>

@@ -70,3 +70,13 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: InformeBundle\Entity\User
+
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     /usr/local/bin/wkhtmltopdf #"\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\"" for Windows users
+        options:    []
+    image:
+        enabled:    false
+        binary:     /usr/bin/wkhtmltoimage #"\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltoimage.exe\"" for Windows users
+        options:    []
