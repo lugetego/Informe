@@ -79,6 +79,9 @@ class EventosController extends Controller
     {
         $deleteForm = $this->createDeleteForm($evento);
 
+        // check for "view" access: calls all voters
+        $this->denyAccessUnlessGranted('view', $evento);
+
         return $this->render('eventos/show.html.twig', array(
             'evento' => $evento,
             'delete_form' => $deleteForm->createView(),
@@ -95,6 +98,8 @@ class EventosController extends Controller
     {
         $deleteForm = $this->createDeleteForm($evento);
         $editForm = $this->createForm('InformeBundle\Form\EventosType', $evento);
+        $this->denyAccessUnlessGranted('edit', $evento);
+
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

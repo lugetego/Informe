@@ -79,6 +79,9 @@ class ProyectosController extends Controller
     {
         $deleteForm = $this->createDeleteForm($proyecto);
 
+        // check for "view" access: calls all voters
+        $this->denyAccessUnlessGranted('view', $proyecto);
+
         return $this->render('proyectos/show.html.twig', array(
             'proyecto' => $proyecto,
             'delete_form' => $deleteForm->createView(),
@@ -94,6 +97,8 @@ class ProyectosController extends Controller
     public function editAction(Request $request, Proyectos $proyecto)
     {
         $deleteForm = $this->createDeleteForm($proyecto);
+        $this->denyAccessUnlessGranted('edit', $proyecto);
+
         $editForm = $this->createForm('InformeBundle\Form\ProyectosType', $proyecto);
 
         $editForm->remove('tipos');

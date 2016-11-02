@@ -80,6 +80,10 @@ class CursosController extends Controller
     {
         $deleteForm = $this->createDeleteForm($curso);
 
+        // check for "view" access: calls all voters
+        $this->denyAccessUnlessGranted('view', $curso);
+
+
         return $this->render('cursos/show.html.twig', array(
             'curso' => $curso,
             'delete_form' => $deleteForm->createView(),
@@ -95,6 +99,9 @@ class CursosController extends Controller
     public function editAction(Request $request, Cursos $curso)
     {
         $deleteForm = $this->createDeleteForm($curso);
+
+        $this->denyAccessUnlessGranted('edit', $curso);
+
         $editForm = $this->createForm('InformeBundle\Form\CursosType', $curso);
 
         $editForm->remove('lugares');

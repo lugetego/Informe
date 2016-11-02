@@ -7,6 +7,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use InformeBundle\Entity\Investigacion;
 use InformeBundle\Entity\Estudiantes;
 use InformeBundle\Entity\Plan;
+use InformeBundle\Entity\Salidas;
+use InformeBundle\Entity\Proyectos;
+use InformeBundle\Entity\Eventos;
+use InformeBundle\Entity\Cursos;
 use InformeBundle\Entity\User;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 
@@ -32,7 +36,15 @@ class InvesVoter extends  Voter
         }
 
         // only vote on Post objects inside this voter
-        if (!$subject instanceof Investigacion && !$subject instanceof Estudiantes && !$subject instanceof Plan) {
+        if (!$subject instanceof Investigacion &&
+            !$subject instanceof Estudiantes &&
+            !$subject instanceof Cursos &&
+            !$subject instanceof Eventos &&
+            !$subject instanceof Proyectos &&
+            !$subject instanceof Salidas &&
+            !$subject instanceof Plan
+
+        ) {
             return false;
         }
 

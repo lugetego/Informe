@@ -79,6 +79,9 @@ class PlanController extends Controller
     {
         $deleteForm = $this->createDeleteForm($plan);
 
+        // check for "view" access: calls all voters
+        $this->denyAccessUnlessGranted('view', $plan);
+
         return $this->render('plan/show.html.twig', array(
             'plan' => $plan,
             'delete_form' => $deleteForm->createView(),
@@ -97,6 +100,8 @@ class PlanController extends Controller
 
         $deleteForm = $this->createDeleteForm($plan);
         $editForm = $this->createForm('InformeBundle\Form\PlanType', $plan);
+        $this->denyAccessUnlessGranted('edit', $plan);
+
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

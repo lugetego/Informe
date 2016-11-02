@@ -81,6 +81,10 @@ class SalidasController extends Controller
     {
         $deleteForm = $this->createDeleteForm($salida);
 
+        // check for "view" access: calls all voters
+        $this->denyAccessUnlessGranted('view', $salida);
+
+
         return $this->render('salidas/show.html.twig', array(
             'salida' => $salida,
             'delete_form' => $deleteForm->createView(),
@@ -96,6 +100,7 @@ class SalidasController extends Controller
     public function editAction(Request $request, Salidas $salida)
     {
         $deleteForm = $this->createDeleteForm($salida);
+        $this->denyAccessUnlessGranted('edit', $salida);
         $editForm = $this->createForm('InformeBundle\Form\SalidasType', $salida);
         $editForm->handleRequest($request);
 
