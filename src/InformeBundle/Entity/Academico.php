@@ -5,6 +5,7 @@ namespace InformeBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Index;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 
 /**
@@ -135,6 +136,11 @@ class Academico
      */
     private $planes;
 
+    /**
+     * @Gedmo\Slug(fields={"apellido", "nombre"}, )
+     * @ORM\Column(length=128, nullable=true)
+     */
+    private $slug;
 
     /**
      * Get id
@@ -260,9 +266,8 @@ class Academico
     {
         $this->investigaciones = new \Doctrine\Common\Collections\ArrayCollection();
         $this->investigacionesautor = new \Doctrine\Common\Collections\ArrayCollection();
-
+        $this->salidas = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
 
 
     /**
@@ -566,5 +571,10 @@ class Academico
     public function getPlanes()
     {
         return $this->planes;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

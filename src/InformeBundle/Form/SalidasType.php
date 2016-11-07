@@ -45,9 +45,11 @@ class SalidasType extends AbstractType
                 'label'=>'Actividad',
                 'required'=>false,
             ))
-            ->add('proposito', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
-                'label'=>'Propósito',
+            ->add('propositos','choice',array(
+                'choices'   =>  $this->getPropositoChoice(),
+                'multiple'=>true,
                 'required'=>false,
+                'label'=>'Propósitos del viaje'
             ))
             ->add('proyecto', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
                 'label'=>'Proyecto',
@@ -92,5 +94,76 @@ class SalidasType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'InformeBundle\Entity\Salidas'
         ));
+    }
+
+    /**
+     * @return array
+     */
+    private function getPropositoChoice()
+    {
+        return array(
+            'Asamblea' => 'Asamblea',
+            'Asesoría' => 'Asesoría',
+            'Capacitación' => 'Capacitación',
+            'Cátedra' => 'Cátedra',
+            'Ceremonia' => 'Ceremonia',
+            'Colaboración' => 'Colaboración',
+            'Coloquio' => 'Coloquio',
+            'Comité' => 'Comité',
+            'Concurso' => 'Concurso',
+            'Conferencia' => 'Conferencia',
+            'Congreso' => 'Congreso',
+            'Conmemoración' => 'Conmemoración',
+            'Consultoría' => 'Consultoría',
+            'Convención' => 'Convención',
+            'Convenio' => 'Convenio',
+            'Coordinación' => 'Coordinación',
+            'Curso' => 'Curso',
+            'Curso-Taller' => 'Curso-Taller',
+            'Demostración' => 'Demostración',
+            'Dictamen' => 'Dictamen',
+            'Diplomado' => 'Diplomado',
+            'Encuentro' => 'Encuentro',
+            'Entrevista' => 'Entrevista',
+            'Estancia' => 'Estancia',
+            'Estudio' => 'Estudio',
+            'Evaluación' => 'Evaluación',
+            'Examen' => 'Examen',
+            'Exposición' => 'Exposición',
+            'Feria' => 'Feria',
+            'Feria-Posgrado' => 'Feria-Posgrado',
+            'Foro' => 'Foro',
+            'Homenaje' => 'Homenaje',
+            'Inauguración' => 'Inauguración',
+            'Instalación' => 'Instalación',
+            'Intercambio' => 'Intercambio',
+            'Investigación' => 'Investigación',
+            'Jornadas' => 'Jornadas',
+            'Jurado' => 'Jurado',
+            'Mesa redonda' => 'Mesa redonda',
+            'Minicongreso' => 'Minicongreso',
+            'Minicurso' => 'Minicurso',
+            'Minisimposio' => 'Minisimposio',
+            'Olimpiada' => 'Olimpiada',
+            'Organización' => 'Organización',
+            'Panel' => 'Panel',
+            'Plática' => 'Plática',
+            'Ponencia' => 'Ponencia',
+            'Premiación' => 'Premiación',
+            'Presentación' => 'Presentación',
+            'Proyecto' => 'Proyecto',
+            'Reconocimiento' => 'Reconocimiento',
+            'Reunión' => 'Reunión',
+            'Revisión' => 'Revisión',
+            'Seminario' => 'Seminario',
+            'Simposio' => 'Simposio',
+            'Sinodal' => 'Sinodal',
+            'Supervisión' => 'Supervisión',
+            'Taller' => 'Taller',
+            'Trabajo' => 'Trabajo',
+            'Trabajo de campo' => 'Trabajo de campo',
+            'Vinculación' => 'Vinculación',
+            'Visita' => 'Visita',
+        );
     }
 }

@@ -41,7 +41,7 @@
             <div class="col-md-4">
                 <dl>
                     <dt>Propósito</dt>
-                    <dd>{{ salida.proposito }}</dd>
+                    <dd>{% for proposito in salida.propositos %}{{ proposito }}{% endfor %}</dd>
                 </dl>
             </div>
             <div class="col-md-4">
