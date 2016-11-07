@@ -263,8 +263,6 @@ class Academico
 
     }
 
-
-
     /**
      * Get investigaciones
      *
@@ -274,8 +272,6 @@ class Academico
     {
         return $this->investigaciones;
     }
-
-
 
     /**
      * Add investigaciones
@@ -566,6 +562,11 @@ class Academico
     public function getPlanes()
     {
         return $this->planes;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
     }
 
     public function getSlug()
