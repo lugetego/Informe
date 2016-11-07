@@ -79,11 +79,11 @@ class Salidas
     private $actividad;
 
     /**
-     * @var string
+     * @var array $propositos
      *
-     * @ORM\Column(name="proposito", type="string", length=255)
+     * @ORM\Column(name="propositos", type="simple_array", nullable=true)
      */
-    private $proposito;
+    private $propositos;
 
     /**
      * @var string
@@ -364,26 +364,26 @@ class Salidas
     }
 
     /**
-     * Set proposito
+     * Set propositos
      *
-     * @param string $proposito
-     * @return Salidas
+     * @param array $propositos
+     * @return Propositos
      */
-    public function setProposito($proposito)
+    public function setPropositos(array $propositos)
     {
-        $this->proposito = $proposito;
+        $this->propositos = $propositos;
 
         return $this;
     }
 
     /**
-     * Get proposito
+     * Get propositos
      *
-     * @return string 
+     * @return array
      */
-    public function getProposito()
+    public function getPropositos()
     {
-        return $this->proposito;
+        return $this->propositos;
     }
 
     /**
