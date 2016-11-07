@@ -251,48 +251,72 @@
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane active" id="investigacion">
                                 <br>
-                                {% for investigacion in investigaciones %}
+                                {% if investigaciones|length == 0 %}
+                                    No se ha registrado información<br><br>
+                                {% else %}
+                                    {% for investigacion in investigaciones %}
 
-                                    <p><strong>{{ investigacion.titulo|title }}</strong>, {{ investigacion.autores }}, {{ investigacion.tipo }}
-                                        {{ investigacion.year }}, {{ investigacion.pags }} págs., Vol. {{ investigacion.volumen }},  {{ investigacion.numero }},
-                                        {{ investigacion.status }}, {{ investigacion.indizado }}, {{ investigacion.revista }}, {{ investigacion.issn }}
-                                        {{ investigacion.proyectos }}
-                                    </p>
-                                {% endfor %}
+                                        <p><strong>{{ investigacion.titulo|title }}</strong>, {{ investigacion.autores }}, {{ investigacion.tipo }}
+                                            {{ investigacion.year }}, {{ investigacion.pags }} págs., Vol. {{ investigacion.volumen }},  {{ investigacion.numero }},
+                                            {{ investigacion.status }}, {{ investigacion.indizado }}, {{ investigacion.revista }}, {{ investigacion.issn }}
+                                            {{ investigacion.proyectos }}
+                                        </p>
+                                    {% endfor %}
+                                {% endif %}
                             </div>
                             <div role="tabpanel" class="tab-pane" id="estudiantes">
                                 <br>
-                                {% for estudiante in estudiantes %}
-                                    <p><strong>{{ estudiante.alumno|title }}</strong>, {{ estudiante.programa }}, {{ estudiante.tesis }}</p>
-                                {% endfor %}
+                                {% if estudiantes|length == 0 %}
+                                    No se ha registrado información<br><br>
+                                {% else %}
+                                    {% for estudiante in estudiantes %}
+                                        <p><strong>{{ estudiante.alumno|title }}</strong>, {{ estudiante.programa }}, {{ estudiante.tesis }}</p>
+                                    {% endfor %}
+                                {% endif %}
                             </div>
                             <div role="tabpanel" class="tab-pane" id="cursos">
                                 <br>
-                                {% for curso in cursos %}
-                                    <p><strong>{{ curso.nombre|title }}</strong>, {{ curso.tipo }}, {{ curso.nivel }}, {{ curso.horas }}, {{ curso.lugar }}</p>
-                                {% endfor %}
+                                {% if cursos|length == 0 %}
+                                    No se ha registrado información<br><br>
+                                {% else %}
+                                    {% for curso in cursos %}
+                                        <p><strong>{{ curso.nombre|title }}</strong>, {{ curso.tipo }}, {{ curso.nivel }}, {{ curso.horas }}, {{ curso.lugar }}</p>
+                                    {% endfor %}
+                                {% endif %}
                             </div>
                             <div role="tabpanel" class="tab-pane" id="proyectos">
                                 <br>
-                                {% for proyecto in proyectos %}
-                                    <p><strong>{{ proyecto.nombre|title }}</strong>, {{ proyecto.numero }}, {{ proyecto.tipo }}</p>
-                                {% endfor %}
+                                {% if proyectos|length == 0 %}
+                                    No se ha registrado información<br><br>
+                                {% else %}
+                                    {% for proyecto in proyectos %}
+                                        <p><strong>{{ proyecto.nombre|title }}</strong>, {{ proyecto.numero }}, {{ proyecto.tipo }}</p>
+                                    {% endfor %}
+                                {% endif %}
                             </div>
                             <div role="tabpanel" class="tab-pane" id="eventos">
                                 <br>
-                                {% for evento in eventos %}
-                                    <p><strong>{{ evento.tipo|title }}</strong>, {{ evento.nombre }}, Organizador: {{ evento.organizador }}, Nacional: {{ evento.nacional }}
-                                    {{ evento.pais }}, {{ evento.institucion }}, {{ evento.platica }}, {{ evento.actividad }}, {{ evento.inicio|date() }}, {{ evento.fin|date() }},
-                                        {{ evento.informacion }}</p>
-                                {% endfor %}
+                                {% if eventos|length == 0 %}
+                                    No se ha registrado información<br><br>
+                                {% else %}
+                                    {% for evento in eventos %}
+                                        <p><strong>{{ evento.tipo|title }}</strong>, {{ evento.nombre }}, Organizador: {{ evento.organizador }}, Nacional: {{ evento.nacional }}
+                                            {{ evento.pais }}, {{ evento.institucion }}, {{ evento.platica }}, {{ evento.actividad }}, {{ evento.inicio|date() }}, {{ evento.fin|date() }},
+                                            {{ evento.informacion }}</p>
+                                    {% endfor %}
+                                {% endif %}
                             </div>
                             <div role="tabpanel" class="tab-pane" id="salidas">
                                 <br>
-                                {% for salida in salidas %}
-                                    <p><strong>{{ salida.tipo|title }}</strong>, {{ salida.pais }}, {{ salida.ciudad }}, Nacional: {{ salida.estado }}
-                                        {{ salida.profesor }}, {{ salida.actividad }}, {{ salida.proposito }}, {{ salida.proyecto }}, {{ salida.inicio|date() }}, {{ salida.fin|date() }},
-                                        {{ salida.trabajo }}, {{ salida.observaciones }}</p>
-                                {% endfor %}
+                                {% if salidas|length == 0 %}
+                                    No se ha registrado información<br><br>
+                                {% else %}
+                                    {% for salida in salidas %}
+                                        <p><strong>{{ salida.tipo|title }}</strong>, {{ salida.pais }}, {{ salida.ciudad }}, Nacional: {{ salida.estado }}
+                                            {{ salida.profesor }}, {{ salida.actividad }}, {{ salida.proposito }}, {{ salida.proyecto }}, {{ salida.inicio|date() }}, {{ salida.fin|date() }},
+                                            {{ salida.trabajo }}, {{ salida.observaciones }}</p>
+                                    {% endfor %}
+                                {% endif %}
                             </div>
                         </div>
 

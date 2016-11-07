@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping\Index;
  *
  * @ORM\Table(name="investigacion")
  * @ORM\Entity(repositoryClass="InformeBundle\Repository\InvestigacionRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Investigacion
 {
@@ -32,7 +33,7 @@ class Investigacion
 
     /**
      * @var autor
-     * @ORM\Column(name="autor", type="integer")
+     * @ORM\Column(name="autor", type="integer", nullable=true)
      * @ORM\ManyToOne(targetEntity="Academico", inversedBy="investigacionesautor")
      * @ORM\JoinColumn(name="autor_id", referencedColumnName="id")
      */
@@ -55,7 +56,7 @@ class Investigacion
     /**
      * @var string
      *
-     * @ORM\Column(name="autores", type="string", length=255)
+     * @ORM\Column(name="autores", type="string", length=255, nullable=true)
      */
     private $autores;
 
@@ -69,21 +70,21 @@ class Investigacion
     /**
      * @var string
      *
-     * @ORM\Column(name="pags", type="string", length=255)
+     * @ORM\Column(name="pags", type="string", length=255, nullable=true)
      */
     private $pags;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="volumen", type="string", length=255)
+     * @ORM\Column(name="volumen", type="string", length=255, nullable=true)
      */
     private $volumen;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="numero", type="string", length=255)
+     * @ORM\Column(name="numero", type="string", length=255, nullable=true)
      */
     private $numero;
 
@@ -97,7 +98,7 @@ class Investigacion
     /**
      * @var string
      *
-     * @ORM\Column(name="issn", type="string", length=255)
+     * @ORM\Column(name="issn", type="string", length=255, nullable=true)
      */
     private $issn;
 
@@ -118,10 +119,80 @@ class Investigacion
     /**
      * @var string
      *
-     * @ORM\Column(name="revista", type="string", length=255)
+     * @ORM\Column(name="revista", type="string", length=255,nullable=true)
      */
     private $revista;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $created;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $modified;
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set modified
+     *
+     * @param \DateTime $modified
+     */
+    public function setModified($modified)
+    {
+        $this->modified = $modified;
+
+        return $this;
+    }
+
+    /**
+     * Get modified
+     *
+     * @return \DateTime
+     */
+    public function getModified()
+    {
+        return $this->modified;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist()
+    {
+        $this->setCreated(new \DateTime());
+        $this->setModified(new \DateTime());
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate()
+    {
+        $this->setModified(new \DateTime());
+    }
 
     /**
      * Get id

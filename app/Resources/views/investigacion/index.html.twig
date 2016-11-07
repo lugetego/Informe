@@ -12,7 +12,7 @@
 <div class="row">
 
     <!-- Investigación -->
-    <div class="col-lg-6">
+    <div class="col-lg-8">
 
         <ol class="breadcrumb">
             <li><a href="{{ path('dashboard') }}">Inicio</a></li>
@@ -62,7 +62,7 @@
                                                     <span class="user-info">
                                                     <strong>{{ investigacion.titulo|title }}</strong>
 
-                                                        <em>{{ investigacion.autores }}</em>  {{ investigacion.pags }} págs.,
+                                                        <em>{{ investigacion.autores }}</em>,  {{ investigacion.pags }} págs.,
                                                         {{ investigacion.year }}, <span class="label label-default"><small>{{ investigacion.tipo|title  }}</small></span></span>
                                         <p class="pull-right">
                                             <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ modalshow }}">

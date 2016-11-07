@@ -60,7 +60,7 @@ class InvestigacionType extends AbstractType
             ->add('year', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',array(
                 'label'=>'*Año',
                 'choices'=>array(
-                    '2015'=>'2015',
+                    '2016'=>'2016',
                     ),
                 'placeholder'=>'Seleccionar',
                 'required'=>true,
@@ -73,7 +73,7 @@ class InvestigacionType extends AbstractType
             ))
             ->add('volumen', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
                 'label'=>'Volumen',
-                'required'=>true,
+                'required'=>false,
             ))
             ->add('numero', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
                 'label'=>'Número',
@@ -87,7 +87,7 @@ class InvestigacionType extends AbstractType
                     'Publicado'=>'publicado',
                 ),
                 'placeholder'=>'Seleccionar',
-                'required'=>true,
+                'required'=>false,
                 'choices_as_values' => true,
 
 
