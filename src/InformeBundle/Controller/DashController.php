@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use InformeBundle\Entity\Academico;
+use InformeBundle\Entity\Plan;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -33,7 +34,6 @@ class DashController extends Controller
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
         }
-
         if ($this->get('security.context')->isGranted('ROLE_ADMIN'))
         {
             $academicos = $em->getRepository('InformeBundle:Academico')->findAll();
@@ -56,18 +56,14 @@ class DashController extends Controller
                 'eventos'=>$eventos,
                 'salidas'=>$salidas,
                 'planes'=>$planes,
-
+                'user'=>$user,
             ));
-
         }
 
         return array(
             'academicos' => $academicos,
         );
-
     }
-
-
 
     /**
      * Export to PDF
@@ -77,25 +73,18 @@ class DashController extends Controller
     public function pdfAction()
     {
 
-        $em = $this->getDoctrine()->getManager();
-
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
         }
 
-            $user = $this->get('security.context')->getToken()->getUser();
-            $investigaciones = $user->getAcademico()->getInvestigaciones();
-            $estudiantes = $user->getAcademico()->getEstudiantes();
-            $cursos = $user->getAcademico()->getCursos();
-            $proyectos = $user->getAcademico()->getProyectos();
-            $eventos = $user->getAcademico()->getEventos();
-            $salidas = $user->getAcademico()->getSalidas();
-            $planes = $user->getAcademico()->getPlanes();
-
-
-
-
-
+        $user = $this->get('security.context')->getToken()->getUser();
+        $investigaciones = $user->getAcademico()->getInvestigaciones();
+        $estudiantes = $user->getAcademico()->getEstudiantes();
+        $cursos = $user->getAcademico()->getCursos();
+        $proyectos = $user->getAcademico()->getProyectos();
+        $eventos = $user->getAcademico()->getEventos();
+        $salidas = $user->getAcademico()->getSalidas();
+        $planes = $user->getAcademico()->getPlanes();
 
         $html = $this->renderView('dash/layout-pdf.html.twig', array(
             'user'=>$user->getAcademico()->getNombre(),
@@ -121,5 +110,26 @@ class DashController extends Controller
     }
 
 
+    /**
+     * Envío informe y plan
+     *
+     * @Route("/send/{id}", name="informe_send")
+     */
+    public function sendAction($id)
+    {
+
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('InformeBundle:Plan')->find($id);
+        $entity->setEnviado(true);
+        $em->persist($entity);
+        $em->flush();
+
+        return $this->redirectToRoute('dashboard');
+
+
+    }
 
 }

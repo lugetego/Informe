@@ -136,13 +136,6 @@ class Academico
     private $planes;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="enviado", type="boolean", nullable=true)
-     */
-    private $enviado;
-
-    /**
      * Get id
      *
      * @return integer 
@@ -480,7 +473,6 @@ class Academico
         return $this;
     }
 
-
     /**
      * Add investigacionesautor
      *
@@ -573,27 +565,6 @@ class Academico
     public function getSlug()
     {
         return $this->slug;
-    }
-
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isEnviado()
-    {
-        return $this->enviado;
-    }
-
-    /**
-     * @param boolean $enviado
-     */
-    public function setEnviado($enviado)
-    {
-        $this->enviado = $enviado;
     }
 
 

@@ -80,7 +80,10 @@
             {% else %}
                 <ul>
                     {% for salida in salidas %}
-                        <li>{{ salida.pais|title }}, <small>{{ salida.tipo|title }}</small>,<em> {{ salida.universidad }}</em>, {{ salida.actividad }}, {{ salida.proposito }}
+                        <li>{{ salida.pais|title }}, <small>{{ salida.tipo|title }}</small>,<em> {{ salida.universidad }}</em>, {{ salida.actividad }},
+                            {% for proposito in salida.propositos %}
+                                {{ proposito }},
+                            {% endfor %}
                             <br>
                         </li>
                     {% endfor %}

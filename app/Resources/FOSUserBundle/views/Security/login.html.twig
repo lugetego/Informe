@@ -21,7 +21,7 @@
         {% else %}
 
             {% if error %}
-                <p class="text-danger"><span class="glyphicon glyphicon-remove"></span> {{ error|trans({}, 'FOSUserBundle') }}</p>
+                <p class="text-danger"><span class="glyphicon glyphicon-remove"></span> {{ error.messageKey|trans(error.messageData, 'security') }}</p>
             {% endif %}
 
 
