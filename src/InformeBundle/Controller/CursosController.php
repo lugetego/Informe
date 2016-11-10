@@ -31,9 +31,12 @@ class CursosController extends Controller
 
         $user = $this->get('security.context')->getToken()->getUser();
         $cursos = $user->getAcademico()->getCursos();
+        $enviado = $user->getAcademico()->isEnviado();
+
 
         return $this->render('cursos/index.html.twig', array(
             'cursos' => $cursos,
+            'enviado'=>$enviado,
         ));
     }
 
@@ -78,6 +81,10 @@ class CursosController extends Controller
      */
     public function showAction(Cursos $curso)
     {
+        $securityContext = $this->container->get('security.token_storage');
+        $user = $securityContext->getToken()->getUser();
+        $enviado = $user->getAcademico()->isEnviado();
+
         $deleteForm = $this->createDeleteForm($curso);
 
         // check for "view" access: calls all voters
@@ -86,6 +93,7 @@ class CursosController extends Controller
 
         return $this->render('cursos/show.html.twig', array(
             'curso' => $curso,
+            'enviado'=>$enviado,
             'delete_form' => $deleteForm->createView(),
         ));
     }

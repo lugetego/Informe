@@ -31,9 +31,12 @@ class EstudiantesController extends Controller
 
         $user = $this->get('security.context')->getToken()->getUser();
         $estudiantes = $user->getAcademico()->getEstudiantes();
+        $enviado = $user->getAcademico()->isEnviado();
+
 
         return $this->render('estudiantes/index.html.twig', array(
             'estudiantes' => $estudiantes,
+            'enviado'=>$enviado,
         ));
 
     }
@@ -83,6 +86,10 @@ class EstudiantesController extends Controller
      */
     public function showAction(Estudiantes $estudiante)
     {
+        $securityContext = $this->container->get('security.token_storage');
+        $user = $securityContext->getToken()->getUser();
+        $enviado = $user->getAcademico()->isEnviado();
+
         $deleteForm = $this->createDeleteForm($estudiante);
 
         // check for "view" access: calls all voters
@@ -90,6 +97,7 @@ class EstudiantesController extends Controller
 
         return $this->render('estudiantes/show.html.twig', array(
             'estudiante' => $estudiante,
+            'enviado'=>$enviado,
             'delete_form' => $deleteForm->createView(),
         ));
     }

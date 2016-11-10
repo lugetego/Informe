@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use InformeBundle\Entity\Plan;
 use InformeBundle\Form\PlanType;
+use InformeBundle\Entity\Academico;
+
 
 /**
  * Plan controller.
@@ -98,6 +100,10 @@ class PlanController extends Controller
     {
         $this->denyAccessUnlessGranted('edit', $plan);
 
+        $securityContext = $this->container->get('security.token_storage');
+        $user = $securityContext->getToken()->getUser();
+        $enviado = $user->getAcademico()->isEnviado();
+
         $deleteForm = $this->createDeleteForm($plan);
         $editForm = $this->createForm('InformeBundle\Form\PlanType', $plan);
         $this->denyAccessUnlessGranted('edit', $plan);
@@ -114,6 +120,7 @@ class PlanController extends Controller
 
         return $this->render('plan/edit.html.twig', array(
             'plan' => $plan,
+            'enviado'=> $enviado,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));

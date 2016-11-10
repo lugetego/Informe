@@ -58,6 +58,13 @@ class Academico
     protected $rfc;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="enviado", type="boolean", nullable=true)
+     */
+    private $enviado;
+
+    /**
      *
      * @ORM\OneToOne(targetEntity="InformeBundle\Entity\User", inversedBy="academico")
      */
@@ -567,5 +574,20 @@ class Academico
         return $this->slug;
     }
 
+    /**
+     * @return boolean
+     */
+    public function isEnviado()
+    {
+        return $this->enviado;
+    }
+
+    /**
+     * @param boolean $enviado
+     */
+    public function setEnviado($enviado)
+    {
+        $this->enviado = $enviado;
+    }
 
 }

@@ -29,8 +29,10 @@
                         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                             <i class="fa fa-tasks fa-1x" aria-hidden="true"></i> <strong>Proyectos</strong>
                         </a>
+                        {% if enviado != true  %}
                         <button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#proyectosnewModal">
                             <i class="fa fa-plus"></i> Nuevo </button>
+                        {% endif %}
                         <!-- Button trigger modal -->
                     </h4>
 
@@ -68,9 +70,11 @@
                                             <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ proyectomodalshow }}">
                                                 <i class="fa fa-search" aria-hidden="true"></i>
                                             </button>
-                                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ proyectomodaledit }}">
+                                            {% if enviado != true  %}
+                                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ proyectomodaledit }}" >
                                                 <i class="fa fa-edit" aria-hidden="true"></i>
                                             </button>
+                                            {% endif %}
                                         </p>
                                     </div>
                                 </div>

@@ -37,9 +37,11 @@ class InvestigacionController extends Controller
 
         $user = $this->get('security.context')->getToken()->getUser();
         $investigaciones = $user->getAcademico()->getInvestigaciones();
+        $enviado = $user->getAcademico()->isEnviado();
 
         return $this->render('investigacion/index.html.twig', array(
             'investigaciones' => $investigaciones,
+            'enviado'=>$enviado,
         ));
     }
 
@@ -55,6 +57,7 @@ class InvestigacionController extends Controller
 
         $user = $securityContext->getToken()->getUser();
         $academico = $user->getAcademico();
+
 
         $em = $this->getDoctrine()->getManager();
 
@@ -87,6 +90,11 @@ class InvestigacionController extends Controller
      */
     public function showAction(Investigacion $investigacion)
     {
+
+        $securityContext = $this->container->get('security.token_storage');
+        $user = $securityContext->getToken()->getUser();
+        $enviado = $user->getAcademico()->isEnviado();
+
         $deleteForm = $this->createDeleteForm($investigacion);
 
         // check for "view" access: calls all voters
@@ -95,6 +103,7 @@ class InvestigacionController extends Controller
 
         return $this->render('investigacion/show.html.twig', array(
             'investigacion' => $investigacion,
+            'enviado'=>$enviado,
             'delete_form' => $deleteForm->createView(),
         ));
     }

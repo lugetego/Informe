@@ -31,9 +31,12 @@ class EventosController extends Controller
 
         $user = $this->get('security.context')->getToken()->getUser();
         $eventos = $user->getAcademico()->getEventos();
+        $enviado = $user->getAcademico()->isEnviado();
+
 
         return $this->render('eventos/index.html.twig', array(
             'eventos' => $eventos,
+            'enviado'=>$enviado,
         ));
     }
 
@@ -77,6 +80,10 @@ class EventosController extends Controller
      */
     public function showAction(Eventos $evento)
     {
+        $securityContext = $this->container->get('security.token_storage');
+        $user = $securityContext->getToken()->getUser();
+        $enviado = $user->getAcademico()->isEnviado();
+
         $deleteForm = $this->createDeleteForm($evento);
 
         // check for "view" access: calls all voters
@@ -84,6 +91,7 @@ class EventosController extends Controller
 
         return $this->render('eventos/show.html.twig', array(
             'evento' => $evento,
+            'enviado' => $enviado,
             'delete_form' => $deleteForm->createView(),
         ));
     }

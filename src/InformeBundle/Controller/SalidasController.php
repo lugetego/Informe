@@ -31,9 +31,12 @@ class SalidasController extends Controller
 
         $user = $this->get('security.context')->getToken()->getUser();
         $salidas = $user->getAcademico()->getSalidas();
+        $enviado = $user->getAcademico()->isEnviado();
+
 
         return $this->render('salidas/index.html.twig', array(
             'salidas' => $salidas,
+            'enviado'=>$enviado,
         ));
 
 
@@ -79,6 +82,10 @@ class SalidasController extends Controller
      */
     public function showAction(Salidas $salida)
     {
+        $securityContext = $this->container->get('security.token_storage');
+        $user = $securityContext->getToken()->getUser();
+        $enviado = $user->getAcademico()->isEnviado();
+
         $deleteForm = $this->createDeleteForm($salida);
 
         // check for "view" access: calls all voters
@@ -87,6 +94,7 @@ class SalidasController extends Controller
 
         return $this->render('salidas/show.html.twig', array(
             'salida' => $salida,
+            'enviado'=>$enviado,
             'delete_form' => $deleteForm->createView(),
         ));
     }

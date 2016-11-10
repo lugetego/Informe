@@ -40,7 +40,11 @@
                         <p>Actividades de investigación</p>
                     </div>
                     <div>
-                        {{ form_widget(edit_form.investigacion,{'attr': {'class': 'form-control input-sm', 'placeholder':'Investigación', 'rows':'20'} } ) }}
+                        {% if enviado == false  %}
+                            {{ form_widget(edit_form.investigacion,{'attr': {'class': 'form-control input-sm', 'placeholder':'Investigación', 'rows':'20'} } ) }}
+                        {% else %}
+                            {{ form_widget(edit_form.investigacion,{'attr': {'class': 'form-control input-sm', 'placeholder':'Investigación', 'rows':'20', 'disabled':true } } ) }}
+                        {% endif %}
                     </div>
                     <div>{{ form_errors(edit_form.investigacion) }}</div>
                 </div>
@@ -52,7 +56,11 @@
                         <p>Estudiantes</p>
                     </div>
                     <div>
-                        {{ form_widget(edit_form.estudiantes,{'attr': {'class': 'form-control input-sm', 'placeholder':'Estudiantes', 'rows':'20'} } ) }}
+                        {% if enviado == false  %}
+                            {{ form_widget(edit_form.estudiantes,{'attr': {'class': 'form-control input-sm', 'placeholder':'Estudiantes', 'rows':'20'} } ) }}
+                        {% else %}
+                            {{ form_widget(edit_form.estudiantes,{'attr': {'class': 'form-control input-sm', 'placeholder':'Estudiantes', 'rows':'20', 'disabled':true } } ) }}
+                        {% endif %}
                     </div>
                     <div>{{ form_errors(edit_form.estudiantes) }}</div>
                 </div>
@@ -64,7 +72,11 @@
                         <p>Cursos o seminarios a impartir</p>
                     </div>
                     <div>
-                        {{ form_widget(edit_form.cursos,{'attr': {'class': 'form-control input-sm', 'placeholder':'Cursos', 'rows':'20'} } ) }}
+                        {% if enviado == false  %}
+                            {{ form_widget(edit_form.cursos,{'attr': {'class': 'form-control input-sm', 'placeholder':'Cursos', 'rows':'20'} } ) }}
+                        {% else %}
+                            {{ form_widget(edit_form.cursos,{'attr': {'class': 'form-control input-sm', 'placeholder':'Cursos', 'rows':'20', 'disabled':true } } ) }}
+                        {% endif %}
                     </div>
                     <div>{{ form_errors(edit_form.cursos) }}</div>
                 </div>
@@ -76,7 +88,11 @@
                         <p>Proyectos de investigación</p>
                     </div>
                     <div>
-                        {{ form_widget(edit_form.proyectos,{'attr': {'class': 'form-control input-sm', 'placeholder':'Proyectos de investigación','rows':'20'} } ) }}
+                        {% if enviado == false  %}
+                            {{ form_widget(edit_form.proyectos,{'attr': {'class': 'form-control input-sm', 'placeholder':'Proyectos de investigación','rows':'20'} } ) }}
+                        {% else %}
+                            {{ form_widget(edit_form.proyectos,{'attr': {'class': 'form-control input-sm', 'placeholder':'Proyectos de investigación','rows':'20', 'disabled':true } } ) }}
+                        {% endif %}
                     </div>
                     <div>{{ form_errors(edit_form.proyectos) }}</div>
                 </div>
@@ -88,7 +104,11 @@
                         <p>Eventos</p>
                     </div>
                     <div>
-                        {{ form_widget(edit_form.eventos,{'attr': {'class': 'form-control input-sm', 'placeholder':'Eventos', 'rows':'20'} } ) }}
+                        {% if enviado == false  %}
+                            {{ form_widget(edit_form.eventos,{'attr': {'class': 'form-control input-sm', 'placeholder':'Eventos', 'rows':'20'} } ) }}
+                        {% else %}
+                            {{ form_widget(edit_form.eventos,{'attr': {'class': 'form-control input-sm', 'placeholder':'Eventos', 'rows':'20', 'disabled':true } } ) }}
+                        {% endif %}
                     </div>
                     <div>{{ form_errors(edit_form.eventos) }}</div>
                 </div>
@@ -100,7 +120,11 @@
                         <p>Licencias y comisiones</p>
                     </div>
                     <div>
-                        {{ form_widget(edit_form.salidas,{'attr': {'class': 'form-control input-sm', 'placeholder':'Licencias y comisiones','rows':'20'} } ) }}
+                        {% if enviado == false  %}
+                            {{ form_widget(edit_form.salidas,{'attr': {'class': 'form-control input-sm', 'placeholder':'Licencias y comisiones','rows':'20'} } ) }}
+                        {% else %}
+                            {{ form_widget(edit_form.salidas,{'attr': {'class': 'form-control input-sm', 'placeholder':'Licencias y comisiones','rows':'20', 'disabled':true } } ) }}
+                        {% endif %}
                     </div>
                     <div>{{ form_errors(edit_form.salidas) }}</div>
                 </div>
@@ -109,16 +133,13 @@
 
     </div>
 
-
-    <div class="row">
-        <div class="col-lg-7 col-lg-offset-5">
-            <input type="submit" value="Guardar"  class="btn btn-primary"/>
-            {{ form_end(edit_form) }}
+    {% if enviado == false  %}
+        <div class="row">
+            <div class="col-lg-7 col-lg-offset-5">
+                <input type="submit" value="Guardar"  class="btn btn-primary"/>
+                {{ form_end(edit_form) }}
+            </div>
         </div>
-    </div>
-
-
-
-
+    {% endif %}
 
 {% endblock %}

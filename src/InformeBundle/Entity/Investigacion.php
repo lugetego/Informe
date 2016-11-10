@@ -105,7 +105,7 @@ class Investigacion
     /**
      * @var string
      *
-     * @ORM\Column(name="proyectos", type="string", length=255)
+     * @ORM\Column(name="proyectos", type="string", length=255, nullable=true)
      */
     private $proyectos;
 

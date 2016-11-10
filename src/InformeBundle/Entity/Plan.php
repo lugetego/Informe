@@ -72,13 +72,6 @@ class Plan
     private $salidas;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="enviado", type="boolean", nullable=true)
-     */
-    private $enviado;
-
-    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $created;
@@ -317,19 +310,4 @@ class Plan
         return $this->academico;
     }
 
-    /**
-     * @return boolean
-     */
-    public function isEnviado()
-    {
-        return $this->enviado;
-    }
-
-    /**
-     * @param boolean $enviado
-     */
-    public function setEnviado($enviado)
-    {
-        $this->enviado = $enviado;
-    }
 }

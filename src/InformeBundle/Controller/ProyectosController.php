@@ -31,9 +31,12 @@ class ProyectosController extends Controller
 
         $user = $this->get('security.context')->getToken()->getUser();
         $proyectos = $user->getAcademico()->getProyectos();
+        $enviado = $user->getAcademico()->isEnviado();
+
 
         return $this->render('proyectos/index.html.twig', array(
             'proyectos' => $proyectos,
+            'enviado'=>$enviado,
         ));
     }
 
@@ -77,6 +80,10 @@ class ProyectosController extends Controller
      */
     public function showAction(Proyectos $proyecto)
     {
+        $securityContext = $this->container->get('security.token_storage');
+        $user = $securityContext->getToken()->getUser();
+        $enviado = $user->getAcademico()->isEnviado();
+
         $deleteForm = $this->createDeleteForm($proyecto);
 
         // check for "view" access: calls all voters
@@ -84,6 +91,7 @@ class ProyectosController extends Controller
 
         return $this->render('proyectos/show.html.twig', array(
             'proyecto' => $proyecto,
+            'enviado'=>$enviado,
             'delete_form' => $deleteForm->createView(),
         ));
     }

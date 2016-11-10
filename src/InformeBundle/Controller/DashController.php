@@ -47,6 +47,8 @@ class DashController extends Controller
             $eventos = $user->getAcademico()->getEventos();
             $salidas = $user->getAcademico()->getSalidas();
             $planes = $user->getAcademico()->getPlanes();
+            $enviado = $user->getAcademico()->isEnviado();
+
 
             return $this->render('dash/index.html.twig', array(
                 'investigaciones'=> $investigaciones,
@@ -57,6 +59,8 @@ class DashController extends Controller
                 'salidas'=>$salidas,
                 'planes'=>$planes,
                 'user'=>$user,
+                'enviado'=>$enviado
+
             ));
         }
 
@@ -113,16 +117,20 @@ class DashController extends Controller
     /**
      * Envío informe y plan
      *
-     * @Route("/send/{id}", name="informe_send")
+     * @Route("/send", name="informe_send")
      */
-    public function sendAction($id)
+    public function sendAction()
     {
 
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
         }
+
+        $user = $this->get('security.context')->getToken()->getUser();
+        $id = $user->getAcademico()->getId();
+
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('InformeBundle:Plan')->find($id);
+        $entity = $em->getRepository('InformeBundle:Academico')->find($id);
         $entity->setEnviado(true);
         $em->persist($entity);
         $em->flush();
