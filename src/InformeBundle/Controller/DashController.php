@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use InformeBundle\Entity\Academico;
+use InformeBundle\Entity\User;
 use InformeBundle\Entity\Plan;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -134,6 +135,18 @@ class DashController extends Controller
         $entity->setEnviado(true);
         $em->persist($entity);
         $em->flush();
+
+        // Obtiene correo y msg de la forma de contacto
+        $mailer = $this->get('mailer');
+
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Informe y plan de trabajo')
+            ->setFrom('webmaster@matmor.unam.mx')
+            ->setTo(array($user->getEmail() ))
+            ->setBcc(array('gerardo@matmor.unam.mx'))
+            ->setBody($this->renderView('dash/mail.txt.twig', array('entity' => $entity)))
+        ;
+        $mailer->send($message);
 
         return $this->redirectToRoute('dashboard');
 

@@ -376,7 +376,7 @@
                 {% else %}
                     <div class="panel-body">
                         <div class="col-lg-12 col-md-2 text-center">
-                            <p class="text-justify alert alert-info">Al momento de enviar tu informe y plan de trabajo recibirás un acuse de recibo a tu correo <em><strong>{{ user~'@matmor.unam.mx' }}</strong></em>.<br>
+                            <p class="text-justify alert alert-info">Al momento de enviar tu informe y plan de trabajo recibirás un acuse de recibo a tu correo <em><strong>{{ app.user.email }}</strong></em>.<br>
                             Una vez enviada la información no será posible realizar modificaciones sobre el informe o plan de trabajo.
                             </p>
                             {% if planid is defined %}
