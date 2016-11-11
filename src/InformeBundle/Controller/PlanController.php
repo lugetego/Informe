@@ -79,12 +79,20 @@ class PlanController extends Controller
      */
     public function showAction(Plan $plan)
     {
+
+        $securityContext = $this->container->get('security.token_storage');
+
+        $user = $securityContext->getToken()->getUser();
+        $academico = $user->getAcademico();
+
+
         $deleteForm = $this->createDeleteForm($plan);
 
         // check for "view" access: calls all voters
         $this->denyAccessUnlessGranted('view', $plan);
 
         return $this->render('plan/show.html.twig', array(
+            'academico'=>$academico,
             'plan' => $plan,
             'delete_form' => $deleteForm->createView(),
         ));

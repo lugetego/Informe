@@ -1,52 +1,57 @@
-{% extends 'dash/index.html.twig' %}
-
 {% block wrapper %}
-    <h1>Plan</h1>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ plan.id }}</td>
-            </tr>
-            <tr>
-                <th>Investigacion</th>
-                <td>{{ plan.investigacion }}</td>
-            </tr>
-            <tr>
-                <th>Estudiantes</th>
-                <td>{{ plan.estudiantes }}</td>
-            </tr>
-            <tr>
-                <th>Cursos</th>
-                <td>{{ plan.cursos }}</td>
-            </tr>
-            <tr>
-                <th>Proyectos</th>
-                <td>{{ plan.proyectos }}</td>
-            </tr>
-            <tr>
-                <th>Eventos</th>
-                <td>{{ plan.eventos }}</td>
-            </tr>
-            <tr>
-                <th>Salidas</th>
-                <td>{{ plan.salidas }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="row page-header">
+        <div class="col-xs-6">
+            <h3>Plan de trabajo 2017</h3>
+            <p> <strong>Académico:</strong> {{ academico.nombre }} {{ academico.apellido }}</p>
+        </div>
+        <div class="col-xs-6">
+            <p class="text-right"><img class="right" src="{{ asset('img/ccm.png', absolute=true) }}" width="180px" height="60px" /></p>
+        </div>
+    </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('plan_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('plan_edit', { 'id': plan.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <div class="container-fluid">
+
+    <strong>Investigación</strong><br>
+    {% if plan.investigacion |length == 0 %}
+        No se ha registrado información<br><br>
+    {% else %}
+        {{ plan.investigacion }}<br><br>
+    {% endif %}
+
+    <strong>Estudiantes</strong><br>
+    {% if plan.estudiantes |length == 0 %}
+        No se ha registrado información<br><br>
+    {% else %}
+        {{ plan.estudiantes }}<br><br>
+    {% endif %}
+
+    <strong>Cursos y seminarios</strong><br>
+    {% if plan.cursos |length == 0 %}
+        No se ha registrado información<br><br>
+    {% else %}
+        {{ plan.cursos }}<br><br>
+    {% endif %}
+
+    <strong>Proyectos</strong><br>
+    {% if plan.proyectos |length == 0 %}
+        No se ha registrado información<br><br>
+    {% else %}
+        {{ plan.proyectos }}<br><br>
+    {% endif %}
+
+    <strong>Eventos</strong><br>
+    {% if plan.eventos |length == 0 %}
+        No se ha registrado información<br><br>
+    {% else %}
+        {{ plan.eventos }}<br><br>
+    {% endif %}
+
+    <strong>Salidas</strong><br>
+    {% if plan.salidas |length == 0 %}
+        No se ha registrado información<br><br>
+    {% else %}
+        {{ plan.salidas }}<br><br>
+    {% endif %}
+
 {% endblock %}

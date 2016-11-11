@@ -41,17 +41,19 @@ class DashController extends Controller
         }
         else {
             $user = $this->get('security.context')->getToken()->getUser();
-            $investigaciones = $user->getAcademico()->getInvestigaciones();
-            $estudiantes = $user->getAcademico()->getEstudiantes();
-            $cursos = $user->getAcademico()->getCursos();
-            $proyectos = $user->getAcademico()->getProyectos();
-            $eventos = $user->getAcademico()->getEventos();
-            $salidas = $user->getAcademico()->getSalidas();
-            $planes = $user->getAcademico()->getPlanes();
-            $enviado = $user->getAcademico()->isEnviado();
+            $academico = $user->getAcademico();
+            $investigaciones = $academico->getInvestigaciones();
+            $estudiantes = $academico->getEstudiantes();
+            $cursos = $academico->getCursos();
+            $proyectos = $academico->getProyectos();
+            $eventos = $academico->getEventos();
+            $salidas = $academico->getSalidas();
+            $planes = $academico->getPlanes();
+            $enviado = $academico->isEnviado();
 
 
             return $this->render('dash/index.html.twig', array(
+                'academico'=> $academico,
                 'investigaciones'=> $investigaciones,
                 'estudiantes'=>$estudiantes,
                 'cursos'=>$cursos,

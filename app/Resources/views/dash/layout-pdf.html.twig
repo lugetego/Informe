@@ -34,74 +34,56 @@
             </div>
 
 
-            <strong>Investigación</strong><br>
-            {% if investigaciones|length == 0 %}
-                No se ha registrado información<br><br>
-            {% else %}
+            {% if investigaciones|length > 0 %}
+                <strong>Investigación</strong><br>
+
                 <ol>
                     {% for investigacion in investigaciones %}
                         <li>{{ investigacion.titulo |title }},<em> {{ investigacion.autores }}</em>, <small>{{ investigacion.tipo|title }}</small>, {{ investigacion.year  }}
                             Vol. {{ investigacion.volumen }}, {{ investigacion.pags }} págs., ISSN: {{ investigacion.issn  }}</li>
                     {% endfor %}
                 </ol>
+
             {% endif %}
 
-            <br><strong>Estudiantes</strong><br>
-            {% if estudiantes|length == 0 %}
-                No se ha registrado información<br><br>
-            {% else %}
+            {% if estudiantes|length > 0 %}
+                <strong>Estudiantes</strong><br>
                 <ol>
                     {% for estudiante in estudiantes %}
-                        <li>{{ estudiante.alumno |title }}, <small>{{ estudiante.programa|title }}</small>,<em> {{ estudiante.tesis }}</em>
-                            <br>
-                        </li>
+                        <li>{{ estudiante.alumno |title }}, <small>{{ estudiante.programa|title }}</small>,<em> {{ estudiante.tesis }}</em></li>
                     {% endfor %}
                 </ol>
             {% endif %}
 
-            <strong>Cursos y seminarios</strong><br>
-            {% if cursos|length == 0 %}
-                No se ha registrado información<br><br>
-            {% else %}
+            {% if cursos|length > 0 %}
+                <strong>Cursos y seminarios</strong><br>
                 <ol>
                     {% for curso in cursos %}
-                        <li>{{ curso.nombre|title }}, <small>{{ curso.tipo|title }}</small>,<em> {{ curso.nivel }}, {{ curso.horas }}, {{ curso.lugar }}</em>
-
-                        </li>
+                        <li>{{ curso.nombre|title }}, <small>{{ curso.tipo|title }}</small>,<em> {{ curso.nivel }}, {{ curso.horas }}, {{ curso.lugar }}</em></li>
                     {% endfor %}
                 </ol>
             {% endif %}
 
-            <strong>Proyectos</strong><br>
-            {% if proyectos|length == 0 %}
-                No se ha registrado información<br><br>
-            {% else %}
+            {% if proyectos|length > 0 %}
+                <strong>Proyectos</strong><br>
                 <ol>
                     {% for proyecto in proyectos %}
-                        <li>{{ proyecto.nombre|title }}, <small>{{ proyecto.tipo|title }}</small>,<em> {{ proyecto.numero }}</em>
-
-                        </li>
+                        <li>{{ proyecto.nombre|title }}, <small>{{ proyecto.tipo|title }}</small>,<em> {{ proyecto.numero }}</em></li>
                     {% endfor %}
                 </ol>
             {% endif %}
 
-            <strong>Eventos</strong><br>
-            {% if eventos|length == 0 %}
-                No se ha registrado información<br><br>
-            {% else %}
+            {% if eventos|length > 0 %}
+                <strong>Eventos</strong><br>
                 <ol>
                     {% for evento in eventos %}
-                        <li>{{ evento.nombre|title }}, <small>{{ evento.tipo|title }}</small>,<em> {{ evento.institucion }}</em>, {{ evento.actividad }}, {{ evento.institucion }}, {{ evento.pais }}
-
-                        </li>
+                        <li>{{ evento.nombre|title }}, <small>{{ evento.tipo|title }}</small>,<em> {{ evento.institucion }}</em>, {{ evento.actividad }}, {{ evento.institucion }}, {{ evento.pais }} </li>
                     {% endfor %}
                 </ol>
             {% endif %}
 
-            <strong>Licencias y comisiones</strong><br>
-            {% if salidas|length == 0 %}
-                No se ha registrado información<br><br>
-            {% else %}
+            {% if salidas|length > 0 %}
+                <strong>Licencias y comisiones</strong><br>
                 <ol>
                     {% for salida in salidas %}
                         <li>{{ salida.pais|title }}, <small>{{ salida.tipo|title }}</small>,<em> {{ salida.universidad }}</em>, {{ salida.actividad }},
