@@ -83,6 +83,7 @@ class DashController extends Controller
         }
 
         $user = $this->get('security.context')->getToken()->getUser();
+        $academico = $user->getAcademico();
         $investigaciones = $user->getAcademico()->getInvestigaciones();
         $estudiantes = $user->getAcademico()->getEstudiantes();
         $cursos = $user->getAcademico()->getCursos();
@@ -92,14 +93,14 @@ class DashController extends Controller
         $planes = $user->getAcademico()->getPlanes();
 
         $html = $this->renderView('dash/layout-pdf.html.twig', array(
-            'user'=>$user->getAcademico()->getNombre(),
+            'academico'=>$academico,
             'investigaciones'  => $investigaciones,
             'estudiantes'=> $estudiantes,
             'cursos'=>$cursos,
             'proyectos'=>$proyectos,
             'eventos'=>$eventos,
             'salidas'=>$salidas,
-            'planes'=>$planes
+            'planes'=>$planes,
         ));
 
         $filename = sprintf('Informe-'.$user.'%s.pdf', date('Y-m-d'));
@@ -110,6 +111,7 @@ class DashController extends Controller
             [
                 'Content-Type'        => 'application/pdf',
                 'Content-Disposition' => sprintf('attachment; filename="%s"', $filename),
+
             ]
         );
     }
