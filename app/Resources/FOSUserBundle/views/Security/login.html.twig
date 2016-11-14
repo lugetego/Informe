@@ -37,9 +37,12 @@
                         <input class="form-control" placeholder="Contraseña" type="password" id="password" name="_password" required="required" />
                     </div>
 
-                    <button class="btn btn-lg btn-success btn-block" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}">Login</button>
+                    <button class="btn btn-lg btn-success btn-block" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}">Login</button>
                 </fieldset>
             </form>
+
+            <br>
+            <p class="text-right"> <a href="{{ path('fos_user_resetting_request') }}">Recordar contraseña</a></p>
 
         {% endif %}
 

@@ -1,5 +1,15 @@
 {% extends 'base.html.twig' %}
 
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block sidebar %}
+
+
+    <li>
+        <a href="{{ path('dashboard') }}"><i class="fa fa-dashboard fa-fw"></i> Inicio</a>
+    </li>
+
+{% endblock %}
 
 {% block wrapper %}
 
@@ -11,30 +21,17 @@
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
                         {% block paneltitle %}
-                            <h3 class="panel-title">Centro de Ciencias Matemáticas</h3>
+                            <h3 class="panel-title">Información de usuario</h3>
                         {% endblock %}
                     </div>
                     <div class="panel-body">
                         {% block content %}
 
-                            {#
-                                                    <div>
-                                                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                                            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
-                                                            <a href="{{ path('fos_user_security_logout') }}">
-                                                                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                                                            </a>
-                                                        {% else %}
-                                                            <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-                                                        {% endif %}
-                                                    </div>
-                            #}
-
                             {% if app.request.hasPreviousSession %}
                                 {% for type, messages in app.session.flashbag.all() %}
                                     {% for message in messages %}
-                                        <div class="flash-{{ type }}">
-                                            {{ message | trans({}, 'FOSUserBundle') }}
+                                        <div class="flash-{{ type }} alert alert-success ">
+                                            {{ message | trans({}, 'FOSUserBundle') }}<br>
                                         </div>
                                     {% endfor %}
                                 {% endfor %}
@@ -43,7 +40,6 @@
                             <div>
                                 {% block fos_user_content %}
 
-                                    {% trans_default_domain 'FOSUserBundle' %}
 
                                 {% endblock fos_user_content %}
                             </div>
@@ -56,6 +52,3 @@
 
 {% endblock %}
 
-            {% block sidebar %}
-
-            {% endblock %}
