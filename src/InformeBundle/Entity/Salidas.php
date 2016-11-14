@@ -67,7 +67,7 @@ class Salidas
     /**
      * @var string
      *
-     * @ORM\Column(name="profesor", type="string", length=255)
+     * @ORM\Column(name="profesor", type="string", length=255, nullable=true)
      */
     private $profesor;
 
@@ -88,7 +88,7 @@ class Salidas
     /**
      * @var string
      *
-     * @ORM\Column(name="proyecto", type="string", length=255)
+     * @ORM\Column(name="proyecto", type="string", length=255, nullable=true)
      */
     private $proyecto;
 
@@ -109,14 +109,14 @@ class Salidas
     /**
      * @var string
      *
-     * @ORM\Column(name="trabajo", type="string", length=255)
+     * @ORM\Column(name="trabajo", type="string", length=500, nullable=true)
      */
     private $trabajo;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="observaciones", type="string", length=255, nullable=true)
+     * @ORM\Column(name="observaciones", type="string", length=1000, nullable=true)
      */
     private $observaciones;
 

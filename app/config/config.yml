@@ -72,6 +72,10 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: InformeBundle\Entity\User
+    from_email:
+            address:        webmaster@matmor.unam.mx
+            sender_name:    Centro de Ciencias Matemáticas
+
 
 knp_snappy:
     pdf:

@@ -11,7 +11,7 @@
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
                         {% block paneltitle %}
-                            <h3 class="panel-title">SIA</h3>
+                            <h3 class="panel-title">Centro de Ciencias Matemáticas</h3>
                         {% endblock %}
                     </div>
                     <div class="panel-body">
@@ -30,16 +30,21 @@
                                                     </div>
                             #}
 
-                            {% for type, messages in app.session.flashBag.all %}
-                                {% for message in messages %}
-                                    <div class="{{ type }}">
-                                        {{ message|trans({}, 'FOSUserBundle') }}
-                                    </div>
+                            {% if app.request.hasPreviousSession %}
+                                {% for type, messages in app.session.flashbag.all() %}
+                                    {% for message in messages %}
+                                        <div class="flash-{{ type }}">
+                                            {{ message | trans({}, 'FOSUserBundle') }}
+                                        </div>
+                                    {% endfor %}
                                 {% endfor %}
-                            {% endfor %}
+                            {% endif %}
 
                             <div>
                                 {% block fos_user_content %}
+
+                                    {% trans_default_domain 'FOSUserBundle' %}
+
                                 {% endblock fos_user_content %}
                             </div>
                         {% endblock %}
