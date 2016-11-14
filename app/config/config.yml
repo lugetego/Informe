@@ -22,7 +22,7 @@ framework:
     #serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
-    default_locale:  "%locale%"
+    default_locale:  es
     trusted_hosts:   ~
     trusted_proxies: ~
     session:
@@ -88,7 +88,7 @@ knp_snappy:
         options:    []
 
 stof_doctrine_extensions:
-    default_locale: en_US
+    default_locale: es_MX
     orm:
         default:
             timestampable: true
@@ -99,3 +99,11 @@ services:
         class: Twig_Extensions_Extension_Text
         tags:
              - { name: twig.extension }
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+    twig.extension.date:
+            class: Twig_Extensions_Extension_Date
+            tags:
+                - { name: twig.extension }

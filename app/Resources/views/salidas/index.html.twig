@@ -1,5 +1,14 @@
 {% extends 'dash/index.html.twig' %}
 
+{% block css %}
+
+    {{ parent() }}
+
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.6/select2-bootstrap.min.css">
+
+{% endblock %}
+
 {% block wrapper %}
     <div class="row">
         <div class="col-lg-12">
@@ -13,7 +22,7 @@
     <div class="row">
 
         <!-- Salidas -->
-        <div class="col-lg-8">
+        <div class="col-lg-10">
             <ol class="breadcrumb">
                 <li><a href="{{ path('dashboard') }}">Inicio</a></li>
                 <li class="active">Informe</li>
@@ -48,7 +57,6 @@
                     </div>
                 </div>
 
-
                 <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 
                     <ul class="list-group">
@@ -60,10 +68,11 @@
                             <li class="list-group-item">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <i class="fa fa fa-car fa-2x" aria-hidden="true"></i>
+                                        <div class="page-header"><h4>{{ salida.universidad|title }}<small><strong> - {{ salida.inicio|localizeddate('long', 'none')  }}</small></strong></h4></div>
+                                        <p>{{ salida.actividad }}</p>
+                                        <i class="fa fa fa-plane " aria-hidden="true"></i>
                                                     <span class="user-info">
                                                     <strong>{{ salida.pais|title }}</strong>
-                                                        <em>{{ salida.universidad|title }} </em>,
                                                         <span class="label label-default"><small>{{ salida.tipo |title}}</small></span></span>
                                         <p class="pull-right">
                                             <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ salidamodalshow }}">
@@ -116,5 +125,28 @@
         </div>
     </div>
     <!-- Fin Salidas -->
+
+{% endblock %}
+
+
+{% block javascript %}
+
+    {{ parent() }}
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.js"></script>
+
+    <script type="text/javascript">
+        $('.select2-multiple').select2( {
+            theme: "bootstrap",
+            placeholder: "Propositos",
+            maximumSelectionSize: 4,
+            containerCssClass: ':all:',
+            width: '100%'
+        } );
+
+        $( ":checkbox" ).on( "click", function() {
+            $( this ).parent().nextAll( "select" ).prop( "disabled", !this.checked );
+        });
+    </script>
 
 {% endblock %}
