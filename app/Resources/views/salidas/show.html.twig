@@ -1,7 +1,25 @@
 <div class="panel panel-default">
     <div class="panel-body">
 
-        <div class="row">
+        <p><h3>{{ salida.universidad }}</h3></p>
+        <p>
+            <strong>{{  salida.ciudad }}, {{ salida.pais }}</strong> <i class="fa fa-calendar"></i> del {{ salida.inicio | localizeddate('medium', 'none', null, null, "d LLLL") }} al {{ salida.fin| localizeddate('long', 'none') }}
+        </p>
+        <div class="well">{{ salida.actividad }}</div>
+
+        {% if salida.trabajo %}
+            <p><h4>{{ salida.trabajo }}</h4></p>
+        {% endif %}
+
+        {% if salida.observaciones %}
+            <p>{{ salida.observaciones }}</p>
+        {% endif %}
+
+        {% for proposito in salida.propositos %}
+            <span class="label label-default">{{ proposito }}</span>
+        {% endfor %}
+
+{#        <div class="row">
             <div class="col-md-4">
                 <dl>
                     <dt>País</dt>
@@ -41,27 +59,10 @@
             <div class="col-md-4">
                 <dl>
                     <dt>Propósito</dt>
-                    <dd>{% for proposito in salida.propositos %}{{ proposito }}{% endfor %}</dd>
+                    <dd>{% for proposito in salida.propositos %}{{ proposito }}, {% endfor %}</dd>
                 </dl>
             </div>
-            <div class="col-md-4">
-                <dl>
-                    <dt>Proyecto</dt>
-                    <dd>{{ salida.proyecto }}</dd>
-                </dl>
-            </div>
-            <div class="col-md-4">
-                <dl>
-                    <dt>Inicio</dt>
-                    <dd>{% if salida.inicio %}{{ salida.inicio|date('Y-m-d') }}{% endif %}</dd>
-                </dl>
-            </div>
-            <div class="col-md-4">
-                <dl>
-                    <dt>Fin</dt>
-                    <dd>{% if salida.fin %}{{ salida.fin|date('Y-m-d') }}{% endif %}</dd>
-                </dl>
-            </div>
+
             <div class="col-md-12">
                 <dl>
                     <dt>Trabajo</dt>
@@ -74,8 +75,8 @@
                     <dd>{{ salida.observaciones }}</dd>
                 </dl>
             </div>
+        </div>#}
 
-        </div>
     </div>
 </div>
 

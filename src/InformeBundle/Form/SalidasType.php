@@ -45,7 +45,7 @@ class SalidasType extends AbstractType
                 'label'=>'Actividad',
                 'required'=>false,
             ))
-            ->add('propositos','choice',array(
+            ->add('propositos','Symfony\Component\Form\Extension\Core\Type\ChoiceType',array(
                 'choices'   =>  $this->getPropositoChoice(),
                 'multiple'=>true,
                 'required'=>false,
@@ -60,7 +60,7 @@ class SalidasType extends AbstractType
                     'year' => 'Año',
                     'month' => 'Mes',
                     'day' => 'Día'),
-                'years'=> range(2015,2015),
+                'years'=> range(2016,2016),
                 'label'=>'*Inicio',
                 'required'=>true,
 
@@ -70,7 +70,7 @@ class SalidasType extends AbstractType
                     'year' => 'Año',
                     'month' => 'Mes',
                     'day' => 'Día'),
-                'years'=> range(2015,2015),
+                'years'=> range(2016,2016),
                 'label'=>'*Fin',
                 'required'=>true,
             ))
