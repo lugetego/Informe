@@ -62,7 +62,7 @@ class PlanController extends Controller
             $em->persist($plan);
             $em->flush();
 
-            return $this->redirectToRoute('plan_show', array('id' => $plan->getId()));
+            return $this->redirectToRoute('dashboard');
         }
 
         return $this->render('plan/new.html.twig', array(
