@@ -13,3 +13,13 @@ li:hover {
     color: #666666;
     font-size: 15px;
 }
+.counter {
+    background-color: #337ab7;
+    border-radius: 20px;
+    color:  #ffffff;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    padding: 2px 5px;
+}

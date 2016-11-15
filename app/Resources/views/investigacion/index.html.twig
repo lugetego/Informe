@@ -12,7 +12,7 @@
 <div class="row">
 
     <!-- Investigación -->
-    <div class="col-lg-8">
+    <div class="col-lg-9">
 
         <ol class="breadcrumb">
             <li><a href="{{ path('dashboard') }}">Inicio</a></li>
@@ -60,12 +60,9 @@
                             <li class="list-group-item">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <i class="fa fa-file-o fa-2x" aria-hidden="true"></i>
-                                                    <span class="user-info">
-                                                    <strong>{{ investigacion.titulo|title }}</strong>
 
-                                                        <em>{{ investigacion.autores }}</em>,  {{ investigacion.pags }} págs.,
-                                                        {{ investigacion.year }}, <span class="label label-default"><small>{{ investigacion.tipo|title  }}</small></span></span>
+                                        <div class="page-header"><h4><i class="fa fa-file-o" aria-hidden="true"></i> {{ investigacion.titulo }}<small> {{ investigacion.tipo|title  }}</small></h4></div>
+                                        <em>{{ investigacion.autores }}</em>
                                         <p class="pull-right">
                                             <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ modalshow }}">
                                                 <i class="fa fa-search" aria-hidden="true"></i>
@@ -75,7 +72,12 @@
                                                     <i class="fa fa-edit" aria-hidden="true"></i>
                                                 </button>
                                             {% endif %}
-
+                                        </p>
+                                        <p>
+                                            <strong>{{ investigacion.revista }}</strong>
+                                            Volume {{ investigacion.volumen }}, {{ investigacion.year }}, Issue {{ investigacion.numero }} <br>
+                                            ISSN: {{ investigacion.issn }}
+                                            {# Volume 25, Issue 8, 1 July 2016, Article number 1642011 #}
                                         </p>
                                     </div>
                                 </div>

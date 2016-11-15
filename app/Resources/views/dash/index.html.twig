@@ -57,10 +57,7 @@
         </div>
     </div>
 
-
     <div class="row">
-
-
         <div class="col-lg-6 col-md-6">
 
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -76,65 +73,62 @@
                         <div class="panel-body">
                             <div class="row">
 
-                                <div class="col-lg-2 col-md-2 text-center">
+                                <div class="col-lg-4 col-md-4 text-center">
                                     <dl>
                                         <dt><i class="fa fa-bar-chart fa-3x" aria-hidden="true"></i></dt>
-                                        <dd><a href="{{ path('investigacion_index',{'investigaciones':investigaciones} ) }} "> <h5>Investigación</h5></a></dd>
+                                        <dd><a href="{{ path('investigacion_index',{'investigaciones':investigaciones} ) }} ">Investigación <span class="counter">{{ investigaciones|length }}</span></a></dd>
                                     </dl>
                                 </div>
 
-                                <div class="col-lg-2 col-md-2 text-center">
+                                <div class="col-lg-4 col-md-4 text-center">
                                     <dl>
                                         <dt><i class="fa fa-graduation-cap fa-3x" aria-hidden="true"></i></dt>
-                                        <dd><a href="{{ path('estudiantes_index',{'estudiantes':estudiantes} ) }} "> <h5>Estudiantes</h5></a></dd>
+                                        <dd><a href="{{ path('estudiantes_index',{'estudiantes':estudiantes} ) }} ">Estudiantes <span class="counter">{{ estudiantes|length }}</span></a></dd>
                                     </dl>
                                 </div>
 
-                                <div class="col-lg-2 col-md-2 text-center">
+                                <div class="col-lg-4 col-md-4 text-center">
                                     <dl>
                                         <dt><i class="fa fa-university fa-3x" aria-hidden="true"></i></dt>
-                                        <dd><a href="{{ path('cursos_index',{'cursos':cursos} ) }} "> <h5>Cursos y seminarios</h5></a></dd>
+                                        <dd><a href="{{ path('cursos_index',{'cursos':cursos} ) }} ">Cursos y seminarios <span class="counter">{{ cursos|length }}</span></a></dd>
                                     </dl>
                                 </div>
 
-                                <div class="col-lg-2 col-md-2 text-center">
+                                <div class="col-lg-4 col-md-4 text-center">
                                     <dl>
                                         <dt><i class="fa fa-tasks fa-3x" aria-hidden="true"></i></dt>
-                                        <dd><a href="{{ path('proyectos_index',{'proyectos':proyectos} ) }} "> <h5>Proyectos</h5></a></dd>
+                                        <dd><a href="{{ path('proyectos_index',{'proyectos':proyectos} ) }} ">Proyectos <span class="counter">{{ proyectos|length }}</span></a></dd>
                                     </dl>
                                 </div>
 
-                                <div class="col-lg-2 col-md-2 text-center">
+                                <div class="col-lg-4 col-md-4 text-center">
                                     <dl>
                                         <dt><i class="fa fa-calendar fa-3x" aria-hidden="true"></i></dt>
-                                        <dd><a href="{{ path('eventos_index',{'eventos':eventos} ) }} "> <h5>Eventos</h5></a></dd>
+                                        <dd><a href="{{ path('eventos_index',{'eventos':eventos} ) }} ">Eventos <span class="counter">{{ eventos|length }}</span></a></dd>
                                     </dl>
                                 </div>
-
-                                <div class="col-lg-2 col-md-2 text-center">
+                                <div class="col-lg-4 col-md-4 text-center">
                                     <dl>
                                         <dt><i class="fa fa-globe fa-3x" aria-hidden="true"></i></dt>
-                                        <dd><a href="{{ path('salidas_index',{'salidas':salidas} ) }} "> <h5>Licencias y Comisiones</h5></a></dd>
+                                        <dd><a href="{{ path('salidas_index',{'salidas':salidas} ) }} ">Licencias y Comisiones <span class="counter">{{ salidas|length }}</span></a></dd>
                                     </dl>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-lg-2 col-md-2 text-center">
-                                        <dl>
-                                            <dt><i class="fa fa-print fa-3x" aria-hidden="true"></i></dt>
-                                            <dd> <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">Vista previa</button> </dd>
-                                        </dl>
-                                    </div>
-
-                                    <div class="col-lg-2 col-md-2 text-center">
-                                        <dl>
-                                            <dt><i class="fa fa-file-pdf-o fa-3x" aria-hidden="true"></i></dt>
-                                            <dd><a href="{{ path('informe_pdf') }} "> <h5>Descargar</h5></a></dd>
-                                        </dl>
-
-                                    </div>
+{#
+                            </div>
+                            <div class="row">
+#}
+                                <div class="col-lg-4 col-md-4 text-center">
+                                    <dl>
+                                        <dt><i class="fa fa-print fa-3x" aria-hidden="true"></i></dt>
+                                        <dd> <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">Vista previa</button> </dd>
+                                    </dl>
                                 </div>
-
+                                <div class="col-lg-4 col-md-4 text-center">
+                                    <dl>
+                                        <dt><i class="fa fa-file-pdf-o fa-3x" aria-hidden="true"></i></dt>
+                                        <dd><a href="{{ path('informe_pdf') }} "> <h5>Descargar</h5></a></dd>
+                                    </dl>
+                                </div>
                             </div>
 
                         </div>
@@ -151,7 +145,7 @@
                     <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-lg-2 col-md-2 text-center">
+                                <div class="col-lg-4 col-md-4 text-center">
                                     <dl>
                                         {% if planes|length == 0 %}
                                             <dt><i class="fa fa-plus fa-3x" aria-hidden="true"></i></dt>
@@ -171,7 +165,7 @@
                                     </dl>
                                 </div>
 
-                                <div class="col-lg-2 col-md-2 text-center">
+                                <div class="col-lg-4 col-md-4 text-center">
                                     <dl>
                                         <dt><i class="fa fa-print fa-3x" aria-hidden="true"></i></dt>
                                         <dd> <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal3">Vista previa</button> </dd>
