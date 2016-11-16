@@ -96,7 +96,9 @@ class AcademicoController extends Controller
             $em->persist($academico);
             $em->flush();
 
-            return $this->redirectToRoute('academico_edit', array('id' => $academico->getId()));
+            //return $this->redirectToRoute('academico_edit', array('id' => $academico->getId()));
+            return $this->redirectToRoute('academico_index');
+
         }
 
         return $this->render('academico/edit.html.twig', array(

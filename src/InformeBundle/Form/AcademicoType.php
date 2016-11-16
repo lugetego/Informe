@@ -17,7 +17,10 @@ class AcademicoType extends AbstractType
         $builder
             ->add('nombre')
             ->add('apellido')
-            ->add('nacimiento', 'date')
+            ->add('nacimiento', 'date', array('widget' => 'single_text',
+                    // this is actually the default format for single_text
+                    'format' => 'yyyy-MM-dd',)
+            )
             ->add('rfc')
             ->add('user', null, array(
                 'label' => 'Usuario',
