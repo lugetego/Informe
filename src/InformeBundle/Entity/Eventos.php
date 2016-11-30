@@ -107,6 +107,13 @@ class Eventos
     private $informacion;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="divulgacion", type="boolean")
+     */
+    private $divulgacion;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $created;
@@ -439,6 +446,22 @@ class Eventos
     public function getInformacion()
     {
         return $this->informacion;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isDivulgacion()
+    {
+        return $this->divulgacion;
+    }
+
+    /**
+     * @param boolean $divulgacion
+     */
+    public function setDivulgacion($divulgacion)
+    {
+        $this->divulgacion = $divulgacion;
     }
 
     /**

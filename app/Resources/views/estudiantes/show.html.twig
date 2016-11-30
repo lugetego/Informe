@@ -3,15 +3,44 @@
     <div class="panel-body">
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-4">
+                <dl>
+                    <dt>Nivel</dt>
+                    <dd>{{ estudiante.nivel }}</dd>
+                </dl>
+            </div>
+            <div class="col-md-4">
                 <dl>
                     <dt>Programa</dt>
-                    <dd>{{ estudiante.programa }}</dd>
+                    <dd>{{ estudiante.programa}}</dd>
                 </dl>
+            </div>
+            <div class="col-md-4">
+                <dl>
+                    <dt>Porcentaje de avance</dt>
+                    <dd>{{ estudiante.avance }} %</dd>
+                </dl>
+            </div>
+            <div class="col-lg-4">
+                <dl>
+                    <dt>Estudiante titulado</dt>
+                    {% if estudiante.titulado == true %}
+                        <dd><span class="label label-success">Si</span></dd>
+                    {% else %}
+                        <dd><span class="label label-danger">No</span></dd>
+                    {% endif %}
+                </dl>
+            </div>
+            <div class="col-lg-4">
+                <dl>
+                    <dt>Fecha de titulación</dt>
+                    <dd>{{ estudiante.titulacion|localizeddate('long', 'none') }}</dd>
+                </dl>
+
             </div>
             <div class="col-md-12">
                 <dl>
-                    <dt>Tesis</dt>
+                    <dt>Título de la Tesis</dt>
                     <dd>{{ estudiante.tesis }}</dd>
                 </dl>
             </div>

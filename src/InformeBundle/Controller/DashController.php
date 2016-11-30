@@ -49,6 +49,7 @@ class DashController extends Controller
             $eventos = $academico->getEventos();
             $salidas = $academico->getSalidas();
             $planes = $academico->getPlanes();
+            $posdocs = $academico->getPosdocs();
             $enviado = $academico->isEnviado();
 
 
@@ -61,6 +62,7 @@ class DashController extends Controller
                 'eventos'=>$eventos,
                 'salidas'=>$salidas,
                 'planes'=>$planes,
+                'posdocs'=>$posdocs,
                 'user'=>$user,
                 'enviado'=>$enviado
 
@@ -93,6 +95,7 @@ class DashController extends Controller
         $eventos = $user->getAcademico()->getEventos();
         $salidas = $user->getAcademico()->getSalidas();
         $planes = $user->getAcademico()->getPlanes();
+        $posdocs= $user->getAcademico()->getPosdocs();
 
         $html = $this->renderView('dash/layout-pdf.html.twig', array(
             'academico'=>$academico,
@@ -103,6 +106,7 @@ class DashController extends Controller
             'eventos'=>$eventos,
             'salidas'=>$salidas,
             'planes'=>$planes,
+            'posdocs'=>$posdocs
         ));
 
         $filename = sprintf('Informe-'.$user.'%s.pdf', date('Y-m-d'));

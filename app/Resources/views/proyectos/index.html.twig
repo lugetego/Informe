@@ -59,21 +59,19 @@
                             {% set proyectomodaledit = 'proyectoeditModal'~ proyecto.id  %}
 
                             <li class="list-group-item">
+                                <div class="page-header"><h4><i class="fa fa-file-text-o fa-x" aria-hidden="true"></i> {{ proyecto.nombre|title }} <small>{{ proyecto.numero }}</small></h4></div>
+
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i>
-                                                    <span class="user-info">
-                                                    <strong>{{ proyecto.nombre|title }}</strong>
-                                                        <em>{{ proyecto.numero }}</em>,
-                                                        <span class="label label-default"><small>{{ proyecto.tipo|upper }}</small></span></span>
+                                        <span class="label label-default">{{ proyecto.tipo }}</span>
                                         <p class="pull-right">
                                             <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ proyectomodalshow }}">
                                                 <i class="fa fa-search" aria-hidden="true"></i>
                                             </button>
                                             {% if enviado != true  %}
-                                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ proyectomodaledit }}" >
-                                                <i class="fa fa-edit" aria-hidden="true"></i>
-                                            </button>
+                                                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ proyectomodaledit }}" >
+                                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                                </button>
                                             {% endif %}
                                         </p>
                                     </div>

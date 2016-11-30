@@ -27,26 +27,22 @@ class CursosType extends AbstractType
             ->add('tipo', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',array(
                 'label'=>'*Tipo',
                 'choices'=>array(
-                    'Curso'=>'curso',
-                    'Seminario'=>'seminario',
-
+                    'Curso'=>'Curso',
+                    'Seminario'=>'Seminario',
                 ),
                 'placeholder'=>'Seleccionar',
                 'required'=>true,
                 'choices_as_values' => true,
-
             ))
             ->add('nivel', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',array(
                 'label'=>'*Nivel',
                 'choices'=>array(
-                    'Licenciatura'=>'licenciatura',
-                    'Posgrado'=>'posgrado',
-
+                    'Licenciatura'=>'Licenciatura',
+                    'Posgrado'=>'Posgrado',
                 ),
                 'placeholder'=>'Seleccionar',
                 'required'=>true,
                 'choices_as_values' => true,
-
             ))
             ->add('horas', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
                 'label'=>'Número de horas',
@@ -58,18 +54,15 @@ class CursosType extends AbstractType
                 'Instituto Tecnológico de Morelia (ITM)'=>'ITM',
                 'Posgrado Conjunto (PCCM), UNAM-UMSNH'=>'PCCM',
                 'Otro'=> 'Otro',
-
             ),
                 // *this line is important*
                 'choices_as_values' => true,
                 'placeholder' => 'Seleccionar',
                 'label'=>'Lugar donde se impartió',
                 'mapped'=> false,
-
             ))
             ->add('lugar','Symfony\Component\Form\Extension\Core\Type\TextType', array('label' => 'Lugar donde se impartió', 'read_only'=> true
             ))
-
         ;
 
         $formModifier = function (FormInterface $form, $otro) {
@@ -79,7 +72,6 @@ class CursosType extends AbstractType
                     'label' => 'Lugar donde se impartió',
                 ));
             }
-
         };
 
         $builder->addEventListener(
@@ -88,7 +80,6 @@ class CursosType extends AbstractType
                 // this would be your entity, i.e. SportMeetup
                 $data = $event->getData();
                 $formModifier($event->getForm(), $data->getLugar());
-
             }
         );
 
@@ -126,10 +117,6 @@ class CursosType extends AbstractType
 
             }
         );
-
-
-
-
     }
     
     /**

@@ -17,8 +17,14 @@
             <ol class="breadcrumb">
                 <li><a href="{{ path('dashboard') }}">Inicio</a></li>
                 <li class="active">Informe</li>
-                <li class="active">Eventos</li>
+                <li class="active">Eventos académicos y de divulgación</li>
             </ol>
+
+            <div class="alert alert-info" role="alert">
+                <p class="text-justify"><strong><i class="fa fa-info-circle" aria-hidden="true"></i> Descripción:</strong>
+                    en este rubro deberá reportar los eventos en los que ha participado / que ha organizado.
+                    Favor de indicar como lo pide el sistema si el evento fue de divulgación. </p>
+            </div>
 
 
             <div class="panel panel-default">
@@ -60,14 +66,15 @@
                             {% set eventomodaledit = 'eventoeditModal'~ evento.id  %}
 
                             <li class="list-group-item">
+                                <div class="page-header"><h4><i class="fa fa-table fa-x" aria-hidden="true"></i> {{ evento.nombre|title }} </h4></div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <i class="fa fa-table fa-2x" aria-hidden="true"></i>
-                                                    <span class="user-info">
-                                                    <strong>{{ evento.nombre|title }}</strong>
 
-                                                        <em>{{ evento.institucion|title }}</em>,
-                                                        <span class="label label-default"><small>{{ evento.tipo |title}}</small></span></span>
+                                                    <span class="user-info">
+                                                    <strong></strong>
+
+                                                        {{ evento.institucion|title }},
+                                                        <span class="label label-default">{{ evento.tipo |title}}</span></span>
                                         <p class="pull-right">
                                             <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ eventomodalshow }}">
                                                 <i class="fa fa-search" aria-hidden="true"></i>

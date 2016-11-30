@@ -33,6 +33,13 @@ class Estudiantes
     /**
      * @var string
      *
+     * @ORM\Column(name="nivel", type="string", length=255)
+     */
+    private $nivel;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="programa", type="string", length=255)
      */
     private $programa;
@@ -50,6 +57,27 @@ class Estudiantes
      * @ORM\Column(name="alumno", type="string", length=255)
      */
     private $alumno;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="avance", type="integer", length=3)
+     */
+    private $avance;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="titulado", type="boolean")
+     */
+    private $titulado;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="titulacion", type="date")
+     */
+    private $titulacion;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -156,6 +184,22 @@ class Estudiantes
     }
 
     /**
+     * @return string
+     */
+    public function getNivel()
+    {
+        return $this->nivel;
+    }
+
+    /**
+     * @param string $nivel
+     */
+    public function setNivel($nivel)
+    {
+        $this->nivel = $nivel;
+    }
+
+    /**
      * Set tesis
      *
      * @param string $tesis
@@ -199,6 +243,54 @@ class Estudiantes
     public function getAlumno()
     {
         return $this->alumno;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAvance()
+    {
+        return $this->avance;
+    }
+
+    /**
+     * @param int $avance
+     */
+    public function setAvance($avance)
+    {
+        $this->avance = $avance;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isTitulado()
+    {
+        return $this->titulado;
+    }
+
+    /**
+     * @param boolean $titulado
+     */
+    public function setTitulado($titulado)
+    {
+        $this->titulado = $titulado;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getTitulacion()
+    {
+        return $this->titulacion;
+    }
+
+    /**
+     * @param \DateTime $titulacion
+     */
+    public function setTitulacion($titulacion)
+    {
+        $this->titulacion = $titulacion;
     }
 
     /**

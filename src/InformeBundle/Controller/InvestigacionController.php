@@ -117,7 +117,6 @@ class InvestigacionController extends Controller
     public function editAction(Request $request, Investigacion $investigacion)
     {
         $securityContext = $this->container->get('security.token_storage');
-
         $user = $securityContext->getToken()->getUser();
 
         $deleteForm = $this->createDeleteForm($investigacion);

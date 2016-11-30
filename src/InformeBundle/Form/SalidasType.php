@@ -18,8 +18,8 @@ class SalidasType extends AbstractType
             ->add('tipo', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',array(
                 'label'=>'*Tipo',
                 'choices'=>array(
-                    'licencia'=>'Licencia',
-                    'comision'=>'Comisión',
+                    'Licencia'=>'Licencia',
+                    'Comisión'=>'Comisión',
             )))
             ->add('pais', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
                 'label'=>'*País',
@@ -81,7 +81,6 @@ class SalidasType extends AbstractType
             ->add('observaciones', 'Symfony\Component\Form\Extension\Core\Type\TextareaType',array(
                 'label'=>'Observaciones',
                 'required'=>false,
-
             ))
         ;
     }

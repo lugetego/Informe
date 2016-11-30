@@ -3,14 +3,11 @@
 {% block title %}CCM - Dashboard{% endblock %}
 
 {% block css %}
-
     {{ parent() }}
     <!-- Bootstrap Core CSS -->
-
 {% endblock %}
 
 {% block sidebar %}
-
 
     <li>
         <a href="{{ path('dashboard') }}"><i class="fa fa-dashboard fa-fw"></i> Inicio</a>
@@ -81,9 +78,10 @@
                                 </div>
 
                                 <div class="col-lg-4 col-md-4 text-center">
+                                    {% set estpos = estudiantes|length + posdocs|length %}
                                     <dl>
                                         <dt><i class="fa fa-graduation-cap fa-3x" aria-hidden="true"></i></dt>
-                                        <dd><a href="{{ path('estudiantes_index',{'estudiantes':estudiantes} ) }} ">Estudiantes <span class="counter">{{ estudiantes|length }}</span></a></dd>
+                                        <dd><a href="{{ path('estudiantes_index',{'estudiantes':estudiantes , 'posdocs':posdocs} ) }} ">Estudiantes y Posdocs <span class="counter">{{ estpos }}</span></a></dd>
                                     </dl>
                                 </div>
 
@@ -104,7 +102,7 @@
                                 <div class="col-lg-4 col-md-4 text-center">
                                     <dl>
                                         <dt><i class="fa fa-calendar fa-3x" aria-hidden="true"></i></dt>
-                                        <dd><a href="{{ path('eventos_index',{'eventos':eventos} ) }} ">Eventos <span class="counter">{{ eventos|length }}</span></a></dd>
+                                        <dd><a href="{{ path('eventos_index',{'eventos':eventos} ) }} ">Eventos académicos y de divulgación <span class="counter">{{ eventos|length }}</span></a></dd>
                                     </dl>
                                 </div>
                                 <div class="col-lg-4 col-md-4 text-center">
@@ -113,10 +111,10 @@
                                         <dd><a href="{{ path('salidas_index',{'salidas':salidas} ) }} ">Licencias y Comisiones <span class="counter">{{ salidas|length }}</span></a></dd>
                                     </dl>
                                 </div>
-{#
-                            </div>
-                            <div class="row">
-#}
+
+                             </div>
+
+                             <div class="row">
                                 <div class="col-lg-4 col-md-4 text-center">
                                     <dl>
                                         <dt><i class="fa fa-print fa-3x" aria-hidden="true"></i></dt>
@@ -275,7 +273,22 @@
                     {% else %}
                         <ol>
                             {% for estudiante in estudiantes %}
-                                <li>{{ estudiante.alumno |title }}, <small>{{ estudiante.programa|title }}</small>,<em> {{ estudiante.tesis }}</em>
+                                <li>{{ estudiante.alumno |title }}, <small>{{ estudiante.nivel|title }}, {{ estudiante.programa }}</small>,
+                                    {{ estudiante.avance }}% de avance, {% if estudiante.titulado %} titulado el {{ estudiante.titulacion|localizeddate('long', 'none') }},{% endif %}
+                                    <em> {{ estudiante.tesis }}</em>
+                                    <br>
+                                </li>
+                            {% endfor %}
+                        </ol>
+                    {% endif %}
+
+                    <strong>Posdocs</strong><br>
+                    {% if posdocs|length == 0 %}
+                        No se ha registrado información<br><br>
+                    {% else %}
+                        <ol>
+                            {% for posdoc in posdocs %}
+                                <li>{{ posdoc.nombre |title }}, <small>del {{ posdoc.inicio|localizeddate('long', 'none') }} al {{ posdoc.fin|localizeddate('long', 'none') }}</small>
                                     <br>
                                 </li>
                             {% endfor %}
@@ -301,21 +314,21 @@
                     {% else %}
                         <ol>
                             {% for proyecto in proyectos %}
-                                <li>{{ proyecto.nombre|title }}, <small>{{ proyecto.tipo|title }}</small>,<em> {{ proyecto.numero }}</em>
+                                <li>{{ proyecto.nombre|title }}, <small>{{ proyecto.tipo }}</small>,<em> {{ proyecto.numero }}</em>
 
                                 </li>
                             {% endfor %}
                         </ol>
                     {% endif %}
 
-                    <strong>Eventos</strong><br>
+                    <strong>Eventos académicos y de divulgación</strong><br>
                     {% if eventos|length == 0 %}
                         No se ha registrado información<br><br>
                     {% else %}
                         <ol>
                             {% for evento in eventos %}
-                                <li>{{ evento.nombre|title }}, <small>{{ evento.tipo|title }}</small>,<em> {{ evento.institucion }}</em>, {{ evento.actividad }}, {{ evento.institucion }}, {{ evento.pais }}
-
+                                <li>{{ evento.nombre|title }}, <small>{{ evento.tipo|title }}, {% if evento.divulgacion %} Divulgación, {% endif %} </small>
+                                    <em> {{ evento.institucion }}</em>, {{ evento.actividad }}, {{ evento.institucion }}, {{ evento.pais }}
                                 </li>
                             {% endfor %}
                         </ol>
@@ -338,9 +351,7 @@
                     {% endif %}
 
                     </div>
-
                 </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 </div>
@@ -395,8 +406,6 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">Vista previa</h4>
                 </div>
-
-
                     <div class="panel-body">
                         {% if planid is defined %}
                             {% render controller("InformeBundle:Plan:show", {'id': planid}) %}
@@ -406,14 +415,11 @@
 
                         {% endif %}
                     </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
     </div>
-
-
 
 {% endblock %}

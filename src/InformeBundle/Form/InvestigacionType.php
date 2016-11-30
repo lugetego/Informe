@@ -45,8 +45,6 @@ class InvestigacionType extends AbstractType
                 'placeholder'=>'Seleccionar',
                 'required'=>true,
                 'choices_as_values' => true,
-
-
             ))
 
             ->add('titulo', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
@@ -66,7 +64,6 @@ class InvestigacionType extends AbstractType
                 'required'=>true,
                 'choices_as_values' => true,
             ))
-
             ->add('pags', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
                 'label'=>'*Páginas',
                 'required'=>false,
@@ -82,15 +79,13 @@ class InvestigacionType extends AbstractType
             ->add('status', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',array(
                 'label'=>'*Status',
                 'choices'=>array(
-                    'Aceptado'=>'aceptado',
-                    'Enviado'=>'enviado',
-                    'Publicado'=>'publicado',
+                    'Aceptado'=>'Aceptado',
+                    'Enviado'=>'Enviado',
+                    'Publicado'=>'Publicado',
                 ),
                 'placeholder'=>'Seleccionar',
                 'required'=>false,
                 'choices_as_values' => true,
-
-
             ))
             ->add('issn', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
                 'label'=>'ISSN',
@@ -108,7 +103,6 @@ class InvestigacionType extends AbstractType
                 'required'=>true,
                 'label'=>'Indizado',
                 'choices_as_values' => false,
-
             ))
             ->add('revista', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
                 'label'=>'Revista',
@@ -130,7 +124,6 @@ class InvestigacionType extends AbstractType
                         ;}, 'data' => ($user->getAcademico()->getAutor())))
 */
         ;
-
     }
     
     /**

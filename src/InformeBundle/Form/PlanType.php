@@ -20,6 +20,7 @@ class PlanType extends AbstractType
                 'required'=>false,
             ))
             ->add('estudiantes')
+            ->add('posdocs')
             ->add('cursos')
             ->add('proyectos')
             ->add('eventos')

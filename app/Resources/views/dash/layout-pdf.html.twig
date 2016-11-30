@@ -28,11 +28,8 @@
                 </div>
                 <div class="col-xs-6">
                     <p class="text-right"><img class="right" src="{{ asset('img/ccm.png', absolute=true) }}" width="180px" height="60px" /></p>
-
                 </div>
-
             </div>
-
 
             {% if investigaciones|length > 0 %}
                 <strong>Investigación</strong><br>
@@ -43,17 +40,31 @@
                             Vol. {{ investigacion.volumen }}, {{ investigacion.pags }} págs., ISSN: {{ investigacion.issn  }}</li>
                     {% endfor %}
                 </ol>
-
             {% endif %}
 
             {% if estudiantes|length > 0 %}
                 <strong>Estudiantes</strong><br>
                 <ol>
                     {% for estudiante in estudiantes %}
-                        <li>{{ estudiante.alumno |title }}, <small>{{ estudiante.programa|title }}</small>,<em> {{ estudiante.tesis }}</em></li>
+                        <li>{{ estudiante.alumno |title }}, <small>{{ estudiante.nivel|title }}, {{ estudiante.programa }}</small>,
+                            {{ estudiante.avance }}% de avance, {% if estudiante.titulado %} titulado el {{ estudiante.titulacion|localizeddate('long', 'none') }},{% endif %}
+                               <em>{{ estudiante.tesis }}</em>
+                        </li>
                     {% endfor %}
                 </ol>
             {% endif %}
+
+            {% if posdocs|length > 0 %}
+                <strong>Posdocs</strong><br>
+                <ol>
+                    {% for posdoc in posdocs %}
+                        <li>{{ posdoc.nombre |title }}, <small>del {{ posdoc.inicio|localizeddate('long', 'none') }} al {{ posdoc.fin|localizeddate('long', 'none') }}</small>
+                            <br>
+                        </li>
+                    {% endfor %}
+                </ol>
+            {% endif %}
+
 
             {% if cursos|length > 0 %}
                 <strong>Cursos y seminarios</strong><br>
@@ -74,10 +85,12 @@
             {% endif %}
 
             {% if eventos|length > 0 %}
-                <strong>Eventos</strong><br>
+                <strong>Eventos académicos y de divulgación</strong><br>
                 <ol>
                     {% for evento in eventos %}
-                        <li>{{ evento.nombre|title }}, <small>{{ evento.tipo|title }}</small>,<em> {{ evento.institucion }}</em>, {{ evento.actividad }}, {{ evento.institucion }}, {{ evento.pais }} </li>
+                        <li>{{ evento.nombre|title }}, <small>{{ evento.tipo|title }}, {% if evento.divulgacion %} Divulgación, {% endif %} </small>
+                            <em> {{ evento.institucion }}</em>, {{ evento.actividad }}, {{ evento.institucion }}, {{ evento.pais }}
+                        </li>
                     {% endfor %}
                 </ol>
             {% endif %}

@@ -20,6 +20,17 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <div>
+                            {{ form_label(edit_form.nivel) }}
+                        </div>
+                        <div>
+                            {{ form_widget(edit_form.nivel,{'attr': {'class': 'form-control input-sm', 'placeholder':'Programa'} } ) }}
+                        </div>
+                        <div>{{ form_errors(edit_form.nivel) }}</div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <div>
                             {{ form_label(edit_form.programa) }}
                         </div>
                         <div>
@@ -28,6 +39,44 @@
                         <div>{{ form_errors(edit_form.programa) }}</div>
                     </div>
                 </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <div>
+                            {{ form_label(edit_form.avance) }}
+                        </div>
+                        <div>
+                            {{ form_widget(edit_form.avance,{'attr': {'class': 'form-control input-sm', 'placeholder':'Programa'} } ) }}
+                        </div>
+                        <div>{{ form_errors(edit_form.avance) }}</div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <div>{{ form_label(edit_form.titulado) }}</div>
+                        <div>
+                            {% spaceless %}
+                                {% for child in edit_form.titulado %}
+                                    <div class="radio-inline">
+                                        {{ form_widget(child) }}  {{ form_label(child, null, {'label_attr': {'class': 'btn btn-default btn-xs'}}) }}
+                                    </div>
+                                {% endfor %}
+                            {% endspaceless %}
+                        </div>
+                        <div>{{ form_errors(edit_form.titulado) }}</div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <div>{{ form_label(edit_form.titulacion) }}</div>
+                        <div class="col-lg-4" >{{ form_widget(edit_form.titulacion.day, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                        <div class="col-lg-4" >{{ form_widget(edit_form.titulacion.month, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                        <div class="col-lg-4" >{{ form_widget(edit_form.titulacion.year, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                        <div>{{ form_errors(edit_form.titulacion) }}</div>
+                    </div>
+                </div>
+
                 <div class="col-lg-6">
                     <div class="form-group">
                         <div>

@@ -98,6 +98,15 @@ class Academico
     private $estudiantes;
 
     /**
+     * @var array $posdocs
+     *
+     * @ORM\OneToMany(targetEntity="InformeBundle\Entity\Posdoc", mappedBy="academico")
+     *
+     * The mappedBy attribute designates the field in the entity that is the owner of the relationship.
+     */
+    private $posdocs;
+
+    /**
      * @var array $cursos
      *
      * @ORM\OneToMany(targetEntity="InformeBundle\Entity\Cursos", mappedBy="academico")
@@ -590,4 +599,47 @@ class Academico
         $this->enviado = $enviado;
     }
 
+
+    /**
+     * Get enviado
+     *
+     * @return boolean 
+     */
+    public function getEnviado()
+    {
+        return $this->enviado;
+    }
+
+    /**
+     * Add posdocs
+     *
+     * @param \InformeBundle\Entity\Posdoc $posdocs
+     * @return Academico
+     */
+    public function addPosdoc(\InformeBundle\Entity\Posdoc $posdocs)
+    {
+        $this->posdocs[] = $posdocs;
+
+        return $this;
+    }
+
+    /**
+     * Remove posdocs
+     *
+     * @param \InformeBundle\Entity\Posdoc $posdocs
+     */
+    public function removePosdoc(\InformeBundle\Entity\Posdoc $posdocs)
+    {
+        $this->posdocs->removeElement($posdocs);
+    }
+
+    /**
+     * Get posdocs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPosdocs()
+    {
+        return $this->posdocs;
+    }
 }

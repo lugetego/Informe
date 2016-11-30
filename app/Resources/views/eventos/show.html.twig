@@ -4,13 +4,13 @@
         <div class="panel-body">
 
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <dl>
                         <dt>Tipo</dt>
-                        <dd>{{ evento.tipo }}</dd>
+                        <dd>{{ evento.tipo|title }}</dd>
                     </dl>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-3">
                     <dl>
                         <dt>Organizador</dt>
                         {% if evento.organizador == true %}
@@ -20,7 +20,7 @@
                         {% endif %}
                     </dl>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-3">
                     <dl>
                         <dt>Nacional</dt>
                         {% if evento.nacional == true %}
@@ -30,41 +30,51 @@
                         {% endif %}
                     </dl>
                 </div>
-                <div class="col-md-2">
+                <div class="col-lg-3">
+                    <dl>
+                        <dt>Divulgación</dt>
+                        {% if evento.divulgacion == true %}
+                            <dd><span class="label label-success">Si</span></dd>
+                        {% else %}
+                            <dd><span class="label label-danger">No</span></dd>
+                        {% endif %}
+                    </dl>
+                </div>
+                <div class="col-md-6">
                     <dl>
                         <dt>País</dt>
                         <dd>{{ evento.pais }}</dd>
                     </dl>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-6">
                     <dl>
                         <dt>Institución</dt>
                         <dd>{{ evento.institucion }}</dd>
                     </dl>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-12">
                     <dl>
                         <dt>Plática</dt>
                         <dd>{{ evento.platica }}</dd>
                     </dl>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-6">
                     <dl>
                         <dt>Actividad</dt>
                         <dd>{{ evento.actividad }}</dd>
                     </dl>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-3">
                     <dl>
                         <dt>Inicio</dt>
-                        <dd>{{ evento.inicio|date('d-m-Y') }}</dd>
+                        <dd>{{ evento.inicio|localizeddate('long', 'none') }}</dd>
                     </dl>
 
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-3">
                     <dl>
                         <dt>Fin</dt>
-                        <dd>{{ evento.fin|date('d-m-Y') }}</dd>
+                        <dd>{{ evento.fin|localizeddate('long', 'none') }}</dd>
                     </dl>
 
                 </div>

@@ -5,6 +5,10 @@ namespace InformeBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 class EstudiantesType extends AbstractType
 {
@@ -16,30 +20,126 @@ class EstudiantesType extends AbstractType
     {
 
         $builder
-            ->add('programa', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',array(
+            ->add('programas', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',array(
                 'label'=>'*Programa',
                 'choices'=>array(
-                    'PCCM'=>'pccm',
-                    'Licenciatura'=>'licenciatura',
-                    'Posgrado externo'=>'externo',
-                    'Posdoc'=>'posdoc',
+                    'PCCM'=>'PCCM',
+                    'Otro'=>'Otro',
                     ),
+                // *this line is important*
+                'choices_as_values' => true,
+                'placeholder' => 'Seleccionar',
+                'mapped'=> false,
+            ))
+            ->add('nivel', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',array(
+                'label'=>'*Nivel',
+                'choices'=>array(
+                    'Doctorado'=>'Doctorado',
+                    'Licenciatura'=>'Licenciatura',
+                    'Maestría'=>'Maestría',
+                ),
                 'placeholder'=>'Seleccionar',
                 'required'=>true,
                 'choices_as_values' => true,
-
-
             ))
             ->add('tesis', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
-                'label'=>'*Tesis dirigidas o en proceso',
-                'required'=>true,
+                'label'=>'Tesis dirigidas o en proceso',
+                'required'=>false,
             ))
             ->add('alumno', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
                 'label'=>'*Nombre del alumno',
                 'required'=>true,
             ))
-
+            ->add('avance', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',array(
+                'label'=>'Porcentaje de avance',
+                'choices'=>array(
+                    '0'=>'0',
+                    '10'=>'10',
+                    '20'=>'20',
+                    '30'=>'30',
+                    '40'=>'40',
+                    '50'=>'50',
+                    '60'=>'60',
+                    '70'=>'70',
+                    '80'=>'80',
+                    '90'=>'90',
+                    '100'=>'100'),
+                'empty_value'=>'Seleccionar'))
+            ->add('titulado', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
+                'choices'=>array(
+                    true=>'Si ',
+                    false=>'No '),
+                'expanded'=>true,
+                'required'=>true,
+                'label'=>'Estudiante titulado',
+                'choices_as_values' => false,
+            ))
+            ->add('titulacion','Symfony\Component\Form\Extension\Core\Type\DateType',array(
+                'placeholder' => array(
+                    'year' => 'Año',
+                    'month' => 'Mes',
+                    'day' => 'Día'),
+                'years'=> range(2016,2020),
+                'label'=>'Fecha de titulación',
+                'required'=>true,
+            ))
+            ->add('programa','Symfony\Component\Form\Extension\Core\Type\TextType', array('label' => 'Otro programa', 'read_only'=> true
+            ))
         ;
+
+        $formModifier = function (FormInterface $form, $otro) {
+
+            if ( 'Otro' == $otro) {
+                $form->add('nivel', 'Symfony\Component\Form\Extension\Core\Type\TextType', array(
+                    'label' => 'Programa',
+                ));
+            }
+        };
+
+        $builder->addEventListener(
+            FormEvents::PRE_SET_DATA,
+            function (FormEvent $event) use ($formModifier) {
+                // this would be your entity, i.e. SportMeetup
+                $data = $event->getData();
+                $formModifier($event->getForm(), $data->getPrograma());
+            }
+        );
+
+        $builder->addEventListener(
+            FormEvents::PRE_SUBMIT,
+            function (FormEvent $event) {
+                // this would be your entity, i.e. SportMeetup
+
+                $data = $event->getData();
+                if (isset($data['programas'])){
+
+                    $val = $data['programas'];
+                    if ( $val !='Otro') {
+                        $data['programa'] = $val;
+                        $event->setData($data);
+                    }
+                }
+                else {
+                    $data['programas']='';
+                }
+            }
+        );
+
+        $builder->get('programas')->addEventListener(
+            FormEvents::POST_SUBMIT,
+            function (FormEvent $event) use ($formModifier) {
+                // It's important here to fetch $event->getForm()->getData(), as
+                // $event->getData() will get you the client data (that is, the ID)
+                $sport = $event->getForm()->getData();
+
+                // since we've added the listener to the child, we'll have to pass on
+                // the parent to the callback functions!
+
+                $formModifier($event->getForm()->getParent(),$sport);
+
+            }
+        );
+
     }
     
     /**

@@ -46,6 +46,13 @@ class Plan
     /**
      * @var string
      *
+     * @ORM\Column(name="posdocs", type="text", length=10000, nullable=true)
+     */
+    private $posdocs;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="cursos", type="text", length=10000, nullable=true)
      */
     private $cursos;
@@ -196,6 +203,22 @@ class Plan
     public function getEstudiantes()
     {
         return $this->estudiantes;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPosdocs()
+    {
+        return $this->posdocs;
+    }
+
+    /**
+     * @param string $posdocs
+     */
+    public function setPosdocs($posdocs)
+    {
+        $this->posdocs = $posdocs;
     }
 
     /**

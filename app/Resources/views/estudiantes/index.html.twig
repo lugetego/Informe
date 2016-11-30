@@ -18,9 +18,13 @@
             <ol class="breadcrumb">
                 <li><a href="{{ path('dashboard') }}">Inicio</a></li>
                 <li class="active">Informe</li>
-                <li class="active">Estudiantes</li>
+                <li class="active">Estudiantes y Posdocs</li>
             </ol>
 
+            <div class="alert alert-info" role="alert">
+                <p class="text-justify"><strong><i class="fa fa-info-circle" aria-hidden="true"></i> Descripción:</strong> En este rubro deberá reportar los estudiantes y postdocs que ha
+                formado o está formando dentro del periodo que corresponde a su informe.</p>
+            </div>
 
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -61,15 +65,11 @@
 
                             <li class="list-group-item">
 
+                                <div class="page-header"><h4><i class="fa fa-user fa-x" aria-hidden="true"></i> {{ estudiante.alumno|title }}</h4></div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <i class="fa fa-user fa-2x" aria-hidden="true"></i>
-                                    <span class="user-info">
-                                        <strong>{{ estudiante.alumno|title }}</strong>
-                                        <em><strong>Tesis:</strong> {{ estudiante.tesis|title }},
-                                            <span class="label label-default"><small>{{ estudiante.programa|title }}</small></span>
-                                        </em>
-                                    </span>
+                                        <span class="label label-default">{{ estudiante.programa}}</span>
+                                        <span class="label label-default">{{ estudiante.nivel }}</span>
                                         <p class="pull-right">
                                             <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ estmodalshow }}">
                                                 <i class="fa fa-search" aria-hidden="true"></i>
@@ -80,7 +80,8 @@
                                                 </button>
                                             {% endif %}
                                         </p>
-                                    </div></div>
+                                    </div>
+                                </div>
                             </li>
                             <!-- Modal -->
                             <div class="modal fade" id="{{ estmodalshow }}" tabindex="-1" role="dialog" aria-labelledby="{{ estmodalshow }}Label">
@@ -120,5 +121,105 @@
         </div>
     </div>
     <!-- Fin Estudiantes -->
+
+    <div class="row">
+
+        <!-- Posdocs -->
+        <div class="col-lg-8">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <i class="fa fa-users" aria-hidden="true"></i> <strong>Posdocs</strong>
+                        </a>
+                        {% if enviado != true  %}
+                            <button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#posdocsnewModal" >
+                                <i class="fa fa-plus"></i> Nuevo </button>
+                        {% endif %}
+                        <!-- Button trigger modal -->
+                    </h4>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="posdocsnewModal" tabindex="-1" role="dialog" aria-labelledby="posdocsnewModalLabel">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="posdocsnewModalLabel">Posdoc</h4>
+                                </div>
+                                <div class="modal-body">
+                                    {% render(controller('InformeBundle:Posdoc:new')) %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+
+                    <ul class="list-group">
+
+                        {% for posdoc in posdocs %}
+                            {% set posdocmodalshow = 'estshowModal'~ posdoc.id  %}
+                            {% set posdocmodaledit = 'esteditModal'~ posdoc.id  %}
+
+                            <li class="list-group-item">
+
+                                <div class="page-header"><h4><i class="fa fa-user fa-x" aria-hidden="true"></i> {{ posdoc.nombre|title }}</h4></div>
+                                <div class="row">
+                                    <div class="col-md-12">
+
+
+                                        <p class="pull-right">
+                                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ posdocmodalshow }}">
+                                                <i class="fa fa-search" aria-hidden="true"></i>
+                                            </button>
+                                            {% if enviado != true %}
+                                                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ posdocmodaledit }}" >
+                                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                                </button>
+                                            {% endif %}
+                                        </p>
+                                    </div></div>
+                            </li>
+                            <!-- Modal -->
+                            <div class="modal fade" id="{{ posdocmodalshow }}" tabindex="-1" role="dialog" aria-labelledby="{{ posdocmodalshow }}Label">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="{{ posdocmodalshow }}Label">{{ posdoc.nombre |title}}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% render controller("InformeBundle:Posdoc:show", {'id': posdoc.id}) %}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="{{ posdocmodaledit }}" tabindex="-1" role="dialog" aria-labelledby="{{ posdocmodaledit }}Label">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="{{ posdocmodaledit }}Label">Posdocs</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% render controller("InformeBundle:Posdoc:edit", {'id': posdoc.id}) %}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Fin posdocs -->
 
 {% endblock %}

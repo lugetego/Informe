@@ -31,11 +31,13 @@ class EstudiantesController extends Controller
 
         $user = $this->get('security.context')->getToken()->getUser();
         $estudiantes = $user->getAcademico()->getEstudiantes();
+        $posdocs = $user->getAcademico()->getPosdocs();
         $enviado = $user->getAcademico()->isEnviado();
 
 
         return $this->render('estudiantes/index.html.twig', array(
             'estudiantes' => $estudiantes,
+            'posdocs'=> $posdocs,
             'enviado'=>$enviado,
         ));
 
@@ -113,7 +115,13 @@ class EstudiantesController extends Controller
         $deleteForm = $this->createDeleteForm($estudiante);
         $editForm = $this->createForm('InformeBundle\Form\EstudiantesType', $estudiante);
         $this->denyAccessUnlessGranted('edit', $estudiante);
+
+        $editForm->remove('programas');
+        $editForm->remove('programa');
+        $editForm->add('programa','Symfony\Component\Form\Extension\Core\Type\TextType', array('label' => 'Programa'));
+
         $editForm->handleRequest($request);
+
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();

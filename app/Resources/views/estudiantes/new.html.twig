@@ -6,39 +6,99 @@
     <div class="panel-body">
         <div class="row">
 
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <div>
-                            {{ form_label(form.alumno) }}
-                        </div>
-                        <div>
-                            {{ form_widget(form.alumno,{'attr': {'class': 'form-control input-sm', 'placeholder':'Nombre del alumno'} } ) }}
-                        </div>
-                        <div>{{ form_errors(form.alumno) }}</div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div>
+                        {{ form_label(form.alumno) }}
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <div>
-                            {{ form_label(form.programa) }}
-                        </div>
-                        <div>
-                            {{ form_widget(form.programa,{'attr': {'class': 'form-control input-sm', 'placeholder':'Programa'} } ) }}
-                        </div>
-                        <div>{{ form_errors(form.programa) }}</div>
+                    <div>
+                        {{ form_widget(form.alumno,{'attr': {'class': 'form-control input-sm', 'placeholder':'Nombre del alumno'} } ) }}
                     </div>
+                    <div>{{ form_errors(form.alumno) }}</div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <div>
-                            {{ form_label(form.tesis) }}
-                        </div>
-                        <div>
-                            {{ form_widget(form.tesis,{'attr': {'class': 'form-control input-sm', 'placeholder':'Tesis'} } ) }}
-                        </div>
-                        <div>{{ form_errors(form.tesis) }}</div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div>
+                        {{ form_label(form.nivel) }}
                     </div>
+                    <div>
+                        {{ form_widget(form.nivel,{'attr': {'class': 'form-control input-sm', 'placeholder':'Programa'} } ) }}
+                    </div>
+                    <div>{{ form_errors(form.nivel) }}</div>
                 </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div>
+                        {{ form_label(form.programas) }}
+                    </div>
+                    <div>
+                        {{ form_widget(form.programas,{'attr': {'class': 'form-control input-sm', 'placeholder':'Programa'} } ) }}
+                    </div>
+                    <div>{{ form_errors(form.programas) }}</div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div>
+                        {{ form_label(form.programa) }}
+                    </div>
+                    <div>
+                        {{ form_widget(form.programa,{'attr': {'class': 'form-control input-sm', 'placeholder':'Otro Programa'} } ) }}
+                    </div>
+                    <div>{{ form_errors(form.programa) }}</div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <div>
+                        {{ form_label(form.avance) }}
+                    </div>
+                    <div>
+                        {{ form_widget(form.avance,{'attr': {'class': 'form-control input-sm', 'placeholder':'Programa'} } ) }}
+                    </div>
+                    <div>{{ form_errors(form.avance) }}</div>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <div>{{ form_label(form.titulado) }}</div>
+                    <div>
+                        {% spaceless %}
+                            {% for child in form.titulado %}
+                                <div class="radio-inline">
+                                    {{ form_widget(child) }}  {{ form_label(child, null, {'label_attr': {'class': 'btn btn-default btn-xs'}}) }}
+                                </div>
+                            {% endfor %}
+                        {% endspaceless %}
+                    </div>
+                    <div>{{ form_errors(form.titulado) }}</div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div>{{ form_label(form.titulacion) }}</div>
+                    <div class="col-lg-4" >{{ form_widget(form.titulacion.day, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                    <div class="col-lg-4" >{{ form_widget(form.titulacion.month, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                    <div class="col-lg-4" >{{ form_widget(form.titulacion.year, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                    <div>{{ form_errors(form.titulacion) }}</div>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <div>
+                        {{ form_label(form.tesis) }}
+                    </div>
+                    <div>
+                        {{ form_widget(form.tesis,{'attr': {'class': 'form-control input-sm', 'placeholder':'Título de la Tesis'} } ) }}
+                    </div>
+                    <div>{{ form_errors(form.tesis) }}</div>
+                </div>
+            </div>
 
         </div>
     </div>

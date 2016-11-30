@@ -58,22 +58,22 @@
                             {% set cursomodaledit = 'cursoeditModal'~ curso.id  %}
 
                             <li class="list-group-item">
+                                <div class="page-header"><h4><i class="fa fa-book fa-x" aria-hidden="true"></i> {{ curso.nombre|title }}</h4></div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <i class="fa fa-book fa-2x" aria-hidden="true"></i>
-                                                    <span class="user-info">
-                                                    <strong>{{ curso.nombre|title }}</strong>
+                                        <span class="label label-default">{{ curso.nivel|title }}</span>
+                                        <span class="label label-default">{{ curso.tipo|title }}</span>
+                                        <span class="label label-default">{{ curso.lugar }}</span>
+                                        <span class="label label-default">{{ curso.horas }} horas</span>
 
-                                                        <em>{{ curso.lugar }}</em>  {{ curso.horas }} horas,
-                                                        {{ curso.nivel|title }}, <span class="label label-default"><small>{{ curso.tipo|title }}</small></span></span>
                                         <p class="pull-right">
                                             <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ cursomodalshow }}">
                                                 <i class="fa fa-search" aria-hidden="true"></i>
                                             </button>
                                             {% if enviado != true  %}
-                                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ cursomodaledit }}">
-                                                <i class="fa fa-edit" aria-hidden="true"></i>
-                                            </button>
+                                                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ cursomodaledit }}">
+                                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                                </button>
                                             {% endif %}
                                         </p>
                                     </div>

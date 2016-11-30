@@ -34,7 +34,6 @@ class ProyectosType extends AbstractType
                 'placeholder' => 'Seleccionar',
                 'label'=>'Tipo de programa',
                 'mapped'=> false,
-
             ))
             ->add('tipo','Symfony\Component\Form\Extension\Core\Type\TextType', array('label' => 'Otro tipo de programa', 'read_only'=> true
 
@@ -56,7 +55,6 @@ class ProyectosType extends AbstractType
                     'label' => 'Tipo',
                 ));
             }
-
         };
 
         $builder->addEventListener(
