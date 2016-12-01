@@ -1,0 +1,36 @@
+<div class="panel panel-default">
+
+    <div class="panel-body">
+
+
+        <div class="row">
+            <div class="col-md-4">
+                <dl>
+                    <dt>Fecha de inicio</dt>
+                    <dd>{% if posdoc.inicio %}{{ posdoc.inicio|localizeddate('long', 'none') }}{% endif %}</dd>
+                </dl>
+            </div>
+            <div class="col-md-4">
+                <dl>
+                    <dt>Fecha de término</dt>
+                    <dd>{% if posdoc.fin %}{{ posdoc.fin|localizeddate('long', 'none') }}{% endif %}</dd>
+                </dl>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-7 col-lg-offset-5">
+
+                {{ form_start(delete_form) }}
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+                {% if enviado != true %}
+                    <input class="btn btn-danger" type="submit" value="Eliminar" onclick="return confirm('¿Estás seguro de eliminar este registro?')" >
+                {% endif %}
+
+                {{ form_end(delete_form) }}
+
+            </div>
+        </div>
+    </div>
+</div>

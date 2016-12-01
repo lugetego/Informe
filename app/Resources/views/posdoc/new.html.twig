@@ -1,0 +1,52 @@
+{% form_theme form 'form_errors.html.twig' %}
+
+{{ form_start(form, {'action': path('posdoc_new')}) }}
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+
+            <div class="col-lg-8">
+                <div class="form-group">
+                    <div>
+                        {{ form_label(form.nombre) }}
+                    </div>
+                    <div>
+                        {{ form_widget(form.nombre,{'attr': {'class': 'form-control input-sm', 'placeholder':'Nombre del posdoc'} } ) }}
+                    </div>
+                    <div>{{ form_errors(form.nombre) }}</div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div>{{ form_label(form.inicio) }}</div>
+                    <div class="col-lg-4" >{{ form_widget(form.inicio.day, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                    <div class="col-lg-4" >{{ form_widget(form.inicio.month, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                    <div class="col-lg-4" >{{ form_widget(form.inicio.year, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                    <div>{{ form_errors(form.inicio) }}</div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div>{{ form_label(form.fin) }}</div>
+                    <div class="col-lg-4" >{{ form_widget(form.fin.day, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                    <div class="col-lg-4" >{{ form_widget(form.fin.month, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                    <div class="col-lg-4" >{{ form_widget(form.fin.year, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                    <div>{{ form_errors(form.fin) }}</div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-7 col-lg-offset-5">
+        <input type="submit" value="Guardar"  class="btn btn-primary"/>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+        {{ form_end(form) }}
+    </div>
+</div>

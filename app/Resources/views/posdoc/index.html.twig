@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Posdocs list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Inicio</th>
+                <th>Fin</th>
+                <th>Created</th>
+                <th>Modified</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for posdoc in posdocs %}
+            <tr>
+                <td><a href="{{ path('posdoc_show', { 'id': posdoc.id }) }}">{{ posdoc.id }}</a></td>
+                <td>{{ posdoc.nombre }}</td>
+                <td>{% if posdoc.inicio %}{{ posdoc.inicio|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if posdoc.fin %}{{ posdoc.fin|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if posdoc.created %}{{ posdoc.created|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if posdoc.modified %}{{ posdoc.modified|date('Y-m-d') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('posdoc_show', { 'id': posdoc.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('posdoc_edit', { 'id': posdoc.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('posdoc_new') }}">Create a new posdoc</a>
+        </li>
+    </ul>
+{% endblock %}

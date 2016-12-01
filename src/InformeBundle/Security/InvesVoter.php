@@ -11,6 +11,7 @@ use InformeBundle\Entity\Salidas;
 use InformeBundle\Entity\Proyectos;
 use InformeBundle\Entity\Eventos;
 use InformeBundle\Entity\Cursos;
+use InformeBundle\Entity\Posdoc;
 use InformeBundle\Entity\User;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 
@@ -42,6 +43,7 @@ class InvesVoter extends  Voter
             !$subject instanceof Eventos &&
             !$subject instanceof Proyectos &&
             !$subject instanceof Salidas &&
+            !$subject instanceof Posdoc &&
             !$subject instanceof Plan
 
         ) {
