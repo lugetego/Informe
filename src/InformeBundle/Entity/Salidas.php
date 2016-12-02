@@ -74,7 +74,7 @@ class Salidas
     /**
      * @var string
      *
-     * @ORM\Column(name="actividad", type="string", length=255)
+     * @ORM\Column(name="actividad", type="string", length=1000)
      */
     private $actividad;
 
