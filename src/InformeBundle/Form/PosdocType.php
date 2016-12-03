@@ -15,14 +15,17 @@ class PosdocType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre')
+            ->add('nombre', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
+                'label'=>'*Nombre',
+                'required'=>true,
+            ))
             ->add('inicio','Symfony\Component\Form\Extension\Core\Type\DateType',array(
                 'placeholder' => array(
                     'year' => 'Año',
                     'month' => 'Mes',
                     'day' => 'Día'),
                 'years'=> range(2012,2016),
-                'label'=>'Fecha de inicio',
+                'label'=>'*Fecha de inicio',
                 'required'=>true,
 
             ))
@@ -32,7 +35,7 @@ class PosdocType extends AbstractType
                     'month' => 'Mes',
                     'day' => 'Día'),
                 'years'=> range(2016,2018),
-                'label'=>'Fecha de término',
+                'label'=>'*Fecha de término',
                 'required'=>true,
             ))
         ;

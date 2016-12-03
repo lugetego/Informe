@@ -75,14 +75,14 @@ class Eventos
     /**
      * @var string
      *
-     * @ORM\Column(name="platica", type="string", length=255)
+     * @ORM\Column(name="platica", type="string", length=255, nullable=true)
      */
     private $platica;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="actividad", type="string", length=255)
+     * @ORM\Column(name="actividad", type="string", length=255, nullable=true)
      */
     private $actividad;
 

@@ -25,13 +25,6 @@ class Academico
     private $id;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="autor", type="integer")
-     */
-    private $autor;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=120)
@@ -78,15 +71,6 @@ class Academico
      * The mappedBy attribute designates the field in the entity that is the owner of the relationship.
      */
     private $investigaciones;
-
-    /**
-     * @var array $investigacionesautor
-     *
-     * @ORM\OneToMany(targetEntity="InformeBundle\Entity\Investigacion", mappedBy="autor")
-     *
-     * The mappedBy attribute designates the field in the entity that is the owner of the relationship.
-     */
-    private $investigacionesautor;
 
     /**
      * @var array $estudiantes
@@ -274,7 +258,6 @@ class Academico
     public function __construct()
     {
         $this->investigaciones = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->investigacionesautor = new \Doctrine\Common\Collections\ArrayCollection();
 
     }
 
@@ -487,62 +470,6 @@ class Academico
         $this->id = $id;
 
         return $this;
-    }
-
-    /**
-     * Add investigacionesautor
-     *
-     * @param \InformeBundle\Entity\Investigacion $investigacionesautor
-     * @return Academico
-     */
-    public function addInvestigacionesautor(\InformeBundle\Entity\Investigacion $investigacionesautor)
-    {
-        $this->investigacionesautor[] = $investigacionesautor;
-
-        return $this;
-    }
-
-    /**
-     * Remove investigacionesautor
-     *
-     * @param \InformeBundle\Entity\Investigacion $investigacionesautor
-     */
-    public function removeInvestigacionesautor(\InformeBundle\Entity\Investigacion $investigacionesautor)
-    {
-        $this->investigacionesautor->removeElement($investigacionesautor);
-    }
-
-    /**
-     * Get investigacionesautor
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getInvestigacionesautor()
-    {
-        return $this->investigacionesautor;
-    }
-
-    /**
-     * Set autor
-     *
-     * @param string $autor
-     * @return Academico
-     */
-    public function setAutor($autor)
-    {
-        $this->autor = $autor;
-
-        return $this;
-    }
-
-    /**
-     * Get autor
-     *
-     * @return string 
-     */
-    public function getAutor()
-    {
-        return $this->autor;
     }
 
     /**

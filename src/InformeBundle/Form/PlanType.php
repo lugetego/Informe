@@ -19,12 +19,30 @@ class PlanType extends AbstractType
                 'label'=>'Actividades de investigación',
                 'required'=>false,
             ))
-            ->add('estudiantes')
-            ->add('posdocs')
-            ->add('cursos')
-            ->add('proyectos')
-            ->add('eventos')
-            ->add('salidas')
+            ->add('estudiantes', 'Symfony\Component\Form\Extension\Core\Type\TextareaType',array(
+                'label'=>'Estudiantes',
+                'required'=>false,
+            ))
+            ->add('posdocs', 'Symfony\Component\Form\Extension\Core\Type\TextareaType',array(
+                'label'=>'Posdocs',
+                'required'=>false,
+            ))
+            ->add('cursos', 'Symfony\Component\Form\Extension\Core\Type\TextareaType',array(
+                'label'=>'Cursos',
+                'required'=>false,
+            ))
+            ->add('proyectos', 'Symfony\Component\Form\Extension\Core\Type\TextareaType',array(
+                'label'=>'Proyectos',
+                'required'=>false,
+            ))
+            ->add('eventos', 'Symfony\Component\Form\Extension\Core\Type\TextareaType',array(
+                'label'=>'Eventos',
+                'required'=>false,
+            ))
+            ->add('salidas', 'Symfony\Component\Form\Extension\Core\Type\TextareaType',array(
+                'label'=>'Salidas',
+                'required'=>false,
+            ))
         ;
     }
     

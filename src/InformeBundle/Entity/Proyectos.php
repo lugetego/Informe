@@ -24,7 +24,7 @@ class Proyectos
 
     /**
      * @var academico
-     * @ORM\ManyToOne(targetEntity="Academico", inversedBy="investigaciones")
+     * @ORM\ManyToOne(targetEntity="Academico", inversedBy="proyectos")
      * @ORM\JoinColumn(name="academico_id", referencedColumnName="id")
      */
     private $academico;

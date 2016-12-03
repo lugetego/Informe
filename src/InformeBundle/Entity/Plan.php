@@ -24,7 +24,7 @@ class Plan
 
     /**
      * @var academico
-     * @ORM\ManyToOne(targetEntity="Academico", inversedBy="investigaciones")
+     * @ORM\ManyToOne(targetEntity="Academico", inversedBy="planes")
      * @ORM\JoinColumn(name="academico_id", referencedColumnName="id")
      */
     private $academico;

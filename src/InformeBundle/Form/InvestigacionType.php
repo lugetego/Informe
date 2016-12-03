@@ -66,7 +66,7 @@ class InvestigacionType extends AbstractType
             ))
             ->add('pags', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
                 'label'=>'*Páginas',
-                'required'=>false,
+                'required'=>true,
             ))
             ->add('volumen', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
                 'label'=>'Volumen',
@@ -84,7 +84,7 @@ class InvestigacionType extends AbstractType
                     'Publicado'=>'Publicado',
                 ),
                 'placeholder'=>'Seleccionar',
-                'required'=>false,
+                'required'=>true,
                 'choices_as_values' => true,
             ))
             ->add('issn', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(

@@ -32,14 +32,6 @@ class Investigacion
     private $academico;
 
     /**
-     * @var autor
-     * @ORM\Column(name="autor", type="integer", nullable=true)
-     * @ORM\ManyToOne(targetEntity="Academico", inversedBy="investigacionesautor")
-     * @ORM\JoinColumn(name="autor_id", referencedColumnName="id")
-     */
-    private $autor;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="tipo", type="string", length=120)
@@ -500,30 +492,4 @@ class Investigacion
         return $this->academico;
     }
 
-
-
-
-
-    /**
-     * Set autor
-     *
-     * @param integer $autor
-     * @return Investigacion
-     */
-    public function setAutor($autor)
-    {
-        $this->autor = $autor;
-
-        return $this;
-    }
-
-    /**
-     * Get autor
-     *
-     * @return integer 
-     */
-    public function getAutor()
-    {
-        return $this->autor;
-    }
 }

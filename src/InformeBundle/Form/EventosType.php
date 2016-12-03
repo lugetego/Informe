@@ -71,12 +71,12 @@ class EventosType extends AbstractType
                 'required'=>true,
             ))
             ->add('platica', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
-                'label'=>'*Plática',
-                'required'=>true,
+                'label'=>'Plática',
+                'required'=>false,
             ))
             ->add('actividad', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
-                'label'=>'*Actividad',
-                'required'=>true,
+                'label'=>'Actividad',
+                'required'=>false,
             ))
             ->add('inicio','Symfony\Component\Form\Extension\Core\Type\DateType',array(
                 'placeholder' => array(

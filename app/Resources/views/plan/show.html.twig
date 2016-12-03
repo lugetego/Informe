@@ -26,6 +26,13 @@
         {{ plan.estudiantes }}<br><br>
     {% endif %}
 
+    <strong>Posdocs</strong><br>
+    {% if plan.posdocs |length == 0 %}
+        No se ha registrado información<br><br>
+    {% else %}
+        {{ plan.posdocs }}<br><br>
+    {% endif %}
+
     <strong>Cursos y seminarios</strong><br>
     {% if plan.cursos |length == 0 %}
         No se ha registrado información<br><br>
