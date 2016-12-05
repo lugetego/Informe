@@ -44,6 +44,10 @@ class PlanController extends Controller
     public function newAction(Request $request)
     {
 
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+
         $securityContext = $this->container->get('security.token_storage');
 
         $user = $securityContext->getToken()->getUser();
