@@ -83,7 +83,7 @@ class EventosType extends AbstractType
                     'year' => 'Año',
                     'month' => 'Mes',
                     'day' => 'Día'),
-                'years'=> range(2015,2015),
+                'years'=> range(2016,2016),
                 'label'=>'*Inicio',
                 'required'=>true,
 
@@ -93,7 +93,7 @@ class EventosType extends AbstractType
                     'year' => 'Año',
                     'month' => 'Mes',
                     'day' => 'Día'),
-                'years'=> range(2015,2015),
+                'years'=> range(2016,2016),
                 'label'=>'*Fin',
                 'required'=>true,
 
