@@ -74,9 +74,9 @@
                     </div>
                     <div>
                         {% if enviado == false  %}
-                            {{ form_widget(edit_form.posdocs,{'attr': {'class': 'form-control input-sm', 'placeholder':'Estudiantes', 'rows':'20'} } ) }}
+                            {{ form_widget(edit_form.posdocs,{'attr': {'class': 'form-control input-sm', 'placeholder':'Posdocs', 'rows':'20'} } ) }}
                         {% else %}
-                            {{ form_widget(edit_form.posdocs,{'attr': {'class': 'form-control input-sm', 'placeholder':'Estudiantes', 'rows':'20', 'disabled':true } } ) }}
+                            {{ form_widget(edit_form.posdocs,{'attr': {'class': 'form-control input-sm', 'placeholder':'Posdocs', 'rows':'20', 'disabled':true } } ) }}
                         {% endif %}
                     </div>
                     <div>{{ form_errors(edit_form.posdocs) }}</div>
