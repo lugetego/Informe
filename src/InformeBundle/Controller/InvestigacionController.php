@@ -68,7 +68,6 @@ class InvestigacionController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $investigacion->setAcademico($academico);
-            $investigacion->setAutor($academico);
             $em->persist($investigacion);
             $em->flush();
 
