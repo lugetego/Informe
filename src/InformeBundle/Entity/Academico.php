@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="academico")
  * @ORM\Entity(repositoryClass="InformeBundle\Repository\AcademicoRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Academico
 {
@@ -134,6 +135,77 @@ class Academico
      * The mappedBy attribute designates the field in the entity that is the owner of the relationship.
      */
     private $planes;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $created;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $modified;
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set modified
+     *
+     * @param \DateTime $modified
+     */
+    public function setModified($modified)
+    {
+        $this->modified = $modified;
+
+        return $this;
+    }
+
+    /**
+     * Get modified
+     *
+     * @return \DateTime
+     */
+    public function getModified()
+    {
+        return $this->modified;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist()
+    {
+        $this->setCreated(new \DateTime());
+        $this->setModified(new \DateTime());
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate()
+    {
+        $this->setModified(new \DateTime());
+    }
 
     /**
      * Get id
