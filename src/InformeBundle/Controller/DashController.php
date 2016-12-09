@@ -151,7 +151,7 @@ class DashController extends Controller
             ->setSubject('Informe y plan de trabajo')
             ->setFrom('webmaster@matmor.unam.mx')
             ->setTo(array($user->getEmail() ))
-            ->setBcc(array('gerardo@matmor.unam.mx'))
+            ->setBcc(array('webmaster@matmor.unam.mx','vorozco@matmor.unam.mx'))
             ->setBody($this->renderView('dash/mail.txt.twig', array('entity' => $entity)))
         ;
         $mailer->send($message);
