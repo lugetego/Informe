@@ -16,49 +16,49 @@
     {% if plan.investigacion |length == 0 %}
         No se ha registrado información<br><br>
     {% else %}
-        {{ plan.investigacion }}<br><br>
+        {{ plan.investigacion| nl2br }}<br><br>
     {% endif %}
 
     <strong>Estudiantes</strong><br>
     {% if plan.estudiantes |length == 0 %}
         No se ha registrado información<br><br>
     {% else %}
-        {{ plan.estudiantes }}<br><br>
+        {{ plan.estudiantes| nl2br }}<br><br>
     {% endif %}
 
     <strong>Posdocs</strong><br>
     {% if plan.posdocs |length == 0 %}
         No se ha registrado información<br><br>
     {% else %}
-        {{ plan.posdocs }}<br><br>
+        {{ plan.posdocs| nl2br }}<br><br>
     {% endif %}
 
     <strong>Cursos y seminarios</strong><br>
     {% if plan.cursos |length == 0 %}
         No se ha registrado información<br><br>
     {% else %}
-        {{ plan.cursos }}<br><br>
+        {{ plan.cursos| nl2br }}<br><br>
     {% endif %}
 
     <strong>Proyectos</strong><br>
     {% if plan.proyectos |length == 0 %}
         No se ha registrado información<br><br>
     {% else %}
-        {{ plan.proyectos }}<br><br>
+        {{ plan.proyectos| nl2br }}<br><br>
     {% endif %}
 
     <strong>Eventos</strong><br>
     {% if plan.eventos |length == 0 %}
         No se ha registrado información<br><br>
     {% else %}
-        {{ plan.eventos }}<br><br>
+        {{ plan.eventos| nl2br }}<br><br>
     {% endif %}
 
     <strong>Salidas</strong><br>
     {% if plan.salidas |length == 0 %}
         No se ha registrado información<br><br>
     {% else %}
-        {{ plan.salidas }}<br><br>
+        {{ plan.salidas | nl2br}}<br><br>
     {% endif %}
 
 {% endblock %}
