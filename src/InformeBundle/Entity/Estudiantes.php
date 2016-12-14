@@ -47,7 +47,7 @@ class Estudiantes
     /**
      * @var string
      *
-     * @ORM\Column(name="tesis", type="string", length=255)
+     * @ORM\Column(name="tesis", type="string", length=255, nullable=true))
      */
     private $tesis;
 
@@ -75,7 +75,7 @@ class Estudiantes
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="titulacion", type="date")
+     * @ORM\Column(name="titulacion", type="date", nullable=true)
      */
     private $titulacion;
 
