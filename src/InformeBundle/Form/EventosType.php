@@ -41,7 +41,7 @@ class EventosType extends AbstractType
                     false=>'No '),
                 'expanded'=>true,
                 'required'=>true,
-                'label'=>'Organizador',
+                'label'=>'*Organizador',
                 'choices_as_values' => false,
             ))
             ->add('nacional', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
