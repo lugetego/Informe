@@ -156,7 +156,7 @@ class EstudiantesController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('dashboard');
+        return $this->redirectToRoute('estudiantes_index');
     }
 
     /**

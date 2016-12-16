@@ -50,7 +50,7 @@ class EventosType extends AbstractType
                     false=>'No '),
                 'expanded'=>true,
                 'required'=>true,
-                'label'=>'Nacional',
+                'label'=>'*Nacional',
                 'choices_as_values' => false,
             ))
             ->add('divulgacion', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
@@ -59,7 +59,7 @@ class EventosType extends AbstractType
                     false=>'No '),
                 'expanded'=>true,
                 'required'=>true,
-                'label'=>'Divulgación',
+                'label'=>'*Divulgación',
                 'choices_as_values' => false,
             ))
             ->add('pais', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(

@@ -32,7 +32,7 @@ class ProyectosType extends AbstractType
                 // *this line is important*
                 'choices_as_values' => true,
                 'placeholder' => 'Seleccionar',
-                'label'=>'Tipo de programa',
+                'label'=>'*Tipo de programa',
                 'mapped'=> false,
             ))
             ->add('tipo','Symfony\Component\Form\Extension\Core\Type\TextType', array('label' => 'Otro tipo de programa', 'read_only'=> true

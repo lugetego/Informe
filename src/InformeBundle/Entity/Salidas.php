@@ -74,14 +74,14 @@ class Salidas
     /**
      * @var string
      *
-     * @ORM\Column(name="actividad", type="string", length=1000)
+     * @ORM\Column(name="actividad", type="string", length=1000, nullable=true))
      */
     private $actividad;
 
     /**
      * @var array $propositos
      *
-     * @ORM\Column(name="propositos", type="simple_array", nullable=true)
+     * @ORM\Column(name="propositos", type="simple_array", nullable=true, nullable=true)
      */
     private $propositos;
 

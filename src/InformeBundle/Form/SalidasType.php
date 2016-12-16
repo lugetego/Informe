@@ -17,6 +17,7 @@ class SalidasType extends AbstractType
         $builder
             ->add('tipo', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',array(
                 'label'=>'*Tipo',
+                'placeholder'=>'Seleccionar',
                 'choices'=>array(
                     'Licencia'=>'Licencia',
                     'Comisión'=>'Comisión',

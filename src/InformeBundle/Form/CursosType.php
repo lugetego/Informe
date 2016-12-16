@@ -10,7 +10,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-
 class CursosType extends AbstractType
 {
     /**
@@ -22,7 +21,7 @@ class CursosType extends AbstractType
         $builder
             ->add('nombre', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
                 'label'=>'*Nombre del curso o seminario',
-                'required'=>false,
+                'required'=>true,
             ))
             ->add('tipo', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',array(
                 'label'=>'*Tipo',
@@ -45,8 +44,8 @@ class CursosType extends AbstractType
                 'choices_as_values' => true,
             ))
             ->add('horas', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
-                'label'=>'Número de horas',
-                'required'=>false,
+                'label'=>'*Número de horas',
+                'required'=>true,
             ))
             ->add('lugares','Symfony\Component\Form\Extension\Core\Type\ChoiceType', array('choices'  => array(
                 'Escuela Nacional de Estudios Superiores (ENES), UNAM Campus Morelia'=>'ENES',
@@ -58,8 +57,9 @@ class CursosType extends AbstractType
                 // *this line is important*
                 'choices_as_values' => true,
                 'placeholder' => 'Seleccionar',
-                'label'=>'Lugar donde se impartió',
+                'label'=>'*Lugar donde se impartió',
                 'mapped'=> false,
+                'required'=>true,
             ))
             ->add('lugar','Symfony\Component\Form\Extension\Core\Type\TextType', array('label' => 'Lugar donde se impartió', 'read_only'=> true
             ))
@@ -69,7 +69,7 @@ class CursosType extends AbstractType
 
             if ( 'Otro' == $otro) {
                 $form->add('lugar', 'Symfony\Component\Form\Extension\Core\Type\TextType', array(
-                    'label' => 'Lugar donde se impartió',
+                    'label' => '*Lugar donde se impartió',
                 ));
             }
         };

@@ -147,7 +147,7 @@ class PosdocController extends Controller
             $em->flush($posdoc);
         }
 
-        return $this->redirectToRoute('posdoc_index');
+        return $this->redirectToRoute('estudiantes_index');
     }
 
     /**

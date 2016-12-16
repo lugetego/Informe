@@ -30,8 +30,6 @@ $(document).ready(function(){
 
                     $('#proyectos_tipo').attr('readonly', false);
 
-
-
                     // Position field now displays the appropriate positions.
 
                 }

@@ -18,7 +18,6 @@ class EstudiantesType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
         $builder
             ->add('programas', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',array(
                 'label'=>'*Programa',
@@ -30,6 +29,7 @@ class EstudiantesType extends AbstractType
                 'choices_as_values' => true,
                 'placeholder' => 'Seleccionar',
                 'mapped'=> false,
+                'required'=>true,
             ))
             ->add('nivel', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',array(
                 'label'=>'*Nivel',
@@ -51,7 +51,8 @@ class EstudiantesType extends AbstractType
                 'required'=>true,
             ))
             ->add('avance', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',array(
-                'label'=>'Porcentaje de avance',
+                'label'=>'*Porcentaje de avance',
+                'required'=>true,
                 'choices'=>array(
                     '0'=>'0',
                     '10'=>'10',
@@ -71,7 +72,7 @@ class EstudiantesType extends AbstractType
                     false=>'No '),
                 'expanded'=>true,
                 'required'=>true,
-                'label'=>'Estudiante titulado',
+                'label'=>'*Estudiante titulado',
                 'choices_as_values' => false,
             ))
             ->add('titulacion','Symfony\Component\Form\Extension\Core\Type\DateType',array(
@@ -81,7 +82,7 @@ class EstudiantesType extends AbstractType
                     'day' => 'Día'),
                 'years'=> range(2016,2020),
                 'label'=>'Fecha de titulación',
-                'required'=>true,
+                'required'=>false,
             ))
             ->add('programa','Symfony\Component\Form\Extension\Core\Type\TextType', array('label' => 'Otro programa', 'read_only'=> true
             ))
