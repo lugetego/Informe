@@ -53,14 +53,14 @@ class Cursos
     /**
      * @var string
      *
-     * @ORM\Column(name="horas", type="string", length=255)
+     * @ORM\Column(name="horas", type="string", length=255, nullable=true)
      */
     private $horas;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lugar", type="string", length=255)
+     * @ORM\Column(name="lugar", type="string", length=255, nullable=true)
      */
     private $lugar;
 
