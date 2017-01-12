@@ -167,6 +167,10 @@ class DashController extends Controller
             $pdfOptions = array(
                 'footer-right'     => ('Hoja [page] de [toPage]'),
                 'footer-font-size'=> 8,
+                'margin-top'    => 10,
+                'margin-right'  => 10,
+                'margin-bottom' => 10,
+                'margin-left'   => 10,
                 );
         }
 
