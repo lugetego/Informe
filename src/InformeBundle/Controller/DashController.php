@@ -35,10 +35,15 @@ class DashController extends Controller
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
         }
+
         if ($this->get('security.context')->isGranted('ROLE_ADMIN'))
         {
             $academicos = $em->getRepository('InformeBundle:Academico')->findAll();
+            return $this->render('dash/admin.html.twig', array(
+                'academicos'=> $academicos,
+            ));
         }
+
         else {
             $user = $this->get('security.context')->getToken()->getUser();
             $academico = $user->getAcademico();
@@ -51,7 +56,6 @@ class DashController extends Controller
             $planes = $academico->getPlanes();
             $posdocs = $academico->getPosdocs();
             $enviado = $academico->isEnviado();
-
 
             return $this->render('dash/index.html.twig', array(
                 'academico'=> $academico,
@@ -69,9 +73,6 @@ class DashController extends Controller
             ));
         }
 
-        return array(
-            'academicos' => $academicos,
-        );
     }
 
     /**
@@ -88,14 +89,14 @@ class DashController extends Controller
 
         $user = $this->get('security.context')->getToken()->getUser();
         $academico = $user->getAcademico();
-        $investigaciones = $user->getAcademico()->getInvestigaciones();
-        $estudiantes = $user->getAcademico()->getEstudiantes();
-        $cursos = $user->getAcademico()->getCursos();
-        $proyectos = $user->getAcademico()->getProyectos();
-        $eventos = $user->getAcademico()->getEventos();
-        $salidas = $user->getAcademico()->getSalidas();
-        $planes = $user->getAcademico()->getPlanes();
-        $posdocs= $user->getAcademico()->getPosdocs();
+        $investigaciones = $academico->getInvestigaciones();
+        $estudiantes = $academico->getEstudiantes();
+        $cursos = $academico->getCursos();
+        $proyectos = $academico->getProyectos();
+        $eventos = $academico->getEventos();
+        $salidas = $academico->getSalidas();
+        $planes = $academico->getPlanes();
+        $posdocs= $academico->getPosdocs();
 
         $html = $this->renderView('dash/layout-pdf.html.twig', array(
             'academico'=>$academico,
@@ -122,6 +123,64 @@ class DashController extends Controller
         );
     }
 
+    /**
+     * Export to PDF admin
+     *
+     * @Route("/pdf/{id}", name="informe_pdfadmin")
+     */
+    public function pdfAdminAction(Academico $id)
+    {
+
+
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+
+        if ($this->get('security.context')->isGranted('ROLE_ADMIN'))
+        {
+
+            $repository = $this->getDoctrine()->getRepository('InformeBundle:Academico');
+            $academico = $repository->find($id);
+            $investigaciones = $academico->getInvestigaciones();
+            $estudiantes = $academico->getEstudiantes();
+            $cursos = $academico->getCursos();
+            $proyectos = $academico->getProyectos();
+            $eventos = $academico->getEventos();
+            $salidas = $academico->getSalidas();
+            $planes = $academico->getPlanes();
+            $posdocs= $academico->getPosdocs();
+
+            $html = $this->renderView('dash/layout-pdf.html.twig', array(
+                'academico'=>$academico,
+                'investigaciones'  => $investigaciones,
+                'estudiantes'=> $estudiantes,
+                'cursos'=>$cursos,
+                'proyectos'=>$proyectos,
+                'eventos'=>$eventos,
+                'salidas'=>$salidas,
+                'planes'=>$planes,
+                'posdocs'=>$posdocs
+            ));
+
+            $filename = sprintf('Informe-'.$academico->getNombre().'%s.pdf', date('Y-m-d'));
+
+            $pdfOptions = array(
+                'footer-right'     => ('Hoja [page] de [toPage]'),
+                'footer-font-size'=> 8,
+                );
+        }
+
+        return new Response(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html, $pdfOptions),
+            200,
+            [
+                'Content-Type'        => 'application/pdf',
+                'Content-Disposition' => sprintf('attachment; filename="%s"', $filename),
+
+            ]
+        );
+
+    }
 
     /**
      * Envío informe y plan
@@ -157,7 +216,6 @@ class DashController extends Controller
         $mailer->send($message);
 
         return $this->redirectToRoute('dashboard');
-
 
     }
 

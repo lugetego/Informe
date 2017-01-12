@@ -13,18 +13,23 @@
     <!-- Custom Fonts -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('css/custom.css', absolute=true) }}" type="text/css"/>
+
 
 {% endblock %}
 
 {% block body %}
     {# Layout for PDF files #}
 
-        {% block content %}
+    {% block content %}
 
+        <div class="print-area">
             <div class="row page-header">
                 <div class="col-xs-6">
-                    <h3>Informe 2016</h3>
-                    <p> <strong>Académico:</strong> {{ academico.nombre }} {{ academico.apellido }}</p>
+                    <p><small><strong>Académico:</strong> {{ academico.nombre }} {{ academico.apellido }}</small> </p>
+                    <p>Informe de actividades 2016</p>
+
                 </div>
                 <div class="col-xs-6">
                     <p class="text-right"><img class="right" src="{{ asset('img/ccm.png', absolute=true) }}" width="180px" height="60px" /></p>
@@ -32,84 +37,126 @@
             </div>
 
             {% if investigaciones|length > 0 %}
-                <strong>Investigación</strong><br>
-
+                <strong><small>Investigación</small></strong><br>
                 <ol>
                     {% for investigacion in investigaciones %}
-                        <li>{{ investigacion.titulo |title }},<em> {{ investigacion.autores }}</em>, <small>{{ investigacion.tipo|title }}</small>, {{ investigacion.year  }}
-                            Vol. {{ investigacion.volumen }}, {{ investigacion.pags }} págs., ISSN: {{ investigacion.issn  }}</li>
+                        <small><li class="text-justify">{{ investigacion.titulo |title }}, <small><em> {{ investigacion.autores }}</em></small>, <small>{{ investigacion.tipo|title }}</small>,
+                                {{ investigacion.year }}, {% if investigacion.volumen %}Vol. {{ investigacion.volumen }},{% endif %}
+                                {% if investigacion.pags %}{{ investigacion.pags }} págs.,{% endif %} {% if investigacion.issn %} ISSN: {{ investigacion.issn  }}, {% endif %}</li></small>
                     {% endfor %}
                 </ol>
             {% endif %}
 
             {% if estudiantes|length > 0 %}
-                <strong>Estudiantes</strong><br>
+                <strong><small>Estudiantes</small></strong><br>
                 <ol>
                     {% for estudiante in estudiantes %}
-                        <li>{{ estudiante.alumno |title }}, <small>{{ estudiante.nivel|title }}, {{ estudiante.programa }}</small>,
-                            {{ estudiante.avance }}% de avance, {% if estudiante.titulado %} titulado el {{ estudiante.titulacion|localizeddate('long', 'none') }},{% endif %}
-                               <em>{{ estudiante.tesis }}</em>
-                        </li>
+                        <small>
+                            <li class="text-justify">{{ estudiante.alumno |title }},{{ estudiante.nivel|title }}, {{ estudiante.programa }},
+                                {% if estudiante.avance %}{{ estudiante.avance }}% de avance,{% endif %} {% if estudiante.titulado %} titulado el {{ estudiante.titulacion|localizeddate('long', 'none') }},{% endif %}
+                                Tesis: <em>{{ estudiante.tesis }}</em>
+                            </li>
+                        </small>
                     {% endfor %}
                 </ol>
             {% endif %}
 
             {% if posdocs|length > 0 %}
-                <strong>Posdocs</strong><br>
+                <strong><small>Posdocs</small></strong><br>
                 <ol>
                     {% for posdoc in posdocs %}
-                        <li>{{ posdoc.nombre |title }}, <small>del {{ posdoc.inicio|localizeddate('long', 'none') }} al {{ posdoc.fin|localizeddate('long', 'none') }}</small>
-                            <br>
-                        </li>
+                        <small>
+                            <li class="text-justify">{{ posdoc.nombre |title }}, <small>del {{ posdoc.inicio|localizeddate('long', 'none') }} al {{ posdoc.fin|localizeddate('long', 'none') }}</small>
+                                <br>
+                            </li>
+                        </small>
                     {% endfor %}
                 </ol>
             {% endif %}
 
-
             {% if cursos|length > 0 %}
-                <strong>Cursos y seminarios</strong><br>
+                <strong><small>Cursos y seminarios</small></strong><br>
                 <ol>
                     {% for curso in cursos %}
-                        <li>{{ curso.nombre|title }}, <small>{{ curso.tipo|title }}</small>,<em> {{ curso.nivel }}, {{ curso.horas }}, {{ curso.lugar }}</em></li>
+                        <small> <li class="text-justify">{{ curso.nombre|title }}, <small>{{ curso.tipo|title }}</small>,<em> {{ curso.nivel }}, {{ curso.horas }}, {{ curso.lugar }}</em></li></small>
                     {% endfor %}
                 </ol>
             {% endif %}
 
             {% if proyectos|length > 0 %}
-                <strong>Proyectos</strong><br>
+                <strong><small>Proyectos</small></strong><br>
                 <ol>
                     {% for proyecto in proyectos %}
-                        <li>{{ proyecto.nombre|title }}, <small>{{ proyecto.tipo|title }}</small>,<em> {{ proyecto.numero }}</em></li>
+                        <small><li class="text-justify">{{ proyecto.nombre }}, <small>{{ proyecto.tipo|title }}</small>,<em> {{ proyecto.numero }}</em></li></small>
                     {% endfor %}
                 </ol>
             {% endif %}
 
             {% if eventos|length > 0 %}
-                <strong>Eventos académicos y de divulgación</strong><br>
+                <strong><small>Eventos académicos y de divulgación</small></strong><br>
                 <ol>
                     {% for evento in eventos %}
-                        <li>{{ evento.nombre|title }}, <small>{{ evento.tipo|title }}, {% if evento.divulgacion %} Divulgación, {% endif %} </small>
-                            <em> {{ evento.institucion }}</em>, {{ evento.actividad }}, {{ evento.institucion }}, {{ evento.pais }}
-                        </li>
+                        <small>
+                            <li class="text-justify">{{ evento.nombre }}, <small>{{ evento.tipo|title }}, {% if evento.divulgacion %} Divulgación, {% endif %} </small>
+                                <em> {% if evento.institucion %}{{ evento.institucion }}</em>,{% endif %} {% if evento.actividad %}{{ evento.actividad }},{% endif %} {% if evento.pais %} {{ evento.pais }}{% endif %}
+                            </li>
+                        </small>
                     {% endfor %}
                 </ol>
             {% endif %}
 
             {% if salidas|length > 0 %}
-                <strong>Licencias y comisiones</strong><br>
+                <strong><small>Licencias y comisiones</small></strong><br>
                 <ol>
                     {% for salida in salidas %}
-                        <li>{{ salida.pais|title }}, <small>{{ salida.tipo|title }}</small>,<em> {{ salida.universidad }}</em>, {{ salida.actividad }},
-                            {% for proposito in salida.propositos %}
-                                {{ proposito }},
-                            {% endfor %}
-                            <br>
-                        </li>
+                        <small><li class="text-justify">{{ salida.pais|title }}, <em> {{ salida.universidad }}</em>, {{ salida.actividad }}
+
+                                <br>
+                            </li>
+                        </small>
                     {% endfor %}
                 </ol>
             {% endif %}
 
-        {% endblock %}
+            {% if is_granted("ROLE_ADMIN") %}
+
+                <div class="row page-header">
+                    <div class="col-xs-6">
+                        <h5>Plan de trabajo 2017</h5>
+                    </div>
+
+                </div>
+                {% for plan in planes %}
+
+                    {% if plan.investigacion %}
+                        <strong><small>Investigación</small></strong><br>
+
+                        <p class="text-justify"><small>{{ plan.investigacion| nl2br }}</small></p>
+                    {% endif %}
+                    {% if plan.estudiantes %}
+                        <strong><small>Estudiantes</small></strong><br>
+                        <p class="text-justify"><small>{{ plan.estudiantes| nl2br }}</small></p>
+                    {% endif %}
+                    {% if plan.cursos %}
+                        <strong><small>Cursos y seminarios</small></strong><br>
+                        <p class="text-justify"><small>{{ plan.cursos | nl2br  }}  </small></p>
+                    {% endif %}
+                    {% if plan.proyectos %}
+                        <strong><small>Proyectos</small></strong><br>
+                        <p class="text-justify"><small>{{ plan.proyectos| nl2br }}</small></p>
+                    {% endif %}
+                    {% if plan.eventos %}
+                        <strong><small>Eventos académicos y de divulgación</small></strong><br>
+                        <p class="text-justify"> <small>{{ plan.eventos| nl2br }}</small></p>
+                    {% endif %}
+                {% endfor %}
+
+            {% endif %}
+
+        </div>
+
+
+
+    {% endblock %}
 
 {% endblock %}
-

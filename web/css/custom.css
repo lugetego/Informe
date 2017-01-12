@@ -1,7 +1,8 @@
 .page-header {
     border-bottom: 1px solid #eee;
-    margin: 6px 0 6px;
-    padding-bottom: 9px;
+    margin: 4px 0 4px;
+    padding-bottom: 2px;
+    padding-top: 2px;
 }
 
 li:hover {
@@ -13,6 +14,7 @@ li:hover {
     color: #666666;
     font-size: 15px;
 }
+
 .counter {
     background-color: #337ab7;
     border-radius: 20px;
@@ -22,4 +24,29 @@ li:hover {
     font-weight: 600;
     line-height: 1;
     padding: 2px 5px;
+}
+
+ol {
+    padding: 0px;
+    margin-bottom: 0px;
+}
+
+ol li {
+    padding: 0px;
+    margin-left: 25px;
+}
+
+/* Printable area */
+.print-area {
+    position:   relative;
+    top:        .5cm;
+    left:       .5cm;
+    bottom:     .5cm;
+    width:      19cm;
+    height:     27.6cm;
+    font-size: 11pt;
+}
+
+.table th {
+    text-align: center;
 }
