@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Tecnicos list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Informe</th>
+                <th>Plan</th>
+                <th>Created</th>
+                <th>Modified</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tecnico in tecnicos %}
+            <tr>
+                <td><a href="{{ path('tecnico_show', { 'id': tecnico.id }) }}">{{ tecnico.id }}</a></td>
+                <td>{{ tecnico.informe }}</td>
+                <td>{{ tecnico.plan }}</td>
+                <td>{% if tecnico.created %}{{ tecnico.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if tecnico.modified %}{{ tecnico.modified|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('tecnico_show', { 'id': tecnico.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('tecnico_edit', { 'id': tecnico.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('tecnico_new') }}">Create a new tecnico</a>
+        </li>
+    </ul>
+{% endblock %}

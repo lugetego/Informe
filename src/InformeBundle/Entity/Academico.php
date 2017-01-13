@@ -137,6 +137,15 @@ class Academico
     private $planes;
 
     /**
+     * @var array $tecnicos
+     *
+     * @ORM\OneToMany(targetEntity="InformeBundle\Entity\Tecnico", mappedBy="academico")
+     *
+     * The mappedBy attribute designates the field in the entity that is the owner of the relationship.
+     */
+    private $tecnicos;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $created;
@@ -640,5 +649,38 @@ class Academico
     public function getPosdocs()
     {
         return $this->posdocs;
+    }
+
+    /**
+     * Add tecnicos
+     *
+     * @param \InformeBundle\Entity\Tecnico $tecnicos
+     * @return Academico
+     */
+    public function addTecnico(\InformeBundle\Entity\Tecnico $tecnicos)
+    {
+        $this->tecnicos[] = $tecnicos;
+
+        return $this;
+    }
+
+    /**
+     * Remove tecnicos
+     *
+     * @param \InformeBundle\Entity\Tecnico $tecnicos
+     */
+    public function removeTecnico(\InformeBundle\Entity\Tecnico $tecnicos)
+    {
+        $this->tecnicos->removeElement($tecnicos);
+    }
+
+    /**
+     * Get tecnicos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTecnicos()
+    {
+        return $this->tecnicos;
     }
 }

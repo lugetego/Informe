@@ -44,6 +44,22 @@ class DashController extends Controller
             ));
         }
 
+        elseif ($this->get('security.context')->isGranted('ROLE_TECNICO'))
+        {
+            $user = $this->get('security.context')->getToken()->getUser();
+            $academico = $user->getAcademico();
+            $tecnicos = $academico->getTecnicos();
+            $enviado = $academico->isEnviado();
+
+            return $this->render('dash/tecnico.html.twig', array(
+                'academico'=>$academico,
+                'tecnicos'=> $tecnicos,
+                'enviado'=>$enviado,
+                'user'=>$user,
+
+            ));
+        }
+
         else {
             $user = $this->get('security.context')->getToken()->getUser();
             $academico = $user->getAcademico();
@@ -124,6 +140,49 @@ class DashController extends Controller
     }
 
     /**
+     * Export to PDF
+     *
+     * @Route("/pdftecnico", name="informe_pdftecnico")
+     */
+    public function pdfTecnicoAction()
+    {
+
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $user = $this->get('security.context')->getToken()->getUser();
+        $academico = $user->getAcademico();
+        $tecnicos = $academico->getTecnicos();
+
+        $html = $this->renderView('dash/layout-pdftecnico.html.twig', array(
+            'academico'=>$academico,
+            'tecnicos'=>$tecnicos,
+        ));
+
+        $filename = sprintf('Informe-'.$user.'%s.pdf', date('Y-m-d'));
+
+        $pdfOptions = array(
+            'footer-right'     => ('Hoja [page] de [toPage]'),
+            'footer-font-size'=> 8,
+            'margin-top'    => 10,
+            'margin-right'  => 10,
+            'margin-bottom' => 10,
+            'margin-left'   => 10,
+        );
+
+        return new Response(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html, $pdfOptions),
+            200,
+            [
+                'Content-Type'        => 'application/pdf',
+                'Content-Disposition' => sprintf('attachment; filename="%s"', $filename),
+
+            ]
+        );
+    }
+
+    /**
      * Export to PDF admin
      *
      * @Route("/pdf/{id}", name="informe_pdfadmin")
@@ -131,13 +190,11 @@ class DashController extends Controller
     public function pdfAdminAction(Academico $id)
     {
 
-
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
         }
 
-        if ($this->get('security.context')->isGranted('ROLE_ADMIN'))
-        {
+        if ($this->get('security.context')->isGranted('ROLE_ADMIN')) {
 
             $repository = $this->getDoctrine()->getRepository('InformeBundle:Academico');
             $academico = $repository->find($id);
@@ -148,21 +205,30 @@ class DashController extends Controller
             $eventos = $academico->getEventos();
             $salidas = $academico->getSalidas();
             $planes = $academico->getPlanes();
-            $posdocs= $academico->getPosdocs();
+            $posdocs = $academico->getPosdocs();
+            $tecnicos = $academico->getTecnicos();
 
-            $html = $this->renderView('dash/layout-pdf.html.twig', array(
-                'academico'=>$academico,
-                'investigaciones'  => $investigaciones,
-                'estudiantes'=> $estudiantes,
-                'cursos'=>$cursos,
-                'proyectos'=>$proyectos,
-                'eventos'=>$eventos,
-                'salidas'=>$salidas,
-                'planes'=>$planes,
-                'posdocs'=>$posdocs
-            ));
+            if(in_array('ROLE_TECNICO', $academico->getUser()->getRoles())){
+                $html = $this->renderView('dash/layout-pdftecnico.html.twig', array(
+                    'academico' => $academico,
+                    'tecnicos' => $tecnicos,
+                ));
+            }
+            else {
+                $html = $this->renderView('dash/layout-pdf.html.twig', array(
+                    'academico' => $academico,
+                    'investigaciones' => $investigaciones,
+                    'estudiantes' => $estudiantes,
+                    'cursos' => $cursos,
+                    'proyectos' => $proyectos,
+                    'eventos' => $eventos,
+                    'salidas' => $salidas,
+                    'planes' => $planes,
+                    'posdocs' => $posdocs
+                ));
+            }
 
-            $filename = sprintf('Informe-'.$academico->getNombre().'%s.pdf', date('Y-m-d'));
+            $filename = sprintf('Informe-'.$academico->getUser().'%s.pdf', date('Y-m-d'));
 
             $pdfOptions = array(
                 'footer-right'     => ('Hoja [page] de [toPage]'),
@@ -171,7 +237,7 @@ class DashController extends Controller
                 'margin-right'  => 10,
                 'margin-bottom' => 10,
                 'margin-left'   => 10,
-                );
+            );
         }
 
         return new Response(
