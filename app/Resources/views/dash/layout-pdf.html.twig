@@ -129,7 +129,6 @@
 
                     {% if plan.investigacion %}
                         <strong><small>Investigación</small></strong><br>
-
                         <p class="text-justify"><small>{{ plan.investigacion| nl2br }}</small></p>
                     {% endif %}
                     {% if plan.estudiantes %}
@@ -145,6 +144,10 @@
                         <p class="text-justify"><small>{{ plan.proyectos| nl2br }}</small></p>
                     {% endif %}
                     {% if plan.eventos %}
+                        <strong><small>Eventos académicos y de divulgación</small></strong><br>
+                        <p class="text-justify"> <small>{{ plan.eventos| nl2br }}</small></p>
+                    {% endif %}
+                    {% if plan.salidas %}
                         <strong><small>Eventos académicos y de divulgación</small></strong><br>
                         <p class="text-justify"> <small>{{ plan.eventos| nl2br }}</small></p>
                     {% endif %}
