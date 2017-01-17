@@ -52,7 +52,7 @@
                 <ol>
                     {% for estudiante in estudiantes %}
                         <small>
-                            <li class="text-justify">{{ estudiante.alumno |title }},{{ estudiante.nivel|title }}, {{ estudiante.programa }},
+                            <li class="text-justify">{{ estudiante.alumno |title }}, {{ estudiante.nivel|title }}, {{ estudiante.programa }},
                                 {% if estudiante.avance %}{{ estudiante.avance }}% de avance,{% endif %} {% if estudiante.titulado %} titulado el {{ estudiante.titulacion|localizeddate('long', 'none') }},{% endif %}
                                 {% if estudiante.tesis %}Tesis: <em>{{ estudiante.tesis }}</em>{% endif %}
                             </li>
