@@ -54,7 +54,7 @@
                         <small>
                             <li class="text-justify">{{ estudiante.alumno |title }},{{ estudiante.nivel|title }}, {{ estudiante.programa }},
                                 {% if estudiante.avance %}{{ estudiante.avance }}% de avance,{% endif %} {% if estudiante.titulado %} titulado el {{ estudiante.titulacion|localizeddate('long', 'none') }},{% endif %}
-                                Tesis: <em>{{ estudiante.tesis }}</em>
+                                {% if estudiante.tesis %}Tesis: <em>{{ estudiante.tesis }}</em>{% endif %}
                             </li>
                         </small>
                     {% endfor %}
