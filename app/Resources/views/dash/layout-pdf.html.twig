@@ -40,9 +40,12 @@
                 <strong><small>Investigación</small></strong><br>
                 <ol>
                     {% for investigacion in investigaciones %}
-                        <small><li class="text-justify">{{ investigacion.titulo |title }}, <small><em> {{ investigacion.autores }}</em></small>, <small>{{ investigacion.tipo|title }}</small>,
-                                {{ investigacion.year }}, {% if investigacion.volumen %}Vol. {{ investigacion.volumen }},{% endif %}
-                                {% if investigacion.pags %}{{ investigacion.pags }} págs.,{% endif %} {% if investigacion.issn %} ISSN: {{ investigacion.issn  }}, {% endif %}</li></small>
+                        <small><li class="text-justify">{{ investigacion.titulo }}, <small><em> {{ investigacion.autores }}</em></small>, <small>{{ investigacion.tipo|title }}</small>,
+                                {% if investigacion.revista %} {{ investigacion.revista }},{% endif %}
+                                {% if investigacion.year %} {{ investigacion.year }}, {% endif %}
+                                {% if investigacion.volumen %}Vol. {{ investigacion.volumen }},{% endif %}
+                                {% if investigacion.pags %}{{ investigacion.pags }} págs.,{% endif %}
+                                {% if investigacion.issn %} ISSN: {{ investigacion.issn  }}, {% endif %}</li></small>
                     {% endfor %}
                 </ol>
             {% endif %}
@@ -78,7 +81,7 @@
                 <strong><small>Cursos y seminarios</small></strong><br>
                 <ol>
                     {% for curso in cursos %}
-                        <small> <li class="text-justify">{{ curso.nombre|title }}, <small>{{ curso.tipo|title }}</small>,<em> {{ curso.nivel }}, {{ curso.horas }}, {{ curso.lugar }}</em></li></small>
+                        <small> <li class="text-justify">{{ curso.nombre }}, <small>{{ curso.tipo|title }}</small>,<em> {{ curso.nivel }}, {{ curso.horas }}, {{ curso.lugar }}</em></li></small>
                     {% endfor %}
                 </ol>
             {% endif %}

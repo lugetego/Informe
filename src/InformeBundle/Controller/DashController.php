@@ -142,6 +142,40 @@ class DashController extends Controller
     /**
      * Export to PDF
      *
+     * @Route("/pdfplan", name="plan_pdf")
+     */
+    public function pdfPlanAction()
+    {
+
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $user = $this->get('security.context')->getToken()->getUser();
+        $academico = $user->getAcademico();
+        $planes = $academico->getPlanes();
+        $html = $this->renderView('dash/layout-pdfplan.html.twig', array(
+            'academico'=>$academico,
+            'planes'=>$planes,
+
+        ));
+
+        $filename = sprintf('Plan-'.$user.'%s.pdf', date('Y-m-d'));
+
+        return new Response(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+            200,
+            [
+                'Content-Type'        => 'application/pdf',
+                'Content-Disposition' => sprintf('attachment; filename="%s"', $filename),
+
+            ]
+        );
+    }
+
+    /**
+     * Export to PDF
+     *
      * @Route("/pdftecnico", name="informe_pdftecnico")
      */
     public function pdfTecnicoAction()

@@ -169,6 +169,12 @@
                                         <dd> <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal3">Vista previa</button> </dd>
                                     </dl>
                                 </div>
+                                <div class="col-lg-4 col-md-4 text-center">
+                                    <dl>
+                                        <dt><i class="fa fa-file-pdf-o fa-3x" aria-hidden="true"></i></dt>
+                                        <dd><a href="{{ path('plan_pdf') }} "> <h5>Descargar</h5></a></dd>
+                                    </dl>
+                                </div>
 
                             </div>
                         </div>
@@ -261,8 +267,10 @@
                     {% else %}
                         <ol>
                             {% for investigacion in investigaciones %}
-                                <li>{{ investigacion.titulo |title }},<em> {{ investigacion.autores }}</em>, <small>{{ investigacion.tipo|title }}</small>, {{ investigacion.year  }}
-                                    Vol. {{ investigacion.volumen }}, {{ investigacion.pags }} págs., ISSN: {{ investigacion.issn  }}</li>
+                                <li>{{ investigacion.titulo }},<em> {{ investigacion.autores }}</em>, <small>{{ investigacion.tipo|title }}</small>,
+                                    {{ investigacion.revista }}, {{ investigacion.year  }}, Vol. {{ investigacion.volumen }},
+                                    {{ investigacion.pags }} págs., ISSN: {{ investigacion.issn  }}
+                                </li>
                             {% endfor %}
                         </ol>
                     {% endif %}
@@ -301,7 +309,7 @@
                     {% else %}
                         <ol>
                             {% for curso in cursos %}
-                                <li>{{ curso.nombre|title }}, <small>{{ curso.tipo|title }}</small>,<em> {{ curso.nivel }}, {{ curso.horas }}, {{ curso.lugar }}</em>
+                                <li>{{ curso.nombre }}, <small>{{ curso.tipo|title }}</small>,<em> {{ curso.nivel }}, {{ curso.horas }}, {{ curso.lugar }}</em>
 
                                 </li>
                             {% endfor %}
@@ -327,7 +335,7 @@
                     {% else %}
                         <ol>
                             {% for evento in eventos %}
-                                <li>{{ evento.nombre|title }}, <small>{{ evento.tipo|title }}, {% if evento.divulgacion %} Divulgación, {% endif %} </small>
+                                <li>{{ evento.nombre}}, <small>{{ evento.tipo|title }}, {% if evento.divulgacion %} Divulgación, {% endif %} </small>
                                     <em> {{ evento.institucion }}</em>, {{ evento.actividad }}, {{ evento.institucion }}, {{ evento.pais }}
                                 </li>
                             {% endfor %}
