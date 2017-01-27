@@ -103,7 +103,7 @@
                             <li class="text-justify">
                             {{ evento.nombre }},
                             <small> {{ evento.tipo|title }}</small>,
-                            {% if evento.platica %} {{ evento.platica }}, {% endif %}
+                            {% if evento.platica %} "{{ evento.platica }}", {% endif %}
                              <small>{% if evento.divulgacion %} Divulgación, {% endif %} </small>
                                 <em> {% if evento.institucion %}{{ evento.institucion }}</em>,{% endif %}
                                 {% if evento.actividad %}{{ evento.actividad }},{% endif %}
@@ -118,7 +118,7 @@
                 <strong><small>Licencias y comisiones</small></strong><br>
                 <ol>
                     {% for salida in salidas %}
-                        <small><li class="text-justify">{{ salida.pais|title }}, <em> {{ salida.universidad }}</em>, {{ salida.actividad }}, {{ salida.trabajo }}
+                        <small><li class="text-justify">{{ salida.pais|title }}, <em> {{ salida.universidad }}</em>, {{ salida.actividad }}, "{{ salida.trabajo }}"
 
                                 <br>
                             </li>
