@@ -100,8 +100,14 @@
                 <ol>
                     {% for evento in eventos %}
                         <small>
-                            <li class="text-justify">{{ evento.nombre }}, <small> {{ evento.tipo|title }}, {% if evento.platica %} {{ evento.platica }}, {% endif %} {% if evento.divulgacion %} Divulgación, {% endif %} </small>
-                                <em> {% if evento.institucion %}{{ evento.institucion }}</em>,{% endif %} {% if evento.actividad %}{{ evento.actividad }},{% endif %} {% if evento.pais %} {{ evento.pais }}{% endif %}
+                            <li class="text-justify">
+                            {{ evento.nombre }},
+                            <small> {{ evento.tipo|title }}</small>,
+                            {% if evento.platica %} {{ evento.platica }}, {% endif %}
+                             <small>{% if evento.divulgacion %} Divulgación, {% endif %} </small>
+                                <em> {% if evento.institucion %}{{ evento.institucion }}</em>,{% endif %}
+                                {% if evento.actividad %}{{ evento.actividad }},{% endif %}
+                                {% if evento.pais %} {{ evento.pais }}{% endif %}
                             </li>
                         </small>
                     {% endfor %}
