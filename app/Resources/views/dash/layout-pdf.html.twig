@@ -100,7 +100,7 @@
                 <ol>
                     {% for evento in eventos %}
                         <small>
-                            <li class="text-justify">{{ evento.nombre }}, <small> {{ evento.tipo|title }}, {% if evento.platica %} Plática: {{ evento.platica }}, {% endif %} {% if evento.divulgacion %} Divulgación, {% endif %} </small>
+                            <li class="text-justify">{{ evento.nombre }}, <small> {{ evento.tipo|title }}, {% if evento.platica %} {{ evento.platica }}, {% endif %} {% if evento.divulgacion %} Divulgación, {% endif %} </small>
                                 <em> {% if evento.institucion %}{{ evento.institucion }}</em>,{% endif %} {% if evento.actividad %}{{ evento.actividad }},{% endif %} {% if evento.pais %} {{ evento.pais }}{% endif %}
                             </li>
                         </small>
@@ -112,7 +112,7 @@
                 <strong><small>Licencias y comisiones</small></strong><br>
                 <ol>
                     {% for salida in salidas %}
-                        <small><li class="text-justify">{{ salida.pais|title }}, <em> {{ salida.universidad }}</em>, {{ salida.trabajo }}, {{ salida.actividad }}
+                        <small><li class="text-justify">{{ salida.pais|title }}, <em> {{ salida.universidad }}</em>, {{ salida.actividad }}, {{ salida.trabajo }}
 
                                 <br>
                             </li>
