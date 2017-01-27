@@ -81,7 +81,12 @@
                 <strong><small>Cursos y seminarios</small></strong><br>
                 <ol>
                     {% for curso in cursos %}
-                        <small> <li class="text-justify">{{ curso.nombre }}, <small>{{ curso.tipo|title }}</small>,<em> {{ curso.nivel }}, {{ curso.horas }}, {{ curso.lugar }}</em></li></small>
+                        <small> <li class="text-justify">{{ curso.nombre }},
+                                <small>{{ curso.tipo|title }}</small>,
+                                <em> {{ curso.nivel }}, {% if curso.horas %}{{ curso.horas }} horas,{% endif %}
+                                    {{ curso.lugar }}</em>
+                            </li>
+                        </small>
                     {% endfor %}
                 </ol>
             {% endif %}
