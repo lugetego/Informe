@@ -267,10 +267,15 @@
                     {% else %}
                         <ol>
                             {% for investigacion in investigaciones %}
-                                <li>{{ investigacion.titulo }},<em> {{ investigacion.autores }}</em>, <small>{{ investigacion.tipo|title }}</small>,
-                                    {{ investigacion.revista }}, {{ investigacion.year  }}, Vol. {{ investigacion.volumen }},
-                                    {{ investigacion.pags }} págs., ISSN: {{ investigacion.issn  }}
-                                </li>
+                                <li class="text-justify">{{ investigacion.titulo }}, <small><em> {{ investigacion.autores }}</em></small>, <small>{{ investigacion.tipo|title }}</small>,
+                                        {% if investigacion.revista %} {{ investigacion.revista }},{% endif %}
+                                        {% if investigacion.year %} {{ investigacion.year }}, {% endif %}
+                                        {% if investigacion.volumen %}Vol. {{ investigacion.volumen }},{% endif %}
+                                        {% if investigacion.pags %}{{ investigacion.pags }} págs.,{% endif %}
+                                        {% if investigacion.indizado %} indizado,{% endif %}
+                                        {% if investigacion.issn %} ISSN: {{ investigacion.issn  }}, {% endif %}
+                                        {% if investigacion.status %} {{ investigacion.status|lower  }} {% endif %}</li>
+
                             {% endfor %}
                         </ol>
                     {% endif %}
@@ -335,9 +340,18 @@
                     {% else %}
                         <ol>
                             {% for evento in eventos %}
-                                <li>{{ evento.nombre}}, <small>{{ evento.tipo|title }}, {% if evento.divulgacion %} Divulgación, {% endif %} </small>
-                                    <em> {{ evento.institucion }}</em>, {{ evento.actividad }}, {{ evento.institucion }}, {{ evento.pais }}
-                                </li>
+                                    <li class="text-justify">
+                                        {{ evento.nombre }},
+                                        <small>{% if evento.nacional %} nacional, {% else %} internacional,{% endif %}</small>
+                                        <small>{% if evento.organizador %} organizador,{% endif %}</small>
+                                        <small> {{ evento.tipo|title }},</small>
+                                        {% if evento.platica %} "{{ evento.platica }}",{% endif %}
+                                        <small>{% if evento.divulgacion %} Divulgación, {% endif %} </small>
+                                        <em> {% if evento.institucion %} {{ evento.institucion }}</em>,{% endif %}
+                                        {% if evento.actividad %} {{ evento.actividad }},{% endif %}
+                                        {% if evento.pais %} {{ evento.pais }}{% endif %}
+                                    </li>
+
                             {% endfor %}
                         </ol>
                     {% endif %}
