@@ -1,0 +1,17 @@
+{{ form_start(edit_form, {'action': path('academico_admin', { 'id': academico.id})}) }}
+
+{% if edit_form.aprobado is defined %}
+    <div class="row">
+        <div class="col-lg-10">
+            {{ form_widget(edit_form.aprobado,{'attr': {'class': 'form-control input-sm', 'placeholder':'RFC'} } ) }}
+        </div>
+        <div class="col-lg-2 ">
+            <button type="submit" class="btn-link">
+                <i class="fa fa-save"></i>
+            </button>
+
+
+            {{ form_end(edit_form) }}
+        </div>
+    </div>
+{% endif %}
