@@ -258,7 +258,8 @@ class DashController extends Controller
                     'eventos' => $eventos,
                     'salidas' => $salidas,
                     'planes' => $planes,
-                    'posdocs' => $posdocs
+                    'posdocs' => $posdocs,
+
                 ));
             }
 

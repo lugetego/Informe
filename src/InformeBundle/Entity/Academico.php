@@ -59,6 +59,11 @@ class Academico
     private $enviado;
 
     /**
+     * @ORM\Column(type="string", length=30, nullable=true)
+     */
+    protected $aprobado;
+
+    /**
      *
      * @ORM\OneToOne(targetEntity="InformeBundle\Entity\User", inversedBy="academico")
      */
@@ -302,6 +307,22 @@ class Academico
     public function setRfc($rfc)
     {
         $this->rfc = $rfc;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAprobado()
+    {
+        return $this->aprobado;
+    }
+
+    /**
+     * @param mixed $aprobado
+     */
+    public function setAprobado($aprobado)
+    {
+        $this->aprobado = $aprobado;
     }
 
     /**

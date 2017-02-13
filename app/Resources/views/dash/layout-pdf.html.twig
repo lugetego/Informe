@@ -20,11 +20,14 @@
         <div class="print-area">
             <div class="row page-header">
                 <div class="col-xs-6">
+
                     <p><small><strong>Académico:</strong> {{ academico.nombre }} {{ academico.apellido }}</small> </p>
                     <p>Informe de actividades 2016</p>
                 </div>
                 <div class="col-xs-6">
-                    <p class="text-right"><img class="right" src="{{ asset('img/ccm.png', absolute=true) }}" width="180px" height="60px" /></p>
+                   {#  <p class="text-right small"><img class="right" src="{{ asset('img/ccm.png', absolute=true) }}" width="180px" height="60px" /></p>   #}
+                    <p class="text-right small"> Dictamen del Consejo Interno: <br><strong>{{ academico.aprobado }}</strong></p>
+
                 </div>
             </div>
 

@@ -109,6 +109,54 @@ class AcademicoController extends Controller
     }
 
     /**
+     * Displays a form to edit an existing Academico entity.
+     *
+     * @Route("/{id}/admin", name="academico_admin")
+     * @Method({"GET", "POST"})
+     */
+    public function adminAction(Request $request, Academico $academico)
+    {
+        $deleteForm = $this->createDeleteForm($academico);
+        $editForm = $this->createForm('InformeBundle\Form\AcademicoType', $academico);
+        $editForm->remove('nombre');
+        $editForm->remove('apellido');
+        $editForm->remove('nacimiento');
+        $editForm->remove('rfc');
+        $editForm->remove('user');
+        $editForm->add('aprobado', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',array(
+            'label'=>'Dictamen',
+            'choices'=>array(
+                'Aprobado'=>'Aprobado',
+                'Aprobado con observaciones'=>'Aprobado con observaciones',
+                'No aprobado'=>'No aprobado',
+            ),
+            'placeholder'=>'Seleccionar',
+            'required'=>true,
+            'choices_as_values' => true,
+        ));
+
+
+        $editForm->handleRequest($request);
+
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($academico);
+            $em->flush();
+
+            //return $this->redirectToRoute('academico_edit', array('id' => $academico->getId()));
+            return $this->redirectToRoute('dashboard');
+
+        }
+
+        return $this->render('academico/dictamen.html.twig', array(
+            'academico' => $academico,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
      * Deletes a Academico entity.
      *
      * @Route("/{id}", name="academico_delete")

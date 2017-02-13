@@ -31,6 +31,7 @@
     <div class="panel-body">
     <div class="row">
 
+        {% if edit_form.nombre is defined %}
         <div class="col-lg-2">
             <div class="form-group">
                 <div>
@@ -42,7 +43,9 @@
                 <div>{{ form_errors(edit_form.nombre) }}</div>
             </div>
         </div>
+        {% endif %}
 
+    {% if edit_form.apellido is defined %}
         <div class="col-lg-2">
             <div class="form-group">
                 <div>
@@ -54,7 +57,9 @@
                 <div>{{ form_errors(edit_form.apellido) }}</div>
             </div>
         </div>
+    {% endif %}
 
+    {% if edit_form.nacimiento is defined %}
         <div class="col-lg-2">
             <div class="form-group">
                 <div>
@@ -66,6 +71,9 @@
                 <div>{{ form_errors(edit_form.nacimiento) }}</div>
             </div>
         </div>
+    {% endif %}
+
+    {% if edit_form.rfc is defined %}
 
         <div class="col-lg-2">
             <div class="form-group">
@@ -78,6 +86,9 @@
                 <div>{{ form_errors(edit_form.rfc) }}</div>
             </div>
         </div>
+    {% endif %}
+
+    {% if edit_form.user is defined %}
         <div class="col-lg-2">
             <div class="form-group">
                 <div>
@@ -90,6 +101,22 @@
             </div>
         </div>
     </div>
+    {% endif %}
+
+    {% if edit_form.aprobado is defined %}
+    <div class="col-lg-2">
+        <div class="form-group">
+            <div>
+                {{ form_label(edit_form.aprobado) }}
+            </div>
+            <div>
+                {{ form_widget(edit_form.aprobado,{'attr': {'class': 'form-control input-sm', 'placeholder':'RFC'} } ) }}
+            </div>
+            <div>{{ form_errors(edit_form.aprobado) }}</div>
+        </div>
+    </div>
+    </div>
+    {% endif %}
 
     <div class="row">
         <div class="col-lg-7 col-lg-offset-5">
