@@ -213,13 +213,14 @@ class Academico
         $this->setModified(new \DateTime());
     }
 
-    /**
-     * @ORM\PreUpdate
-     */
-    public function preUpdate()
-    {
-        $this->setModified(new \DateTime());
-    }
+//    /**
+//     * @ORM\PreUpdate
+//     */
+//    public function preUpdate()
+//    {
+//        $this->setModified(new \DateTime());
+//    }
+
 
     /**
      * Get id
