@@ -64,6 +64,11 @@ class Academico
     protected $aprobado;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $observaciones;
+
+    /**
      *
      * @ORM\OneToOne(targetEntity="InformeBundle\Entity\User", inversedBy="academico")
      */
@@ -324,6 +329,22 @@ class Academico
     public function setAprobado($aprobado)
     {
         $this->aprobado = $aprobado;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getObservaciones()
+    {
+        return $this->observaciones;
+    }
+
+    /**
+     * @param mixed $observaciones
+     */
+    public function setObservaciones($observaciones)
+    {
+        $this->observaciones = $observaciones;
     }
 
     /**
