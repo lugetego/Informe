@@ -33,7 +33,8 @@
                 </div>
                 <div class="col-xs-6">
               {#       <p class="text-right"><img class="right" src="{{ asset('img/ccm.png', absolute=true) }}" width="180px" height="60px" /></p>   #}
-                    <p class="text-right small"> Dictamen del Consejo Interno: <br><strong>{{ academico.aprobado }}</strong></p>
+                    <p class="text-right small alert-success"> Dictamen del Consejo Interno: <strong>{{ academico.aprobado }}</strong><br>
+                    {{ academico.observaciones }}</p>
 
                 </div>
             </div>
