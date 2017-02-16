@@ -39,6 +39,7 @@
                         <small><li class="text-justify">{{ investigacion.titulo }}, <small><em> {{ investigacion.autores }}</em></small>, <small>{{ investigacion.tipo|title }}</small>,
                                 {% if investigacion.revista %} {{ investigacion.revista }},{% endif %}
                                 {% if investigacion.year %} {{ investigacion.year }}, {% endif %}
+                                {% if investigacion.numero %} {{ investigacion.numero }}, {% endif %}
                                 {% if investigacion.volumen %}Vol. {{ investigacion.volumen }},{% endif %}
                                 {% if investigacion.pags %}{{ investigacion.pags }} págs.,{% endif %}
                                 {% if investigacion.indizado %} indizado,{% endif %}
