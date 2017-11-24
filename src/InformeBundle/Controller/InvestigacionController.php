@@ -30,14 +30,16 @@ class InvestigacionController extends Controller
      */
     public function indexAction()
     {
+        $em = $this->getDoctrine()->getManager();
 
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
         }
 
         $user = $this->get('security.context')->getToken()->getUser();
-        $investigaciones = $user->getAcademico()->getInvestigaciones();
-        $enviado = $user->getAcademico()->isEnviado();
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $user->getAcademico());
+        $investigaciones = $informe->getInvestigaciones();
+        $enviado = $informe->isEnviado();
 
         return $this->render('investigacion/index.html.twig', array(
             'investigaciones' => $investigaciones,
@@ -54,12 +56,11 @@ class InvestigacionController extends Controller
     public function newAction(Request $request)
     {
         $securityContext = $this->container->get('security.token_storage');
-
         $user = $securityContext->getToken()->getUser();
         $academico = $user->getAcademico();
 
-
         $em = $this->getDoctrine()->getManager();
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
 
         $investigacion = new Investigacion();
         $form = $this->createForm('InformeBundle\Form\InvestigacionType', $investigacion, array('user'=>$user));
@@ -67,7 +68,7 @@ class InvestigacionController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $investigacion->setAcademico($academico);
+            $investigacion->setInforme($informe);
             $em->persist($investigacion);
             $em->flush();
 
@@ -92,13 +93,16 @@ class InvestigacionController extends Controller
 
         $securityContext = $this->container->get('security.token_storage');
         $user = $securityContext->getToken()->getUser();
-        $enviado = $user->getAcademico()->isEnviado();
+        $academico = $user->getAcademico();
+
+        $em = $this->getDoctrine()->getManager();
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+        $enviado = $informe->isEnviado();
 
         $deleteForm = $this->createDeleteForm($investigacion);
 
         // check for "view" access: calls all voters
         $this->denyAccessUnlessGranted('view', $investigacion);
-
 
         return $this->render('investigacion/show.html.twig', array(
             'investigacion' => $investigacion,
@@ -115,9 +119,13 @@ class InvestigacionController extends Controller
      */
     public function editAction(Request $request, Investigacion $investigacion)
     {
+        $em = $this->getDoctrine()->getManager();
+
         $securityContext = $this->container->get('security.token_storage');
         $user = $securityContext->getToken()->getUser();
+        $academico = $user->getAcademico();
 
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
         $deleteForm = $this->createDeleteForm($investigacion);
         $this->denyAccessUnlessGranted('edit', $investigacion);
         $editForm = $this->createForm('InformeBundle\Form\InvestigacionType', $investigacion, array('user'=>$user));

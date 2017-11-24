@@ -58,7 +58,7 @@ class InvestigacionType extends AbstractType
             ->add('year', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',array(
                 'label'=>'*Año',
                 'choices'=>array(
-                    '2016'=>'2016',
+                    '2017'=>'2017',
                     ),
                 'placeholder'=>'Seleccionar',
                 'required'=>true,

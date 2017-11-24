@@ -14,7 +14,7 @@ class TecnicoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('informe', 'Symfony\Component\Form\Extension\Core\Type\TextareaType',array(
+            ->add('informeAnual', 'Symfony\Component\Form\Extension\Core\Type\TextareaType',array(
                 'label'=>'Informe de actividades',
                 'required'=>false,
             ))

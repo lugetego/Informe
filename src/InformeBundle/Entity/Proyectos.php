@@ -23,11 +23,11 @@ class Proyectos
     private $id;
 
     /**
-     * @var academico
-     * @ORM\ManyToOne(targetEntity="Academico", inversedBy="proyectos")
-     * @ORM\JoinColumn(name="academico_id", referencedColumnName="id")
+     * @var informe
+     * @ORM\ManyToOne(targetEntity="Informe", inversedBy="proyectos")
+     * @ORM\JoinColumn(name="informe_id", referencedColumnName="id")
      */
-    private $academico;
+    private $informe;
 
     /**
      * @var string
@@ -200,26 +200,28 @@ class Proyectos
         return $this->numero;
     }
 
+
+
     /**
-     * Set academico
+     * Set informe
      *
-     * @param \InformeBundle\Entity\Academico $academico
+     * @param \InformeBundle\Entity\Informe $informe
      * @return Proyectos
      */
-    public function setAcademico(\InformeBundle\Entity\Academico $academico = null)
+    public function setInforme(\InformeBundle\Entity\Informe $informe = null)
     {
-        $this->academico = $academico;
+        $this->informe = $informe;
 
         return $this;
     }
 
     /**
-     * Get academico
+     * Get informe
      *
-     * @return \InformeBundle\Entity\Academico 
+     * @return \InformeBundle\Entity\Informe 
      */
-    public function getAcademico()
+    public function getInforme()
     {
-        return $this->academico;
+        return $this->informe;
     }
 }

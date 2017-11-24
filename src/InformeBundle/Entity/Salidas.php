@@ -23,11 +23,11 @@ class Salidas
     private $id;
 
     /**
-     * @var academico
-     * @ORM\ManyToOne(targetEntity="Academico", inversedBy="salidas")
-     * @ORM\JoinColumn(name="academico_id", referencedColumnName="id")
+     * @var informe
+     * @ORM\ManyToOne(targetEntity="Informe", inversedBy="salidas")
+     * @ORM\JoinColumn(name="informe_id", referencedColumnName="id")
      */
-    private $academico;
+    private $informe;
 
     /**
      * @var string
@@ -74,7 +74,7 @@ class Salidas
     /**
      * @var string
      *
-     * @ORM\Column(name="actividad", type="string", length=1000, nullable=true))
+     * @ORM\Column(name="actividad", type="string", length=3000, nullable=true))
      */
     private $actividad;
 
@@ -501,26 +501,28 @@ class Salidas
         return $this->observaciones;
     }
 
+
+
     /**
-     * Set academico
+     * Set informe
      *
-     * @param \InformeBundle\Entity\Academico $academico
-     * @return Estudiantes
+     * @param \InformeBundle\Entity\Informe $informe
+     * @return Salidas
      */
-    public function setAcademico(\InformeBundle\Entity\Academico $academico = null)
+    public function setInforme(\InformeBundle\Entity\Informe $informe = null)
     {
-        $this->academico = $academico;
+        $this->informe = $informe;
 
         return $this;
     }
 
     /**
-     * Get academico
+     * Get informe
      *
-     * @return \InformeBundle\Entity\Academico
+     * @return \InformeBundle\Entity\Informe 
      */
-    public function getAcademico()
+    public function getInforme()
     {
-        return $this->academico;
+        return $this->informe;
     }
 }

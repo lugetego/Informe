@@ -23,11 +23,11 @@ class Cursos
     private $id;
 
     /**
-     * @var academico
-     * @ORM\ManyToOne(targetEntity="Academico", inversedBy="cursos")
-     * @ORM\JoinColumn(name="academico_id", referencedColumnName="id")
+     * @var informe
+     * @ORM\ManyToOne(targetEntity="Informe", inversedBy="cursos")
+     * @ORM\JoinColumn(name="informe_id", referencedColumnName="id")
      */
-    private $academico;
+    private $informe;
 
     /**
      * @var string
@@ -169,29 +169,6 @@ class Cursos
     }
 
     /**
-     * Set academico
-     *
-     * @param \InformeBundle\Entity\Academico $academico
-     * @return Cursos
-     */
-    public function setAcademico(\InformeBundle\Entity\Academico $academico = null)
-    {
-        $this->academico = $academico;
-
-        return $this;
-    }
-
-    /**
-     * Get academico
-     *
-     * @return \InformeBundle\Entity\Academico 
-     */
-    public function getAcademico()
-    {
-        return $this->academico;
-    }
-
-    /**
      * Set tipo
      *
      * @param string $tipo
@@ -260,6 +237,29 @@ class Cursos
     public function setLugar($lugar)
     {
         $this->lugar = $lugar;
+    }
+
+    /**
+     * Set informe
+     *
+     * @param \InformeBundle\Entity\Informe $informe
+     * @return Investigacion
+     */
+    public function setInforme(\InformeBundle\Entity\Informe $informe )
+    {
+        $this->informe = $informe;
+
+        return $this;
+    }
+
+    /**
+     * Get informe
+     *
+     * @return \InformeBundle\Entity\Informe
+     */
+    public function getInforme()
+    {
+        return $this->informe;
     }
 
 }

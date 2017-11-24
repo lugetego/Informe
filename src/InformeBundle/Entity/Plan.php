@@ -79,6 +79,19 @@ class Plan
     private $salidas;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="enviado", type="boolean", nullable=true)
+     */
+    private $enviado;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="anio", type="string", length=4, nullable=true)
+     */
+    private $anio;
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $created;
@@ -333,4 +346,43 @@ class Plan
         return $this->academico;
     }
 
+
+    /**
+     * Set anio
+     *
+     * @param string $anio
+     * @return Plan
+     */
+    public function setAnio($anio)
+    {
+        $this->anio = $anio;
+
+        return $this;
+    }
+
+    /**
+     * Get anio
+     *
+     * @return string 
+     */
+    public function getAnio()
+    {
+        return $this->anio;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isEnviado()
+    {
+        return $this->enviado;
+    }
+
+    /**
+     * @param boolean $enviado
+     */
+    public function setEnviado($enviado)
+    {
+        $this->enviado = $enviado;
+    }
 }

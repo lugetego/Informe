@@ -25,13 +25,17 @@ class ProyectosController extends Controller
     public function indexAction()
     {
 
+        $em = $this->getDoctrine()->getManager();
+
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
         }
 
         $user = $this->get('security.context')->getToken()->getUser();
-        $proyectos = $user->getAcademico()->getProyectos();
-        $enviado = $user->getAcademico()->isEnviado();
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $user->getAcademico());
+
+        $proyectos = $informe->getProyectos();
+        $enviado = $informe->isEnviado();
 
 
         return $this->render('proyectos/index.html.twig', array(
@@ -50,6 +54,10 @@ class ProyectosController extends Controller
     {
         $securityContext = $this->container->get('security.token_storage');
         $user = $securityContext->getToken()->getUser();
+        $academico = $user->getAcademico();
+
+        $em = $this->getDoctrine()->getManager();
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
 
         $proyecto = new Proyectos();
         $form = $this->createForm('InformeBundle\Form\ProyectosType', $proyecto);
@@ -57,7 +65,7 @@ class ProyectosController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $proyecto->setAcademico($user->getAcademico());
+            $proyecto->setInforme($informe);
             $em->persist($proyecto);
             $em->flush();
 
@@ -82,7 +90,11 @@ class ProyectosController extends Controller
     {
         $securityContext = $this->container->get('security.token_storage');
         $user = $securityContext->getToken()->getUser();
-        $enviado = $user->getAcademico()->isEnviado();
+        $academico = $user->getAcademico();
+
+        $em = $this->getDoctrine()->getManager();
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+        $enviado = $informe->isEnviado();
 
         $deleteForm = $this->createDeleteForm($proyecto);
 

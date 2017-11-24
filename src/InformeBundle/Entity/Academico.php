@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Index;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 /**
  * Academico
  *
@@ -33,6 +32,16 @@ class Academico
     private $nombre;
 
     /**
+     * @ORM\OneToMany(targetEntity="Informe", mappedBy="academico", cascade={"persist"})
+     */
+    private $informes;
+
+
+    public function __construct() {
+        $this->informes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * @var string
      *
      * @ORM\Column(name="apellido", type="string", length=120)
@@ -52,108 +61,10 @@ class Academico
     protected $rfc;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="enviado", type="boolean", nullable=true)
-     */
-    private $enviado;
-
-    /**
-     * @ORM\Column(type="string", length=30, nullable=true)
-     */
-    protected $aprobado;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    protected $observaciones;
-
-    /**
      *
      * @ORM\OneToOne(targetEntity="InformeBundle\Entity\User", inversedBy="academico")
      */
     private $user;
-
-    /**
-     * @var array $investigaciones
-     *
-     * @ORM\OneToMany(targetEntity="InformeBundle\Entity\Investigacion", mappedBy="academico")
-     *
-     * The mappedBy attribute designates the field in the entity that is the owner of the relationship.
-     */
-    private $investigaciones;
-
-    /**
-     * @var array $estudiantes
-     *
-     * @ORM\OneToMany(targetEntity="InformeBundle\Entity\Estudiantes", mappedBy="academico")
-     *
-     * The mappedBy attribute designates the field in the entity that is the owner of the relationship.
-     */
-    private $estudiantes;
-
-    /**
-     * @var array $posdocs
-     *
-     * @ORM\OneToMany(targetEntity="InformeBundle\Entity\Posdoc", mappedBy="academico")
-     *
-     * The mappedBy attribute designates the field in the entity that is the owner of the relationship.
-     */
-    private $posdocs;
-
-    /**
-     * @var array $cursos
-     *
-     * @ORM\OneToMany(targetEntity="InformeBundle\Entity\Cursos", mappedBy="academico")
-     *
-     * The mappedBy attribute designates the field in the entity that is the owner of the relationship.
-     */
-    private $cursos;
-
-    /**
-     * @var array $proyectos
-     *
-     * @ORM\OneToMany(targetEntity="InformeBundle\Entity\Proyectos", mappedBy="academico")
-     *
-     * The mappedBy attribute designates the field in the entity that is the owner of the relationship.
-     */
-    private $proyectos;
-
-    /**
-     * @var array $eventos
-     *
-     * @ORM\OneToMany(targetEntity="InformeBundle\Entity\Eventos", mappedBy="academico")
-     *
-     * The mappedBy attribute designates the field in the entity that is the owner of the relationship.
-     */
-    private $eventos;
-
-    /**
-     * @var array $salidas
-     *
-     * @ORM\OneToMany(targetEntity="InformeBundle\Entity\Salidas", mappedBy="academico")
-     *
-     * The mappedBy attribute designates the field in the entity that is the owner of the relationship.
-     */
-    private $salidas;
-
-    /**
-     * @var array $planes
-     *
-     * @ORM\OneToMany(targetEntity="InformeBundle\Entity\Plan", mappedBy="academico")
-     *
-     * The mappedBy attribute designates the field in the entity that is the owner of the relationship.
-     */
-    private $planes;
-
-    /**
-     * @var array $tecnicos
-     *
-     * @ORM\OneToMany(targetEntity="InformeBundle\Entity\Tecnico", mappedBy="academico")
-     *
-     * The mappedBy attribute designates the field in the entity that is the owner of the relationship.
-     */
-    private $tecnicos;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -225,7 +136,6 @@ class Academico
 //    {
 //        $this->setModified(new \DateTime());
 //    }
-
 
     /**
      * Get id
@@ -315,37 +225,6 @@ class Academico
         $this->rfc = $rfc;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getAprobado()
-    {
-        return $this->aprobado;
-    }
-
-    /**
-     * @param mixed $aprobado
-     */
-    public function setAprobado($aprobado)
-    {
-        $this->aprobado = $aprobado;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getObservaciones()
-    {
-        return $this->observaciones;
-    }
-
-    /**
-     * @param mixed $observaciones
-     */
-    public function setObservaciones($observaciones)
-    {
-        $this->observaciones = $observaciones;
-    }
 
     /**
      * Set user
@@ -376,212 +255,6 @@ class Academico
 
     }
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->investigaciones = new \Doctrine\Common\Collections\ArrayCollection();
-
-    }
-
-    /**
-     * Get investigaciones
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getInvestigaciones()
-    {
-        return $this->investigaciones;
-    }
-
-    /**
-     * Add investigaciones
-     *
-     * @param \InformeBundle\Entity\Investigacion $investigaciones
-     * @return Academico
-     */
-    public function addInvestigacione(\InformeBundle\Entity\Investigacion $investigaciones)
-    {
-        $this->investigaciones[] = $investigaciones;
-
-        return $this;
-    }
-
-    /**
-     * Remove investigaciones
-     *
-     * @param \InformeBundle\Entity\Investigacion $investigaciones
-     */
-    public function removeInvestigacione(\InformeBundle\Entity\Investigacion $investigaciones)
-    {
-        $this->investigaciones->removeElement($investigaciones);
-    }
-
-    /**
-     * Add estudiantes
-     *
-     * @param \InformeBundle\Entity\Estudiantes $estudiantes
-     * @return Academico
-     */
-    public function addEstudiante(\InformeBundle\Entity\Estudiantes $estudiantes)
-    {
-        $this->estudiantes[] = $estudiantes;
-
-        return $this;
-    }
-
-    /**
-     * Remove estudiantes
-     *
-     * @param \InformeBundle\Entity\Estudiantes $estudiantes
-     */
-    public function removeEstudiante(\InformeBundle\Entity\Estudiantes $estudiantes)
-    {
-        $this->estudiantes->removeElement($estudiantes);
-    }
-
-    /**
-     * Get estudiantes
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getEstudiantes()
-    {
-        return $this->estudiantes;
-    }
-
-    /**
-     * Add cursos
-     *
-     * @param \InformeBundle\Entity\Cursos $cursos
-     * @return Academico
-     */
-    public function addCurso(\InformeBundle\Entity\Cursos $cursos)
-    {
-        $this->cursos[] = $cursos;
-
-        return $this;
-    }
-
-    /**
-     * Remove cursos
-     *
-     * @param \InformeBundle\Entity\Cursos $cursos
-     */
-    public function removeCurso(\InformeBundle\Entity\Cursos $cursos)
-    {
-        $this->cursos->removeElement($cursos);
-    }
-
-    /**
-     * Get cursos
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getCursos()
-    {
-        return $this->cursos;
-    }
-
-    /**
-     * Add proyectos
-     *
-     * @param \InformeBundle\Entity\Proyectos $proyectos
-     * @return Academico
-     */
-    public function addProyecto(\InformeBundle\Entity\Proyectos $proyectos)
-    {
-        $this->proyectos[] = $proyectos;
-
-        return $this;
-    }
-
-    /**
-     * Remove proyectos
-     *
-     * @param \InformeBundle\Entity\Proyectos $proyectos
-     */
-    public function removeProyecto(\InformeBundle\Entity\Proyectos $proyectos)
-    {
-        $this->proyectos->removeElement($proyectos);
-    }
-
-    /**
-     * Get proyectos
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getProyectos()
-    {
-        return $this->proyectos;
-    }
-
-    /**
-     * Add eventos
-     *
-     * @param \InformeBundle\Entity\Eventos $eventos
-     * @return Academico
-     */
-    public function addEvento(\InformeBundle\Entity\Eventos $eventos)
-    {
-        $this->eventos[] = $eventos;
-
-        return $this;
-    }
-
-    /**
-     * Remove eventos
-     *
-     * @param \InformeBundle\Entity\Eventos $eventos
-     */
-    public function removeEvento(\InformeBundle\Entity\Eventos $eventos)
-    {
-        $this->eventos->removeElement($eventos);
-    }
-
-    /**
-     * Get eventos
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getEventos()
-    {
-        return $this->eventos;
-    }
-
-    /**
-     * Add salidas
-     *
-     * @param \InformeBundle\Entity\Salidas $salidas
-     * @return Academico
-     */
-    public function addSalida(\InformeBundle\Entity\Salidas $salidas)
-    {
-        $this->salidas[] = $salidas;
-
-        return $this;
-    }
-
-    /**
-     * Remove salidas
-     *
-     * @param \InformeBundle\Entity\Salidas $salidas
-     */
-    public function removeSalida(\InformeBundle\Entity\Salidas $salidas)
-    {
-        $this->salidas->removeElement($salidas);
-    }
-
-    /**
-     * Get salidas
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getSalidas()
-    {
-        return $this->salidas;
-    }
 
     /**
      * Set id
@@ -595,6 +268,48 @@ class Academico
 
         return $this;
     }
+
+    /**
+     * Add informes
+     *
+     * @param \InformeBundle\Entity\Informe $informes
+     * @return Academico
+     */
+    public function addInforme(\InformeBundle\Entity\Informe $informes)
+    {
+        $this->informes[] = $informes;
+
+        return $this;
+    }
+
+    /**
+     * Remove informes
+     *
+     * @param \InformeBundle\Entity\Informe $informes
+     */
+    public function removeInforme(\InformeBundle\Entity\Informe $informes)
+    {
+        $this->informes->removeElement($informes);
+    }
+
+    /**
+     * Get informes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getInformes()
+    {
+        return $this->informes;
+    }
+
+    /**
+     * @var array $planes
+     *
+     * @ORM\OneToMany(targetEntity="InformeBundle\Entity\Plan", mappedBy="academico")
+     *
+     * The mappedBy attribute designates the field in the entity that is the owner of the relationship.
+     */
+    private $planes;
 
     /**
      * Add planes
@@ -622,108 +337,12 @@ class Academico
     /**
      * Get planes
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getPlanes()
     {
         return $this->planes;
     }
 
-    public function getSlug()
-    {
-        return $this->slug;
-    }
 
-    /**
-     * @return boolean
-     */
-    public function isEnviado()
-    {
-        return $this->enviado;
-    }
-
-    /**
-     * @param boolean $enviado
-     */
-    public function setEnviado($enviado)
-    {
-        $this->enviado = $enviado;
-    }
-
-
-    /**
-     * Get enviado
-     *
-     * @return boolean 
-     */
-    public function getEnviado()
-    {
-        return $this->enviado;
-    }
-
-    /**
-     * Add posdocs
-     *
-     * @param \InformeBundle\Entity\Posdoc $posdocs
-     * @return Academico
-     */
-    public function addPosdoc(\InformeBundle\Entity\Posdoc $posdocs)
-    {
-        $this->posdocs[] = $posdocs;
-
-        return $this;
-    }
-
-    /**
-     * Remove posdocs
-     *
-     * @param \InformeBundle\Entity\Posdoc $posdocs
-     */
-    public function removePosdoc(\InformeBundle\Entity\Posdoc $posdocs)
-    {
-        $this->posdocs->removeElement($posdocs);
-    }
-
-    /**
-     * Get posdocs
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getPosdocs()
-    {
-        return $this->posdocs;
-    }
-
-    /**
-     * Add tecnicos
-     *
-     * @param \InformeBundle\Entity\Tecnico $tecnicos
-     * @return Academico
-     */
-    public function addTecnico(\InformeBundle\Entity\Tecnico $tecnicos)
-    {
-        $this->tecnicos[] = $tecnicos;
-
-        return $this;
-    }
-
-    /**
-     * Remove tecnicos
-     *
-     * @param \InformeBundle\Entity\Tecnico $tecnicos
-     */
-    public function removeTecnico(\InformeBundle\Entity\Tecnico $tecnicos)
-    {
-        $this->tecnicos->removeElement($tecnicos);
-    }
-
-    /**
-     * Get tecnicos
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getTecnicos()
-    {
-        return $this->tecnicos;
-    }
 }

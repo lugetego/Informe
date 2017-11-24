@@ -18,31 +18,32 @@
         </ol>
 
         {{ form_start(edit_form) }}
-        <!-- Nav tabs -->
+        {#<!-- Nav tabs -->#}
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#informe" aria-controls="informe" role="tab" data-toggle="tab">Informe de actividades</a></li>
             <li role="presentation"><a href="#plan" aria-controls="plan" role="tab" data-toggle="tab">Plan de trabajo</a></li>
         </ul>
 
-        <!-- Tab panes -->
+        {#<!-- Tab panes -->#}
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="informe">
                 <div class="form-group">
                     <div>
                         <br>
-                        <p>Informe de actividades correspondiente al año 2016</p>
+                        <p>Informe de actividades correspondiente al año 2017</p>
                     </div>
                     <div>
                         {% if enviado == false  %}
-                            {{ form_widget(edit_form.informe,{'attr': {'class': 'form-control input-sm', 'placeholder':'Informe de actividades', 'rows':'20' } } )   }}
+                            {{ form_widget(edit_form.informeAnual,{'attr': {'class': 'form-control input-sm', 'placeholder':'Informe de actividades', 'rows':'20' } } )   }}
+
                         {% else %}
-                            {{ form_widget(edit_form.informe,{'attr': {'class': 'form-control input-sm', 'placeholder':'Informe de actividades', 'rows':'20', 'disabled':true } } ) }}
+                            {{ form_widget(edit_form.informeAnual,{'attr': {'class': 'form-control input-sm', 'placeholder':'Informe de actividades', 'rows':'20', 'disabled':true } } ) }}
                         {% endif %}
                     </div>
                     <div>
 
                     </div>
-                    <div>{{ form_errors(edit_form.informe) }}</div>
+                    <div>{{ form_errors(edit_form.informeAnual) }}</div>
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="plan">

@@ -3,7 +3,7 @@
     <div class="row page-header">
         <div class="col-xs-6">
             <p><small><strong>Académico:</strong> {{ academico.nombre }} {{ academico.apellido }}</small> </p>
-            <h4>Informe de actividades 2016</h4>
+            <h4>Informe de actividades 2017</h4>
         </div>
         <div class="col-xs-6">
             <p class="text-right"><img class="right" src="{{ asset('img/ccm.png', absolute=true) }}" width="180px" height="60px" /></p>
@@ -12,26 +12,26 @@
 
     <div class="container-fluid">
 
-    {% if tecnico.informe |length == 0 %}
+    {% if tecnicos.informeAnual |length == 0 %}
         No se ha registrado información<br><br>
     {% else %}
-        {{ tecnico.informe| nl2br }}<br><br>
+        {{ tecnicos.informeAnual| nl2br }}<br><br>
     {% endif %}
 
     </div>
 
     <div class="row page-header">
         <div class="col-xs-6">
-            <h4>Plan de trabajo 2017</h4>
+            <h4>Plan de trabajo 2018</h4>
         </div>
     </div>
 
 
     <div class="container-fluid">
-    {% if tecnico.plan |length == 0 %}
+    {% if tecnicos.plan |length == 0 %}
         No se ha registrado información<br><br>
     {% else %}
-        {{ tecnico.plan| nl2br }}<br><br>
+        {{ tecnicos.plan| nl2br }}<br><br>
     {% endif %}
 
     </div>

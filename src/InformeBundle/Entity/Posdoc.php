@@ -23,11 +23,11 @@ class Posdoc
     private $id;
 
     /**
-     * @var academico
-     * @ORM\ManyToOne(targetEntity="Academico", inversedBy="posdocs")
-     * @ORM\JoinColumn(name="academico_id", referencedColumnName="id")
+     * @var informe
+     * @ORM\ManyToOne(targetEntity="Informe", inversedBy="posdocs")
+     * @ORM\JoinColumn(name="informe_id", referencedColumnName="id")
      */
-    private $academico;
+    private $informe;
 
     /**
      * @var string
@@ -202,23 +202,28 @@ class Posdoc
         return $this->fin;
     }
 
+
+
     /**
-     * Set academico
+     * Set informe
      *
-     * @param \InformeBundle\Entity\academico $academico
+     * @param \InformeBundle\Entity\Informe $informe
+     * @return Posdoc
      */
-    public function setAcademico($academico)
+    public function setInforme(\InformeBundle\Entity\Informe $informe = null)
     {
-        $this->academico = $academico;
+        $this->informe = $informe;
+
+        return $this;
     }
 
     /**
-     * Get academico
+     * Get informe
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \InformeBundle\Entity\Informe 
      */
-    public function getAcademico()
+    public function getInforme()
     {
-        return $this->academico;
+        return $this->informe;
     }
 }

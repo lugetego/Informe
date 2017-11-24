@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use InformeBundle\Entity\Academico;
+use InformeBundle\Entity\Informe;
 use InformeBundle\Entity\User;
 use InformeBundle\Entity\Plan;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,10 +49,11 @@ class DashController extends Controller
         {
             $user = $this->get('security.context')->getToken()->getUser();
             $academico = $user->getAcademico();
-            $tecnicos = $academico->getTecnicos();
-            $enviado = $academico->isEnviado();
-
+            $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+            $enviado = $informe->isEnviado();
+            $tecnicos = $em->getRepository('InformeBundle:Tecnico')->findOneByInforme($informe);
             return $this->render('dash/tecnico.html.twig', array(
+                'informe'=>$informe,
                 'academico'=>$academico,
                 'tecnicos'=> $tecnicos,
                 'enviado'=>$enviado,
@@ -63,19 +65,27 @@ class DashController extends Controller
         else {
             $user = $this->get('security.context')->getToken()->getUser();
             $academico = $user->getAcademico();
-            $investigaciones = $academico->getInvestigaciones();
-            $estudiantes = $academico->getEstudiantes();
-            $cursos = $academico->getCursos();
-            $proyectos = $academico->getProyectos();
-            $eventos = $academico->getEventos();
-            $salidas = $academico->getSalidas();
-            $planes = $academico->getPlanes();
-            $posdocs = $academico->getPosdocs();
-            $enviado = $academico->isEnviado();
+
+            $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+            $plan = $em->getRepository('InformeBundle:Plan')->findOneByAnio(2018,$academico);
+
+
+
+            //$investigaciones = $informe->getInvestigaciones();
+            //$estudiantes = $informe->getEstudiantes();
+            //$cursos = $informe->getCursos();
+            //$proyectos = $informe->getProyectos();
+            //$eventos = $informe->getEventos();
+            //$salidas = $informe->getSalidas();
+            //$planes = $informe->getPlanes();
+            //$posdocs = $informe->getPosdocs();
+            //$enviado = $informe->isEnviado();
 
             return $this->render('dash/index.html.twig', array(
+                'informe'=>$informe,
                 'academico'=> $academico,
-                'investigaciones'=> $investigaciones,
+                'plan'=>$plan,
+              /*  'investigaciones'=> $investigaciones,
                 'estudiantes'=>$estudiantes,
                 'cursos'=>$cursos,
                 'proyectos'=>$proyectos,
@@ -84,7 +94,90 @@ class DashController extends Controller
                 'planes'=>$planes,
                 'posdocs'=>$posdocs,
                 'user'=>$user,
-                'enviado'=>$enviado
+                'enviado'=>$enviado*/
+
+            ));
+        }
+
+    }
+
+    /**
+     * Lists all actions on Informe .
+     *
+     * @Route("/consulta/{anio}", name="consulta")
+     * @Method({"GET", "POST"})
+     * @Template()
+     */
+    public function consultaAction(Informe $informe)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+
+        if ($this->get('security.context')->isGranted('ROLE_ADMIN'))
+        {
+            $academicos = $em->getRepository('InformeBundle:Academico')->findAll();
+            return $this->render('dash/admin.html.twig', array(
+                'academicos'=> $academicos,
+            ));
+        }
+
+        elseif ($this->get('security.context')->isGranted('ROLE_TECNICO'))
+        {
+            $user = $this->get('security.context')->getToken()->getUser();
+            $academico = $user->getAcademico();
+            $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2016,$academico);
+            $tecnicos = $em->getRepository('InformeBundle:Tecnico')->findOneByInforme($informe);
+            $informeAnual = $tecnicos->getInformeAnual();
+            $plan= $tecnicos->getPlan();
+            $enviado = $informe->isEnviado();
+
+            return $this->render('dash/consulta-tecnico.html.twig', array(
+                'academico'=>$academico,
+                'tecnicos'=> $tecnicos,
+                'plan'=> $plan,
+                'enviado'=>$enviado,
+                'informe'=> $informe,
+                'informeAnual'=>$informeAnual,
+                'user'=>$user,
+
+            ));
+        }
+
+        else {
+            $user = $this->get('security.context')->getToken()->getUser();
+            $academico = $user->getAcademico();
+
+            $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio($informe->getAnio(),$academico);
+            $plan = $em->getRepository('InformeBundle:Plan')->findOneByAnio($informe->getAnio()+1,$academico);
+
+
+
+            //$investigaciones = $informe->getInvestigaciones();
+            //$estudiantes = $informe->getEstudiantes();
+            //$cursos = $informe->getCursos();
+            //$proyectos = $informe->getProyectos();
+            //$eventos = $informe->getEventos();
+            //$salidas = $informe->getSalidas();
+            //$planes = $informe->getPlanes();
+            //$posdocs = $informe->getPosdocs();
+            //$enviado = $informe->isEnviado();
+
+            return $this->render('dash/consulta.html.twig', array(
+                'informe'=>$informe,
+                'academico'=> $academico,
+                /*  'investigaciones'=> $investigaciones,
+                  'estudiantes'=>$estudiantes,
+                  'cursos'=>$cursos,
+                  'proyectos'=>$proyectos,
+                  'eventos'=>$eventos,
+                  'salidas'=>$salidas,/**/
+                  'plan'=>$plan,/*
+                  'posdocs'=>$posdocs,
+                  'user'=>$user,
+                  'enviado'=>$enviado*/
 
             ));
         }
@@ -94,10 +187,11 @@ class DashController extends Controller
     /**
      * Export to PDF
      *
-     * @Route("/pdf", name="informe_pdf")
+     * @Route("/pdf/{anio}", name="informe_pdf")
      */
-    public function pdfAction()
+    public function pdfAction(Informe $informe)
     {
+        $em = $this->getDoctrine()->getManager();
 
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
@@ -105,28 +199,15 @@ class DashController extends Controller
 
         $user = $this->get('security.context')->getToken()->getUser();
         $academico = $user->getAcademico();
-        $investigaciones = $academico->getInvestigaciones();
-        $estudiantes = $academico->getEstudiantes();
-        $cursos = $academico->getCursos();
-        $proyectos = $academico->getProyectos();
-        $eventos = $academico->getEventos();
-        $salidas = $academico->getSalidas();
-        $planes = $academico->getPlanes();
-        $posdocs= $academico->getPosdocs();
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio($informe->getAnio(),$academico);
 
         $html = $this->renderView('dash/layout-pdf.html.twig', array(
             'academico'=>$academico,
-            'investigaciones'  => $investigaciones,
-            'estudiantes'=> $estudiantes,
-            'cursos'=>$cursos,
-            'proyectos'=>$proyectos,
-            'eventos'=>$eventos,
-            'salidas'=>$salidas,
-            'planes'=>$planes,
-            'posdocs'=>$posdocs
+            'informe'=>$informe,
+
         ));
 
-        $filename = sprintf('Informe-'.$user.'%s.pdf', date('Y-m-d'));
+        $filename = sprintf('Informe-'.$user.'%s.pdf', $informe->getAnio());
 
         return new Response(
             $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
@@ -142,10 +223,12 @@ class DashController extends Controller
     /**
      * Export to PDF
      *
-     * @Route("/pdfplan", name="plan_pdf")
+     * @Route("/pdfplan/{anio}", name="plan_pdf")
      */
-    public function pdfPlanAction()
+    public function pdfPlanAction(Plan $plan)
     {
+        $em = $this->getDoctrine()->getManager();
+
 
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
@@ -153,14 +236,15 @@ class DashController extends Controller
 
         $user = $this->get('security.context')->getToken()->getUser();
         $academico = $user->getAcademico();
-        $planes = $academico->getPlanes();
+        $plan = $em->getRepository('InformeBundle:Plan')->findOneByAnio($plan->getAnio(),$academico);
+
         $html = $this->renderView('dash/layout-pdfplan.html.twig', array(
             'academico'=>$academico,
-            'planes'=>$planes,
+            'plan'=>$plan,
 
         ));
 
-        $filename = sprintf('Plan-'.$user.'%s.pdf', date('Y-m-d'));
+        $filename = sprintf('Plan-'.$user.'%s.pdf', $plan->getAnio());
 
         return new Response(
             $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
@@ -176,10 +260,11 @@ class DashController extends Controller
     /**
      * Export to PDF
      *
-     * @Route("/pdftecnico", name="informe_pdftecnico")
+     * @Route("/pdftecnico/{anio}", name="informe_pdftecnico")
      */
-    public function pdfTecnicoAction()
+    public function pdfTecnicoAction(Informe $informe)
     {
+        $em = $this->getDoctrine()->getManager();
 
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
@@ -187,9 +272,15 @@ class DashController extends Controller
 
         $user = $this->get('security.context')->getToken()->getUser();
         $academico = $user->getAcademico();
-        $tecnicos = $academico->getTecnicos();
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio($informe->getAnio(),$academico);
+        $tecnicos = $em->getRepository('InformeBundle:Tecnico')->findOneByInforme($informe);
+        $informeAnual=$tecnicos->getInformeAnual();
+        $plan=$tecnicos->getPlan();
 
         $html = $this->renderView('dash/layout-pdftecnico.html.twig', array(
+            'informe'=>$informe,
+            'informeAnual'=>$informeAnual,
+            'plan'=>$plan,
             'academico'=>$academico,
             'tecnicos'=>$tecnicos,
         ));
@@ -295,17 +386,23 @@ class DashController extends Controller
     public function sendAction()
     {
 
+        $em = $this->getDoctrine()->getManager();
+
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
         }
 
         $user = $this->get('security.context')->getToken()->getUser();
-        $id = $user->getAcademico()->getId();
+        $academico = $user->getAcademico();
 
-        $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('InformeBundle:Academico')->find($id);
-        $entity->setEnviado(true);
-        $em->persist($entity);
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+        $plan = $em->getRepository('InformeBundle:Plan')->findOneByAnio(2018, $academico);
+
+
+        $informe->setEnviado(true);
+        $plan->setEnviado(true);
+        $em->persist($informe);
+        $em->persist($plan);
         $em->flush();
 
         // Obtiene correo y msg de la forma de contacto
@@ -315,8 +412,9 @@ class DashController extends Controller
             ->setSubject('Informe y plan de trabajo')
             ->setFrom('webmaster@matmor.unam.mx')
             ->setTo(array($user->getEmail() ))
+//                ->setTo('gerardo@matmor.unam.mx')
             ->setBcc(array('webmaster@matmor.unam.mx','vorozco@matmor.unam.mx'))
-            ->setBody($this->renderView('dash/mail.txt.twig', array('entity' => $entity)))
+            ->setBody($this->renderView('dash/mail.txt.twig', array('entity' => $informe,'academico'=>$academico)))
         ;
         $mailer->send($message);
 

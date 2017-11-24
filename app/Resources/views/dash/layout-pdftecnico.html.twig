@@ -28,42 +28,33 @@
             <div class="row page-header">
                 <div class="col-xs-5">
                     <p><small><strong>Académico:</strong> {{ academico.nombre }} {{ academico.apellido }}</small> </p>
-                    <p>Informe de actividades 2016</p>
+                    <p>Informe de actividades 2017</p>
 
                 </div>
-                <div class="col-xs-7">
-              {#       <p class="text-right"><img class="right" src="{{ asset('img/ccm.png', absolute=true) }}" width="180px" height="60px" /></p>   #}
-                    <p class="text-justify small alert-warning"> Dictamen del Consejo Interno: <strong>{{ academico.aprobado }}</strong><br>
-                    <small>{{ academico.observaciones }}</small></p>
+                {% if informe.dictamen is not null %}
+                    <div class="col-xs-7">
+                        {#       <p class="text-right"><img class="right" src="{{ asset('img/ccm.png', absolute=true) }}" width="180px" height="60px" /></p>   #}
+                        <p class="text-justify small alert-warning"> Dictamen del Consejo Interno: <strong>{{ informe.dictamen }}</strong><br>
+                            <small>{{ informe.observaciones }}</small></p>
+                    </div>
+                {% endif %}
+            </div>
 
+
+            <p class="text-justify"><small>{{ informeAnual| nl2br }}</small></p>
+
+
+
+
+            <div class="row page-header">
+                <div class="col-xs-6">
+                    <h5>Plan de trabajo 2018</h5>
                 </div>
             </div>
 
-            {% for tecnico in tecnicos %}
-
-                {% if tecnico.informe %}
-
-                    <p class="text-justify"><small>{{ tecnico.informe| nl2br }}</small></p>
-
-                {% endif %}
 
 
-            {% endfor %}
-
-
-                <div class="row page-header">
-                    <div class="col-xs-6">
-                        <h5>Plan de trabajo 2017</h5>
-                    </div>
-                </div>
-                {% for tecnico in tecnicos %}
-
-                    {% if tecnico.plan %}
-
-                        <p class="text-justify"><small>{{ tecnico.plan| nl2br }}</small></p>
-                    {% endif %}
-
-                {% endfor %}
+            <p class="text-justify"><small>{{ plan| nl2br }}</small></p>
 
 
 

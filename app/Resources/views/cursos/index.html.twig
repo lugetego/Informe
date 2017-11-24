@@ -22,6 +22,14 @@
                 <li class="active">Cursos y seminarios</li>
             </ol>
 
+            <div class="alert alert-info" role="alert">
+                <p class="text-justify"><strong><i class="fa fa-info-circle" aria-hidden="true"></i> Descripción:</strong> en este rubro deberá reportar los cursos y seminarios
+                    impartidos durante el periodo que corresponde a su informe.</p>
+                <p class="text-justify"><strong class="text-danger"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Importante</strong>: se ha precargado en este sistema
+                    la información que nos proporciona el Sistema de Información Académica del CCM (SID), favor de verificar que la información
+                    sea la correcta. Si hubiera algún curso o seminarios que no aparezca favor de agregarlo.</p>
+            </div>
+
             <div class="panel panel-default">
 
                 <div class="panel-heading">
@@ -58,13 +66,13 @@
                             {% set cursomodaledit = 'cursoeditModal'~ curso.id  %}
 
                             <li class="list-group-item">
-                                <div class="page-header"><h4><i class="fa fa-book fa-x" aria-hidden="true"></i> {{ curso.nombre|title }}</h4></div>
+                                <div class="page-header"><h4><i class="fa fa-book fa-x" aria-hidden="true"></i> {{ curso.nombre }}</h4></div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <span class="label label-default">{{ curso.nivel|title }}</span>
                                         <span class="label label-default">{{ curso.tipo|title }}</span>
                                         <span class="label label-default">{{ curso.lugar }}</span>
-                                        <span class="label label-default">{{ curso.horas }} horas</span>
+                                        <span class="label label-default">{{ curso.horas }} horas por semana</span>
 
                                         <p class="pull-right">
                                             <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ cursomodalshow }}">

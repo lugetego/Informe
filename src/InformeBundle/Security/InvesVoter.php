@@ -14,6 +14,8 @@ use InformeBundle\Entity\Cursos;
 use InformeBundle\Entity\Posdoc;
 use InformeBundle\Entity\User;
 use InformeBundle\Entity\Tecnico;
+use InformeBundle\Entity\Informe;
+
 
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 
@@ -47,6 +49,7 @@ class InvesVoter extends  Voter
             !$subject instanceof Salidas &&
             !$subject instanceof Posdoc &&
             !$subject instanceof Tecnico &&
+            !$subject instanceof Informe &&
             !$subject instanceof Plan
 
         ) {
@@ -92,14 +95,23 @@ class InvesVoter extends  Voter
 
     private function canView($post, User $user)
     {
+        if ($post instanceof Plan) {
+            if ($user->getAcademico() === $post->getAcademico() ){
+                return true;
+            }
+
+            if ( $user->getAcademico() === $post->getInforme()->getAcademico() ){
+                return true;
+            }
 
 
-        if ($user->getAcademico()->getId() === $post->getAcademico()->getId()) {
 
-            return true;
+
         }
 
-        // if they can edit, they can view
+
+
+        //  if they can edit, they can view
         if ($this->canEdit($post, $user)) {
             return true;
         }
@@ -108,7 +120,7 @@ class InvesVoter extends  Voter
 
         // the Post object could have, for example, a method isPrivate()
         // that checks a boolean $private property
-       //return !$post->isPrivate();
+        //return !$post->isPrivate();
     }
 
     private function canEdit( $post, User $user)
@@ -116,10 +128,20 @@ class InvesVoter extends  Voter
         // this assumes that the data object has a getOwner() method
         // to get the entity of the user who owns this data object
 
-        if ($user->getAcademico()->getId() === $post->getAcademico()->getId()) {
+        if ($post instanceof Plan){
+            if ($user->getAcademico() === $post->getAcademico() ){
+                return true;
+            }
 
-            return true;
         }
+
+        if ( $user->getAcademico() === $post->getInforme()->getAcademico() ){
+            if ( $user->getAcademico() === $post->getInforme()->getAcademico() ){
+                return true;
+            }
+        }
+
+
 
 
     }

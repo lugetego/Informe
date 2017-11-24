@@ -25,13 +25,18 @@ class SalidasController extends Controller
     public function indexAction()
     {
 
+        $em = $this->getDoctrine()->getManager();
+
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
         }
 
         $user = $this->get('security.context')->getToken()->getUser();
-        $salidas = $user->getAcademico()->getSalidas();
-        $enviado = $user->getAcademico()->isEnviado();
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $user->getAcademico());
+
+        $salidas = $informe->getSalidas();
+
+        $enviado = $informe->isEnviado();
 
 
         return $this->render('salidas/index.html.twig', array(
@@ -52,6 +57,10 @@ class SalidasController extends Controller
     {
         $securityContext = $this->container->get('security.token_storage');
         $user = $securityContext->getToken()->getUser();
+        $academico = $user->getAcademico();
+
+        $em = $this->getDoctrine()->getManager();
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
 
         $salida = new Salidas();
         $form = $this->createForm('InformeBundle\Form\SalidasType', $salida);
@@ -59,7 +68,7 @@ class SalidasController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $salida->setAcademico($user->getAcademico());
+            $salida->setInforme($informe);
             $em->persist($salida);
             $em->flush();
 
@@ -84,7 +93,11 @@ class SalidasController extends Controller
     {
         $securityContext = $this->container->get('security.token_storage');
         $user = $securityContext->getToken()->getUser();
-        $enviado = $user->getAcademico()->isEnviado();
+        $academico = $user->getAcademico();
+
+        $em = $this->getDoctrine()->getManager();
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+        $enviado = $informe->isEnviado();
 
         $deleteForm = $this->createDeleteForm($salida);
 

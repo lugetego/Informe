@@ -112,9 +112,16 @@ class PlanController extends Controller
     {
         $this->denyAccessUnlessGranted('edit', $plan);
 
+        $em = $this->getDoctrine()->getManager();
+
+
         $securityContext = $this->container->get('security.token_storage');
         $user = $securityContext->getToken()->getUser();
-        $enviado = $user->getAcademico()->isEnviado();
+        $academico = $user->getAcademico();
+
+        $plan = $em->getRepository('InformeBundle:Plan')->findOneByAnio(2018, $academico);
+
+        $enviado = $plan->isEnviado();
 
         $deleteForm = $this->createDeleteForm($plan);
         $editForm = $this->createForm('InformeBundle\Form\PlanType', $plan);

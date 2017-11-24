@@ -25,13 +25,17 @@ class CursosController extends Controller
     public function indexAction()
     {
 
+        $em = $this->getDoctrine()->getManager();
+
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
         }
 
         $user = $this->get('security.context')->getToken()->getUser();
-        $cursos = $user->getAcademico()->getCursos();
-        $enviado = $user->getAcademico()->isEnviado();
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $user->getAcademico());
+
+        $cursos = $informe->getCursos();
+        $enviado = $informe->isEnviado();
 
 
         return $this->render('cursos/index.html.twig', array(
@@ -51,6 +55,10 @@ class CursosController extends Controller
         $securityContext = $this->container->get('security.token_storage');
 
         $user = $securityContext->getToken()->getUser();
+        $academico = $user->getAcademico();
+
+        $em = $this->getDoctrine()->getManager();
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
 
         $curso = new Cursos();
         $form = $this->createForm('InformeBundle\Form\CursosType', $curso);
@@ -58,7 +66,7 @@ class CursosController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $curso->setAcademico($user->getAcademico());
+            $curso->setInforme($informe);
             $em->persist($curso);
             $em->flush();
 
@@ -83,7 +91,11 @@ class CursosController extends Controller
     {
         $securityContext = $this->container->get('security.token_storage');
         $user = $securityContext->getToken()->getUser();
-        $enviado = $user->getAcademico()->isEnviado();
+        $academico = $user->getAcademico();
+
+        $em = $this->getDoctrine()->getManager();
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+        $enviado = $informe->isEnviado();
 
         $deleteForm = $this->createDeleteForm($curso);
 
@@ -106,6 +118,14 @@ class CursosController extends Controller
      */
     public function editAction(Request $request, Cursos $curso)
     {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $securityContext = $this->container->get('security.token_storage');
+        $user = $securityContext->getToken()->getUser();
+        $academico = $user->getAcademico();
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+
         $deleteForm = $this->createDeleteForm($curso);
 
         $this->denyAccessUnlessGranted('edit', $curso);

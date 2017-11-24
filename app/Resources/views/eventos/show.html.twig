@@ -40,7 +40,17 @@
                         {% endif %}
                     </dl>
                 </div>
-                <div class="col-md-6">
+                <div class="col-lg-3">
+                    <dl>
+                        <dt>Invitación</dt>
+                        {% if evento.invitacion == true %}
+                            <dd><span class="label label-success">Si</span></dd>
+                        {% else %}
+                            <dd><span class="label label-danger">No</span></dd>
+                        {% endif %}
+                    </dl>
+                </div>
+                <div class="col-md-3">
                     <dl>
                         <dt>País</dt>
                         <dd>{{ evento.pais }}</dd>

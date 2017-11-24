@@ -62,6 +62,15 @@ class EventosType extends AbstractType
                 'label'=>'*Divulgación',
                 'choices_as_values' => false,
             ))
+            ->add('invitacion', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
+                'choices'=>array(
+                    true=>'Si ',
+                    false=>'No '),
+                'expanded'=>true,
+                'required'=>true,
+                'label'=>'*Invitacion',
+                'choices_as_values' => false,
+            ))
             ->add('pais', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
                 'label'=>'*País',
                 'required'=>true,
@@ -83,7 +92,7 @@ class EventosType extends AbstractType
                     'year' => 'Año',
                     'month' => 'Mes',
                     'day' => 'Día'),
-                'years'=> range(2016,2016),
+                'years'=> range(2017,2017),
                 'label'=>'*Inicio',
                 'required'=>true,
 
@@ -93,7 +102,7 @@ class EventosType extends AbstractType
                     'year' => 'Año',
                     'month' => 'Mes',
                     'day' => 'Día'),
-                'years'=> range(2016,2016),
+                'years'=> range(2017,2017),
                 'label'=>'*Fin',
                 'required'=>true,
 

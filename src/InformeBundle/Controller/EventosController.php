@@ -24,15 +24,16 @@ class EventosController extends Controller
      */
     public function indexAction()
     {
+        $em = $this->getDoctrine()->getManager();
 
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
         }
 
         $user = $this->get('security.context')->getToken()->getUser();
-        $eventos = $user->getAcademico()->getEventos();
-        $enviado = $user->getAcademico()->isEnviado();
-
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $user->getAcademico());
+        $eventos = $informe->getEventos();
+        $enviado = $informe->isEnviado();
 
         return $this->render('eventos/index.html.twig', array(
             'eventos' => $eventos,
@@ -48,8 +49,15 @@ class EventosController extends Controller
      */
     public function newAction(Request $request)
     {
+
+
         $securityContext = $this->container->get('security.token_storage');
         $user = $securityContext->getToken()->getUser();
+        $academico = $user->getAcademico();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
 
         $evento = new Eventos();
         $form = $this->createForm('InformeBundle\Form\EventosType', $evento);
@@ -57,7 +65,7 @@ class EventosController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $evento->setAcademico($user->getAcademico());
+            $evento->setInforme($informe);
             $em->persist($evento);
             $em->flush();
 
@@ -82,7 +90,11 @@ class EventosController extends Controller
     {
         $securityContext = $this->container->get('security.token_storage');
         $user = $securityContext->getToken()->getUser();
-        $enviado = $user->getAcademico()->isEnviado();
+        $academico = $user->getAcademico();
+
+        $em = $this->getDoctrine()->getManager();
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+        $enviado = $informe->isEnviado();
 
         $deleteForm = $this->createDeleteForm($evento);
 
@@ -104,6 +116,13 @@ class EventosController extends Controller
      */
     public function editAction(Request $request, Eventos $evento)
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $securityContext = $this->container->get('security.token_storage');
+        $user = $securityContext->getToken()->getUser();
+        $academico = $user->getAcademico();
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+
         $deleteForm = $this->createDeleteForm($evento);
         $editForm = $this->createForm('InformeBundle\Form\EventosType', $evento);
         $this->denyAccessUnlessGranted('edit', $evento);

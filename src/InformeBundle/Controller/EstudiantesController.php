@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use InformeBundle\Entity\Estudiantes;
 use InformeBundle\Form\EstudiantesType;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+
 
 /**
  * Estudiantes controller.
@@ -24,15 +26,18 @@ class EstudiantesController extends Controller
      */
     public function indexAction()
     {
+        $em = $this->getDoctrine()->getManager();
 
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
         }
 
         $user = $this->get('security.context')->getToken()->getUser();
-        $estudiantes = $user->getAcademico()->getEstudiantes();
-        $posdocs = $user->getAcademico()->getPosdocs();
-        $enviado = $user->getAcademico()->isEnviado();
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $user->getAcademico());
+
+        $estudiantes = $informe->getEstudiantes();
+        $posdocs = $informe->getPosdocs();
+        $enviado = $informe->isEnviado();
 
 
         return $this->render('estudiantes/index.html.twig', array(
@@ -57,14 +62,19 @@ class EstudiantesController extends Controller
 
         $securityContext = $this->container->get('security.token_storage');
         $user = $securityContext->getToken()->getUser();
+        $academico = $user->getAcademico();
+
+        $em = $this->getDoctrine()->getManager();
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
 
         $estudiante = new Estudiantes();
         $form = $this->createForm('InformeBundle\Form\EstudiantesType', $estudiante);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
-            $estudiante->setAcademico($user->getAcademico());
+            $estudiante->setInforme($informe);
             $em->persist($estudiante);
             $em->flush();
 
@@ -88,7 +98,14 @@ class EstudiantesController extends Controller
     {
         $securityContext = $this->container->get('security.token_storage');
         $user = $securityContext->getToken()->getUser();
-        $enviado = $user->getAcademico()->isEnviado();
+        $academico = $user->getAcademico();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+
+        $enviado = $informe->isEnviado();
+
 
         $deleteForm = $this->createDeleteForm($estudiante);
 

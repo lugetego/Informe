@@ -77,9 +77,16 @@ class TecnicoController extends Controller
     {
 
         $securityContext = $this->container->get('security.token_storage');
-
         $user = $securityContext->getToken()->getUser();
         $academico = $user->getAcademico();
+
+        $em = $this->getDoctrine()->getManager();
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+        $enviado = $informe->isEnviado();
+        $tecnicos = $em->getRepository('InformeBundle:Tecnico')->findOneByInforme($informe);
+
+
+
 
         $deleteForm = $this->createDeleteForm($tecnico);
 
@@ -88,7 +95,8 @@ class TecnicoController extends Controller
 
         return $this->render('tecnico/show.html.twig', array(
             'academico'=>$academico,
-            'tecnico' => $tecnico,
+            'tecnicos' => $tecnicos,
+            'enviado'=>$enviado,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -102,10 +110,16 @@ class TecnicoController extends Controller
     public function editAction(Request $request, Tecnico $tecnico)
     {
         $this->denyAccessUnlessGranted('edit', $tecnico);
+        $em = $this->getDoctrine()->getManager();
+
 
         $securityContext = $this->container->get('security.token_storage');
         $user = $securityContext->getToken()->getUser();
-        $enviado = $user->getAcademico()->isEnviado();
+        $academico = $user->getAcademico();
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+
+        $enviado = $informe->isEnviado();
+
 
         $deleteForm = $this->createDeleteForm($tecnico);
         $editForm = $this->createForm('InformeBundle\Form\TecnicoType', $tecnico);

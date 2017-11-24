@@ -44,7 +44,7 @@ class CursosType extends AbstractType
                 'choices_as_values' => true,
             ))
             ->add('horas', 'Symfony\Component\Form\Extension\Core\Type\TextType',array(
-                'label'=>'*Número de horas',
+                'label'=>'*Número de horas por semana',
                 'required'=>true,
             ))
             ->add('lugares','Symfony\Component\Form\Extension\Core\Type\ChoiceType', array('choices'  => array(

@@ -76,7 +76,6 @@ fos_user:
             address:        webmaster@matmor.unam.mx
             sender_name:    Centro de Ciencias Matemáticas
 
-
 knp_snappy:
     pdf:
         enabled:    true

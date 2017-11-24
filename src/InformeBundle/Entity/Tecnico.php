@@ -23,18 +23,18 @@ class Tecnico
     private $id;
 
     /**
-     * @var academico
-     * @ORM\ManyToOne(targetEntity="Academico", inversedBy="tecnicos")
-     * @ORM\JoinColumn(name="academico_id", referencedColumnName="id")
+     * @var informe
+     * @ORM\ManyToOne(targetEntity="Informe", inversedBy="tecnicos")
+     * @ORM\JoinColumn(name="informe_id", referencedColumnName="id")
      */
-    private $academico;
+    private $informe;
 
     /**
      * @var string
      *
      * @ORM\Column(name="informe", type="text", nullable=true)
      */
-    private $informe;
+    private $informeAnual;
 
     /**
      * @var string
@@ -62,29 +62,6 @@ class Tecnico
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set informe
-     *
-     * @param string $informe
-     * @return Tecnico
-     */
-    public function setInforme($informe)
-    {
-        $this->informe = $informe;
-
-        return $this;
-    }
-
-    /**
-     * Get informe
-     *
-     * @return string 
-     */
-    public function getInforme()
-    {
-        return $this->informe;
     }
 
     /**
@@ -194,5 +171,51 @@ class Tecnico
     public function getAcademico()
     {
         return $this->academico;
+    }
+
+    /**
+     * Set informeAnual
+     *
+     * @param string $informeAnual
+     * @return Tecnico
+     */
+    public function setInformeAnual($informeAnual)
+    {
+        $this->informeAnual = $informeAnual;
+
+        return $this;
+    }
+
+    /**
+     * Get informeAnual
+     *
+     * @return string 
+     */
+    public function getInformeAnual()
+    {
+        return $this->informeAnual;
+    }
+
+    /**
+     * Set informe
+     *
+     * @param \InformeBundle\Entity\Informe $informe
+     * @return Tecnico
+     */
+    public function setInforme(\InformeBundle\Entity\Informe $informe = null)
+    {
+        $this->informe = $informe;
+
+        return $this;
+    }
+
+    /**
+     * Get informe
+     *
+     * @return \InformeBundle\Entity\Informe 
+     */
+    public function getInforme()
+    {
+        return $this->informe;
     }
 }

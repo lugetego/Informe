@@ -28,7 +28,7 @@
             <div class="row page-header">
                 <div class="col-xs-6">
                     <p><small><strong>Académico:</strong> {{ academico.nombre }} {{ academico.apellido }}</small> </p>
-                    <p>Plan de trabajo 2017</p>
+                    <p>Plan de trabajo 2018</p>
                 </div>
                 <div class="col-xs-6">
                     <p class="text-right"><img class="right" src="{{ asset('img/ccm.png', absolute=true) }}" width="180px" height="60px" /></p>
@@ -36,29 +36,29 @@
             </div>
 
 
-                {% for plan in planes %}
+                {% for planes in plan %}
 
-                    {% if plan.investigacion %}
+                    {% if planes.investigacion %}
                         <strong><small>Investigación</small></strong><br>
                         <p class="text-justify"><small>{{ plan.investigacion| nl2br }}</small></p>
                     {% endif %}
-                    {% if plan.estudiantes %}
+                    {% if planes.estudiantes %}
                         <strong><small>Estudiantes</small></strong><br>
                         <p class="text-justify"><small>{{ plan.estudiantes| nl2br }}</small></p>
                     {% endif %}
-                    {% if plan.cursos %}
+                    {% if planes.cursos %}
                         <strong><small>Cursos y seminarios</small></strong><br>
                         <p class="text-justify"><small>{{ plan.cursos | nl2br  }}  </small></p>
                     {% endif %}
-                    {% if plan.proyectos %}
+                    {% if planes.proyectos %}
                         <strong><small>Proyectos</small></strong><br>
                         <p class="text-justify"><small>{{ plan.proyectos| nl2br }}</small></p>
                     {% endif %}
-                    {% if plan.eventos %}
+                    {% if planes.eventos %}
                         <strong><small>Eventos académicos y de divulgación</small></strong><br>
                         <p class="text-justify"> <small>{{ plan.eventos| nl2br }}</small></p>
                     {% endif %}
-                    {% if plan.salidas %}
+                    {% if planes.salidas %}
                         <strong><small>Licencias y comisiones</small></strong><br>
                         <p class="text-justify"> <small>{{ plan.salidas| nl2br }}</small></p>
                     {% endif %}

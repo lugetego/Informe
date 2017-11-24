@@ -24,13 +24,17 @@ class PosdocController extends Controller
      */
     public function indexAction()
     {
+
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
         }
 
         $em = $this->getDoctrine()->getManager();
 
-        $posdocs = $em->getRepository('InformeBundle:Posdoc')->findAll();
+        $user = $this->get('security.context')->getToken()->getUser();
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $user->getAcademico());
+        $posdocs = $informe->getPosdocs();
+        $enviado = $informe->isEnviado();
 
         //return $this->render('posdoc/index.html.twig', array(
           //  'posdocs' => $posdocs,
@@ -51,6 +55,11 @@ class PosdocController extends Controller
 
         $securityContext = $this->container->get('security.token_storage');
         $user = $securityContext->getToken()->getUser();
+        $academico = $user->getAcademico();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
 
         $posdoc = new Posdoc();
         $form = $this->createForm('InformeBundle\Form\PosdocType', $posdoc);
@@ -58,7 +67,7 @@ class PosdocController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $posdoc->setAcademico($user->getAcademico());
+            $posdoc->setInforme($informe);
             $em->persist($posdoc);
             $em->flush($posdoc);
 
@@ -82,7 +91,14 @@ class PosdocController extends Controller
     {
         $securityContext = $this->container->get('security.token_storage');
         $user = $securityContext->getToken()->getUser();
-        $enviado = $user->getAcademico()->isEnviado();
+        $academico = $user->getAcademico();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+
+        $enviado = $informe->isEnviado();
+
 
         $deleteForm = $this->createDeleteForm($posdoc);
 
@@ -104,8 +120,14 @@ class PosdocController extends Controller
      */
     public function editAction(Request $request, Posdoc $posdoc)
     {
+
+        $em = $this->getDoctrine()->getManager();
+
         $securityContext = $this->container->get('security.token_storage');
         $user = $securityContext->getToken()->getUser();
+        $academico = $user->getAcademico();
+
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
 
         $deleteForm = $this->createDeleteForm($posdoc);
         $editForm = $this->createForm('InformeBundle\Form\PosdocType', $posdoc);

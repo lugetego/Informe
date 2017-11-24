@@ -24,11 +24,11 @@ class Eventos
     private $id;
 
     /**
-     * @var academico
-     * @ORM\ManyToOne(targetEntity="Academico", inversedBy="eventos")
-     * @ORM\JoinColumn(name="academico_id", referencedColumnName="id")
+     * @var informe
+     * @ORM\ManyToOne(targetEntity="Informe", inversedBy="eventos")
+     * @ORM\JoinColumn(name="informe_id", referencedColumnName="id")
      */
-    private $academico;
+    private $informe;
 
     /**
      * @var string
@@ -57,6 +57,13 @@ class Eventos
      * @ORM\Column(name="nacional", type="boolean")
      */
     private $nacional;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="invitacion", type="boolean")
+     */
+    private $invitacion;
 
     /**
      * @var string
@@ -287,6 +294,29 @@ class Eventos
     }
 
     /**
+     * Set invitacion
+     *
+     * @param boolean $invitacion
+     * @return Eventos
+     */
+    public function setInvitacion($invitacion)
+    {
+        $this->invitacion = $invitacion;
+
+        return $this;
+    }
+
+    /**
+     * Get invitacion
+     *
+     * @return boolean
+     */
+    public function getInvitacion()
+    {
+        return $this->invitacion;
+    }
+
+    /**
      * Set pais
      *
      * @param string $pais
@@ -464,26 +494,38 @@ class Eventos
         $this->divulgacion = $divulgacion;
     }
 
+
+
     /**
-     * Set academico
+     * Get divulgacion
      *
-     * @param \InformeBundle\Entity\Academico $academico
+     * @return boolean 
+     */
+    public function getDivulgacion()
+    {
+        return $this->divulgacion;
+    }
+
+    /**
+     * Set informe
+     *
+     * @param \InformeBundle\Entity\Informe $informe
      * @return Eventos
      */
-    public function setAcademico(\InformeBundle\Entity\Academico $academico = null)
+    public function setInforme(\InformeBundle\Entity\Informe $informe = null)
     {
-        $this->academico = $academico;
+        $this->informe = $informe;
 
         return $this;
     }
 
     /**
-     * Get academico
+     * Get informe
      *
-     * @return \InformeBundle\Entity\Academico 
+     * @return \InformeBundle\Entity\Informe 
      */
-    public function getAcademico()
+    public function getInforme()
     {
-        return $this->academico;
+        return $this->informe;
     }
 }
