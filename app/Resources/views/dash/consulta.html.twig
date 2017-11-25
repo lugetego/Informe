@@ -119,7 +119,7 @@
                 <div class="panel-heading" role="tab" id="headingTwo">
                     <h4 class="panel-title">
                         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            <i class="fa fa-calendar-o" aria-hidden="true"></i> Plan de trabajo {{ plan.anio }}
+                            <i class="fa fa-calendar-o" aria-hidden="true"></i> Plan de trabajo {{ informe.anio + 1}}
                         </a>
                     </h4>
                 </div>
@@ -146,13 +146,13 @@
                             <div class="col-lg-4 col-md-4 text-center">
                                 <dl>
                                     <dt><i class="fa fa-print fa-3x" aria-hidden="true"></i></dt>
-                                    <dd> <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal3">Vista previa</button> </dd>
+                                    <dd> <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal3">Vista previa plan {{ informe.anio + 1 }}</button> </dd>
                                 </dl>
                             </div>
                             <div class="col-lg-4 col-md-4 text-center">
                                 <dl>
                                     <dt><i class="fa fa-file-pdf-o fa-3x" aria-hidden="true"></i></dt>
-                                    <dd><a href="{{ path('plan_pdf',{'anio':plan.anio}) }} "> <h5>Descargar</h5></a></dd>
+                                    <dd><a href="{{ path('plan_pdf',{'anio': informe.anio + 1}) }} "> <h5>Descargar</h5></a></dd>
                                 </dl>
                             </div>
 

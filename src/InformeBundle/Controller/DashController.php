@@ -128,7 +128,7 @@ class DashController extends Controller
         {
             $user = $this->get('security.context')->getToken()->getUser();
             $academico = $user->getAcademico();
-            $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2016,$academico);
+            $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2016, $academico);
             $tecnicos = $em->getRepository('InformeBundle:Tecnico')->findOneByInforme($informe);
             $informeAnual = $tecnicos->getInformeAnual();
             $plan= $tecnicos->getPlan();
@@ -153,8 +153,6 @@ class DashController extends Controller
             $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio($informe->getAnio(),$academico);
             $plan = $em->getRepository('InformeBundle:Plan')->findOneByAnio($informe->getAnio()+1,$academico);
 
-
-
             //$investigaciones = $informe->getInvestigaciones();
             //$estudiantes = $informe->getEstudiantes();
             //$cursos = $informe->getCursos();
@@ -178,7 +176,6 @@ class DashController extends Controller
                   'posdocs'=>$posdocs,
                   'user'=>$user,
                   'enviado'=>$enviado*/
-
             ));
         }
 
@@ -229,19 +226,17 @@ class DashController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
         }
 
         $user = $this->get('security.context')->getToken()->getUser();
         $academico = $user->getAcademico();
-        $plan = $em->getRepository('InformeBundle:Plan')->findOneByAnio($plan->getAnio(),$academico);
+        $plan = $em->getRepository('InformeBundle:Plan')->findOneByAnio($plan->getAnio(), $academico);
 
         $html = $this->renderView('dash/layout-pdfplan.html.twig', array(
             'academico'=>$academico,
             'plan'=>$plan,
-
         ));
 
         $filename = sprintf('Plan-'.$user.'%s.pdf', $plan->getAnio());
