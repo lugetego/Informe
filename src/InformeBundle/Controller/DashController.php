@@ -69,7 +69,8 @@ class DashController extends Controller
             $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
             $plan = $em->getRepository('InformeBundle:Plan')->findOneByAnio(2018,$academico);
 
-
+            $salidas = $em->getRepository('InformeBundle:Salidas')->findSalidas($informe->getId());
+            $visitantes = $em->getRepository('InformeBundle:Salidas')->findVisitantes($informe->getId());
 
             //$investigaciones = $informe->getInvestigaciones();
             //$estudiantes = $informe->getEstudiantes();
@@ -82,9 +83,11 @@ class DashController extends Controller
             //$enviado = $informe->isEnviado();
 
             return $this->render('dash/index.html.twig', array(
-                'informe'=>$informe,
-                'academico'=> $academico,
-                'plan'=>$plan,
+                'informe' => $informe,
+                'academico' => $academico,
+                'plan' => $plan,
+                'salidas' => $salidas,
+                'visitantes' => $visitantes,
               /*  'investigaciones'=> $investigaciones,
                 'estudiantes'=>$estudiantes,
                 'cursos'=>$cursos,
@@ -198,9 +201,15 @@ class DashController extends Controller
         $academico = $user->getAcademico();
         $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio($informe->getAnio(),$academico);
 
+        $salidas = $em->getRepository('InformeBundle:Salidas')->findSalidas($informe->getId());
+        $visitas = $em->getRepository('InformeBundle:Salidas')->findVisitantes($informe->getId());
+
+
         $html = $this->renderView('dash/layout-pdf.html.twig', array(
             'academico'=>$academico,
             'informe'=>$informe,
+            'salidas'=>$salidas,
+            'visitas'=>$visitas,
 
         ));
 
@@ -324,6 +333,7 @@ class DashController extends Controller
             $proyectos = $academico->getProyectos();
             $eventos = $academico->getEventos();
             $salidas = $academico->getSalidas();
+            $visitas = $academico->getVisitas();
             $planes = $academico->getPlanes();
             $posdocs = $academico->getPosdocs();
             $tecnicos = $academico->getTecnicos();

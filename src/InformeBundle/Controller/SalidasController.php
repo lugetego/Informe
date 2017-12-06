@@ -34,16 +34,45 @@ class SalidasController extends Controller
         $user = $this->get('security.context')->getToken()->getUser();
         $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $user->getAcademico());
 
-        $salidas = $informe->getSalidas();
+        $salidas = $em->getRepository('InformeBundle:Salidas')->findSalidas($informe->getId());
+
+        $enviado = $informe->isEnviado();
+
+        return $this->render('salidas/index.html.twig', array(
+            'salidas' => $salidas,
+            'enviado'=>$enviado,
+            'titulo' => 'Licencias, comisiones',
+        ));
+    }
+
+    /**
+     * Lists all Salidas entities.
+     *
+     * @Route("/visitas", name="visitas_index")
+     * @Method("GET")
+     */
+    public function visitasAction()
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $user = $this->get('security.context')->getToken()->getUser();
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $user->getAcademico());
+
+        $visitantes = $em->getRepository('InformeBundle:Salidas')->findVisitantes($informe->getId());
 
         $enviado = $informe->isEnviado();
 
 
         return $this->render('salidas/index.html.twig', array(
-            'salidas' => $salidas,
+            'salidas' => $visitantes,
             'enviado'=>$enviado,
+            'titulo' => 'Visitantes',
         ));
-
 
     }
 

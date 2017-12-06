@@ -31,7 +31,10 @@
                 <a href="{{ path('eventos_index') }}">Eventos</a>
             </li>
             <li>
-                <a href="{{ path('salidas_index') }}">Licencias, comisiones y visitantes</a>
+                <a href="{{ path('salidas_index') }}">Licencias, comisiones</a>
+            </li>
+            <li>
+                <a href="{{ path('visitas_index') }}">Visitas</a>
             </li>
         </ul>
         <!-- /.nav-second-level -->
@@ -59,7 +62,7 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-6 col-md-6">
+        <div class="col-lg-8 col-md-8">
 
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                 <div class="panel panel-default">
@@ -95,6 +98,8 @@
                                         <dd><a href="{{ path('cursos_index',{'cursos':informe.cursos} ) }} ">Cursos y seminarios <span class="counter">{{ informe.cursos|length }}</span></a></dd>
                                     </dl>
                                 </div>
+                            </div>
+                            <div class="row">
 
                                 <div class="col-lg-4 col-md-4 text-center">
                                     <dl>
@@ -112,13 +117,17 @@
                                 <div class="col-lg-4 col-md-4 text-center">
                                     <dl>
                                         <dt><i class="fa fa-globe fa-3x" aria-hidden="true"></i></dt>
-                                        <dd><a href="{{ path('salidas_index',{'salidas':informe.salidas} ) }} ">Licencias, comisiones y visitantes <span class="counter">{{ informe.salidas|length }}</span></a></dd>
+                                        <dd><a href="{{ path('salidas_index',{'salidas':informe.salidas} ) }} ">Licencias, comisiones <span class="counter">{{ salidas|length }}</span></a></dd>
                                     </dl>
                                 </div>
-
-                             </div>
-
-                             <div class="row">
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 text-center">
+                                    <dl>
+                                        <dt><i class="fa fa-globe fa-3x" aria-hidden="true"></i></dt>
+                                        <dd><a href="{{ path('visitas_index',{'salidas':informe.salidas} ) }} ">Visitantes <span class="counter">{{ visitantes|length }}</span></a></dd>
+                                    </dl>
+                                </div>
                                 <div class="col-lg-4 col-md-4 text-center">
                                     <dl>
                                         <dt><i class="fa fa-print fa-3x" aria-hidden="true"></i></dt>
@@ -194,7 +203,7 @@
             </div>
         </div>
 
-        <div class="col-lg-6 col-md-6">
+        <div class="col-lg-4 col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title"> <i class="fa fa-envelope-o" aria-hidden="true"></i> Mensajes</h3>
@@ -261,13 +270,13 @@
 
                     <div class="container-fluid">
 
-                    <strong>Investigación</strong><br>
-                    {% if informe.investigaciones|length == 0 %}
-                        No se ha registrado información<br><br>
-                    {% else %}
-                        <ol>
-                            {% for investigacion in informe.investigaciones %}
-                                <li class="text-justify">{{ investigacion.titulo }}, <small><em> {{ investigacion.autores }}</em></small>, <small>{{ investigacion.tipo|title }}</small>,
+                        <strong>Investigación</strong><br>
+                        {% if informe.investigaciones|length == 0 %}
+                            No se ha registrado información<br><br>
+                        {% else %}
+                            <ol>
+                                {% for investigacion in informe.investigaciones %}
+                                    <li class="text-justify">{{ investigacion.titulo }}, <small><em> {{ investigacion.autores }}</em></small>, <small>{{ investigacion.tipo|title }}</small>,
                                         {% if investigacion.revista %} {{ investigacion.revista }},{% endif %}
                                         {% if investigacion.year %} {{ investigacion.year }}, {% endif %}
                                         {% if investigacion.volumen %}Vol. {{ investigacion.volumen }},{% endif %}
@@ -276,70 +285,70 @@
                                         {% if investigacion.issn %} ISSN: {{ investigacion.issn  }}, {% endif %}
                                         {% if investigacion.status %} {{ investigacion.status|lower  }} {% endif %}</li>
 
-                            {% endfor %}
-                        </ol>
-                    {% endif %}
+                                {% endfor %}
+                            </ol>
+                        {% endif %}
 
-                    <strong>Estudiantes</strong><br>
-                    {% if informe.estudiantes|length == 0 %}
-                        No se ha registrado información<br><br>
-                    {% else %}
-                        <ol>
-                            {% for estudiante in informe.estudiantes %}
-                                <li>{{ estudiante.alumno |title }}, <small>{{ estudiante.nivel|title }}, {{ estudiante.programa }}</small>,
-                                    {{ estudiante.avance }}% de avance, {% if estudiante.titulado %} titulado el {{ estudiante.titulacion|localizeddate('long', 'none') }},{% endif %}
-                                    <em> {{ estudiante.tesis }}</em>
-                                    <br>
-                                </li>
-                            {% endfor %}
-                        </ol>
-                    {% endif %}
+                        <strong>Estudiantes</strong><br>
+                        {% if informe.estudiantes|length == 0 %}
+                            No se ha registrado información<br><br>
+                        {% else %}
+                            <ol>
+                                {% for estudiante in informe.estudiantes %}
+                                    <li>{{ estudiante.alumno |title }}, <small>{{ estudiante.nivel|title }}, {{ estudiante.programa }}</small>,
+                                        {{ estudiante.avance }}% de avance, {% if estudiante.titulado %} titulado el {{ estudiante.titulacion|localizeddate('long', 'none') }},{% endif %}
+                                        <em> {{ estudiante.tesis }}</em>
+                                        <br>
+                                    </li>
+                                {% endfor %}
+                            </ol>
+                        {% endif %}
 
-                    <strong>Posdocs</strong><br>
-                    {% if informe.posdocs|length == 0 %}
-                        No se ha registrado información<br><br>
-                    {% else %}
-                        <ol>
-                            {% for posdoc in informe.posdocs %}
-                                <li>{{ posdoc.nombre |title }}, <small>del {{ posdoc.inicio|localizeddate('long', 'none') }} al {{ posdoc.fin|localizeddate('long', 'none') }}</small>
-                                    <br>
-                                </li>
-                            {% endfor %}
-                        </ol>
-                    {% endif %}
+                        <strong>Posdocs</strong><br>
+                        {% if informe.posdocs|length == 0 %}
+                            No se ha registrado información<br><br>
+                        {% else %}
+                            <ol>
+                                {% for posdoc in informe.posdocs %}
+                                    <li>{{ posdoc.nombre |title }}, <small>del {{ posdoc.inicio|localizeddate('long', 'none') }} al {{ posdoc.fin|localizeddate('long', 'none') }}</small>
+                                        <br>
+                                    </li>
+                                {% endfor %}
+                            </ol>
+                        {% endif %}
 
-                    <strong>Cursos y seminarios</strong><br>
-                    {% if informe.cursos|length == 0 %}
-                        No se ha registrado información<br><br>
-                    {% else %}
-                        <ol>
-                            {% for curso in informe.cursos %}
-                                <li>{{ curso.nombre }}, <small>{{ curso.tipo|title }}</small>,<em> {{ curso.nivel }}, {{ curso.horas }} horas por semana, {{ curso.lugar }}</em>
+                        <strong>Cursos y seminarios</strong><br>
+                        {% if informe.cursos|length == 0 %}
+                            No se ha registrado información<br><br>
+                        {% else %}
+                            <ol>
+                                {% for curso in informe.cursos %}
+                                    <li>{{ curso.nombre }}, <small>{{ curso.tipo|title }}</small>,<em> {{ curso.nivel }}, {{ curso.horas }} horas por semana, {{ curso.lugar }}</em>
 
-                                </li>
-                            {% endfor %}
-                        </ol>
-                    {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ol>
+                        {% endif %}
 
-                    <strong>Proyectos</strong><br>
-                    {% if informe.proyectos|length == 0 %}
-                        No se ha registrado información<br><br>
-                    {% else %}
-                        <ol>
-                            {% for proyecto in informe.proyectos %}
-                                <li>{{ proyecto.nombre|title }}, <small>{{ proyecto.tipo }}</small>,<em> {{ proyecto.numero }}</em>
+                        <strong>Proyectos</strong><br>
+                        {% if informe.proyectos|length == 0 %}
+                            No se ha registrado información<br><br>
+                        {% else %}
+                            <ol>
+                                {% for proyecto in informe.proyectos %}
+                                    <li>{{ proyecto.nombre|title }}, <small>{{ proyecto.tipo }}</small>,<em> {{ proyecto.numero }}</em>
 
-                                </li>
-                            {% endfor %}
-                        </ol>
-                    {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ol>
+                        {% endif %}
 
-                    <strong>Eventos académicos y de divulgación</strong><br>
-                    {% if informe.eventos|length == 0 %}
-                        No se ha registrado información<br><br>
-                    {% else %}
-                        <ol>
-                            {% for evento in informe.eventos %}
+                        <strong>Eventos académicos y de divulgación</strong><br>
+                        {% if informe.eventos|length == 0 %}
+                            No se ha registrado información<br><br>
+                        {% else %}
+                            <ol>
+                                {% for evento in informe.eventos %}
                                     <li class="text-justify">
                                         {{ evento.nombre }},
                                         <small>{% if evento.nacional %} nacional, {% else %} internacional,{% endif %}</small>
@@ -353,29 +362,47 @@
                                         {% if evento.pais %} {{ evento.pais }}{% endif %}
                                     </li>
 
-                            {% endfor %}
-                        </ol>
-                    {% endif %}
+                                {% endfor %}
+                            </ol>
+                        {% endif %}
 
-                    <strong>Licencias, comisiones y visitantes</strong><br>
-                    {% if informe.salidas|length == 0 %}
-                        No se ha registrado información<br><br>
-                    {% else %}
-                        <ol>
-                            {% for salida in informe.salidas %}
-                                <li>{{ salida.pais|title }}, <small>{{ salida.tipo|title }}</small>,<em> {{ salida.universidad }}</em>,
-                                    {% if salida.actividad %}
-                                        {{ salida.actividad }},
-                                    {% endif %}
-                                    {% for proposito in salida.propositos %}
-                                        {{ proposito }},
-                                    {% endfor %}
-                                    <br>
-                                </li>
-                            {% endfor %}
-                        </ol>
-                    {% endif %}
+                        <strong>Licencias, comisiones</strong><br>
+                        {% if salidas|length == 0 %}
+                            No se ha registrado información<br><br>
+                        {% else %}
+                            <ol>
+                                {% for salida in salidas %}
+                                    <li>{{ salida.pais|title }}, <small>{{ salida.tipo|title }}</small>,<em> {{ salida.universidad }}</em>,
+                                        {% if salida.actividad %}
+                                            {{ salida.actividad }},
+                                        {% endif %}
+                                        {% for proposito in salida.propositos %}
+                                            {{ proposito }},
+                                        {% endfor %}
+                                        <br>
+                                    </li>
+                                {% endfor %}
+                            </ol>
+                        {% endif %}
 
+                        <strong>Visitantes</strong><br>
+                        {% if visitantes|length == 0 %}
+                            No se ha registrado información<br><br>
+                        {% else %}
+                            <ol>
+                                {% for visita in visitantes %}
+                                    <li>{{ visita.pais|title }}, <small>{{ visita.tipo|title }}</small>,<em> {{ visita.universidad }}</em>,
+                                        {% if visita.actividad %}
+                                            {{ visita.actividad }},
+                                        {% endif %}
+                                        {% for proposito in visita.propositos %}
+                                            {{ proposito }},
+                                        {% endfor %}
+                                        <br>
+                                    </li>
+                                {% endfor %}
+                            </ol>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="modal-footer">

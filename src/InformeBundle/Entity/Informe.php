@@ -528,8 +528,6 @@ class Informe
         return $this->salidas;
     }
 
-
-
     public function getSlug()
     {
         return $this->slug;

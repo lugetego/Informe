@@ -26,7 +26,7 @@
             <ol class="breadcrumb">
                 <li><a href="{{ path('dashboard') }}">Inicio</a></li>
                 <li class="active">Informe</li>
-                <li class="active">Licencias, comisiones y visitantes</li>
+                <li class="active">{{ titulo }}</li>
             </ol>
 
             <div class="alert alert-info" role="alert">
@@ -40,7 +40,7 @@
                 <div class="panel-heading" role="tab" id="headingOne">
                     <h4 class="panel-title">
                         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            <i class="fa fa fa-globe fa-1x" aria-hidden="true"></i> <strong>Licencias, comisiones y visitantes</strong>
+                            <i class="fa fa fa-globe fa-1x" aria-hidden="true"></i> <strong> {{ titulo }} </strong> <span class="counter">{{ salidas|length }}</span>
                         </a>
                         {% if enviado != true  %}
                         <button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#salidasnewModal">

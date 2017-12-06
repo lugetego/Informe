@@ -17,4 +17,34 @@ class SalidasRepository extends EntityRepository
     {
         return $this->findBy(array(), array('inicio' => 'ASC'));
     }
+
+    public function findSalidas($informe_id)
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                "SELECT s FROM InformeBundle:Salidas s
+                    JOIN s.informe f
+                    WHERE f.id = :informe
+                    AND s.tipo <> :tipo
+                    ORDER BY s.inicio ASC"
+            )
+            ->setParameter('informe', $informe_id)
+            ->setParameter('tipo', 'Visitante')
+            ->getResult();
+    }
+
+    public function findVisitantes($informe_id)
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                "SELECT s FROM InformeBundle:Salidas s
+                    JOIN s.informe f
+                    WHERE f.id = :informe
+                    AND s.tipo = :tipo
+                    ORDER BY s.inicio ASC"
+            )
+            ->setParameter('informe', $informe_id)
+            ->setParameter('tipo', 'Visitante')
+            ->getResult();
+    }
 }
