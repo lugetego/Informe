@@ -52,6 +52,7 @@
                                             <th>Fecha de envío</th>
 
                                             <th>Dictamen</th>
+                                            <th>Evaluado</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -81,10 +82,13 @@
                                             <td class="text-center">{% if informe.enviado %}<a href="{{ path('informe_pdfadmin', {'id': informe.academico.id } ) }} "> <i class="fa fa-file-pdf-o"></i></a>{% endif %}</td>
 
                                         <td>{% if informe.enviado %}{{ informe.modified|localizeddate('long', 'none') }}{% endif %}</td>
-                                        <td>
+                                        <td class="text-center">
                                             <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ modaledit }}" >
                                                 <i class="fa fa-edit" aria-hidden="true"></i> Evaluación
                                             </button>
+                                        </td>
+                                        <td class="text-center">{% if informe.dictamen %}<span class="label label-success">Si</span> {% else %}<span class="label label-warning">No</span> {% endif %}</td>
+
                                         </tr>
 
                                             <!-- Modal -->
