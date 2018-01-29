@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Informe</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ informe.id }}</td>
+            </tr>
+            <tr>
+                <th>Enviado</th>
+                <td>{% if informe.enviado %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Dictamen</th>
+                <td>{{ informe.dictamen }}</td>
+            </tr>
+            <tr>
+                <th>Observaciones</th>
+                <td>{{ informe.observaciones }}</td>
+            </tr>
+            <tr>
+                <th>Anio</th>
+                <td>{{ informe.anio }}</td>
+            </tr>
+            <tr>
+                <th>Created</th>
+                <td>{% if informe.created %}{{ informe.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Modified</th>
+                <td>{% if informe.modified %}{{ informe.modified|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('informe_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('informe_edit', { 'id': informe.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

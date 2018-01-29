@@ -1,0 +1,67 @@
+{% form_theme edit_form 'form_errors.html.twig' %}
+
+{{ form_start(edit_form, {'action': path('informe_edit', { 'id': informe.id })}) }}
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <div>
+                        {{ form_label(edit_form.dictamen) }}
+                    </div>
+                    <div>
+                        {{ form_widget(edit_form.dictamen,{'attr': {'class': 'form-control input-sm', 'placeholder':'Autores'} } ) }}
+                    </div>
+                    <div>{{ form_errors(edit_form.dictamen) }}</div>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div>{{ form_label(edit_form.observaciones) }}</div>
+
+                <div>
+                    {{ form_widget(edit_form.observaciones,{'attr': {'class': 'form-control input-sm', 'placeholder':'Observaciones', 'rows':'1' } } )  }}
+                </div>
+                <div>{{ form_errors(edit_form.observaciones) }}</div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <div>{{ form_label(edit_form.enviado) }} {% if informe.enviado %} <small><i> {{ informe.modified|localizeddate('long', 'none') }}</i></small>{% endif %}</div>
+                    <div>
+                        {% spaceless %}
+                            {% for child in edit_form.enviado %}
+                                <div class="radio-inline">
+                                    {{ form_widget(child) }}  {{ form_label(child, null, {'label_attr': {'class': 'btn btn-default btn-xs'}}) }}
+                                </div>
+                            {% endfor %}
+                        {% endspaceless %}
+                    </div>
+                    <div>{{ form_errors(edit_form.enviado) }}</div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-lg-7 col-lg-offset-5">
+        <input type="submit" value="Guardar"  class="btn btn-primary"/>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+        {{ form_end(edit_form) }}
+    </div>
+</div>
+
+

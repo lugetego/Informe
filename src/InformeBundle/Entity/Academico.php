@@ -77,6 +77,13 @@ class Academico
     private $modified;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="activo", type="boolean", nullable=true)
+     */
+    private $activo;
+
+    /**
      * Set created
      *
      * @param \DateTime $created
@@ -342,6 +349,22 @@ class Academico
     public function getPlanes()
     {
         return $this->planes;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isActivo()
+    {
+        return $this->activo;
+    }
+
+    /**
+     * @param boolean $activo
+     */
+    public function setActivo($activo)
+    {
+        $this->activo = $activo;
     }
 
 

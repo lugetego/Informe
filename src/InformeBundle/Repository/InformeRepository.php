@@ -25,4 +25,18 @@ class InformeRepository extends EntityRepository
             ->setParameter('anio', $anio)
             ->getSingleResult();
     }
+
+    public function findByActivo($anio)
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                "SELECT i FROM InformeBundle:Informe i
+                    JOIN i.academico a
+                    WHERE a.activo = :activo
+                    AND i.anio = :anio"
+            )
+            ->setParameter('activo', true)
+            ->setParameter('anio', $anio)
+            ->getResult();
+    }
 }

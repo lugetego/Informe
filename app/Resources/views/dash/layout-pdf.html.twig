@@ -160,10 +160,11 @@
             {% if is_granted("ROLE_ADMIN") %}
                 <div class="row page-header">
                     <div class="col-xs-6">
-                        <h5>Plan de trabajo 2017</h5>
+                        <h5>Plan de trabajo 2018</h5>
                     </div>
                 </div>
-                {% for plan in planes %}
+
+
                     {% if plan.investigacion %}
                         <strong><small>Investigación</small></strong><br>
                         <p class="text-justify"><small>{{ plan.investigacion| nl2br }}</small></p>
@@ -188,7 +189,6 @@
                         <strong><small>Licencias y comisiones</small></strong><br>
                         <p class="text-justify"> <small>{{ plan.salidas| nl2br }}</small></p>
                     {% endif %}
-                {% endfor %}
             {% endif %}
         </div>
     {% endblock %}

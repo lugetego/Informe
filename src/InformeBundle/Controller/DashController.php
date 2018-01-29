@@ -39,9 +39,9 @@ class DashController extends Controller
 
         if ($this->get('security.context')->isGranted('ROLE_ADMIN'))
         {
-            $academicos = $em->getRepository('InformeBundle:Academico')->findAll();
+            $informes = $em->getRepository('InformeBundle:Informe')->findByActivo(2017);
             return $this->render('dash/admin.html.twig', array(
-                'academicos'=> $academicos,
+                'informes'=> $informes,
             ));
         }
 
@@ -200,7 +200,6 @@ class DashController extends Controller
         $user = $this->get('security.context')->getToken()->getUser();
         $academico = $user->getAcademico();
         $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio($informe->getAnio(),$academico);
-
         $salidas = $em->getRepository('InformeBundle:Salidas')->findSalidas($informe->getId());
         $visitas = $em->getRepository('InformeBundle:Salidas')->findVisitantes($informe->getId());
 
@@ -314,10 +313,12 @@ class DashController extends Controller
     /**
      * Export to PDF admin
      *
-     * @Route("/pdf/{id}", name="informe_pdfadmin")
+     * @Route("/pdfadmin/{id}", name="informe_pdfadmin")
      */
-    public function pdfAdminAction(Academico $id)
+    public function pdfAdminAction(Academico $academico)
     {
+
+        $em = $this->getDoctrine()->getManager();
 
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
@@ -325,36 +326,44 @@ class DashController extends Controller
 
         if ($this->get('security.context')->isGranted('ROLE_ADMIN')) {
 
-            $repository = $this->getDoctrine()->getRepository('InformeBundle:Academico');
-            $academico = $repository->find($id);
-            $investigaciones = $academico->getInvestigaciones();
-            $estudiantes = $academico->getEstudiantes();
-            $cursos = $academico->getCursos();
-            $proyectos = $academico->getProyectos();
-            $eventos = $academico->getEventos();
-            $salidas = $academico->getSalidas();
-            $visitas = $academico->getVisitas();
-            $planes = $academico->getPlanes();
-            $posdocs = $academico->getPosdocs();
-            $tecnicos = $academico->getTecnicos();
+            $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+            $salidas = $em->getRepository('InformeBundle:Salidas')->findSalidas($informe->getId());
+            $visitas = $em->getRepository('InformeBundle:Salidas')->findVisitantes($informe->getId());
+            $plan = $em->getRepository('InformeBundle:Plan')->findOneByAnio(2018, $academico);
+
+//            $repository = $this->getDoctrine()->getRepository('InformeBundle:Academico');
+//            $academico = $repository->find($id);
+//            $investigaciones = $academico->getInvestigaciones();
+//            $estudiantes = $academico->getEstudiantes();
+//            $cursos = $academico->getCursos();
+//            $proyectos = $academico->getProyectos();
+//            $eventos = $academico->getEventos();
+//            $salidas = $academico->getSalidas();
+//            $visitas = $academico->getVisitas();
+//            $planes = $academico->getPlanes();
+//            $posdocs = $academico->getPosdocs();
+//            $tecnicos = $academico->getTecnicos();
 
             if(in_array('ROLE_TECNICO', $academico->getUser()->getRoles())){
+
+                $tecnicos = $em->getRepository('InformeBundle:Tecnico')->findOneByInforme($informe);
+                $informeAnual = $tecnicos->getInformeAnual();
+                $plan= $tecnicos->getPlan();
+
                 $html = $this->renderView('dash/layout-pdftecnico.html.twig', array(
                     'academico' => $academico,
                     'tecnicos' => $tecnicos,
+                    'plan' => $plan,
+                    'informeAnual'=>$informeAnual,
                 ));
             }
             else {
                 $html = $this->renderView('dash/layout-pdf.html.twig', array(
-                    'academico' => $academico,
-                    'investigaciones' => $investigaciones,
-                    'estudiantes' => $estudiantes,
-                    'cursos' => $cursos,
-                    'proyectos' => $proyectos,
-                    'eventos' => $eventos,
-                    'salidas' => $salidas,
-                    'planes' => $planes,
-                    'posdocs' => $posdocs,
+                    'academico'=>$academico,
+                    'salidas'=>$salidas,
+                    'visitas'=>$visitas,
+                    'informe'=>$informe,
+                    'plan'=>$plan,
 
                 ));
             }

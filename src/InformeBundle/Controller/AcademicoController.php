@@ -123,17 +123,17 @@ class AcademicoController extends Controller
         $editForm->remove('nacimiento');
         $editForm->remove('rfc');
         $editForm->remove('user');
-        $editForm->add('aprobado', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',array(
-            'label'=>'Dictamen',
-            'choices'=>array(
-                'Aprobado'=>'Aprobado',
-                'Aprobado con observaciones'=>'Aprobado con observaciones',
-                'No aprobado'=>'No aprobado',
-            ),
-            'placeholder'=>'Seleccionar',
-            'required'=>true,
-            'choices_as_values' => true,
-        ));
+//        $editForm->add('aprobado', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',array(
+//            'label'=>'Dictamen',
+//            'choices'=>array(
+//                'Aprobado'=>'Aprobado',
+//                'Aprobado con observaciones'=>'Aprobado con observaciones',
+//                'No aprobado'=>'No aprobado',
+//            ),
+//            'placeholder'=>'Seleccionar',
+//            'required'=>true,
+//            'choices_as_values' => true,
+//        ));
 
 
         $editForm->handleRequest($request);

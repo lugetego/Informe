@@ -25,6 +25,7 @@ class AcademicoType extends AbstractType
             ->add('user', null, array(
                 'label' => 'Usuario',
                 'required' => false))
+            ->add('activo')
         ;
     }
     
