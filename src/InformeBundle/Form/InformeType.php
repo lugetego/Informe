@@ -31,7 +31,7 @@ class InformeType extends AbstractType
                     'No aprobado'=>'No aprobado',
                 ),
                 'placeholder'=>'Seleccionar',
-                'required'=>true,
+                'required'=>false,
                 'choices_as_values' => true,
             ))
             ->add('observaciones', 'Symfony\Component\Form\Extension\Core\Type\TextareaType',array(

@@ -37,7 +37,6 @@ class Informe
      */
     private $enviado;
 
-
     /**
      * @ORM\Column(type="string", length=30, nullable=true)
      */
@@ -278,8 +277,6 @@ class Informe
     {
         return $this->observaciones;
     }
-
-
 
     /**
      * Set anio

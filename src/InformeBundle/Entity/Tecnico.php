@@ -43,7 +43,7 @@ class Tecnico
      */
     private $plan;
 
-    /**
+   /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $created;
@@ -218,4 +218,28 @@ class Tecnico
     {
         return $this->informe;
     }
+
+    /**
+     * Set dictamen
+     *
+     * @param string $dictamen
+     * @return Informe
+     */
+    public function setDictamen($dictamen)
+    {
+        $this->dictamen = $dictamen;
+
+        return $this;
+    }
+
+    /**
+     * Get dictamen
+     *
+     * @return string
+     */
+    public function getDictamen()
+    {
+        return $this->dictamen;
+    }
+
 }

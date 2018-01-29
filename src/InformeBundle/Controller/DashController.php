@@ -347,12 +347,14 @@ class DashController extends Controller
             if(in_array('ROLE_TECNICO', $academico->getUser()->getRoles())){
 
                 $tecnicos = $em->getRepository('InformeBundle:Tecnico')->findOneByInforme($informe);
+                $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
                 $informeAnual = $tecnicos->getInformeAnual();
                 $plan= $tecnicos->getPlan();
 
                 $html = $this->renderView('dash/layout-pdftecnico.html.twig', array(
                     'academico' => $academico,
                     'tecnicos' => $tecnicos,
+                    'informe'=>$informe,
                     'plan' => $plan,
                     'informeAnual'=>$informeAnual,
                 ));
