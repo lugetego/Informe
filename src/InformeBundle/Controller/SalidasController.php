@@ -32,7 +32,7 @@ class SalidasController extends Controller
         }
 
         $user = $this->get('security.context')->getToken()->getUser();
-        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $user->getAcademico());
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $user->getAcademico());
 
         $salidas = $em->getRepository('InformeBundle:Salidas')->findSalidas($informe->getId());
 
@@ -61,9 +61,9 @@ class SalidasController extends Controller
         }
 
         $user = $this->get('security.context')->getToken()->getUser();
-        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $user->getAcademico());
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $user->getAcademico());
 
-        $visitantes = $em->getRepository('InformeBundle:Salidas')->findVisitantes($informe->getId());
+        $visitantes = $em->getRepository('InformeBundle:Salidas')->findByVisitantes($informe->getId());
 
         $enviado = $informe->isEnviado();
 
@@ -89,7 +89,7 @@ class SalidasController extends Controller
         $academico = $user->getAcademico();
 
         $em = $this->getDoctrine()->getManager();
-        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $academico);
 
         $salida = new Salidas();
         $form = $this->createForm('InformeBundle\Form\SalidasType', $salida);
@@ -101,8 +101,13 @@ class SalidasController extends Controller
             $em->persist($salida);
             $em->flush();
 
-            //return $this->redirectToRoute('salidas_show', array('id' => $salida->getId()));
-            return $this->redirectToRoute('salidas_index');
+            if ($salida->getTipo() == 'Visitante') {
+                return $this->redirectToRoute('visitas_index');
+            }
+            else {
+                //return $this->redirectToRoute('salidas_show', array('id' => $salida->getId()));
+                return $this->redirectToRoute('salidas_index');
+            }
 
         }
 
@@ -125,7 +130,7 @@ class SalidasController extends Controller
         $academico = $user->getAcademico();
 
         $em = $this->getDoctrine()->getManager();
-        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $academico);
         $enviado = $informe->isEnviado();
 
         $deleteForm = $this->createDeleteForm($salida);
@@ -159,8 +164,13 @@ class SalidasController extends Controller
             $em->persist($salida);
             $em->flush();
 
-            //return $this->redirectToRoute('salidas_show', array('id' => $salida->getId()));
-            return $this->redirectToRoute('salidas_index');
+            if ($salida->getTipo() == 'Visitante') {
+                return $this->redirectToRoute('visitas_index');
+            }
+            else {
+                //return $this->redirectToRoute('salidas_show', array('id' => $salida->getId()));
+                return $this->redirectToRoute('salidas_index');
+            }
 
         }
 

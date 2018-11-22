@@ -81,7 +81,7 @@ class TecnicoController extends Controller
         $academico = $user->getAcademico();
 
         $em = $this->getDoctrine()->getManager();
-        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $academico);
         $enviado = $informe->isEnviado();
         $tecnicos = $em->getRepository('InformeBundle:Tecnico')->findOneByInforme($informe);
 
@@ -116,7 +116,7 @@ class TecnicoController extends Controller
         $securityContext = $this->container->get('security.token_storage');
         $user = $securityContext->getToken()->getUser();
         $academico = $user->getAcademico();
-        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $academico);
 
         $enviado = $informe->isEnviado();
 

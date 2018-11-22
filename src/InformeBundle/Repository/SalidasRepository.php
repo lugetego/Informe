@@ -33,7 +33,7 @@ class SalidasRepository extends EntityRepository
             ->getResult();
     }
 
-    public function findVisitantes($informe_id)
+    public function findByVisitantes($informe_id)
     {
         return $this->getEntityManager()
             ->createQuery(

@@ -15,6 +15,8 @@ use InformeBundle\Entity\Posdoc;
 use InformeBundle\Entity\User;
 use InformeBundle\Entity\Tecnico;
 use InformeBundle\Entity\Informe;
+use InformeBundle\Entity\Otros;
+
 
 
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
@@ -43,6 +45,7 @@ class InvesVoter extends  Voter
         // only vote on Post objects inside this voter
         if (!$subject instanceof Investigacion &&
             !$subject instanceof Estudiantes &&
+            !$subject instanceof Otros &&
             !$subject instanceof Cursos &&
             !$subject instanceof Eventos &&
             !$subject instanceof Proyectos &&
@@ -103,9 +106,6 @@ class InvesVoter extends  Voter
             if ( $user->getAcademico() === $post->getInforme()->getAcademico() ){
                 return true;
             }
-
-
-
 
         }
 

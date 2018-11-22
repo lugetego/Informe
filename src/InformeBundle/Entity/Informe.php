@@ -130,6 +130,15 @@ class Informe
     private $salidas;
 
     /**
+     * @var array $otros
+     *
+     * @ORM\OneToMany(targetEntity="InformeBundle\Entity\Otros", mappedBy="informe")
+     *
+     * The mappedBy attribute designates the field in the entity that is the owner of the relationship.
+     */
+    private $otros;
+
+    /**
      * @var array $tecnicos
      *
      * @ORM\OneToMany(targetEntity="InformeBundle\Entity\Tecnico", mappedBy="informe")
@@ -530,6 +539,39 @@ class Informe
         return $this->slug;
     }
 
+
+    /**
+     * Add otros
+     *
+     * @param \InformeBundle\Entity\Otros $otros
+     * @return Academico
+     */
+    public function addOtro(\InformeBundle\Entity\Otros $otros)
+    {
+        $this->otros[] = $otros;
+
+        return $this;
+    }
+
+    /**
+     * Remove otros
+     *
+     * @param \InformeBundle\Entity\Otros $otros
+     */
+    public function removeOtros(\InformeBundle\Entity\Otros $otros)
+    {
+        $this->estudiantes->removeElement($otros);
+    }
+
+    /**
+     * Get otros
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOtros()
+    {
+        return $this->otros;
+    }
 
 
     /**

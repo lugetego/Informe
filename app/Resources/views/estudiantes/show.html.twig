@@ -34,7 +34,7 @@
             <div class="col-lg-4">
                 <dl>
                     <dt>Fecha de titulación</dt>
-                    <dd>{{ estudiante.titulacion|localizeddate('long', 'none') }}</dd>
+                    <dd>{% if estudiante.titulacion %}{{ estudiante.titulacion|localizeddate('long', 'none') }}{% endif %}</dd>
                 </dl>
 
             </div>

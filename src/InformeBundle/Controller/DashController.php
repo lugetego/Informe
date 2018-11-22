@@ -39,7 +39,7 @@ class DashController extends Controller
 
         if ($this->get('security.context')->isGranted('ROLE_ADMIN'))
         {
-            $informes = $em->getRepository('InformeBundle:Informe')->findByActivo(2017);
+            $informes = $em->getRepository('InformeBundle:Informe')->findByActivo(2018);
             return $this->render('dash/admin.html.twig', array(
                 'informes'=> $informes,
             ));
@@ -49,7 +49,7 @@ class DashController extends Controller
         {
             $user = $this->get('security.context')->getToken()->getUser();
             $academico = $user->getAcademico();
-            $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+            $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $academico);
             $enviado = $informe->isEnviado();
             $tecnicos = $em->getRepository('InformeBundle:Tecnico')->findOneByInforme($informe);
             return $this->render('dash/tecnico.html.twig', array(
@@ -66,11 +66,11 @@ class DashController extends Controller
             $user = $this->get('security.context')->getToken()->getUser();
             $academico = $user->getAcademico();
 
-            $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
-            $plan = $em->getRepository('InformeBundle:Plan')->findOneByAnio(2018,$academico);
+            $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $academico);
+            $plan = $em->getRepository('InformeBundle:Plan')->findOneByAnio(2019,$academico);
 
             $salidas = $em->getRepository('InformeBundle:Salidas')->findSalidas($informe->getId());
-            $visitantes = $em->getRepository('InformeBundle:Salidas')->findVisitantes($informe->getId());
+            $visitantes = $em->getRepository('InformeBundle:Salidas')->findByVisitantes($informe->getId());
 
             //$investigaciones = $informe->getInvestigaciones();
             //$estudiantes = $informe->getEstudiantes();
@@ -131,7 +131,7 @@ class DashController extends Controller
         {
             $user = $this->get('security.context')->getToken()->getUser();
             $academico = $user->getAcademico();
-            $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2016, $academico);
+            $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio($informe->getAnio(), $academico);
             $tecnicos = $em->getRepository('InformeBundle:Tecnico')->findOneByInforme($informe);
             $informeAnual = $tecnicos->getInformeAnual();
             $plan= $tecnicos->getPlan();
@@ -201,7 +201,7 @@ class DashController extends Controller
         $academico = $user->getAcademico();
         $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio($informe->getAnio(),$academico);
         $salidas = $em->getRepository('InformeBundle:Salidas')->findSalidas($informe->getId());
-        $visitas = $em->getRepository('InformeBundle:Salidas')->findVisitantes($informe->getId());
+        $visitas = $em->getRepository('InformeBundle:Salidas')->findByVisitantes($informe->getId());
 
 
         $html = $this->renderView('dash/layout-pdf.html.twig', array(
@@ -326,7 +326,7 @@ class DashController extends Controller
 
         if ($this->get('security.context')->isGranted('ROLE_ADMIN')) {
 
-            $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+            $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $academico);
             $salidas = $em->getRepository('InformeBundle:Salidas')->findSalidas($informe->getId());
             $visitas = $em->getRepository('InformeBundle:Salidas')->findVisitantes($informe->getId());
             $plan = $em->getRepository('InformeBundle:Plan')->findOneByAnio(2018, $academico);
@@ -347,7 +347,7 @@ class DashController extends Controller
             if(in_array('ROLE_TECNICO', $academico->getUser()->getRoles())){
 
                 $tecnicos = $em->getRepository('InformeBundle:Tecnico')->findOneByInforme($informe);
-                $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+                $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $academico);
                 $informeAnual = $tecnicos->getInformeAnual();
                 $plan= $tecnicos->getPlan();
 

@@ -28,7 +28,7 @@
             <div class="row page-header">
                 <div class="col-xs-5">
                     <p><small><strong>Académico:</strong> {{ academico.nombre }} {{ academico.apellido }}</small> </p>
-                    <p>Informe de actividades 2017</p>
+                    <p>Informe de actividades {{ informe.anio}}</p>
 
                 </div>
                 {% if informe.dictamen is not null %}
@@ -48,7 +48,7 @@
 
             <div class="row page-header">
                 <div class="col-xs-6">
-                    <h5>Plan de trabajo 2018</h5>
+                    <h5>Plan de trabajo {{ informe.anio + 1 }}</h5>
                 </div>
             </div>
 

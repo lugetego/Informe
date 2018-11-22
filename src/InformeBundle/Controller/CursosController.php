@@ -32,7 +32,7 @@ class CursosController extends Controller
         }
 
         $user = $this->get('security.context')->getToken()->getUser();
-        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $user->getAcademico());
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $user->getAcademico());
 
         $cursos = $informe->getCursos();
         $enviado = $informe->isEnviado();
@@ -58,7 +58,7 @@ class CursosController extends Controller
         $academico = $user->getAcademico();
 
         $em = $this->getDoctrine()->getManager();
-        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $academico);
 
         $curso = new Cursos();
         $form = $this->createForm('InformeBundle\Form\CursosType', $curso);
@@ -94,7 +94,7 @@ class CursosController extends Controller
         $academico = $user->getAcademico();
 
         $em = $this->getDoctrine()->getManager();
-        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $academico);
         $enviado = $informe->isEnviado();
 
         $deleteForm = $this->createDeleteForm($curso);
@@ -124,7 +124,7 @@ class CursosController extends Controller
         $securityContext = $this->container->get('security.token_storage');
         $user = $securityContext->getToken()->getUser();
         $academico = $user->getAcademico();
-        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $academico);
 
         $deleteForm = $this->createDeleteForm($curso);
 

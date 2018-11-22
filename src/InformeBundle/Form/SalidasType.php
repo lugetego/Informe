@@ -62,7 +62,7 @@ class SalidasType extends AbstractType
                     'year' => 'Año',
                     'month' => 'Mes',
                     'day' => 'Día'),
-                'years'=> range(2017,2017),
+                'years'=> range(2018,2018),
                 'label'=>'*Inicio',
                 'required'=>true,
 
@@ -72,7 +72,7 @@ class SalidasType extends AbstractType
                     'year' => 'Año',
                     'month' => 'Mes',
                     'day' => 'Día'),
-                'years'=> range(2017,2017),
+                'years'=> range(2018,2018),
                 'label'=>'*Fin',
                 'required'=>true,
             ))

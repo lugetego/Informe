@@ -36,6 +36,9 @@
             <li>
                 <a href="{{ path('visitas_index') }}">Visitas</a>
             </li>
+            <li>
+                <a href="{{ path('otros_index') }}">Otras actividades</a>
+            </li>
         </ul>
         <!-- /.nav-second-level -->
     </li>
@@ -45,7 +48,16 @@
     </li>
 
     <li>
-        <a href="{{ path('consulta',{'anio':2016})}} "> <i class="fa fa-calendar fa-fw"></i> Consulta informe 2016 </a>
+        <a href="#"><i class="fa fa-calendar fa-fw"></i> Años anteriores<span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+            <li>
+                <a href="{{ path('consulta',{'anio':2017})}} "> <i class="fa fa-calendar fa-fw"></i> 2017 </a>
+            </li>
+            <li>
+                <a href="{{ path('consulta',{'anio':2016})}} "> <i class="fa fa-calendar fa-fw"></i> 2016 </a>
+            </li>
+        </ul>
+        <!-- /.nav-second-level -->
     </li>
 
 {% endblock %}
@@ -124,10 +136,19 @@
                             <div class="row">
                                 <div class="col-lg-4 col-md-4 text-center">
                                     <dl>
-                                        <dt><i class="fa fa-globe fa-3x" aria-hidden="true"></i></dt>
+                                        <dt><i class="fa fa-suitcase fa-3x" aria-hidden="true"></i></dt>
                                         <dd><a href="{{ path('visitas_index',{'salidas':informe.salidas} ) }} ">Visitantes <span class="counter">{{ visitantes|length }}</span></a></dd>
                                     </dl>
                                 </div>
+                                <div class="col-lg-4 col-md-4 text-center">
+                                    <dl>
+                                        <dt><i class="fa fa-list-ul fa-3x" aria-hidden="true"></i></dt>
+                                        <dd><a href="{{ path('otros_index',{'otros':informe.otros} ) }} ">Otras actividades <span class="counter">{{ informe.otros|length }}</span></a></dd>
+
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-lg-4 col-md-4 text-center">
                                     <dl>
                                         <dt><i class="fa fa-print fa-3x" aria-hidden="true"></i></dt>
@@ -165,9 +186,9 @@
                                             {% set planid = "" %}
 
 
-                                                <dt><i class="fa fa-edit fa-3x" aria-hidden="true"></i></dt>
-                                                <dd><a href="{{ path('plan_edit', {'id': plan.id} )}} "> <h5>Plan de trabajo </h5></a></dd>
-                                                {% set planid = plan.id %}
+                                            <dt><i class="fa fa-edit fa-3x" aria-hidden="true"></i></dt>
+                                            <dd><a href="{{ path('plan_edit', {'id': plan.id} )}} "> <h5>Plan de trabajo </h5></a></dd>
+                                            {% set planid = plan.id %}
 
                                         {% endif %}
                                     </dl>
@@ -182,7 +203,7 @@
                                 <div class="col-lg-4 col-md-4 text-center">
                                     <dl>
                                         <dt><i class="fa fa-file-pdf-o fa-3x" aria-hidden="true"></i></dt>
-                                        <dd><a href="{{ path('plan_pdf',{'anio':2018}) }} "> <h5>Descargar</h5></a></dd>
+                                        <dd><a href="{{ path('plan_pdf',{'anio':2019}) }} "> <h5>Descargar</h5></a></dd>
                                     </dl>
                                 </div>
 
@@ -215,8 +236,8 @@
                             <i class="fa fa-exclamation-triangle media-object fa-2x text-info" aria-hidden="true"></i>
                         </div>
                         <div class="media-body">
-                            <span class="alert-info"> <h4 class="media-heading">Informe 2017 y Plan de trabajo 2018</h4></span>
-                            <p class="text-info">La fecha límite para el envío de tu información es el 26 de enero de 2018.</p>
+                            <span class="alert-info"> <h4 class="media-heading">Informe 2018 y Plan de trabajo 2019</h4></span>
+                            <p class="text-info">La fecha límite para el envío de tu información es el 25 de enero de 2019.</p>
                         </div>
                     </div>
 
@@ -260,7 +281,7 @@
                 <div class="modal-body">
                     <div class="row page-header">
                         <div class="col-xs-6">
-                            <h3>Informe 2017</h3>
+                            <h3>Informe 2018</h3>
                             <p> <strong>Académico:</strong> {{ academico.nombre }} {{ academico.apellido }}</p>
                         </div>
                         <div class="col-xs-6">
@@ -289,7 +310,7 @@
                             </ol>
                         {% endif %}
 
-                        <strong>Estudiantes</strong><br>
+                        <br><strong>Estudiantes</strong><br>
                         {% if informe.estudiantes|length == 0 %}
                             No se ha registrado información<br><br>
                         {% else %}
@@ -304,7 +325,7 @@
                             </ol>
                         {% endif %}
 
-                        <strong>Posdocs</strong><br>
+                        <br><strong>Posdocs</strong><br>
                         {% if informe.posdocs|length == 0 %}
                             No se ha registrado información<br><br>
                         {% else %}
@@ -317,7 +338,7 @@
                             </ol>
                         {% endif %}
 
-                        <strong>Cursos y seminarios</strong><br>
+                        <br><strong>Cursos y seminarios</strong><br>
                         {% if informe.cursos|length == 0 %}
                             No se ha registrado información<br><br>
                         {% else %}
@@ -330,7 +351,7 @@
                             </ol>
                         {% endif %}
 
-                        <strong>Proyectos</strong><br>
+                        <br><strong>Proyectos</strong><br>
                         {% if informe.proyectos|length == 0 %}
                             No se ha registrado información<br><br>
                         {% else %}
@@ -343,7 +364,7 @@
                             </ol>
                         {% endif %}
 
-                        <strong>Eventos académicos y de divulgación</strong><br>
+                        <br><strong>Eventos académicos y de divulgación</strong><br>
                         {% if informe.eventos|length == 0 %}
                             No se ha registrado información<br><br>
                         {% else %}
@@ -366,7 +387,7 @@
                             </ol>
                         {% endif %}
 
-                        <strong>Licencias, comisiones</strong><br>
+                        <br><strong>Licencias, comisiones</strong><br>
                         {% if salidas|length == 0 %}
                             No se ha registrado información<br><br>
                         {% else %}
@@ -374,7 +395,7 @@
                                 {% for salida in salidas %}
                                     <li>{{ salida.pais|title }}, <small>{{ salida.tipo|title }}</small>,<em> {{ salida.universidad }}</em>,
                                         {% if salida.actividad %}
-                                            {{ salida.actividad }},
+                                            {{ salida.actividad }}
                                         {% endif %}
                                         {% for proposito in salida.propositos %}
                                             {{ proposito }},
@@ -385,7 +406,7 @@
                             </ol>
                         {% endif %}
 
-                        <strong>Visitantes</strong><br>
+                        <br><strong>Visitantes</strong><br>
                         {% if visitantes|length == 0 %}
                             No se ha registrado información<br><br>
                         {% else %}
@@ -398,6 +419,23 @@
                                         {% for proposito in visita.propositos %}
                                             {{ proposito }},
                                         {% endfor %}
+                                        <br>
+                                    </li>
+                                {% endfor %}
+                            </ol>
+                        {% endif %}
+
+                        <br><strong>Otros</strong><br>
+                        {% if informe.otros|length == 0 %}
+                            No se ha registrado información<br><br>
+                        {% else %}
+                            <ol>
+                                {% for otro in informe.otros %}
+
+                                    <li>
+                                        {% if otro.actividad %}
+                                            {{ otro.actividad|nl2br }}
+                                        {% endif %}
                                         <br>
                                     </li>
                                 {% endfor %}
@@ -432,12 +470,12 @@
                     <div class="panel-body">
                         <div class="col-lg-12 col-md-2 text-center">
                             <p class="text-justify alert alert-info">Al momento de enviar tu informe y plan de trabajo recibirás un acuse de recibo a tu correo <em><strong>{{ app.user.email }}</strong></em>.<br>
-                            Una vez enviada la información no será posible realizar modificaciones sobre el informe o plan de trabajo.
+                                Una vez enviada la información no será posible realizar modificaciones sobre el informe o plan de trabajo.
                             </p>
                             {% if plan.id is defined %}
-                            <p><a class="btn btn-primary" href="{{ path('informe_send') }}" role="button"><i class="fa fa-paper-plane" aria-hidden="true"></i> Enviar informe y plan de trabajo</a></p>
-                                {% else %}
-                                    <p class="text-justify alert alert-danger">No has creado tu plan de trabajo.</p>
+                                <p><a class="btn btn-primary" href="{{ path('informe_send') }}" role="button"><i class="fa fa-paper-plane" aria-hidden="true"></i> Enviar informe y plan de trabajo</a></p>
+                            {% else %}
+                                <p class="text-justify alert alert-danger">No has creado tu plan de trabajo.</p>
                             {% endif %}
 
                         </div>
@@ -459,15 +497,15 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">Vista previa</h4>
                 </div>
-                    <div class="panel-body">
-                        {% if plan.id is defined %}
-                            {% render controller("InformeBundle:Plan:show", {'id': plan.id}) %}
+                <div class="panel-body">
+                    {% if plan.id is defined %}
+                        {% render controller("InformeBundle:Plan:show", {'id': plan.id}) %}
 
-                        {% else %}
-                            <p class="text-danger"> No se ha creado el plan de trabajo.</p>
+                    {% else %}
+                        <p class="text-danger"> No se ha creado el plan de trabajo.</p>
 
-                        {% endif %}
-                    </div>
+                    {% endif %}
+                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 </div>

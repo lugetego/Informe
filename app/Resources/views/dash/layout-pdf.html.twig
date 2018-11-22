@@ -157,6 +157,19 @@
                 </ol>
             {% endif %}
 
+            {% if informe.otros|length > 0 %}
+                <strong><small>Otras actividades</small></strong><br>
+                <ol>
+                    {% for otro in informe.otros %}
+                        <small>
+                            <li class="text-justify">
+                                {{ otro.actividad}}
+                            </li>
+                        </small>
+                    {% endfor %}
+                </ol>
+            {% endif %}
+
             {% if is_granted("ROLE_ADMIN") %}
                 <div class="row page-header">
                     <div class="col-xs-6">

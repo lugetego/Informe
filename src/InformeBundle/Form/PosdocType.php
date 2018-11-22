@@ -24,7 +24,7 @@ class PosdocType extends AbstractType
                     'year' => 'Año',
                     'month' => 'Mes',
                     'day' => 'Día'),
-                'years'=> range(2013,2017),
+                'years'=> range(2015,2018),
                 'label'=>'*Fecha de inicio',
                 'required'=>true,
 
@@ -34,7 +34,7 @@ class PosdocType extends AbstractType
                     'year' => 'Año',
                     'month' => 'Mes',
                     'day' => 'Día'),
-                'years'=> range(2017,2019),
+                'years'=> range(2017,2020),
                 'label'=>'*Fecha de término',
                 'required'=>true,
             ))

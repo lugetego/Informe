@@ -37,7 +37,7 @@ class InvestigacionController extends Controller
         }
 
         $user = $this->get('security.context')->getToken()->getUser();
-        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $user->getAcademico());
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $user->getAcademico());
         $investigaciones = $informe->getInvestigaciones();
         $enviado = $informe->isEnviado();
 
@@ -60,7 +60,7 @@ class InvestigacionController extends Controller
         $academico = $user->getAcademico();
 
         $em = $this->getDoctrine()->getManager();
-        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $academico);
 
         $investigacion = new Investigacion();
         $form = $this->createForm('InformeBundle\Form\InvestigacionType', $investigacion, array('user'=>$user));
@@ -96,7 +96,7 @@ class InvestigacionController extends Controller
         $academico = $user->getAcademico();
 
         $em = $this->getDoctrine()->getManager();
-        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $academico);
         $enviado = $informe->isEnviado();
 
         $deleteForm = $this->createDeleteForm($investigacion);
@@ -125,7 +125,7 @@ class InvestigacionController extends Controller
         $user = $securityContext->getToken()->getUser();
         $academico = $user->getAcademico();
 
-        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $academico);
         $deleteForm = $this->createDeleteForm($investigacion);
         $this->denyAccessUnlessGranted('edit', $investigacion);
         $editForm = $this->createForm('InformeBundle\Form\InvestigacionType', $investigacion, array('user'=>$user));

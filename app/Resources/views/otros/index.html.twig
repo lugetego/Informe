@@ -1,0 +1,126 @@
+{% extends 'dash/index.html.twig' %}
+
+{% block wrapper %}
+
+    <div class="row">
+        <div class="col-lg-12">
+            <p></p>
+            <br>
+            {#                <h1 class="page-header">Solicitudes </h1>#}
+        </div>
+    </div>
+
+    <div class="row">
+
+        <!-- Otros -->
+        <div class="col-lg-8">
+
+            <ol class="breadcrumb">
+                <li><a href="{{ path('dashboard') }}">Inicio</a></li>
+                <li class="active">Informe</li>
+                <li class="active">Otras actividades</li>
+            </ol>
+
+            <div class="alert alert-info" role="alert">
+                <p class="text-justify"><strong><i class="fa fa-info-circle" aria-hidden="true"></i> Descripción:</strong> En este rubro deberá reportar otras actividades relevantes
+                dentro del periodo al que corresponde su informe y que no se ajuste a alguna de las categorías ya establecidas.</p>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <i class="fa fa-list-ul fa-1x" aria-hidden="true"></i> <strong>Otras actividades</strong>
+                        </a>
+                        {% if enviado != true  %}
+                            <button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#otrosnewModal" >
+                                <i class="fa fa-plus"></i> Nuevo </button>
+                        {% endif %}
+                        <!-- Button trigger modal -->
+                    </h4>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="otrosnewModal" tabindex="-1" role="dialog" aria-labelledby="otrosnewModalLabel">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="otrosnewModalLabel">Otros</h4>
+                                </div>
+                                <div class="modal-body">
+                                    {% render(controller('InformeBundle:Otros:new')) %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+
+                    <ul class="list-group">
+
+                        {% for otro in otros %}
+                            {% set otrmodalshow = 'otrshowModal'~ otro.id  %}
+                            {% set otrmodaledit = 'otreditModal'~ otro.id  %}
+
+                            <li class="list-group-item">
+
+                                <div class="page-header"><h4><i class="fa fa-paperclip fa-x" aria-hidden="true"></i> {{ otro.actividad }}</h4></div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        {#<span class="label label-default">{{ estudiante.programa}}</span>#}
+                                        {#<span class="label label-default">{{ estudiante.nivel }}</span>#}
+                                        <p class="pull-right">
+                                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ otrmodalshow }}">
+                                                <i class="fa fa-search" aria-hidden="true"></i>
+                                            </button>
+                                            {% if enviado != true %}
+                                                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ otrmodaledit }}" >
+                                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                                </button>
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- Modal -->
+                            <div class="modal fade" id="{{ otrmodalshow }}" tabindex="-1" role="dialog" aria-labelledby="{{ otrmodalshow }}Label">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="{{ otrmodalshow }}Label">{{ otro.actividad }}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% render controller("InformeBundle:Otros:show", {'id': otro.id}) %}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="{{ otrmodaledit }}" tabindex="-1" role="dialog" aria-labelledby="{{ otrmodaledit }}Label">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="{{ otrmodaledit }}Label">Otros</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% render controller("InformeBundle:Otros:edit", {'id': otro.id}) %}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Fin Otros -->
+
+
+{% endblock %}

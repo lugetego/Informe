@@ -119,7 +119,7 @@ class PlanController extends Controller
         $user = $securityContext->getToken()->getUser();
         $academico = $user->getAcademico();
 
-        $plan = $em->getRepository('InformeBundle:Plan')->findOneByAnio(2018, $academico);
+        $plan = $em->getRepository('InformeBundle:Plan')->findOneByAnio(2019, $academico);
 
         $enviado = $plan->isEnviado();
 

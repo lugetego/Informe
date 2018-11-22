@@ -32,7 +32,7 @@ class PosdocController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $user = $this->get('security.context')->getToken()->getUser();
-        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $user->getAcademico());
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $user->getAcademico());
         $posdocs = $informe->getPosdocs();
         $enviado = $informe->isEnviado();
 
@@ -59,7 +59,7 @@ class PosdocController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $academico);
 
         $posdoc = new Posdoc();
         $form = $this->createForm('InformeBundle\Form\PosdocType', $posdoc);
@@ -95,7 +95,7 @@ class PosdocController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $academico);
 
         $enviado = $informe->isEnviado();
 
@@ -127,7 +127,7 @@ class PosdocController extends Controller
         $user = $securityContext->getToken()->getUser();
         $academico = $user->getAcademico();
 
-        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $academico);
 
         $deleteForm = $this->createDeleteForm($posdoc);
         $editForm = $this->createForm('InformeBundle\Form\PosdocType', $posdoc);

@@ -33,7 +33,7 @@ class EstudiantesController extends Controller
         }
 
         $user = $this->get('security.context')->getToken()->getUser();
-        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $user->getAcademico());
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $user->getAcademico());
 
         $estudiantes = $informe->getEstudiantes();
         $posdocs = $informe->getPosdocs();
@@ -65,7 +65,7 @@ class EstudiantesController extends Controller
         $academico = $user->getAcademico();
 
         $em = $this->getDoctrine()->getManager();
-        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $academico);
 
         $estudiante = new Estudiantes();
         $form = $this->createForm('InformeBundle\Form\EstudiantesType', $estudiante);
@@ -102,7 +102,7 @@ class EstudiantesController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $academico);
 
         $enviado = $informe->isEnviado();
 

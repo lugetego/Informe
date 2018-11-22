@@ -6,25 +6,26 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use InformeBundle\Entity\Proyectos;
-use InformeBundle\Form\ProyectosType;
+use InformeBundle\Entity\Otros;
+use InformeBundle\Form\OtrosType;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+
 
 /**
- * Proyectos controller.
+ * Otros controller.
  *
- * @Route("/proyectos")
+ * @Route("/otros")
  */
-class ProyectosController extends Controller
+class OtrosController extends Controller
 {
     /**
-     * Lists all Proyectos entities.
+     * Lists all Otros entities.
      *
-     * @Route("/", name="proyectos_index")
+     * @Route("/", name="otros_index")
      * @Method("GET")
      */
     public function indexAction()
     {
-
         $em = $this->getDoctrine()->getManager();
 
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
@@ -34,24 +35,29 @@ class ProyectosController extends Controller
         $user = $this->get('security.context')->getToken()->getUser();
         $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $user->getAcademico());
 
-        $proyectos = $informe->getProyectos();
+        $otros = $informe->getotros();
         $enviado = $informe->isEnviado();
 
 
-        return $this->render('proyectos/index.html.twig', array(
-            'proyectos' => $proyectos,
+        return $this->render('otros/index.html.twig', array(
+            'otros' => $otros,
             'enviado'=>$enviado,
         ));
+
     }
 
     /**
-     * Creates a new Proyectos entity.
+     * Creates a new Otros entity.
      *
-     * @Route("/new", name="proyectos_new")
+     * @Route("/new", name="otros_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
     {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+
         $securityContext = $this->container->get('security.token_storage');
         $user = $securityContext->getToken()->getUser();
         $academico = $user->getAcademico();
@@ -59,125 +65,122 @@ class ProyectosController extends Controller
         $em = $this->getDoctrine()->getManager();
         $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $academico);
 
-        $proyecto = new Proyectos();
-        $form = $this->createForm('InformeBundle\Form\ProyectosType', $proyecto);
+        $otro = new Otros();
+        $form = $this->createForm('InformeBundle\Form\OtrosType', $otro);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
-            $proyecto->setInforme($informe);
-            $em->persist($proyecto);
+            $otro->setInforme($informe);
+            $em->persist($otro);
             $em->flush();
 
-            //return $this->redirectToRoute('proyectos_show', array('id' => $proyecto->getId()));
-            return $this->redirectToRoute('proyectos_index');
-
+            return $this->redirectToRoute('otros_index');
+            //return $this->redirectToRoute('dashboard');
         }
 
-        return $this->render('proyectos/new.html.twig', array(
-            'proyecto' => $proyecto,
+        return $this->render('otros/new.html.twig', array(
+            'otro' => $otro,
             'form' => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a Proyectos entity.
+     * Finds and displays a Otros entity.
      *
-     * @Route("/{id}", name="proyectos_show")
+     * @Route("/{id}", name="otros_show")
      * @Method("GET")
      */
-    public function showAction(Proyectos $proyecto)
+    public function showAction(Otros $otro)
     {
         $securityContext = $this->container->get('security.token_storage');
         $user = $securityContext->getToken()->getUser();
         $academico = $user->getAcademico();
 
         $em = $this->getDoctrine()->getManager();
+
         $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $academico);
+
         $enviado = $informe->isEnviado();
 
-        $deleteForm = $this->createDeleteForm($proyecto);
+
+        $deleteForm = $this->createDeleteForm($otro);
 
         // check for "view" access: calls all voters
-        $this->denyAccessUnlessGranted('view', $proyecto);
+        $this->denyAccessUnlessGranted('view', $otro);
 
-        return $this->render('proyectos/show.html.twig', array(
-            'proyecto' => $proyecto,
+        return $this->render('otros/show.html.twig', array(
+            'otro' => $otro,
             'enviado'=>$enviado,
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Displays a form to edit an existing Proyectos entity.
+     * Displays a form to edit an existing Estudiantes entity.
      *
-     * @Route("/{id}/edit", name="proyectos_edit")
+     * @Route("/{id}/edit", name="otros_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Proyectos $proyecto)
+    public function editAction(Request $request, Otros $otro)
     {
-        $deleteForm = $this->createDeleteForm($proyecto);
-        $this->denyAccessUnlessGranted('edit', $proyecto);
-
-        $editForm = $this->createForm('InformeBundle\Form\ProyectosType', $proyecto);
-
-        $editForm->remove('tipos');
-        $editForm->remove('tipo');
-
-
-        $editForm->add('tipo','Symfony\Component\Form\Extension\Core\Type\TextType', array('label' => 'Tipo de programa'));
+        $deleteForm = $this->createDeleteForm($otro);
+        $editForm = $this->createForm('InformeBundle\Form\OtrosType', $otro);
+        $this->denyAccessUnlessGranted('edit', $otro);
 
         $editForm->handleRequest($request);
 
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($proyecto);
+            $em->persist($otro);
             $em->flush();
 
-            //return $this->redirectToRoute('proyectos_show', array('id' => $proyecto->getId()));
-            return $this->redirectToRoute('proyectos_index');
+            //return $this->redirectToRoute('estudiantes_show', array('id' => $estudiante->getId()));
+            return $this->redirectToRoute('otros_index');
 
         }
 
-        return $this->render('proyectos/edit.html.twig', array(
-            'id'=>$proyecto->getId(),
-            'proyecto' => $proyecto,
+        return $this->render('otros/edit.html.twig', array(
+            'id'=>$otro->getId(),
+            'otro' => $otro,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Deletes a Proyectos entity.
+     * Deletes a Otros entity.
      *
-     * @Route("/{id}", name="proyectos_delete")
+     * @Route("/{id}", name="otros_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, Proyectos $proyecto)
+    public function deleteAction(Request $request, Otros $otro)
     {
-        $form = $this->createDeleteForm($proyecto);
+        $form = $this->createDeleteForm($otro);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($proyecto);
+            $em->remove($otro);
             $em->flush();
         }
 
-        return $this->redirectToRoute('proyectos_index');
+        return $this->redirectToRoute('otros_index');
     }
 
     /**
-     * Creates a form to delete a Proyectos entity.
+     * Creates a form to delete a Otros entity.
      *
-     * @param Proyectos $proyecto The Proyectos entity
+     * @param Otros $estudiante The Otros entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(Proyectos $proyecto)
+    private function createDeleteForm(Otros $otros)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('proyectos_delete', array('id' => $proyecto->getId())))
+            ->setAction($this->generateUrl('otros_delete', array('id' => $otros->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;
