@@ -411,8 +411,8 @@ class DashController extends Controller
         $user = $this->get('security.context')->getToken()->getUser();
         $academico = $user->getAcademico();
 
-        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2017, $academico);
-        $plan = $em->getRepository('InformeBundle:Plan')->findOneByAnio(2018, $academico);
+        $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $academico);
+        $plan = $em->getRepository('InformeBundle:Plan')->findOneByAnio(2019, $academico);
 
 
         $informe->setEnviado(true);
