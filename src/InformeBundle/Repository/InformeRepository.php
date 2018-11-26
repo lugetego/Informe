@@ -33,7 +33,8 @@ class InformeRepository extends EntityRepository
                 "SELECT i FROM InformeBundle:Informe i
                     JOIN i.academico a
                     WHERE a.activo = :activo
-                    AND i.anio = :anio"
+                    AND i.anio = :anio
+                    ORDER BY a.apellido ASC"
             )
             ->setParameter('activo', true)
             ->setParameter('anio', $anio)

@@ -23,7 +23,6 @@ class AcademicoRepository extends EntityRepository
         return $this->findBy(array(), array('apellido' => 'ASC'));
     }
 
-
 }
 
 
