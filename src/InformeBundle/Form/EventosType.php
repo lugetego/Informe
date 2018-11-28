@@ -30,7 +30,6 @@ class EventosType extends AbstractType
                     'Escuela'=>'Escuela',
                     'Feria'=>'Feria',
                     'Jornadas'=>'Jornadas',
-                    'Plática'=>'Plática',
                     'Seminario'=>'Seminario',
                     'Taller'=>'Taller',
                 ),
