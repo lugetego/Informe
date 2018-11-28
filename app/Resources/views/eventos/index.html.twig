@@ -22,8 +22,9 @@
 
             <div class="alert alert-info" role="alert">
                 <p class="text-justify"><strong><i class="fa fa-info-circle" aria-hidden="true"></i> Descripción:</strong>
-                    en este rubro deberá reportar los eventos en los que ha participado / que ha organizado.
-                    Favor de indicar como lo pide el sistema si el evento fue de divulgación. </p>
+                    en este rubro deberá reportar los eventos en los que ha participado y/u organizado para los caules no solicitó permiso mediante licencia o comisión.
+                    <br>-Los eventos foráneos se encuentran precargados en el rubro de licencias y comisiones.<br>
+                    -Indicar como lo pide el sistema si el evento fue de divulgación. </p>
             </div>
 
 
@@ -73,7 +74,7 @@
                                                     <span class="user-info">
                                                     <strong></strong>
 
-                                                        {{ evento.institucion|title }},
+                                                        {{ evento.institucion }},
                                                         <span class="label label-default">{{ evento.tipo |title}}</span></span>
                                         <p class="pull-right">
                                             <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ eventomodalshow }}">
@@ -95,7 +96,7 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="{{ eventomodalshow }}Label">{{ evento.nombre |title}}</h4>
+                                            <h4 class="modal-title" id="{{ eventomodalshow }}Label">{{ evento.nombre }}</h4>
                                         </div>
                                         <div class="modal-body">
                                             {% render controller("InformeBundle:Eventos:show", {'id': evento.id}) %}

@@ -50,7 +50,7 @@ class EventosType extends AbstractType
                     false=>'No '),
                 'expanded'=>true,
                 'required'=>true,
-                'label'=>'*Nacional',
+                'label'=>'*Alcance nacional',
                 'choices_as_values' => false,
             ))
             ->add('divulgacion', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
@@ -95,6 +95,7 @@ class EventosType extends AbstractType
                 'years'=> range(2018,2018),
                 'label'=>'*Inicio',
                 'required'=>true,
+                'data' => new \DateTime('01-01-2018'),
 
             ))
             ->add('fin','Symfony\Component\Form\Extension\Core\Type\DateType',array(
@@ -105,6 +106,9 @@ class EventosType extends AbstractType
                 'years'=> range(2018,2018),
                 'label'=>'*Fin',
                 'required'=>true,
+                'data' => new \DateTime('01-01-2018'),
+
+
 
             ))
             ->add('informacion', 'Symfony\Component\Form\Extension\Core\Type\TextareaType',array(
