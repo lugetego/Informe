@@ -22,11 +22,14 @@ class EventosType extends AbstractType
             ->add('tipo', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',array(
                 'label'=>'*Tipo',
                 'choices'=>array(
+                    'Coloquio'=>'Coloquio',
+                    'Congreso'=>'Congreso',
                     'Conferencia'=>'Conferencia',
                     'Curso'=>'Curso',
                     'Encuentro'=>'Encuentro',
                     'Escuela'=>'Escuela',
                     'Feria'=>'Feria',
+                    'Jornadas'=>'Jornadas',
                     'Plática'=>'Plática',
                     'Seminario'=>'Seminario',
                     'Taller'=>'Taller',

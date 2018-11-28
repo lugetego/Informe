@@ -61,6 +61,7 @@ class EventosController extends Controller
 
         $evento = new Eventos();
         $form = $this->createForm('InformeBundle\Form\EventosType', $evento);
+        $form = $form->remove('actividad');
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
