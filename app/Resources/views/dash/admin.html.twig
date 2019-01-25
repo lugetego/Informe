@@ -57,13 +57,13 @@
                                         </thead>
                                         <tbody>
                                         {#{% for academico in academicos %}#}
-                                            {#<tr>#}
+                                            {#<tr>sssssss#}
                                                 {#<td>{{ academico.nombre }} {{ academico.apellido }}</a></td>#}
                                                 {#<td class="text-center"><a href="{{ path('informe_pdfadmin', {'id': academico.id } ) }} "> <i class="fa fa-file-pdf-o"></i></a></td>#}
 
                                                 {#<td>{{ academico.informe.fecha_eviado }}</td>#}
 
-                                                {#&#123;&#35;<td>{% if academico.enviado %}{{ academico.modified|localizeddate('long', 'none') }}{% endif %}</td>&#35;&#125;#}
+                                                {#<td>{% if academico.enviado %}{{ academico.modified|localizeddate('long', 'none') }}{% endif %}</td>#}
                                                 {#<td>{{ render(controller(#}
                                                     {#'InformeBundle:Academico:admin',#}
                                                     {#{ 'id': academico.id }#}

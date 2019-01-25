@@ -328,8 +328,10 @@ class DashController extends Controller
 
             $informe = $em->getRepository('InformeBundle:Informe')->findOneByAnio(2018, $academico);
             $salidas = $em->getRepository('InformeBundle:Salidas')->findSalidas($informe->getId());
-            $visitas = $em->getRepository('InformeBundle:Salidas')->findVisitantes($informe->getId());
+            $visitas = $em->getRepository('InformeBundle:Salidas')->findByVisitantes($informe->getId());
             $plan = $em->getRepository('InformeBundle:Plan')->findOneByAnio(2018, $academico);
+
+
 
 //            $repository = $this->getDoctrine()->getRepository('InformeBundle:Academico');
 //            $academico = $repository->find($id);
