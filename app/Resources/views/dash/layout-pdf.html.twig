@@ -28,7 +28,7 @@
                     <div class="col-xs-7">
                         {#  <p class="text-right small"><img class="right" src="{{ asset('img/ccm.png', absolute=true) }}" width="180px" height="60px" /></p>   #}
                         <p class="text-justify small alert-warning"> Dictamen del Consejo Interno: <strong>{{ informe.dictamen }}</strong><br>
-                            <small>{{ informe.observaciones }}</small></p>
+                            {#<small>{{ informe.observaciones }}</small></p>#}
                     </div>
                 {% endif %}
             </div>
@@ -203,6 +203,23 @@
                         <p class="text-justify"> <small>{{ plan.salidas| nl2br }}</small></p>
                     {% endif %}
             {% endif %}
+
+            {% if informe.observaciones is not null %}
+
+                <div class="row page-header">
+                    <div class="col-xs-6">
+                        <h5>Observaciones realizadas por el Cosejo Interno</h5>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    {#       <p class="text-right"><img class="right" src="{{ asset('img/ccm.png', absolute=true) }}" width="180px" height="60px" /></p>   #}
+                    <p class="text-justify small ">
+                        <small>{{ informe.observaciones }}</small></p>
+                </div>
+            {% endif %}
+
+
         </div>
     {% endblock %}
 {% endblock %}
