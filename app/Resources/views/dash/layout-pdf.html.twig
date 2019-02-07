@@ -215,7 +215,7 @@
                 <div class="col-md-12">
                     {#       <p class="text-right"><img class="right" src="{{ asset('img/ccm.png', absolute=true) }}" width="180px" height="60px" /></p>   #}
                     <p class="text-justify small ">
-                        <small>{{ informe.observaciones }}</small></p>
+                        <small>{{ informe.observaciones| nl2br }}</small></p>
                 </div>
             {% endif %}
 
